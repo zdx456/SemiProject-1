@@ -26,6 +26,8 @@
 
 + ERD주소 : <https://www.erdcloud.com/d/jxvri2DP6RiyLcoXe>
 
++ Flow Chart : https://app.diagrams.net/#Hzdx456%2FSemiProject-1%2Fmain%2Fsemi-1.drawio
+
 
 
 
