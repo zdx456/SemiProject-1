@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-24T08:08:57.843Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="77weHOMmgzLqltv-XaSA" version="17.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-24T08:36:53.874Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="GwlaAHRdxyzYf1za3e3J" version="17.4.6" type="github">
   <diagram id="tml-jXRMbO2Q2C7IZaB5" name="Page-1">
     <mxGraphModel dx="3773" dy="3997" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -913,11 +913,11 @@
         <mxCell id="ZoFXQVpPqDZmOyctuImB-5" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3610" y="-1210" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ZoFXQVpPqDZmOyctuImB-6" value="컨텐츠 테이블에 1~4명 정도?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="3372" y="-1530" width="350" height="100" as="geometry" />
+        <mxCell id="ZoFXQVpPqDZmOyctuImB-6" value="컨텐츠 수정, 삭제" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2820" y="-1520" width="350" height="100" as="geometry" />
         </mxCell>
         <mxCell id="ZoFXQVpPqDZmOyctuImB-7" value="배우 테이블 넣는거 (강사님)&lt;br&gt;컨텐츠 상세보기에서 리뷰 보이기&lt;br&gt;예고편&lt;br&gt;컨텐츠 수 정하기(10개 정도?)&lt;br&gt;OTT별 존재 컨텐츠" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="3068" y="-1090" width="400" height="220" as="geometry" />
+          <mxGeometry x="3340" y="842" width="400" height="220" as="geometry" />
         </mxCell>
         <mxCell id="ZoFXQVpPqDZmOyctuImB-8" value="좋아요 싫어요&lt;br&gt;like_unlike.svt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="3981.5" y="605" width="120" height="60" as="geometry" />
