@@ -30,6 +30,8 @@
 
 
 
++ font : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
+
 
 ##  기능 구현
 
