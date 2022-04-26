@@ -32,6 +32,7 @@
 
 + font : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
 
++ color :  #222831(배경)   #00ADB5(주요색)  #6F7173(보조색)
 
 ##  기능 구현
 
