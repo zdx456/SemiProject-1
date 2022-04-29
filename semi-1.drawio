@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-04-29T02:50:21.435Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36" etag="9driKSPpwLnVPoj0_yQr" version="17.4.5" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-29T11:05:59.427Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36" etag="Gz8d92lGayituuwKcsp2" version="17.4.5" type="github">
   <diagram id="tml-jXRMbO2Q2C7IZaB5" name="Page-1">
-    <mxGraphModel dx="3015" dy="3560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2605" dy="3331" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -540,7 +540,7 @@
         <mxCell id="ehsiyCT55tGsAfIYGdXe-459" value="아이디 찾기&lt;br&gt;find_id.jsp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="1636" y="-620.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ehsiyCT55tGsAfIYGdXe-460" value="아이디&lt;br&gt;이메일&lt;br&gt;생년월일&lt;br&gt;휴대폰 번호" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="ehsiyCT55tGsAfIYGdXe-461" target="ehsiyCT55tGsAfIYGdXe-464" edge="1">
+        <mxCell id="ehsiyCT55tGsAfIYGdXe-460" value="아이디&lt;br&gt;닉네임&lt;br&gt;이메일" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="ehsiyCT55tGsAfIYGdXe-461" target="ehsiyCT55tGsAfIYGdXe-464" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ehsiyCT55tGsAfIYGdXe-461" value="비밀번호 찾기&lt;br&gt;find.pw.jsp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
@@ -795,7 +795,7 @@
         <mxCell id="ehsiyCT55tGsAfIYGdXe-523" value="아이디 찾기&lt;br&gt;find_id.svt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="1901" y="-620" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ehsiyCT55tGsAfIYGdXe-524" value="이메일&lt;br&gt;생년월일&lt;br&gt;휴대폰번호&lt;br&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="ehsiyCT55tGsAfIYGdXe-523" edge="1">
+        <mxCell id="ehsiyCT55tGsAfIYGdXe-524" value="이메일&lt;br&gt;닉네임" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="ehsiyCT55tGsAfIYGdXe-523" edge="1">
           <mxGeometry x="-0.0378" relative="1" as="geometry">
             <mxPoint x="1756" y="-590.5" as="sourcePoint" />
             <mxPoint x="1916" y="-590.5" as="targetPoint" />
@@ -918,7 +918,7 @@
           <mxGeometry x="3981.5" y="605" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ZoFXQVpPqDZmOyctuImB-9" value="좋아요 싫어요&lt;br&gt;like_unlike.svt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-          <mxGeometry x="4400" y="-560.5" width="120" height="60" as="geometry" />
+          <mxGeometry x="4170" y="-680.5" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ZoFXQVpPqDZmOyctuImB-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="ZoFXQVpPqDZmOyctuImB-10" target="ZoFXQVpPqDZmOyctuImB-11" edge="1">
           <mxGeometry relative="1" as="geometry" />
