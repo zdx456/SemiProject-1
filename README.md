@@ -32,7 +32,7 @@
 
 + font : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
 
-+ color :  #222831(배경)   #00ADB5(주요색)  #6F7173(보조색)
++ Screen form : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
 
 ##  기능 구현
 
