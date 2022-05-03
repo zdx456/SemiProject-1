@@ -1,8 +1,5 @@
 package ottes.beans;
 
-public class ReviewDto {
-	package ottes.beans;
-
 	import java.sql.Date;
 
 	public class ReviewDto {
@@ -62,4 +59,4 @@ public class ReviewDto {
 		
 		
 	}
-}
+
