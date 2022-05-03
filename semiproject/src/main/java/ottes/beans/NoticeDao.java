@@ -9,7 +9,7 @@ import java.util.List;
 public class NoticeDao {
 	// 공지게시판 리스트 출력
 	public List<NoticeDto> selectList() throws Exception {
-		Connection con = JdbcUtiles.getConnection();
+		Connection con = JdbcUtils.getConnection();
 			
 		String sql = "select * from notice order by notice_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
