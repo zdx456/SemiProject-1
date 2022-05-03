@@ -5,6 +5,7 @@ import java.sql.Date;
 public class NoticeDto {
 	private int noticeNo;
 	private String noticeWriter;
+	private String noticeType;
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;
@@ -21,6 +22,14 @@ public class NoticeDto {
 		this.noticeNo = noticeNo;
 	}
 
+	public String getNoticeType() {
+		return noticeType;
+	}
+
+	public void setNoticeType(String noticeType) {
+		this.noticeType = noticeType;
+	}
+	
 	public String getNoticeWriter() {
 		return noticeWriter;
 	}
