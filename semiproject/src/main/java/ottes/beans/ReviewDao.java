@@ -10,7 +10,7 @@ public class ReviewDao {
 
 	public List<ReviewDto> selectList() throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		String sql = "select * from review order by review_no";
+		String sql = "select * from review order by review_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
