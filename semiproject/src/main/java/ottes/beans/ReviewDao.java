@@ -13,6 +13,7 @@ public class ReviewDao {
 		String sql = "select * from review order by review_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
+		
 
 		List<ReviewDto> list = new ArrayList<>();
 		while (rs.next()) {
