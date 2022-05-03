@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-과연 커밋이 될까요
-=======
-	<h1>실행입니다.</h1>
->>>>>>> branch 'main' of https://github.com/zdx456/SemiProject-1.git
 
-제발 한번만요 ㅠㅠㅠㅠ
+제발 한번만요 ㅠㅠㅠㅠ 진짜 한번만 커밋 되었으면 좋겠어
 </body>
 </html>
