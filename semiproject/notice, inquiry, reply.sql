@@ -3,6 +3,7 @@ create sequence notice_seq;
 create table notice (
     notice_no number primary key,
     notice_writer references client(client_id),
+    notice_type varchar2(6),
     notice_title varchar2(300) not null,
     notice_content varchar2(4000) not null,
     notice_date date default sysdate not null
