@@ -18,7 +18,6 @@ inquiry_type varchar2(12),
 inquiry_title varchar2(300) not null,
 inquiry_content varchar2(4000) not null,
 inquiry_date date default sysdate not null,
-inquiry_readcount number default 0,
 inquiry_replycount number default 0
 );
 
