@@ -10,7 +10,7 @@ public class ActorDao {
 	
 	// 배우 생성
 	// @author : 이기주
-	public void actor(ActorDto actorDto) throws Exception {
+	public void insert(ActorDto actorDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "insert into actor(actor_no, actor_name) values(actor_seq.nextval, ?)";
