@@ -18,7 +18,7 @@ public class ClientDao {
 	
 	// 회원 생성
 	// @author : 이기주
-	public void actor(ClientDto clientDto) throws Exception {
+	public void insert(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "insert into client(client_id, client_pw, client_nick, client_gender, client_grade, client_birth, client_email)"
