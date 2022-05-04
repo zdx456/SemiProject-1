@@ -22,13 +22,18 @@ public class ReviewWriteServlet extends HttpServlet{
 			// 리뷰 번호 (reviewNo) +리뷰 내용(reviewContent) + 평점(reviewScore) + 컨텐츠 번호(contentsNo)
 			// + 작성자 (로그인한 HttpSession)
 			ReviewDto reviewDto = new ReviewDto();
-			reviewDto.setReviewNo(Integer.parseInt(req.getParameter("reviewNo")));
+			ReviewDao reviewDao = new ReviewDao();
+			
+			// reviewNo는 시퀀스 가져와서 사용
+			reviewDto.setReviewNo(reviewDao.getSequence());
+			
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
 			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewSccore")));
 			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("ContentsNo")));
+			
+			// writer은 로그인한 세션에서 사용
 			reviewDto.setReviewWriter((String)req.getSession().getAttribute("login"));
 			
-			ReviewDao reviewDao = new ReviewDao();
 			reviewDao.insert(reviewDto);
 			
 			// 리뷰 작성 후 컨텐츠 상세보기 페이지 그대로 돌아오기
