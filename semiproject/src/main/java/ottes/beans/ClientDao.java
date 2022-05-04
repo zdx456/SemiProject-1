@@ -30,7 +30,7 @@ public class ClientDao {
 		ps.setString(3, clientDto.getClientNick());
 		ps.setString(4, clientDto.getClientGender());
 		ps.setString(5, clientDto.getClientGrade());
-		ps.setDate(6, clientDto.getClientBirth());
+		ps.setString(6, clientDto.getClientBirth());
 		ps.setString(7, clientDto.getClientEmail());
 		
 		ps.execute();
@@ -57,7 +57,7 @@ public class ClientDao {
 			clientDto.setClientJoindate(rs.getDate("client_joindate"));
 			clientDto.setClientGender(rs.getString("client_gender"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientBirth(rs.getDate("client_birth"));
+			clientDto.setClientBirth(rs.getString("client_birth"));
 			clientDto.setClientEmail(rs.getString("client_email"));
 			
 			list.add(clientDto);
@@ -87,7 +87,7 @@ public class ClientDao {
 			clientDto.setClientJoindate(rs.getDate("client_joindate"));
 			clientDto.setClientGender(rs.getString("client_gender"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientBirth(rs.getDate("client_birth"));
+			clientDto.setClientBirth(rs.getString("client_birth"));
 			clientDto.setClientEmail(rs.getString("client_email"));
 			}
 		else {
@@ -159,7 +159,7 @@ public class ClientDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientNick());
 		ps.setString(2, clientDto.getClientGender());
-		ps.setDate(3, clientDto.getClientBirth());
+		ps.setString(3, clientDto.getClientBirth());
 		ps.setString(4, clientDto.getClientEmail());
 		ps.setString(5, clientDto.getClientId());
 		
@@ -183,7 +183,7 @@ public class ClientDao {
 		ps.setString(1, clientDto.getClientNick());
 		ps.setString(2, clientDto.getClientGender());
 		ps.setString(3, clientDto.getClientGrade());
-		ps.setDate(4, clientDto.getClientBirth());
+		ps.setString(4, clientDto.getClientBirth());
 		ps.setString(5, clientDto.getClientEmail());
 		ps.setString(6, clientDto.getClientId());
 		int count = ps.executeUpdate();
