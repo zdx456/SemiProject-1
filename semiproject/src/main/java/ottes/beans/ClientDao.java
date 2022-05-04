@@ -70,12 +70,12 @@ public class ClientDao {
 	
 	// 회원목록 아이디로 단일 조회
 	// @author : 이기주
-	public ClientDto selectOne(String memberId) throws Exception{
+	public ClientDto selectOne(String clientId) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from client where client_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, memberId);
+		ps.setString(1, clientId);
 		ResultSet rs = ps.executeQuery();
 		
 		ClientDto clientDto;
@@ -89,6 +89,7 @@ public class ClientDao {
 			clientDto.setClientGrade(rs.getString("client_grade"));
 			clientDto.setClientBirth(rs.getString("client_birth"));
 			clientDto.setClientEmail(rs.getString("client_email"));
+			clientDto.setClientEmail(rs.getString("client_logindate"));
 			}
 		else {
 			clientDto = null;
@@ -191,6 +192,11 @@ public class ClientDao {
 		con.close();
 		
 		return count > 0;
+	}
+
+	public void updateLogindate(String clientId) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
