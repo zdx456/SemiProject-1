@@ -1,0 +1,38 @@
+/*
+    기본 화면 설정을 위한 디자인 파일
+*/
+@charset "UTF-8";
+
+main {
+    width:1000px;
+    margin:auto;
+}
+header {
+    min-height: 120px;
+    padding: 20px;
+}
+.section {
+    min-height: 450px;
+}
+nav {}
+footer {
+    min-height: 120px;
+    padding: 20px;
+}
+
+section::after {
+    content:"";
+    display: block;
+    clear: both;
+}
+aside {
+    float:left;
+    width:20%;
+    min-height: 450px;
+}
+article {
+    float:left;
+    width:80%;
+    min-height: 450px;
+    padding:20px;
+}
