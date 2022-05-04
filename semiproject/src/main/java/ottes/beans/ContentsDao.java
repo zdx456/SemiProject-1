@@ -22,8 +22,8 @@ public class ContentsDao {
 		while(rs.next()) {
 			ContentsDto contentsDto = new ContentsDto();
 			contentsDto.setContentsNo(rs.getInt("contents_no"));
-			contentsDto.setRegionNo(rs.getInt("region_no"));
-			contentsDto.setGenreNo(rs.getInt("genre_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
 			contentsDto.setContentsTitle(rs.getString("contents_title"));
 			contentsDto.setContentsViews(rs.getInt("contents_views"));
 			contentsDto.setContentsGrade(rs.getString("contents_grade"));
@@ -55,8 +55,8 @@ public class ContentsDao {
 		if(rs.next()) {
 			contentsDto = new ContentsDto();
 			contentsDto.setContentsNo(rs.getInt("contents_no"));
-			contentsDto.setRegionNo(rs.getInt("region_no"));
-			contentsDto.setGenreNo(rs.getInt("genre_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
 			contentsDto.setContentsTitle(rs.getString("contents_title"));
 			contentsDto.setContentsViews(rs.getInt("contents_views"));
 			contentsDto.setContentsGrade(rs.getString("contents_grade"));
@@ -93,11 +93,11 @@ public class ContentsDao {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update contents set region_no=?, genre_no=?, contents_title=?, contents_grade=?, "
+		String sql = "update contents set region_name=?, genre_name=?, contents_title=?, contents_grade=?, "
 				+ "contents_time=?, contents_director=?, contents_summary=? where contents_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, contentsDto.getRegionNo());
-		ps.setInt(2, contentsDto.getGenreNo());
+		ps.setString(1, contentsDto.getRegionName());
+		ps.setString(2, contentsDto.getGenreName());
 		ps.setString(3, contentsDto.getContentsTitle());
 		ps.setString(4, contentsDto.getContentsGrade());
 		ps.setInt(5, contentsDto.getContentsTime());
@@ -128,8 +128,8 @@ public class ContentsDao {
 		while(rs.next()) {
 			ContentsDto contentsDto = new ContentsDto();
 			contentsDto.setContentsNo(rs.getInt("contents_no"));
-			contentsDto.setRegionNo(rs.getInt("region_no"));
-			contentsDto.setGenreNo(rs.getInt("genre_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
 			contentsDto.setContentsTitle(rs.getString("contents_title"));
 			contentsDto.setContentsViews(rs.getInt("contents_views"));
 			contentsDto.setContentsGrade(rs.getString("contents_grade"));
@@ -169,13 +169,13 @@ public class ContentsDao {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "insert into contents("
-				+ "contents_no, region_no, genre_no, contents_title, contents_grade, contents_time, contents_director, contents_summary"
+				+ "contents_no, region_name, genre_name, contents_title, contents_grade, contents_time, contents_director, contents_summary"
 				+ ") values (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1,  contentsDto.getContentsNo());
-		ps.setInt(2, contentsDto.getRegionNo());
-		ps.setInt(3, contentsDto.getGenreNo());
+		ps.setString(2, contentsDto.getRegionName());
+		ps.setString(3, contentsDto.getGenreName());
 		ps.setString(4, contentsDto.getContentsTitle());
 		ps.setString(5, contentsDto.getContentsGrade());
 		ps.setInt(6, contentsDto.getContentsTime());
