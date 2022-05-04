@@ -47,6 +47,7 @@ public class ContentsDao {
 		
 		String sql = "select * from contents where contents_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
 		ResultSet rs = ps.executeQuery();
 		
 		ContentsDto contentsDto;
