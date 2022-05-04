@@ -56,8 +56,8 @@ public class OttDao {
 		String sql = "update ott set ott_name = ?, ott_price = ? where ott_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, ottDto.getOttName());
-		ps.setInt(3, ottDto.getOttPrice());
-		ps.setInt(2, ottDto.getOttNo());
+		ps.setInt(2, ottDto.getOttPrice());
+		ps.setInt(3, ottDto.getOttNo());
 		
 		int count = ps.executeUpdate();
 		
