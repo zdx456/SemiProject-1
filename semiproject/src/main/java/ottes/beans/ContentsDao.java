@@ -300,9 +300,11 @@ public class ContentsDao {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select count(*) from contents";
+		String sql = "select count(*) from contents where instr(#1, ?) > 0";
+		sql = sql.replace("#1", type);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		
