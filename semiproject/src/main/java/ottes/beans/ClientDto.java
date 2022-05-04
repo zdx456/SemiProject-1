@@ -8,7 +8,7 @@ public class ClientDto {
    private Date clientJoindate;
    private String clientGender;
    private String clientGrade;
-   private Date clientBirth;
+   private String clientBirth;
    private String clientEmail;
    @Override
    public String toString() {
@@ -55,10 +55,10 @@ public class ClientDto {
    public void setClientGrade(String clientGrade) {
       this.clientGrade = clientGrade;
    }
-   public Date getClientBirth() {
+   public String getClientBirth() {
       return clientBirth;
    }
-   public void setClientBirth(Date clientBirth) {
+   public void setClientBirth(String clientBirth) {
       this.clientBirth = clientBirth;
    }
    public String getClientEmail() {
