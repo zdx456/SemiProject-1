@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.ContentsDao;
 import ottes.beans.ContentsDto;
 
-@WebServlet(urlPatterns = "/admin/insert.svt")
+@WebServlet(urlPatterns = "/adminContents/insert.svt")
 public class ContentsInsertServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//준비
 			ContentsDto contentsDto = new ContentsDto();
-			contentsDto.setRegionNo(Integer.parseInt(req.getParameter("regionNo")));
-			contentsDto.setGenreNo(Integer.parseInt(req.getParameter("genreNo")));
+			contentsDto.setRegionName(req.getParameter("regionName"));
+			contentsDto.setGenreName(req.getParameter("genreName"));
 			contentsDto.setContentsTitle(req.getParameter("contentsTitle"));
 			contentsDto.setContentsGrade(req.getParameter("contentsGrade"));
 			contentsDto.setContentsTime(Integer.parseInt(req.getParameter("contentsTime")));

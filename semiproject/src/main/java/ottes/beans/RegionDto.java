@@ -1,19 +1,13 @@
 package ottes.beans;
 
 public class RegionDto {
-	private int regionNo;
+
 	private String regionName;
 	
 	public RegionDto() {
 		super();
 	}
 	
-	public int getRegionNo() {
-		return regionNo;
-	}
-	public void setRegionNo(int regionNo) {
-		this.regionNo = regionNo;
-	}
 	public String getRegionName() {
 		return regionName;
 	}
@@ -23,7 +17,7 @@ public class RegionDto {
 	
 	@Override
 	public String toString() {
-		return "RegionDto [regionNo=" + regionNo + ", regionName=" + regionName + "]";
+		return "RegionDto [regionName=" + regionName + "]";
 	}
 
 }
