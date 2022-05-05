@@ -8,15 +8,35 @@ import java.util.List;
 
 public class ActorDao {
 	
+	// 배우 생성 - 시퀀스
+	public int getSequence() throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select actor_seq.nextval from dual";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int number = rs.getInt("nextval");
+		
+		con.close();
+		
+		return number;
+	}
+	
 	// 배우 생성
 	// @author : 이기주
 	public void insert(ActorDto actorDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into actor(actor_no, actor_name) values(actor_seq.nextval, ?)";
+		String sql = "insert into actor(actor_no, actor_name) values(?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
-		ps.setString(1, actorDto.getActorName());
+		ps.setInt(1, actorDto.getActorNo());
+		ps.setString(2, actorDto.getActorName());
+		
 		
 		ps.execute();
 		
