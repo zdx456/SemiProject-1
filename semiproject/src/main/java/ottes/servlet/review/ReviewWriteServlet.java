@@ -13,7 +13,7 @@ import ottes.beans.ReviewDto;
 
 @WebServlet(urlPatterns = "/contents/review_insert.svt")
 //urlPatterns는 contents 파트와 협의 후 변경 가능
-
+  
 public class ReviewWriteServlet extends HttpServlet{
 		
 	@Override
