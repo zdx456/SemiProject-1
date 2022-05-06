@@ -13,7 +13,7 @@ import ottes.beans.ReviewDto;
 
 @WebServlet(urlPatterns = "/contents/review_insert.svt")
 //urlPatterns는 contents 파트와 협의 후 변경 가능
-
+  
 public class ReviewWriteServlet extends HttpServlet{
 		
 	@Override
@@ -28,16 +28,17 @@ public class ReviewWriteServlet extends HttpServlet{
 			reviewDto.setReviewNo(reviewDao.getSequence());
 			
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
-			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewScore")));
-			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("contentsNo")));
+			reviewDto.setReviewWriter(req.getParameter("reviewWriter")); // 등록할때  작성자 필요해서 추가했어요 ㅎㅎ - 조장's
+			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewSccore")));
+			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("ContentsNo")));
 			
 			// writer은 로그인한 세션에서 사용
-			// reviewDto.setReviewWriter((String)req.getSession().getAttribute("login"));
+			reviewDto.setReviewWriter((String)req.getSession().getAttribute("login"));
 			
 			reviewDao.insert(reviewDto);
 			
 			// 리뷰 작성 후 컨텐츠 상세보기 페이지 그대로 돌아오기
-			resp.sendRedirect("detail.jsp?contentsNo="+reviewDto.getContentsNo());
+			resp.sendRedirect("detail.jsp?ContentsNo="+reviewDto.getContentsNo());
 			
 					
 		} catch (Exception e) {

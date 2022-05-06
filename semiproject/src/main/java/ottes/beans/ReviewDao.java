@@ -14,6 +14,31 @@ public class ReviewDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
+  
+		List<ReviewDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ReviewDto reviewDto = new ReviewDto();
+			reviewDto.setReviewNo(rs.getInt("review_no"));
+			reviewDto.setContentsNo(rs.getInt("contents_no"));
+			reviewDto.setReviewWriter(rs.getString("review_writer"));
+			reviewDto.setReviewContent(rs.getString("review_content"));
+			reviewDto.setReviewScore(rs.getInt("review_score"));
+			reviewDto.setReviewTime(rs.getDate("review_time"));
+
+			list.add(reviewDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 내가 쓴 review 보기 위한 메소드
+	public List<ReviewDto> selectList(String reviewWriter) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from review where review_writer = ? order by review_no desc";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, reviewWriter);
+		ResultSet rs = ps.executeQuery();
+		
 
 		List<ReviewDto> list = new ArrayList<>();
 		while (rs.next()) {
@@ -30,6 +55,30 @@ public class ReviewDao {
 		con.close();
 		return list;
 	}
+	// 컨텐츠별 리뷰 보기!
+		public List<ReviewDto> selectList(int contentsNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			String sql = "select * from review where contents_no = ? order by review_no desc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, contentsNo);
+			ResultSet rs = ps.executeQuery();
+			
+
+			List<ReviewDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ReviewDto reviewDto = new ReviewDto();
+				reviewDto.setReviewNo(rs.getInt("review_no"));
+				reviewDto.setContentsNo(rs.getInt("contents_no"));
+				reviewDto.setReviewWriter(rs.getString("review_writer"));
+				reviewDto.setReviewContent(rs.getString("review_content"));
+				reviewDto.setReviewScore(rs.getInt("review_score"));
+				reviewDto.setReviewTime(rs.getDate("review_time"));
+
+				list.add(reviewDto);
+			}
+			con.close();
+			return list;
+		}
 
 	public int getSequence() throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -62,7 +111,7 @@ public class ReviewDao {
 	public boolean update(ReviewDto reviewDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update review set review_content = ? review_score = ? where review_no = ?";
+		String sql = "update review set review_content = ?, review_score = ? where review_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, reviewDto.getReviewContent());
 		ps.setInt(2, reviewDto.getReviewScore());
@@ -74,12 +123,12 @@ public class ReviewDao {
 		return count > 0;
 	}
 
-	public boolean delete(int reviewNo) throws Exception {
+	public boolean delete(int ottNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "delete review where review_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, reviewNo);
+		ps.setInt(1, ottNo);
 		int count = ps.executeUpdate();
 
 		con.close();
