@@ -50,7 +50,7 @@ public class ActorDao {
 	public boolean update(ActorDto actorDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update actor set actor_name1 = ?, actor_name2 = ?, actor_name3 = ? actor_name4 = ? where actor_no = ?";
+		String sql = "update actor set actor_name1 = ?, actor_name2 = ?, actor_name3 = ?, actor_name4 = ? where actor_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, actorDto.getActorName1());
 		ps.setString(2, actorDto.getActorName2());
