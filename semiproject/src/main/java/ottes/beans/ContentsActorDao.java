@@ -24,32 +24,5 @@ public class ContentsActorDao {
 		
 		con.close();
 	}
-	
-	
-	//컨텐츠 배우 조회
-	public List<ContentsActorDto> selectList(int contentsNo) throws Exception {
-		
-		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "select * from contents_actor where contents_no=?";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, contentsNo);
-		ResultSet rs = ps.executeQuery();
-		
-		List<ContentsActorDto> list = new ArrayList<>();
-		
-		while(rs.next()) {
-			ContentsActorDto contentsActorDto = new ContentsActorDto();
-			contentsActorDto.setContentsNo(rs.getInt("contents_no"));
-			contentsActorDto.setActorNo(rs.getInt("actor_no"));
-			
-			list.add(contentsActorDto);
-		}
-		
-		con.close();
-		
-		return list;
-	}
 
 }

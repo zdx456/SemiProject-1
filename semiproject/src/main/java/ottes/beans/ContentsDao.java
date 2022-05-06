@@ -188,7 +188,149 @@ public class ContentsDao {
 		
 	}
 	
+	//페이징 - 전체 목록
+	public List<ContentsDto> selectListByPaging(int page, int size) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+				+ "select rownum RN, TMP.* from ("
+					+ "select * from contents order by contents_no desc"
+					+ ") TMP"
+				+ ") where RN between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		int end = page * size;
+		int begin = end - (size-1);
+		
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ContentsDto> list = new ArrayList<>();
+				
+		while(rs.next()) {
+			ContentsDto contentsDto = new ContentsDto();
+			contentsDto.setContentsNo(rs.getInt("contents_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
+			contentsDto.setContentsTitle(rs.getString("contents_title"));
+			contentsDto.setContentsViews(rs.getInt("contents_views"));
+			contentsDto.setContentsGrade(rs.getString("contents_grade"));
+			contentsDto.setContentsTime(rs.getInt("contents_time"));
+			contentsDto.setContentsDirector(rs.getString("contents_director"));
+			contentsDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			list.add(contentsDto);
+			
+		}
+		
+		con.close();
+		
+		return list;		
+	}
+	
+	//페이징 - 검색 목록
+	public List<ContentsDto> selectListByPaging(int page, int size, String type, String keyword) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+				+ "select rownum RN, TMP.* from ("
+					+ "select * from contents where instr(#1, ?) > 0"
+					+ "order by contents_no desc"
+					+ ") TMP"
+				+ ") where RN between ? and ?";
+		sql = sql.replace("#1", type);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		int end = page * size;
+		int begin = end - (size-1);
+		
+		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ContentsDto> list = new ArrayList<>();
+				
+		while(rs.next()) {
+			ContentsDto contentsDto = new ContentsDto();
+			contentsDto.setContentsNo(rs.getInt("contents_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
+			contentsDto.setContentsTitle(rs.getString("contents_title"));
+			contentsDto.setContentsViews(rs.getInt("contents_views"));
+			contentsDto.setContentsGrade(rs.getString("contents_grade"));
+			contentsDto.setContentsTime(rs.getInt("contents_time"));
+			contentsDto.setContentsDirector(rs.getString("contents_director"));
+			contentsDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			list.add(contentsDto);
+			
+		}
+		
+		con.close();
+		
+		return list;		
+	}
+	
+	//전체 목록 - 게시글 숫자 카운트
+	public int countByPaging() throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from contents";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	//검색 목록 - 게시글 숫자 카운트
+	public int countByPaging(String type, String keyword) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from contents where instr(#1, ?) > 0";
+		sql = sql.replace("#1", type);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
