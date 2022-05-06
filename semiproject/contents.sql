@@ -54,7 +54,10 @@ create sequence actor_seq;
 /*배우(actor) 테이블 생성*/
 create table actor (
 actor_no number primary key,
-actor_name varchar2(300) not null
+actor_name1 varchar2(300),
+actor_name2 varchar2(300),
+actor_name3 varchar2(300),
+actor_name4 varchar2(300)
 );
 
 /*컨텐츠 배우 테이블 생성(파란색 테이블)*/
