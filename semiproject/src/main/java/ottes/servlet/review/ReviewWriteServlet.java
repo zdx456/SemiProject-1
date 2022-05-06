@@ -20,7 +20,7 @@ public class ReviewWriteServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 리뷰 번호 (reviewNo) +리뷰 내용(reviewContent) + 평점(reviewScore) + 컨텐츠 번호(contentsNo)
-			// + 작성자 (로그인한 HttpSession)
+			// + 작성자 (로그인한 HttpSession) 
 			ReviewDto reviewDto = new ReviewDto();
 			ReviewDao reviewDao = new ReviewDao();
 			
@@ -29,6 +29,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
 			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewSccore")));
+			reviewDto.setReviewWriter(req.getParameter("reviewWriter"));
 			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("ContentsNo")));
 			
 			// writer은 로그인한 세션에서 사용

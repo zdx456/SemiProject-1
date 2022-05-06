@@ -10,7 +10,7 @@
 %>
 <%-- Ott 목록 (등록 수정 삭제)페이지 초안  --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
-
+ 
 <div class="container">
 <div class="row center">
 	<h1>OTT관리 페이지</h1>
