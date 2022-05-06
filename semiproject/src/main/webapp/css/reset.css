@@ -76,3 +76,11 @@ h5 {
 h6 {
     font-size: 0.67em;
 }
+
+/* 
+    글자가 적용되지 않는 현상 수정 
+    font:inherit; 속성이 정상 작동하기 위해 최상위 태그인 html에 font-family를 설정
+*/
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+}
