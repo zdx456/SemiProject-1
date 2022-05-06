@@ -2,29 +2,29 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-<form action="inquiry_write.svt" method="post">
+<form action="notice_write.svt" method="post">
 	<div>
 	    <div>
-	        <h1>1:1 문의 접수</h1>
+	        <h1>공지사항 작성</h1>
 	    </div>
 	    <div>
 	        <label>분류</label>
-	        <select name="inquiryType">
+	        <select name="noticeType">
 	            <option value="">선택</option>
-	            <option>문의사항</option>
-	            <option>오류제보</option>
+	            <option>공지</option>
+	            <option>FAQ</option>
 	        </select>
 	    </div>
 	    <div>
 	        <label>제목</label>
-	        <input type="text" name="inquiryTitle" autocomplete="off" required>
+	        <input type="text" name="noticeTitle" autocomplete="off" required>
 	    </div>
 	    <div>
 	        <label>내용</label>
-	        <textarea name="inquiryContent" required rows="12"></textarea>
+	        <textarea name="noticeContent" required rows="12"></textarea>
 	    </div>
 	    <div>
-	        <button type="submit">접수하기</button>
+	        <button type="submit">등록하기</button>
 	    </div>
 	</div>
 </form>

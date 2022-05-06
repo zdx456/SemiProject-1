@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ottes.beans.NoticeDao;
 
-@WebServlet(urlPatterns = "/notice/delete.svt")
+@WebServlet(urlPatterns = "/admin/notice_delete.svt")
 public class NoticeDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 			boolean success = noticeDao.delete(noticeNo);
 
 			if(success) {
-				resp.sendRedirect("list.jsp");
+				resp.sendRedirect("notice_list.jsp");
 			}
 			else {
 				resp.sendError(404);

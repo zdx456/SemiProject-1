@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.AttachmentDto"%>
+<%@page import="ottes.beans.AttachmentDao"%>
 <%@page import="ottes.beans.ReviewDto"%>
 <%@page import="java.util.List"%>
 <%@page import="ottes.beans.ReviewDao"%>
@@ -7,14 +9,15 @@
 	pageEncoding="UTF-8"%>
 
 <%
-int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
+Integer contentsNo = Integer.valueOf(request.getParameter("contentsNo"));
+// int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
 
 // 현재 글에 대한 댓글 목록을 조회
 ReviewDao reviewDao = new ReviewDao();
-List<ReviewDto> reviewList = reviewDao.selectList();
+List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 
 // 현재 로그인한 사용자가 댓글 작성자인지 확인하는 코드
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
@@ -25,6 +28,10 @@ boolean isLogin = clientId != null;
   String memberGrade = (String)session.getAttribute("auth");
   boolean isAdmin = clientId != null && memberGrade.equals("관리자");
   
+//포스터 가져오기
+AttachmentDao attachmentDao = new AttachmentDao();
+AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
+	
 %>
 
 
@@ -41,8 +48,11 @@ boolean isLogin = clientId != null;
 	<div class="row float-container m50 center ">
 
 		<div class="float-left layer-2">
-			<label>영화 이미지</label> <br> <img src="https://via.placeholder.com/200x200">
-			<!-- 이미지 다운로드 svt로 추가 변경 예정 -->
+		
+			<label><h2><%=contentsDto.getContentsTitle() %></h2></label>
+			<br>
+			<img src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" width="150" height="150" alt="포스터">
+
 			
 			<table class="table center">
 			<thead>
@@ -128,10 +138,9 @@ boolean isLogin = clientId != null;
 		<!--  댓글 목록 영역 -->
 		
 				<table class="table">
-					<%for(ReviewDto reviewDto : reviewList) { %>
-					
-					<% boolean isReplyOwner = clientId != null && clientId.equals(reviewDto.getReviewWriter()); %>
 
+					<%for(ReviewDto reviewDto : reviewList) { %>
+				
 					<tr>
 						<th width="10%"><%=reviewDto.getReviewWriter() %></th>
 						<td width="20%"><%=reviewDto.getReviewTime() %></td>
@@ -163,7 +172,7 @@ boolean isLogin = clientId != null;
 						
 					<%} %>
 						</table>
-						<form action="review_list.jsp" method="post">
+						<form action="review_list.jsp?contentsNo=<%=contentsNo%>"  method="post">
 						<input type="submit" value="리뷰 전체 보기"></input>
 						</form>
 				
