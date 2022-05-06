@@ -1,8 +1,10 @@
+<%@page import="ottes.beans.AttachmentDto"%>
+<%@page import="ottes.beans.AttachmentDao"%>
+<%@page import="ottes.beans.ActorDto"%>
+<%@page import="ottes.beans.ActorDao"%>
 <%@page import="ottes.beans.GenreDto"%>
 <%@page import="ottes.beans.RegionDto"%>
 <%@page import="java.util.List"%>
-<%@page import="ottes.beans.ContentsActorDto"%>
-<%@page import="ottes.beans.ContentsActorDao"%>
 <%@page import="ottes.beans.ContentsDto"%>
 <%@page import="ottes.beans.ContentsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,17 +18,16 @@
 	ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
 	
 	//배우 정보 가져오기
-	ContentsActorDao contentsActorDao = new ContentsActorDao();
-	List<ContentsActorDto> list = contentsActorDao.selectList(contentsNo);
+	ActorDao actorDao = new ActorDao();
+	ActorDto actorDto = actorDao.selectName(contentsNo);
+	
+	//포스터 가져오기
+	AttachmentDao attachmentDao = new AttachmentDao();
+	AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상세 페이지</title>
-</head>
-<body>
+<jsp:include page="/template/header.jsp"></jsp:include>
+
 	<div class="container w800 m30">
 	
 		<div class="row center">
@@ -34,6 +35,13 @@
 		</div>
 	
 		<table class="table">
+		
+		<!-- 포스터 보여주기 -->
+			<tr>
+				<td>
+					<img src="file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" width="150" height="150" alt="포스터">
+				</td>
+			</tr>
 			
 			<tr>
 				<td>번호</td>
@@ -70,13 +78,34 @@
 				<td><%=contentsDto.getContentsDirector() %></td>
 			</tr>
 			
-				
-			<%for(ContentsActorDto contentsActorDto : list) {%>
+				<%if(actorDto.getActorName1() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
 				<tr>
-					<td>배우</td>
-					<td><%=contentsActorDto.getActorNo() %></td>
+					<td>배우1</td>
+					<td><%=actorDto.getActorName1() %></td>
 				</tr>
-			<%} %>
+				<%} %>
+				
+				<%if(actorDto.getActorName2() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+				<tr>
+					<td>배우2</td>
+					<td><%=actorDto.getActorName2() %></td>
+				</tr>
+				<%} %>
+				
+				<%if(actorDto.getActorName3() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+				<tr>
+					<td>배우3</td>
+					<td><%=actorDto.getActorName3() %></td>
+				</tr>
+				<%} %>
+				
+				<%if(actorDto.getActorName4() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+				<tr>
+					<td>배우4</td>
+					<td><%=actorDto.getActorName4() %></td>
+				</tr>
+				<%} %>
+
 			
 			<tr>
 				<td>줄거리</td>
@@ -93,8 +122,8 @@
 		<a href="list.jsp">목록</a>
 		
 	</div>
-</body>
-</html>
+	
+<jsp:include page="/template/footer.jsp"></jsp:include>
 
 
 
