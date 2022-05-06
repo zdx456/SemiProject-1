@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.AttachmentDto"%>
+<%@page import="ottes.beans.AttachmentDao"%>
 <%@page import="ottes.beans.ReviewDto"%>
 <%@page import="java.util.List"%>
 <%@page import="ottes.beans.ReviewDao"%>
@@ -25,6 +27,10 @@ boolean isLogin = clientId != null;
   String memberGrade = (String)session.getAttribute("auth");
   boolean isAdmin = clientId != null && memberGrade.equals("관리자");
   
+//포스터 가져오기
+AttachmentDao attachmentDao = new AttachmentDao();
+AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
+	
 %>
 
 
@@ -41,8 +47,9 @@ boolean isLogin = clientId != null;
 	<div class="row float-container m50 center ">
 
 		<div class="float-left layer-2">
-			<label>영화 이미지</label> <br> <img src="https://via.placeholder.com/200x200">
-			<!-- 이미지 다운로드 svt로 추가 변경 예정 -->
+		
+			<label>영화 이미지</label> <br>
+
 			
 			<table class="table center">
 			<thead>
@@ -163,7 +170,7 @@ boolean isLogin = clientId != null;
 						
 					<%} %>
 						</table>
-						<form action="review_list.jsp" method="post">
+						<form action="review_list.jsp?contentsNo="+<%=contentsDto.getContentsNo() %> method="post">
 						<input type="submit" value="리뷰 전체 보기"></input>
 						</form>
 				
