@@ -10,7 +10,7 @@
     
 <%
 	int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
-
+  
 	ContentsDao contentsDao = new ContentsDao();
 	ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
 	
@@ -24,6 +24,29 @@
     
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<style>
+	.form-input[type=file]{
+		display: none;
+	}
+</style>
+
+<script type="text/javascript">
+	
+	$(function(){
+		
+		$(".file-button").click(function(){
+			$(this).next("label").children(".form-input[type=file]").click();
+		});
+		
+		$(".form-input[type=file]").on("input", function(){
+			$(this).next(".file-name").text($(this).val());
+		});
+		
+	});
+	
+	
+</script>
+
 <div class="container w800 m30">
 	
 	<div class="row center">
@@ -33,6 +56,8 @@
 	<form action="edit.svt" method="post" enctype="multipart/form-data">
 		
 		<input type="hidden" name="contentsNo" value="<%=contentsDto.getContentsNo() %>">
+		<input type="hidden" name="attachmentNo" value="<%=attachmentDto.getAttachmentNo() %>">
+		<input type="hidden" name="actorNo" value="<%=actorDto.getActorNo() %>">
 	
 		<div class="row">
 			<label>제목
@@ -183,9 +208,15 @@
 			</label>
 		</div>
 		
-		<!-- 포스터 이미지 선택란 추가 -->
+		<!-- 포스터 이미지 선택란 -->
 		<div class = "row">
-			첨부파일 <input type="file" name="contentsAttachment" accept=".jpg, .png"><span><%=attachmentDto.getAttachmentUploadname() %></span>
+			<button type="button" class="file-button">파일 선택</button>
+			<label>
+				<input type="file" name="contentsAttachment" accept=".jpg, .png" class="form-input">
+				<span class="file-name">
+					<%=attachmentDto.getAttachmentUploadname() %>
+				</span>
+			</label>
 		</div>
 		
 		<div class="row">
