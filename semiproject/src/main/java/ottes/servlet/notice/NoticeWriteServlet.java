@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.NoticeDao;
 import ottes.beans.NoticeDto;
 
-@WebServlet(urlPatterns = "/notice/write.svt")
+@WebServlet(urlPatterns = "/admin/notice_write.svt")
 public class NoticeWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,7 +20,7 @@ public class NoticeWriteServlet extends HttpServlet {
 			noticeDto.setNoticeType(req.getParameter("noticeType"));
 			noticeDto.setNoticeTitle(req.getParameter("noticeTitle"));
 			noticeDto.setNoticeContent(req.getParameter("noticeContent"));
-			
+
 			String clientId = (String) req.getSession().getAttribute("login");
 			noticeDto.setNoticeWriter(clientId);
 
@@ -28,7 +28,7 @@ public class NoticeWriteServlet extends HttpServlet {
 			noticeDto.setNoticeNo(noticeDao.getSequence());
 			noticeDao.insert(noticeDto);
 
-			resp.sendRedirect("detail.jsp?noticeNo=" + noticeDto.getNoticeNo());
+			resp.sendRedirect("notice_list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
