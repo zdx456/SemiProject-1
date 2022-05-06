@@ -29,8 +29,8 @@ public class ReviewWriteServlet extends HttpServlet{
 			
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
 			reviewDto.setReviewWriter(req.getParameter("reviewWriter")); // 등록할때  작성자 필요해서 추가했어요 ㅎㅎ - 조장's
-			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewSccore")));
-			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("ContentsNo")));
+			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewScore")));
+			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("contentsNo")));
 			
 			// writer은 로그인한 세션에서 사용
 			reviewDto.setReviewWriter((String)req.getSession().getAttribute("login"));
@@ -38,7 +38,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			reviewDao.insert(reviewDto);
 			
 			// 리뷰 작성 후 컨텐츠 상세보기 페이지 그대로 돌아오기
-			resp.sendRedirect("detail.jsp?ContentsNo="+reviewDto.getContentsNo());
+			resp.sendRedirect("detail.jsp?contentsNo="+reviewDto.getContentsNo());
 			
 					
 		} catch (Exception e) {
