@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.ActorDto"%>
+<%@page import="ottes.beans.ActorDao"%>
 <%@page import="ottes.beans.AttachmentDto"%>
 <%@page import="ottes.beans.AttachmentDao"%>
 <%@page import="ottes.beans.ReviewDto"%>
@@ -14,6 +16,9 @@ Integer contentsNo = Integer.valueOf(request.getParameter("contentsNo"));
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
+
+ActorDao actorDao = new ActorDao();
+ActorDto actorDto = actorDao.selectName(contentsNo);
 
 // 현재 글에 대한 댓글 목록을 조회
 ReviewDao reviewDao = new ReviewDao();
@@ -65,7 +70,7 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 					<td>ott 가격</td>
 				</tr>
 				<tr>
-					<td>♥<label><%=contentsDto.getContentsViews()%></label> 
+					<td>♥ <label><%=contentsDto.getContentsViews()%></label> 
 					</td>
 				</tr>
 				</thead>
@@ -78,31 +83,37 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 			<table class="table m50">
 				<tr>
 				<tr>
-					<td>제목 <%=contentsDto.getContentsTitle()%>
+					<td>제목 : <%=contentsDto.getContentsTitle()%>
 					</td>
 				</tr>
 				<tr>
-					<td>등급 <%=contentsDto.getContentsGrade()%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>러닝타임 <%=contentsDto.getContentsTime()%>
+					<td>등급 : <%=contentsDto.getContentsGrade()%>
 					</td>
 				</tr>
 
 				<tr>
-					<td>장르 <%=contentsDto.getGenreName()%>
+					<td>러닝타임 : <%=contentsDto.getContentsTime()%> 분
 					</td>
 				</tr>
 
 				<tr>
-					<td>줄거리 <%=contentsDto.getContentsSummary()%>
+					<td>장르 : <%=contentsDto.getGenreName()%>
 					</td>
 				</tr>
 
 				<tr>
-					<td>감독 <%=contentsDto.getContentsDirector()%>
+					<td>줄거리 : <%=contentsDto.getContentsSummary()%>
+					</td>
+				</tr>
+
+				<tr>
+					<td>감독 : <%=contentsDto.getContentsDirector()%>
+					</td>
+				</tr>
+
+				<tr>
+					<td>배우 : <%=actorDto.getActorName1()%>, <%=actorDto.getActorName2() %>,
+								<%=actorDto.getActorName3()%>, <%=actorDto.getActorName4() %>
 					</td>
 				</tr>
 
