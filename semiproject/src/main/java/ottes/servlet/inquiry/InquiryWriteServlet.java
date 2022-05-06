@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.InquiryDao;
 import ottes.beans.InquiryDto;
 
-@WebServlet(urlPatterns = "/inquiry/write.svt")
+@WebServlet(urlPatterns = "/inquiry/inquiry_write.svt")
 public class InquiryWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,10 +20,9 @@ public class InquiryWriteServlet extends HttpServlet {
 			inquiryDto.setInquiryType(req.getParameter("inquiryType"));
 			inquiryDto.setInquiryTitle(req.getParameter("inquiryTitle"));
 			inquiryDto.setInquiryContent(req.getParameter("inquiryContent"));
-			
-//			String clientId = (String) req.getSession().getAttribute("login");
-//			inquiryDto.setInquiryWriter(clientId);
-			inquiryDto.setInquiryWriter("11111111");
+
+			String clientId = (String) req.getSession().getAttribute("login");
+			inquiryDto.setInquiryWriter(clientId);
 
 			InquiryDao inquiryDao = new InquiryDao();
 			inquiryDto.setInquiryNo(inquiryDao.getSequence());

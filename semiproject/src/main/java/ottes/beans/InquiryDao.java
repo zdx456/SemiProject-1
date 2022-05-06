@@ -34,7 +34,7 @@ public class InquiryDao {
 			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
 			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
 			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
-			inquiryDto.setInquiryNo(rs.getInt("inquiry_replycount"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
 			
 			list.add(inquiryDto);
 		}
@@ -53,7 +53,7 @@ public class InquiryDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select * from inquiry and inquiry_writer = ? order by inquiry_no desc"
+							+ "select * from inquiry where inquiry_writer = ? order by inquiry_no desc"
 						+ ") TMP"
 					+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class InquiryDao {
 			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
 			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
 			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
-			inquiryDto.setInquiryNo(rs.getInt("inquiry_replycount"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
 			
 			list.add(inquiryDto);
 		}
@@ -112,7 +112,7 @@ public class InquiryDao {
 			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
 			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
 			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
-			inquiryDto.setInquiryNo(rs.getInt("inquiry_replycount"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
 			
 			list.add(inquiryDto);
 		}
@@ -152,7 +152,7 @@ public class InquiryDao {
 			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
 			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
 			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
-			inquiryDto.setInquiryNo(rs.getInt("inquiry_replycount"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
 			
 			list.add(inquiryDto);
 		}
@@ -213,7 +213,7 @@ public class InquiryDao {
 			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
 			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
 			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
-			inquiryDto.setInquiryNo(rs.getInt("inquiry_replycount"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
 		}
 		else {
 			inquiryDto = null;
@@ -263,11 +263,26 @@ public class InquiryDao {
 		String sql = "delete inquiry where inquiry_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, inquiryNo);
-		System.out.println(inquiryNo);
 		int count = ps.executeUpdate();
 		
 		con.close();
-		System.out.println(count);
+		return count > 0;
+	}
+	
+	// 문의&오류 게시글 댓글 수 갱신
+	public boolean updateReplycount(int inquiryNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update inquiry set inquiry_replycount = ("
+									+ "select count(*) from reply where reply_target = ?"
+						+ ") where inquiry_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, inquiryNo);
+		ps.setInt(2, inquiryNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
 		return count > 0;
 	}
 }

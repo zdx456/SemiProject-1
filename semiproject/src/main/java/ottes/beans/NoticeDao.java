@@ -200,11 +200,9 @@ public class NoticeDao {
 		String sql = "delete notice where notice_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
-		System.out.println(noticeNo);
 		int count = ps.executeUpdate();
 		
 		con.close();
-		System.out.println(count);
 		return count > 0;
 	}
 }

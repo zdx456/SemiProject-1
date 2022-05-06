@@ -9,19 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ottes.beans.InquiryDao;
+import ottes.beans.ReplyDao;
 
-@WebServlet(urlPatterns = "/admin/inquiry_delete.svt")
-public class InquiryDeleteServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/reply_delete.svt")
+public class ReplyDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			int inquiryNo = Integer.parseInt(req.getParameter("inquiryNo"));
-			
-			InquiryDao inquiryDao = new InquiryDao();
-			boolean success = inquiryDao.delete(inquiryNo);
+			int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+			int replyTarget = Integer.parseInt(req.getParameter("replyTarget"));
+
+			ReplyDao replyDao = new ReplyDao();
+			boolean success = replyDao.delete(replyNo);
 
 			if(success) {
-				resp.sendRedirect("inquiry_list.jsp");
+				InquiryDao inquiryDao = new InquiryDao();
+				inquiryDao.updateReplycount(replyTarget);
+				resp.sendRedirect("inquiry_detail.jsp?inquiryNo=" + replyTarget);
 			}
 			else {
 				resp.sendError(404);
