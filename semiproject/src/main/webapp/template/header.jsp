@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%
+	// 세션 로그인 추가
+	
+	String clientId = (String)session.getAttribute("login");
+
+	boolean login = clientId !=null;
+	
+	// 관리자 검사
+	String auth = (String)session.getAttribute("auth");
+	boolean admin = auth != null && auth.equals("관리자");
+
+%>    
+
+<h3>로그인 상태 : <%=login %></h3>
+
 
 <!DOCTYPE html>
 <html lang="en">

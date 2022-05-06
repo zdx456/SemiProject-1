@@ -62,7 +62,7 @@ public class ReviewDao {
 	public boolean update(ReviewDto reviewDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update review set review_content = ? review score = ? where review_no = ?";
+		String sql = "update review set review_content = ? review_score = ? where review_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, reviewDto.getReviewContent());
 		ps.setInt(2, reviewDto.getReviewScore());
