@@ -14,7 +14,7 @@ public class ReviewDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-
+  
 		List<ReviewDto> list = new ArrayList<>();
 		while (rs.next()) {
 			ReviewDto reviewDto = new ReviewDto();
