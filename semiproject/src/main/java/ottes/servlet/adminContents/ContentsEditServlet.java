@@ -1,4 +1,4 @@
-package ottes.servlet.adminContents;
+   package ottes.servlet.adminContents;
 
 import java.io.IOException;
 
