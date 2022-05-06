@@ -27,7 +27,7 @@
 	} else{
 		list = reviewDao.selectList(contentsNo);
 	}
-
+ 
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
