@@ -9,7 +9,6 @@ public class InquiryDto {
 	private String inquiryTitle;
 	private String inquiryContent;
 	private Date inquiryDate;
-	private int inquiryReadcount;
 	private int inquiryReplycount;
 	
 	public InquiryDto() {
@@ -64,14 +63,6 @@ public class InquiryDto {
 		this.inquiryDate = inquiryDate;
 	}
 
-	public int getInquiryReadcount() {
-		return inquiryReadcount;
-	}
-
-	public void setInquiryReadcount(int inquiryReadcount) {
-		this.inquiryReadcount = inquiryReadcount;
-	}
-
 	public int getInquiryReplycount() {
 		return inquiryReplycount;
 	}
@@ -84,7 +75,6 @@ public class InquiryDto {
 	public String toString() {
 		return "InquiryDto [inquiryNo=" + inquiryNo + ", inquiryWriter=" + inquiryWriter + ", inquiryType="
 				+ inquiryType + ", inquiryTitle=" + inquiryTitle + ", inquiryContent=" + inquiryContent
-				+ ", inquiryDate=" + inquiryDate + ", inquiryReadcount=" + inquiryReadcount + ", inquiryReplycount="
-				+ inquiryReplycount + "]";
+				+ ", inquiryDate=" + inquiryDate + ", inquiryReplycount=" + inquiryReplycount + "]";
 	}
 }
