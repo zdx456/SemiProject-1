@@ -62,10 +62,12 @@
 	<%-- 버튼 클릭시 등록 input 나오게 설정 jquery 이용해서 hide 할 예정 --%>
 </div>
 <div class="row center">
-<!-- 등록 이상 무  잘됨 -->
-	<form action="insert.svt" method="post">
+
+
+	<form action="insert.svt" method="post" enctype="multipart/form-data">
 	<input type="text" name="ottName" placeholder="Ott 이름" class="form-input input-round">
 	<input type="number"  name="ottPrice" placeholder="Ott월별가격(basic)" min="0" step="100"  class="form-input input-round">
+	<input type="file" name="ottLogo" accept=".jpg,.png">
 	<button type="submit" class="btn">등록</button>
 	</form>
 </div>
