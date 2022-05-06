@@ -1,22 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
+
 <%
-	// 세션 로그인 추가
-	
-	String clientId = (String)session.getAttribute("login");
-
-	boolean login = clientId !=null;
-	
-	// 관리자 검사
-	String auth = (String)session.getAttribute("auth");
-	boolean admin = auth != null && auth.equals("관리자");
-
+   String clientId = (String) session.getAttribute("login");
+   boolean login = clientId != null;
+   String auth = (String)session.getAttribute("auth");
+   boolean admin = auth != null && auth.equals("관리자");
 %>    
-
-<h3>로그인 상태 : <%=login %></h3>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ottes layout Sample</title>
 
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style.css">
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css">
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style.css">
 
 
     <!-- 폰트 CDN -->
@@ -59,7 +49,8 @@
             <ul class="menu-semi">
                 <li><a href="#">홈</a></li>
                 <li><a href="#">장르</a></li>
-                <li><a href="#">로그인</a></li>
+                <li><a href = "<%=request.getContextPath() %>/client/join.jsp">회원가입</a></li>
+                <li><a href = "<%=request.getContextPath() %>/client/login.jsp">로그인</a></li>
                 <li><a href="#">닉네임님</a></li>
 
                 <li>
