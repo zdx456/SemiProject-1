@@ -31,12 +31,14 @@ public class ActorDao {
 	public void insert(ActorDto actorDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into actor(actor_no, actor_name) values(?, ?)";
+		String sql = "insert into actor(actor_no, actor_name1, actor_name2, actor_name3, actor_name4) values(?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, actorDto.getActorNo());
-		ps.setString(2, actorDto.getActorName());
-		
+		ps.setString(2, actorDto.getActorName1());
+		ps.setString(3, actorDto.getActorName2());
+		ps.setString(4, actorDto.getActorName3());
+		ps.setString(5, actorDto.getActorName4());
 		
 		ps.execute();
 		
@@ -48,10 +50,13 @@ public class ActorDao {
 	public boolean update(ActorDto actorDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update actor set actor_no = ?, actor_name = ? where actor_name = ?";
+		String sql = "update actor set actor_name1 = ?, actor_name2 = ?, actor_name3 = ? actor_name4 = ? where actor_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, actorDto.getActorNo());
-		ps.setString(5, actorDto.getActorName());
+		ps.setString(1, actorDto.getActorName1());
+		ps.setString(2, actorDto.getActorName2());
+		ps.setString(3, actorDto.getActorName3());
+		ps.setString(4, actorDto.getActorName4());
+		ps.setInt(5, actorDto.getActorNo());
 		int count = ps.executeUpdate();
 		
 		con.close();
@@ -73,8 +78,11 @@ public class ActorDao {
 		while(rs.next()) {
 			ActorDto actorDto = new ActorDto();
 			
-			actorDto.setActorNo(rs.getInt("actorNo"));
-			actorDto.setActorName(rs.getString("actorName"));
+			actorDto.setActorNo(rs.getInt("actor_no"));
+			actorDto.setActorName1(rs.getString("actor_name1"));
+			actorDto.setActorName2(rs.getString("actor_name2"));
+			actorDto.setActorName3(rs.getString("actor_name3"));
+			actorDto.setActorName4(rs.getString("actor_name4"));
 			
 			list.add(actorDto);
 		}
@@ -86,19 +94,22 @@ public class ActorDao {
 	
 	// 배우 목록 이름으로 단일 조회
 	// @author : 이기주
-	public ActorDto selectOne(String actorName) throws Exception{
+	public ActorDto selectOne(int actorNo) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from actor where actor_name = ?";
+		String sql = "select * from actor where actor_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, actorName);
+		ps.setInt(1, actorNo);
 		ResultSet rs = ps.executeQuery();
 		
 		ActorDto actorDto;
 		if(rs.next()) {
 			actorDto = new ActorDto();
 			actorDto.setActorNo(rs.getInt("actor_no"));
-			actorDto.setActorName(rs.getString("actor_name"));
+			actorDto.setActorName1(rs.getString("actor_name1"));
+			actorDto.setActorName2(rs.getString("actor_name2"));
+			actorDto.setActorName3(rs.getString("actor_name3"));
+			actorDto.setActorName4(rs.getString("actor_name4"));
 		}
 		else {
 			actorDto = null;
@@ -108,7 +119,7 @@ public class ActorDao {
 	
 		return actorDto;
 	}
-	
+
 	// 배우삭제(이름으로 삭제)
 	// @author : 이기주
 	public boolean deleteActorName(String actorName) throws Exception {
@@ -139,5 +150,42 @@ public class ActorDao {
 		return count > 0;
 	}
 	
+	//배우 이름 조회
+	public ActorDto selectName(int contentsNo) throws Exception{
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from actor A"
+				+ "    left outer join contents_actor C on C.actor_no = A.actor_no where contents_no=? order by contents_no asc";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		
+		ActorDto actorDto;
+		if(rs.next()) {
+			actorDto = new ActorDto();
+			actorDto.setActorNo(rs.getInt("actor_no"));
+			actorDto.setActorName1(rs.getString("actor_name1"));
+			actorDto.setActorName2(rs.getString("actor_name2"));
+			actorDto.setActorName3(rs.getString("actor_name3"));
+			actorDto.setActorName4(rs.getString("actor_name4"));
+		}
+		else {
+			actorDto = null;
+		}
+		
+		con.close();
+		
+		return actorDto;
+		
+	}
+	
 //////////////////////////
 }
+
+
+
+
+
+
