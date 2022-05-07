@@ -18,7 +18,6 @@ public class ContentsActorDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, contentsActorDto.getContentsNo());
 		ps.setInt(2, contentsActorDto.getActorNo());
-		ps.execute();
 		
 		ps.execute();
 		
