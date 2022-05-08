@@ -3,23 +3,14 @@
 <%@page import="ottes.beans.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%-- 준비 : 로그인된 사용자의 ID --%>
 <%
 	String clientId = (String) session.getAttribute("login");
 %>    
-
-<%-- 처리 --%>
 <%
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.selectOne(clientId);
-	
 %>    
- 
-<%-- 출력 --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
-
-
 <h1>회원 정보</h1>
 
 <table border="1" width="400">

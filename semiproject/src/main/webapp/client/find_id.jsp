@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
     
         <jsp:include page="/template/header.jsp"></jsp:include>
-    
-    
-    
-    
+
     
 <form action="find_id.kh" method="post">
    <div class="container w400 m30">
@@ -30,7 +27,7 @@
        </div>
       <%if(request.getParameter("error") != null){ %>
       <div class="row center">
-         <h3 style="color:red;">정보가 일치하는 아이디가 존재하지 않습니다</h3>
+         <h3 style="color:red;">일치하는 아이디가 존재하지 않습니다</h3>
       </div>
       <%} %>
    </div>

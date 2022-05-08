@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
  
 <%
-	//에러 관련된 파라미터를 수신하는 코드
 	String error = request.getParameter("error");
 	boolean type1 = error != null && error.equals("1");
 	boolean type2 = error != null && error.equals("2");

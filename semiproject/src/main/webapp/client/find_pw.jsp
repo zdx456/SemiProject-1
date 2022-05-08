@@ -30,7 +30,7 @@
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>
 		<% if(request.getParameter("error") != null) { %>
 		<div class="row center">
-			<h3 style="color:red;">입력한 정보와 일치하는 데이터가 없습니다</h3>
+			<h3 style="color:red;">정보와 일치하는 데이터가 없습니다</h3>
 		</div>
 		<% } %>
 	</div>
