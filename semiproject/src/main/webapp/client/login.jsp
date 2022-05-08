@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <jsp:include page="/template/header.jsp"></jsp:include>
     
- <form action="login.ott" method="post">
+ <form action="login.kh" method="post">
     <div class="container w400 m30">
         <div class="row center">
             <h1>로그인</h1>
@@ -25,23 +25,15 @@
         </div>
         
       <%-- 에러 표시가 있는 경우 메세지를 출력 --%>
-      <% if(request.getParameter("error") != null) { %>
-      <div class="row center">
-         <h3 style="color:red;">로그인 정보가 일치하지 않습니다</h3>   
-      </div>
-      <% } %>        
+		<% if(request.getParameter("error") != null) { %>
+		<div class="row center">
+			<h3 style="color:red;">로그인 정보가 일치하지 않습니다</h3>	
+		</div>
+		<% } %>        
     </div>
 </form>
 
 
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

@@ -21,23 +21,23 @@ public class ClientDao {
 	public void insert(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into client(client_id, client_pw, client_nick, client_gender, client_grade, client_birth, client_email)"
-				+ "values(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into client(client_id, client_pw, client_nick, client_gender, client_birth, client_email)"
+				+ "values(?, ?, ?, ?, ?, ?)";
+		//String sql = "insert into client(client_id, client_pw, client_nick, client_gender, client_grade, client_birth, client_email)"
+			//	+ "values(?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
 		ps.setString(1, clientDto.getClientId());
 		ps.setString(2, clientDto.getClientPw());
 		ps.setString(3, clientDto.getClientNick());
-		ps.setString(4, clientDto.getClientGender());
-		ps.setString(5, clientDto.getClientGrade());
-		ps.setString(6, clientDto.getClientBirth());
-		ps.setString(7, clientDto.getClientEmail());
-		
+		ps.setString(4, clientDto.getClientGender());		
+		ps.setString(5, clientDto.getClientBirth());
+		ps.setString(6, clientDto.getClientEmail());		
 		ps.execute();
 		
 		con.close();
 	}
 	
+	//ps.setString(5, clientDto.getClientGrade());
 	// 회원 목록 전체 조회
 	// @author : 이기주
 	public List<ClientDto> select() throws Exception {
@@ -70,7 +70,7 @@ public class ClientDao {
 	
 	// 회원목록 아이디로 단일 조회
 	// @author : 이기주
-	public ClientDto selectOne(String clientId) throws Exception{
+	public ClientDto selectOne(String clientId) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from client where client_id = ?";
@@ -81,25 +81,25 @@ public class ClientDao {
 		ClientDto clientDto;
 		if(rs.next()) {
 			clientDto = new ClientDto();
+			
+			//data 13개 copy
 			clientDto.setClientId(rs.getString("client_id"));
 			clientDto.setClientPw(rs.getString("client_pw"));
 			clientDto.setClientNick(rs.getString("client_nick"));
-			clientDto.setClientJoindate(rs.getDate("client_joindate"));
-			clientDto.setClientGender(rs.getString("client_gender"));
-			clientDto.setClientGrade(rs.getString("client_grade"));
 			clientDto.setClientBirth(rs.getString("client_birth"));
 			clientDto.setClientEmail(rs.getString("client_email"));
-			clientDto.setClientEmail(rs.getString("client_logindate"));
-			}
+			clientDto.setClientGrade(rs.getString("client_grade"));
+			clientDto.setClientJoindate(rs.getDate("client_joindate"));
+		}
 		else {
 			clientDto = null;
 		}
-	
+		
 		con.close();
-	
+		
 		return clientDto;
-			
 	}
+
 	
 	// 비밀번호 변경(사용자, 관리자 같이 사용)
 	// @author : 이기주
@@ -109,7 +109,9 @@ public class ClientDao {
 		String sql = "update client set client_pw = ? where client_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, changePw);
+		System.out.println("ClientDao >> changePassword  >> changePw : " +  changePw);
 		ps.setString(2, clientId);
+		System.out.println("ClientDao >> changePassword  >> clientId : " +  clientId);
 		int count = ps.executeUpdate();
 		
 		con.close();
@@ -155,7 +157,7 @@ public class ClientDao {
 	public boolean chgInfoClient(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update client set client_nick=? client_gender=? client_birth=? client_email=? where client_id=?";
+		String sql = "update client set client_nick=? , client_gender=?, client_birth=? ,client_email=? where client_id=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientNick());
@@ -198,8 +200,57 @@ public class ClientDao {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+	//아이디찾기
+	public String findId(ClientDto clientDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		//System.out.println("ClientDao >> findId ");
+		String sql = "select client_id from client where client_nick=? and client_birth=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, clientDto.getClientNick());
+		ps.setString(2, clientDto.getClientBirth());
+		ResultSet rs = ps.executeQuery();
+		
+		String clientId;
+		if(rs.next()) {
+			clientId = rs.getString("client_id");
+		}
+		else {
+			clientId = null;
+		}
+		
+		con.close();
+		
+		return clientId;
+	}
+	public String findPw(ClientDto clientDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		System.out.println("ClientDao >> findPw ");
+		String sql = "select client_id from client where client_id=? and client_nick=? and client_birth=? and client_email=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, clientDto.getClientId());
+		System.out.println("ClientDao >> findPw0 >> getClientId "+clientDto.getClientId());
+		ps.setString(2, clientDto.getClientNick());
+		System.out.println("ClientDao >> findPw0 >> getClientNick "+clientDto.getClientNick());
+		ps.setString(3, clientDto.getClientBirth());
+		System.out.println("ClientDao >> findPw0 >> getClientBirth "+clientDto.getClientBirth());
+		ps.setString(4, clientDto.getClientEmail());
+		System.out.println("ClientDao >> findPw0 >> getClientEmail "+clientDto.getClientEmail());	
+		ResultSet rs = ps.executeQuery();
+		
+		String clientId;
+		
+		if(rs.next()) {
+			clientId = rs.getString("client_id");
+		}
+		else {
+			clientId = null;
+		}
+		System.out.println("ClientDao >> findPw0 >> clientPw "+clientId);
+
+		con.close();
+		
+		return clientId;
+	}
 ///////////
 }
 
