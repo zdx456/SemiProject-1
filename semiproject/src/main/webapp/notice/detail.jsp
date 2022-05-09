@@ -11,19 +11,17 @@
 %>    
     
 <jsp:include page="/template/header.jsp"></jsp:include>
-<table>
-	<tr>
-		<td><%=noticeDto.getNoticeType()%></td>
-	</tr>
-	<tr>
-		<td><%=noticeDto.getNoticeTitle()%></td>
-	</tr>
-	<tr>
-		<td><%=noticeDto.getNoticeDate()%></td>
-	</tr>	
-	<tr>
-		<td><%=noticeDto.getNoticeContent()%></td>
-	</tr>
-</table>
+<form action="/adminClient/update.svt" method="post">
+	<div>
+		<label>
+			<input type="text">
+		</label>
+	</div>
+			clientDto.setClientNick(req.getParameter("clinetNick"));
+			clientDto.setClientGender(req.getParameter("clientGender"));
+			clientDto.setClientGrade(req.getParameter("clientGrade"));
+			clientDto.setClientBirth(req.getParameter("clientBirth")); 
+			clientDto.setClientEmail(req.getParameter("clientEmail"));
+</form>
 <div><a href="list.jsp">목록</a></div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

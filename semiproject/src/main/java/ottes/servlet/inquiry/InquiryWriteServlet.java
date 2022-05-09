@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.InquiryDao;
 import ottes.beans.InquiryDto;
 
-@WebServlet(urlPatterns = "/inquiry/inquiry_write.svt")
+@WebServlet(urlPatterns = "/adminClient/inquiry_write.svt")
 public class InquiryWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
