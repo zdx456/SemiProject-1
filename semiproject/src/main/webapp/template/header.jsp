@@ -14,8 +14,8 @@
     <title>Ottes</title>
 
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css">	
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 	
     <!-- 폰트 CDN -->
