@@ -16,12 +16,12 @@ import ottes.beans.ActorDao;
 import ottes.beans.ActorDto;
 import ottes.beans.AttachmentDao;
 import ottes.beans.AttachmentDto;
-import ottes.beans.ContentsActorDao;
-import ottes.beans.ContentsActorDto;
-import ottes.beans.ContentsAttachmentDao;
-import ottes.beans.ContentsAttachmentDto;
 import ottes.beans.ContentsDao;
 import ottes.beans.ContentsDto;
+import ottes.beans.OttContentsDao;
+import ottes.beans.OttContentsDto;
+import ottes.beans.OttDao;
+import ottes.beans.OttDto;
 
 @WebServlet(urlPatterns = "/adminContents/edit.svt")
 public class ContentsEditServlet extends HttpServlet {
@@ -39,6 +39,7 @@ public class ContentsEditServlet extends HttpServlet {
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 			
 			MultipartRequest mRequest = new MultipartRequest(req, path, max, encoding, policy);
+			
 			
 			//*************** 콘텐츠 정보 수정 ***************//
 			//[1] contents 테이블 수정
@@ -77,7 +78,6 @@ public class ContentsEditServlet extends HttpServlet {
 				
 			}
 			
-			
 			//*************** 배우 수정 ***************//
 			//[4] actor 테이블 수정
 			//[4] - 준비
@@ -92,6 +92,30 @@ public class ContentsEditServlet extends HttpServlet {
 			ActorDao actorDao = new ActorDao();
 			actorDao.update(actorDto);
 			
+			//*************** ott 수정 ***************//삭제하고 다시 등록....
+			
+			OttContentsDao ottContentsDao = new OttContentsDao();
+			ottContentsDao.delete(contentsDto.getContentsNo());
+			
+			//등록
+			String[] ottNames = mRequest.getParameterValues("ottName");
+			
+			for(int i = 0; i < ottNames.length; i++) {
+				
+				OttContentsDto ottContentsDto = new OttContentsDto();			
+				
+				OttDao ottDao = new OttDao();
+
+				String ottName = ottNames[i];
+				OttDto ottDto = ottDao.selectOne(ottName);
+				
+				ottContentsDto.setOttNo(ottDto.getOttNo());
+				ottContentsDto.setContentsNo(contentsDto.getContentsNo());
+				
+				OttContentsDao ottContentsDaoIn = new OttContentsDao();
+				ottContentsDaoIn.insert(ottContentsDto);
+				
+			}
 		
 			//출력
 			resp.sendRedirect(req.getContextPath()+"/adminContents/detail.jsp?contentsNo=" + contentsDto.getContentsNo());
