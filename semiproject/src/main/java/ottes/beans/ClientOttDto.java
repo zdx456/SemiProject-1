@@ -2,19 +2,19 @@ package ottes.beans;
 
 public class ClientOttDto {
 
-	private String clinetId;
+	private String clientId;
 	private int ottNo;
 	
 	public ClientOttDto() {
 		super();
 	}
 
-	public String getClinetId() {
-		return clinetId;
+	public String getClientId() {
+		return clientId;
 	}
 
-	public void setClinetId(String clinetId) {
-		this.clinetId = clinetId;
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
 	public int getOttNo() {

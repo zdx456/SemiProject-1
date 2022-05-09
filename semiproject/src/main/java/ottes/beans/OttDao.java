@@ -77,6 +77,7 @@ public class OttDao {
 		return count > 0;
 	}
 	
+
 	public OttDto selectOne(String ottName) throws Exception {
 		
 		Connection con = JdbcUtils.getConnection();
@@ -186,6 +187,7 @@ public class OttDao {
 		
 		return list;
 	}
+
 }
 
 
