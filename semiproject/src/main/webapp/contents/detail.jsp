@@ -13,6 +13,7 @@
 <%
 Integer contentsNo = Integer.valueOf(request.getParameter("contentsNo"));
 // int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
+String reviewWriter = request.getParameter("reviewWriter");
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
@@ -128,6 +129,7 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 		<% if(isLogin){ %>
 		<form action="review_insert.svt" method="post">
 			<input type="hidden" name="contentsNo" value="<%=contentsDto.getContentsNo()%>">
+			<input type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
 			<textarea name="reviewContent" rows="4" cols="70"></textarea>
 				<label>평점</label>
 				<select name="reviewScore">
