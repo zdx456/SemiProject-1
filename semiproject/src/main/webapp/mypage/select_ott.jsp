@@ -110,17 +110,17 @@ String clientId = (String)session.getAttribute("login");
 
 	</div>
 	<br><br><br><br>
-	<div>
+	<div class="row center">
 		<input type="checkbox" id="selectAll">
 		<label for="selectAll">
 		전체선택
 		</label>
 	</div>
 	<div class="row center">
-		<button type="submit" class="btn">등록</button>
+		<button type="submit" class="btn-mint">등록</button>
 	</div>
 	<div class="row center">
-		<a href="#" class="link link-btn">스킵</a>
+		<a href="#" class="btn-black">스킵</a>
 	</div>
 </div>
 

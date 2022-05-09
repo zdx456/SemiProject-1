@@ -327,6 +327,7 @@ ul.menu a {
     padding: 0.5em;
     border: 1px solid #b2bec3;
     font:inherit;
+    background-color: transparent;
 }
 /*
     :focus 는 해당 태그에 포커스가 맞춰진 경우 실행되는 조건부 선택자

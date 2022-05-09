@@ -83,7 +83,7 @@
 				<option value="4">★★★★</option>
 				<option value="5">★★★★★</option>
 			</select>
-			<button type="submit" class="btn">등록</button>
+			<button type="submit" class="btn-mint">등록</button>
 		</form>
 	</div>
 	<%} %>
@@ -127,8 +127,8 @@
 						<%=starScore %>
 						<%} %>
 				</td>
-				<td><a href="#" class="link link-btn edit-btn">수정</a></td>
-				<td><a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="link link-btn">삭제</a></td>
+				<td><a href="#" class="btn-mint edit-btn">수정</a></td>
+				<td><a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="btn-black">삭제</a></td>
 			</tr>
 				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계 예정 -->
 			<tr class="edit-row">
@@ -188,10 +188,10 @@
 						<%} %>
 					</td>
 					<td>
-						<button type="submit" class="btn">수정</button>
+						<button type="submit" class="btn-mint">수정</button>
 					</td>
 					<td>
-						<button class="btn cancel-btn">취소</button>
+						<button class="btn-black cancel-btn">취소</button>
 					</td>
 			</tr>
 		<%} %>
