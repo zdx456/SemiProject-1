@@ -17,6 +17,6 @@ public class LoginTestFilter implements Filter{
 		req.getSession().setAttribute("auth", "관리자");
 		
 		chain.doFilter(request, response);
-		
+		 
 	};
 }
