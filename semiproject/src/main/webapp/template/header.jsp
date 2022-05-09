@@ -13,24 +13,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ottes</title>
 
+	<!-- 파비콘 -->
+	<link rel="icon" href="<%=request.getContextPath()%>/image/logo_favicon.png">
+	
+	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css">	
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/semi-style2.css">
 	
     <!-- 폰트 CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display">
 
-    <!-- jquery cdn -->
+    <!-- jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     
+    <!-- 이미지 슬라이더(swiper) CDN -->
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+    <!-- JS -->
     <script src="<%=request.getContextPath()%>/js/script.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
     <main>
         <header>
             <div class="logo"><a href="#"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
