@@ -1,154 +1,227 @@
+/* 스타일 수정 : 천지연 */
+
 /*
     @author : 이기주
-    semi-project용 style.css 만들어보았습.니다
+    semi-project용 style.css 만들어보았습니다.
 */
+
 @charset "UTF-8";
 
-/* 
-    @author : 이기주    
-    홈페이지의 전체 lay-out 스타일 입니다.
-*/
-.main-semi {
-    width:1000px;
-    margin:auto;
+/*  전체 lay-out 스타일 */
+
+* {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+body {
     background-color: #222831;
+    min-width: 1300px;
+}
+
+main {
+    width: 100%;
+    margin: auto;
     color: white;
-
-    text-align: center;
-}
-.header-semi{
-    padding: 12px;
-    text-align: left;
-}
-.nav-semi {
-    padding-left: 12px;
-    height: 30px;
-    
-}
-.footer-semi {
-    min-height: 120px;
-    padding: 20px;
-}
-.article-semi {
-    margin: 10px;
-    border-top: 3px solid yellow;
-    border-bottom: 3px solid yellow;
-}
-
-
-/* 
-@author : 이기주 
-메뉴바 속성입니다. 
-*/
-
-.logo{
-    /* Ottes */
-    font-style: normal ;
-    font-weight: 600 ;
-    font-size: 40px ;
-               
-    color: #00ADB5;
-
-    text-decoration: none;
-    
-}
-
-.home-menu{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-              
-    color: #FFFFFF;
-
-    text-decoration: none;
     text-align: center;
 }
 
-.hamburger{
+/* 헤더 영역 */
+
+header {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-bottom: 2px solid #EDC948;
+    background: linear-gradient(to top, rgba(0, 0, 0, .2), rgba(0, 0, 0, 1));
+    box-sizing: border-box;
+    padding-bottom: 30px;
+}
+
+.logo {
+    float: left;
+    width: 250px;
+    height: 70px;
+    z-index: 2;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo a {
+    display: inline-block;
+    width: 250px;
+    height: 70px;
+    padding: 10px 0;
+}
+
+nav {
+    float: left;
+    height: 70px;
+}
+
+.main_menu {
+    float: left;
+}
+
+.main_menu > li {
+    float: left;
+    height: 70px;
+    width: 150px;
+}
+
+.main_menu > li > a {
+    display: inline-block;
+    width: 150px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.main_menu > li > a:hover {
+    color: #EDC948;
+    font-weight: bolder;
+}
+
+.hamburger {
     align-items: right;
     width: 30px;
     height: 3px;
     background-color: white;
     border-radius: 2px;
     margin: 3px;
-
 }
 
-ul.menu-semi, 
-ul.menu-semi ul {
-    list-style: none;
+/* 콘텐츠 영역 */
 
-    padding:0;
-    margin:0;
-}
-
-ul.menu-semi::after {
-    content:"";
-    display:block;
-    clear:both;
-}
-ul.menu-semi > li {
-    float:left;
-    width:150px;
+.bg_img {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-image: url(../image/test.PNG); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -2;
 }
 
-ul.menu-semi ul {
-    display: none;
-}
-ul.menu-semi li:hover > ul {
-    display: block;
-}
-ul.menu-semi li {
-    position:relative;
-}
-ul.menu-semi ul {
-    position:absolute;
-    top:100%;
-    left:0%;
-}
-ul.menu-semi ul {
-    width:100%;
-}
-ul.menu-semi {
-    font-size: 16px;
-}
-ul.menu-semi, ul.menu-semi ul {
-    background-color: #222831;
-}
-ul.menu-semi li {
-    padding: 0.5em;
-    text-align: center;
-}
-ul.menu-semi a {
-    text-decoration: none;
-    color:white;
-}
-ul.menu-semi li:hover {
-    background-color: #636e72;
-}
-ul.menu-semi a {
-    display: block;
-    width:100%;
-}
-ul.menu-semi > li.right-menu-semi {
-    float:right;
-}
-ul.menu-semi > li > ul ul {
-    top:0%;
-    left:100%;
-}
-ul.menu-semi > li.right-menu-semi > ul ul {
-    left:-100%;
-}
-ul.menu-semi a {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.bg_gradient {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: linear-gradient(to top, rgba(34, 40, 49, 1), rgba(0, 0, 0, 0.4));
+    z-index: -1;
 }
 
 
+article {  
+    padding: 100px 100px 30px 100px;
+    text-align: left;
+}
+
+.search {
+    padding: 50px 0 200px 250px;
+}
+
+.search h2 {
+    font-weight: bolder;
+    line-height: 50px;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.search p {
+    font-size: 1.3em;
+    line-height: 35px;
+}
+
+.search p span {
+    color: #EDC948;
+    font-weight: bolder;
+}
+
+.search input {
+    border-bottom: 5px solid #ffffff;
+    background-color: transparent;
+    width: 400px;
+    height: 50px;
+    margin-top: 20px;
+    font-size: 1.8em;
+    
+}
+
+.search input::placeholder {
+    color: #ffffff;
+}
+
+.content h3 {
+    font-size: 1.5em;
+    font-weight: bolder;
+}
 
 
+/* 슬라이더 */
+.swiper {
+    margin: 30px 0;
+}
 
+.swiper-slide img {
+    width: 100%;
+}
 
+.swiper-pagination-bullet {
+    background: #ffffff;
+}
 
+/* 푸터 영역 */
+
+footer {
+    width: 100%;
+    height: 150px;
+    border-top: 2px solid #EDC948;
+    background: rgba(0, 0, 0, .5);
+    padding: 20px 0;
+}
+
+.footer_wrap {
+    width: 100%;
+}
+
+.footer_menu {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.footer_menu li {
+    float: left;
+    width: 150px;
+    height: 40px;
+}
+
+.footer_menu > li > a {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.footer_menu > li > a:hover {
+    color: #EDC948;
+}
+
+footer p {
+    padding: 20px 0 0 0;
+    color: #929292;
+    font-size: 0.8em;
+}
