@@ -13,47 +13,47 @@
             </div>
             <div class="content">
                 <h3># 지금 가장 HOT한 컨텐츠</h3>
-            </div>
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="<%=request.getContextPath()%>/image/test.jpg">
-                    </div>                                                                                                                                                      
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+		        <div class="swiper">
+		                <div class="swiper-wrapper">
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>
+		                    <div class="swiper-slide">
+		                        <img src="<%=request.getContextPath()%>/image/test.jpg">
+		                    </div>                                                                                                                                                      
+		                </div>
+		             <div class="swiper-button-prev"></div>
+	             	 <div class="swiper-button-next"></div>
+		             </div>
+	             </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
