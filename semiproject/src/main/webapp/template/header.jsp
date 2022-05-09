@@ -1,8 +1,13 @@
+<%@page import="ottes.beans.ClientDao"%>
+<%@page import="ottes.beans.ClientDto"%>   
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>    
 <%
 	String clientId = (String) session.getAttribute("login");
 	boolean login = clientId != null;
+	
+	ClientDao clientDao = new ClientDao();
+	ClientDto clientDto = clientDao.selectOne(clientId);
 %>
 
 <!DOCTYPE html>
@@ -39,26 +44,24 @@
 <body>
     <main>
         <header>
-            <div class="logo"><a href="#"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
             <nav>
                 <ul class="main_menu">
                     <li><a href="<%=request.getContextPath()%>">홈</a></li>
                     <li><a href="#">장르</a></li>
 					<%if(login){ %>
-					<li><a href="<%=request.getContextPath()%>/client/logout.kh">로그아웃</a></li>
-					<li><a href="#">닉네임님</a></li>
-					<li>
-						<div class="hamburger"></div>
-						<div class="hamburger"></div>
-						<div class="hamburger"></div>
-						<ul>
-							<li><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
-							<li><a href="#">고객센터</a></li>
-						</ul>
-					</li>
+						<li><a href="#"><span><%=clientDto.getClientNick()%></span> 님</a></li>
+						<li>
+							<a href="#">임시</a>
+							<ul class="hidden">
+								<li><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
+								<li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>
+								<li><a href="<%=request.getContextPath()%>/client/logout.kh">로그아웃</a></li>
+							</ul>	
+						</li>
 					<%}else{ %>
-					<li><a href="<%=request.getContextPath()%>/client/join.jsp">회원가입</a></li>
-					<li><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></li>
+						<li><a href="<%=request.getContextPath()%>/client/join.jsp">회원가입</a></li>
+						<li><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></li>
 					<%} %>
                 </ul>
             </nav>
