@@ -30,6 +30,7 @@
     <script src="<%=request.getContextPath()%>/js/script.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
     <main>
         <header>
             <div class="logo"><a href="#"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
@@ -37,20 +38,23 @@
                 <ul class="main_menu">
                     <li><a href="<%=request.getContextPath()%>">홈</a></li>
                     <li><a href="#">장르</a></li>
-                    <li><a href="#">로그인</a></li>
-                    <li class="hidden"><a href="#">안녕하세요, 닉네임님!</a></li>
-                    <li class="hidden">
-                        <div class="hamburger"></div>
-                        <div class="hamburger"></div>
-                        <div class="hamburger"></div>
-                        <ul>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">고객센터</a></li>
-                            <li><a href="#">로그아웃</a></li>
-                        </ul>
-                    </li>
+					<%if(login){ %>
+					<li><a href="<%=request.getContextPath()%>/client/logout.kh">로그아웃</a></li>
+					<li><a href="#">닉네임님</a></li>
+					<li>
+						<div class="hamburger"></div>
+						<div class="hamburger"></div>
+						<div class="hamburger"></div>
+						<ul>
+							<li><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
+							<li><a href="#">고객센터</a></li>
+						</ul>
+					</li>
+					<%}else{ %>
+					<li><a href="<%=request.getContextPath()%>/client/join.jsp">회원가입</a></li>
+					<li><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></li>
+					<%} %>
                 </ul>
             </nav>
         </header>
         <article class="clear">
-    

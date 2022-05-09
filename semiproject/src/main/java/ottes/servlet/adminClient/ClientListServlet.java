@@ -13,7 +13,7 @@ import ottes.beans.ClientDao;
 import ottes.beans.ClientDto;
 
 @WebServlet(urlPatterns = "/adminClient/list.svt")
-public class AdminListServlet extends HttpServlet{
+public class ClientListServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
