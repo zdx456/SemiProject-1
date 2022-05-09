@@ -4,7 +4,7 @@ create sequence ott_seq;
 -- ott
 create table ott(
 ott_no number primary key,
-ott_name varchar2(20) not null check(ott_name in('넷플릭스','왓챠','티빙','웨이브')),
+ott_name varchar2(20) not null unique,
 ott_price number not null check(ott_price >= 0)
 );
 

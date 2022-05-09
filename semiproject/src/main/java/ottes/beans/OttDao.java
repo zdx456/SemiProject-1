@@ -34,7 +34,7 @@ public class OttDao {
 	
 	public List<OttDto> selectList() throws Exception{
 		Connection con = JdbcUtils.getConnection();
-		String sql = "select * from ott order by ott_no desc";
+		String sql = "select * from ott order by ott_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
@@ -76,4 +76,6 @@ public class OttDao {
 		con.close();
 		return count > 0;
 	}
+	
+
 }

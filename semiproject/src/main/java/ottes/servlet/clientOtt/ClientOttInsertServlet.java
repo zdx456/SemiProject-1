@@ -1,6 +1,7 @@
 package ottes.servlet.clientOtt;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ottes.beans.ClientOttDao;
-import ottes.beans.ClientOttDto;
 
 @WebServlet(urlPatterns = "/mypage/client_ott_insert.svt")
 public class ClientOttInsertServlet extends HttpServlet {
@@ -18,13 +18,24 @@ public class ClientOttInsertServlet extends HttpServlet {
 		
 		try {
 			
-			ClientOttDto clientOttDto = new ClientOttDto();
-			clientOttDto.setClinetId((String)req.getSession().getAttribute("login"));
-			clientOttDto.setOttNo(Integer.parseInt(req.getParameter("ottNo")));
+			String clientId = (String)req.getSession().getAttribute("login");
+			
+			//배열로 받기! 체크박스 값 여러개 가능 하므로
+			String [] ottNoStr = req.getParameterValues("ottNo") ;
+			
+			// String 배열은 int 배열로 변환 (stream 이용)
+			int [] ottNoArray = Arrays.stream(ottNoStr).mapToInt(Integer::parseInt).toArray();
 			
 			ClientOttDao clientOttDao = new ClientOttDao();
 			
-			clientOttDao.insert(clientOttDto);
+			clientOttDao.delete(clientId);
+			
+			for(int i = 0; i < ottNoArray.length; i++) {
+				int ottNo = ottNoArray[i];
+				
+				clientOttDao.insert(clientId, ottNo);
+			}
+			
 			
 			resp.sendRedirect(req.getContextPath()+"/mypage/main.jsp");
 			
