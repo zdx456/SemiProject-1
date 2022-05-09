@@ -181,8 +181,41 @@ public class ActorDao {
 		
 	}
 	
+	//contents 번호로 actor 테이블 삭제하기
+	public boolean delete(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete actor where actor_no = "
+				+ "(select A.actor_no from actor A"
+				+ "    left outer join contents_actor C on A.actor_no = C.actor_no "
+				+ "    where contents_no = ?)";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
 //////////////////////////
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

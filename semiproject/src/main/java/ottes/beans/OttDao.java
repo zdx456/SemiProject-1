@@ -78,4 +78,123 @@ public class OttDao {
 	}
 	
 
+	public OttDto selectOne(String ottName) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ott where ott_name = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, ottName);
+		ResultSet rs = ps.executeQuery();
+		
+		OttDto ottDto;
+		
+		if(rs.next()) {
+			ottDto = new OttDto();
+			ottDto.setOttNo(rs.getInt("ott_no"));
+			ottDto.setOttName(rs.getString("ott_name"));
+			ottDto.setOttPrice(rs.getInt("ott_price"));
+		}
+		else {
+			ottDto = null;
+		}
+		
+		con.close();
+		
+		return ottDto;
+	}
+	
+	//서비스 중인 ott 목록 출력
+	public List<OttDto> selectList(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ott O"
+				+ "    left outer join ott_contents C on O.ott_no = C.ott_no"
+				+ "    where contents_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<OttDto> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			OttDto ottDto = new OttDto();
+			ottDto.setOttNo(rs.getInt("ott_no"));
+			ottDto.setOttName(rs.getString("ott_name"));
+			ottDto.setOttPrice(rs.getInt("ott_price"));
+			
+			list.add(ottDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
+	public List<OttDto> selectCheckbox(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ott O"
+				+ "    left outer join ott_contents C on O.ott_no = C.ott_no"
+				+ "    where contents_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<OttDto> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			OttDto ottDto = new OttDto();
+			ottDto.setOttNo(rs.getInt("ott_no"));
+			ottDto.setOttName(rs.getString("ott_name"));
+			ottDto.setOttPrice(rs.getInt("ott_price"));
+		
+			list.add(ottDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
+	//콘텐츠 수정에서 등록 시 선택 된 ott 체크박스 유지하기 위함
+	public List<OttCheckVO> checkList(int contentsNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ott A left outer join (select * from ott_contents where contents_no = ?) B on A.ott_no = B.ott_no";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<OttCheckVO> list = new ArrayList<>();
+		while(rs.next()) {
+			OttCheckVO ottCheckVO = new OttCheckVO();
+			
+			ottCheckVO.setOttNo(rs.getInt("ott_no"));
+			ottCheckVO.setOttName(rs.getString("ott_name"));
+			ottCheckVO.setOttPrice(rs.getInt("ott_price"));
+			ottCheckVO.setCheck(rs.getInt("contents_no") > 0);//true면 체크된 항목
+			
+			list.add(ottCheckVO);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+
 }
+
+
+
+
+
+
+
+
+
