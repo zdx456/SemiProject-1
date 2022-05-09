@@ -68,7 +68,7 @@ public class ClientDao {
 		return list;
 	}
 	
-	// 회원목록 아이디로 단일 조회
+	// 회원목록 아이디로 단일 조회(회원용)
 	// @author : 이기주
 	public ClientDto selectOne(String clientId) throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -99,6 +99,38 @@ public class ClientDao {
 		
 		return clientDto;
 	}
+	
+	// 회원목록 아이디로 단일 조회(관리자용)
+		// @author : 이기주
+		public ClientDto selectOneAdmin(String clientId) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select * from client where client_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, clientId);
+			ResultSet rs = ps.executeQuery();
+			
+			ClientDto clientDto;
+			if(rs.next()) {
+				clientDto = new ClientDto();
+				
+				//data 13개 copy
+				clientDto.setClientId(rs.getString("client_id"));
+				clientDto.setClientNick(rs.getString("client_nick"));
+				clientDto.setClientGender(rs.getString("client_gender"));
+				clientDto.setClientGrade(rs.getString("client_grade"));
+				clientDto.setClientEmail(rs.getString("client_email"));
+				clientDto.setClientBirth(rs.getString("client_birth"));
+				clientDto.setClientJoindate(rs.getDate("client_joindate"));
+			}
+			else {
+				clientDto = null;
+			}
+			
+			con.close();
+			
+			return clientDto;
+		}
 
 	
 	// 비밀번호 변경(사용자, 관리자 같이 사용)
@@ -178,9 +210,9 @@ public class ClientDao {
 	public boolean chgInfoAdmin(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update client set client_nick=?, client_gender=?,"
-				+ "client_grade=?, client_birth=?, client_email=?,"
-				+ "where client_id=?";
+		String sql = "update client set "
+				+ "client_nick = ?, client_gender= ?, client_grade= ?, client_birth = ?, client_email = ? "
+				+ "where client_id = ? ";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientNick());
@@ -251,6 +283,109 @@ public class ClientDao {
 		
 		return clientId;
 	}
+	
+	// 관리자-회원목록 출력(+페이지네이션)
+		// @author : 이기주
+		public List<ClientDto> selectListByPaging(int p, int s) throws Exception {
+			int end = p * s;
+			int begin = end - (s - 1); 
+			
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+						+ "select * from client order by client_id asc"
+					+ ") TMP"
+				+ ") where rn between ? and ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, begin);
+			ps.setInt(2, end);
+			ResultSet rs = ps.executeQuery();
+			
+			List<ClientDto> list = new ArrayList<>();
+			while(rs.next()) {
+				ClientDto clientDto = new ClientDto();
+				
+				clientDto.setClientId(rs.getString("client_id"));
+				clientDto.setClientNick(rs.getString("client_nick"));
+				clientDto.setClientGender(rs.getString("client_gender"));
+				clientDto.setClientGrade(rs.getString("client_grade"));
+				
+				list.add(clientDto); 
+			}
+			
+			con.close();
+			
+			return list;
+		}
+		
+		// 관리자-회원목록 출력(+페이지네이션/검색 결과)
+			public List<ClientDto> selectListByPaging(int p, int s, String type, String keyword) throws Exception {
+				int end = p * s;
+				int begin = end - (s - 1); 
+				
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from client where #1 = ? order by client_id asc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
+				sql = sql.replace("#1", type);
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, keyword);
+				ps.setInt(2, begin);
+				ps.setInt(3, end);
+				ResultSet rs = ps.executeQuery();
+				
+				List<ClientDto> list = new ArrayList<>();
+				while(rs.next()) {
+					ClientDto clientDto = new ClientDto();
+					
+					clientDto.setClientId(rs.getString("client_id"));
+					clientDto.setClientNick(rs.getString("client_nick"));
+					clientDto.setClientGender(rs.getString("client_gender"));
+					clientDto.setClientGrade(rs.getString("client_grade"));
+					
+					list.add(clientDto); 
+				}
+				
+				con.close();
+				
+				return list;
+			}
+			
+			// 페이지 카운팅
+			public int countByPaging() throws Exception {
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select count(*) from client";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				rs.next();
+				int count = rs.getInt(1);
+				
+				con.close();
+				
+				return count;
+			}
+			
+			// 페이지 카운팅 (검색 결과)
+			public int countByPaging(String type, String keyword) throws Exception {
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select count(*) from client where #1 = ?";
+				sql = sql.replace("#1", type);
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, keyword);		
+				ResultSet rs = ps.executeQuery();
+				rs.next();
+				int count = rs.getInt(1);
+				
+				con.close();
+				
+				return count;
+			}
 ///////////
 }
 

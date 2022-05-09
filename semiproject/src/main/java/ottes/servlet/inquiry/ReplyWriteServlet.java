@@ -12,7 +12,7 @@ import ottes.beans.InquiryDao;
 import ottes.beans.ReplyDao;
 import ottes.beans.ReplyDto;
 
-@WebServlet(urlPatterns = "/admin/reply_write.svt")
+@WebServlet(urlPatterns = "/adminClient/reply_write.svt")
 public class ReplyWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
