@@ -235,6 +235,38 @@ article {
     color: #ffffff;
 }
 
+.recent_list_style {
+	margin-right: 20px;
+}
+
+.btn_more_wrap {
+	height: 50px;
+	position: relative;
+}
+
+.btn_more {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 1.2em;
+	color: #EDC948;
+	font-weight: bolder;
+	margin: 0 auto;
+	cursor: pointer;
+	text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+	animation: motion 0.5s linear 0s infinite alternate; 
+}
+        
+@keyframes motion {
+	0% {top: 0px; color: #EDC948;}
+	100% {top: 5px; color: rgba(237, 201, 72, 0.7);}
+}
+
 /* 푸터 영역 */
 
 footer {
