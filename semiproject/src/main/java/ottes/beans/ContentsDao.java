@@ -111,15 +111,23 @@ public class ContentsDao {
 		return count > 0;
 	}
 	
-	//컨텐츠 검색
-	public List<ContentsDto> selectList(String type, String keyword) throws Exception {
-		
+	// 컨텐츠 통합 검색 : 검색 키워드가 제목, 감독, 줄거리, 배우 중 일치하는 항목이 있으면 출력
+	public List<ContentsDto> selectList(String keyword) throws Exception {	
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from contents where instr(#1, ?) > 0 order by contents_no desc";
-		sql = sql.replace("#1", type);
+		String sql = "select * from contents A join contents_actor B on A.contents_no = B.contents_no "
+						+ "join actor C on B.actor_no = C.actor_no "
+						+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+						+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0";
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
 		
 		ResultSet rs = ps.executeQuery();
 		
@@ -143,7 +151,6 @@ public class ContentsDao {
 		con.close();
 		
 		return list;
-		
 	}
 	
 	
