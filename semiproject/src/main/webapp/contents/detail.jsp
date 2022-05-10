@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.LikeContentsDto"%>
+<%@page import="ottes.beans.LikeContentsDao"%>
 <%@page import="ottes.beans.ActorDto"%>
 <%@page import="ottes.beans.ActorDao"%>
 <%@page import="ottes.beans.AttachmentDto"%>
@@ -30,37 +32,92 @@ List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 String clientId = (String) session.getAttribute("login");
 boolean isLogin = clientId != null;
 
+//좋아요 출력할 likeContents 불러오기
+LikeContentsDao likeContentsDao = new LikeContentsDao();
+LikeContentsDto likecontentsDto = likeContentsDao.find(clientId, contentsNo);//find는 좋아요 이력을 찾는 기능(단일조회와 비슷)
+
 // 관리자인지 판정
-  String memberGrade = (String)session.getAttribute("auth");
-  boolean isAdmin = clientId != null && memberGrade.equals("관리자");
-  
+String memberGrade = (String) session.getAttribute("auth");
+boolean isAdmin = clientId != null && memberGrade.equals("관리자");
+
 //포스터 가져오기
 AttachmentDao attachmentDao = new AttachmentDao();
 AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
-	
 %>
 <style>
-	.like {
-		color : red;
-	}
-	.btn.btn-view {
-		 background-color: transparent;
-         border-color:transparent;
-         width : 30px;
-         font-size: 15px;
-	}
+
+.review {
+	color: grey;
+	background-color: #313842;
+	border: transparent;
+	border-radius : 10px;
+}
+#r1 {
+	position : absolute;
+	right : 30%;
+}	
+#r2 {
+	position : absolute;
+	right :30%;
+}
+
+.content {
+	padding :  0.3em;
+	font-size : 15px;	
+}
+
+.btn {
+	padding: 0.3em;
+
+}
+.review.review-score {
+	color : #EDC948;
+}
+
+.like {
+	border-color: red;
+	color: red;
+}
+
+textarea::placeholder {
+	padding : 0.3em;
+	color : #00ADB5;
+}
 
 </style>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+      
+      
+$(function () {
 
-    $(function(){
+    $(".heart").click(function (){
+    	
+        $.ajax({
+            url: "http://localhost:8080/semiproject/likecontents/likecontents_insert.svt",
+            type: "post",
+            data: {
+                contentsNo: <%=contentsNo%>
+            },
+            
+            success: function (resp) {
+                console.log(resp);
+                
+	            if (resp.like == false) {
+	                $(".heart").removeClass("like");
+        	    }
+	            else {
+	            	$(".heart").addClass("like");
+	            }
+	            $(".count").text(resp.count);
+	            
+            }
 
-        $("#like").click(function(){
-                $("#like").addClass("like");
-            });
+        });
     });
+
+});
 
     </script>
 
@@ -77,37 +134,40 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 	<div class="row float-container m50 center ">
 
 		<div class="float-left layer-2">
-		
-			<label><h2><%=contentsDto.getContentsTitle() %></h2></label>
-			<br>
-			<img src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" width="150" height="150" alt="포스터">
 
-			
+			<label><h2><%=contentsDto.getContentsTitle()%></h2></label> <br>
+			<img
+				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
+				width="150" height="150" alt="포스터">
+
+
 			<table class="table center">
-			<thead>
-				<tr>
-					<td>
-					<img src="<%=request.getContextPath() %>/image/netflix.png" width="30">
-					</td>
-				</tr>
-				<tr>
-					<td>ott 가격</td>
-				</tr>
-				<tr>
-					<form>
-					<td>
-
-					</td>
-					</form>
-				</tr>
+				<thead>
+					<tr>
+						<td><img
+							src="<%=request.getContextPath()%>/image/netflix.png" width="30">
+						</td>
+					</tr>
+					<tr>
+						<td>ott 가격</td>
+					</tr>
+					<tr>
+						<td> <span class="count"><%=likeContentsDao.count()%></span>  
+						<% if (likecontentsDto != null) { %> 
+						<label class="heart like">♥</label> 
+						<% } else { %> 
+						<label class="heart">♥</label> 
+						<% } %>
+						</td>
+					</tr>
 				</thead>
 			</table>
 
 		</div>
 
-		<div class="float-left layer-2">
+		<div class="float-left layer-4">
 
-			<table class="table m50">
+			<table class="table m50 review content">
 				<tr>
 				<tr>
 					<td>제목 : <%=contentsDto.getContentsTitle()%>
@@ -139,8 +199,8 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 				</tr>
 
 				<tr>
-					<td>배우 : <%=actorDto.getActorName1()%>, <%=actorDto.getActorName2() %>,
-								<%=actorDto.getActorName3()%>, <%=actorDto.getActorName4() %>
+					<td>배우 : <%=actorDto.getActorName1()%>, <%=actorDto.getActorName2()%>,
+						<%=actorDto.getActorName3()%>, <%=actorDto.getActorName4()%>
 					</td>
 				</tr>
 
@@ -150,73 +210,98 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 
 
 		<!-- 댓글 작성 영역 -->
-
 	
-		<% if(isLogin){ %>
 		<form action="review_insert.svt" method="post">
-			<input type="hidden" name="contentsNo" value="<%=contentsDto.getContentsNo()%>">
-			<input type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
-			<textarea name="reviewContent" rows="4" cols="70"></textarea>
-				<label>평점</label>
-				<select name="reviewScore">
-					<option value="1">★</option>
-					<option value="2">★★</option>
-					<option value="3">★★★</option>
-					<option value="4">★★★★</option>
-					<option value="5">★★★★★</option>
-				</select> <input type="submit" value="리뷰 등록">
+			<div class="container">
+
+			<div class="row center">
+
+		<%
+		if (isLogin) {
+		%>
+			<input type="hidden" name="contentsNo"
+				value="<%=contentsDto.getContentsNo()%>"> <input
+				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
+				
+			<textarea name="reviewContent" class="review" rows="4" cols="80"
+				placeholder="리뷰 작성하기"></textarea>
+				<br>
+				<br>
+			<div id="r1">
+			<select name="reviewScore" class="review review-score" id="rb2">
+				<option value="1" class="review">★</option>
+				<option value="2" class="review">★★</option>
+				<option value="3" class="review">★★★</option>
+				<option value="4" class="review">★★★★</option>
+				<option value="5" class="review">★★★★★</option>
+			</select> 
+			<input type="submit" class="review btn btn-yellow" value="리뷰 등록">
+			</div>
+			</div>
+			</div>
 		</form>
-
 	
-		<% } else {%>
-		<textarea name="reviewContent" rows="4" cols="70" placeholder="로그인 후 댓글 작성 가능" disabled></textarea>
-				<label>평점</label>
-				<input type="submit" value="리뷰 등록">		
-		<% } %>
-				
-		<!--  댓글 목록 영역 -->
-		
-				<table class="table">
-
-					<%for(ReviewDto reviewDto : reviewList) { %>
-				
-					<tr>
-						<th width="10%"><%=reviewDto.getReviewWriter() %></th>
-						<td width="20%"><%=reviewDto.getReviewTime() %></td>
-						<td width="30%"><!--  댓글 내용 --> <%=reviewDto.getReviewContent() %> </td>
-												<%
-												String reviewScore = Integer.toString(reviewDto.getReviewScore());
-													
-													if(reviewScore.equals("1")) {
-														reviewScore = reviewScore.replaceAll("1", "★");
-													}
-													else if (reviewScore.equals("2")) {
-														reviewScore = reviewScore.replaceAll("2", "★★");
-													}
-													else if (reviewScore.equals("3")) {
-														reviewScore = reviewScore.replaceAll("3", "★★★");
-													}
-													else if (reviewScore.equals("4")) {
-														reviewScore = reviewScore.replaceAll("4", "★★★★");
-													}
-													else if (reviewScore.equals("5")) {
-														reviewScore = reviewScore.replaceAll("5", "★★★★★");
-													}
-													
-												%>
-						<td width="10%">
-						<%=reviewScore%>
-						</td>
-						</tr>
-						
-					<%} %>
-						</table>
-						<form action="review_list.jsp?contentsNo=<%=contentsNo%>"  method="post">
-						<input type="submit" value="리뷰 전체 보기"></input>
-						</form>
-				
+	
+		<div class="row" >
+		<% } else { %>
+		<textarea name="reviewContent"  class="review" rows="4" cols="80"
+			placeholder="로그인 후 댓글 작성 가능" disabled></textarea>
+		<div id="r1">
+		 <input type="submit" class="review btn btn-yellow" value="리뷰 등록">
+		 </div>
+		<%
+		}
+		%>
 		</div>
-	</body>
+	</div>
+	
+	
+		<!--  댓글 목록 영역 -->
+
+		<br> <br>
+		<table class="table">
+
+			<%
+			for (ReviewDto reviewDto : reviewList) {
+			%>
+
+			<tr>
+				<th width="10%"><%=reviewDto.getReviewWriter()%></th>
+				<td width="20%"><%=reviewDto.getReviewTime()%></td>
+				<td width="30%">
+					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
+				</td>
+				
+				<% String reviewScore = Integer.toString(reviewDto.getReviewScore());
+
+				if (reviewScore.equals("1")) {
+					reviewScore = reviewScore.replaceAll("1", "★");
+				} else if (reviewScore.equals("2")) {
+					reviewScore = reviewScore.replaceAll("2", "★★");
+				} else if (reviewScore.equals("3")) {
+					reviewScore = reviewScore.replaceAll("3", "★★★");
+				} else if (reviewScore.equals("4")) {
+					reviewScore = reviewScore.replaceAll("4", "★★★★");
+				} else if (reviewScore.equals("5")) {
+					reviewScore = reviewScore.replaceAll("5", "★★★★★");
+				}
+				%>
+				<td width="10%"><%=reviewScore%></td>
+			</tr>
+
+			<%
+			}
+			%>
+		</table>
+		<br>
+		<div class="row center">
+		<form action="review_list.jsp?contentsNo=<%=contentsNo%>" method="post">
+			<input type="submit" class="btn btn-mint" id="rb2" value="리뷰 전체 보기"></input>
+		</form>
+		</div>
+</body>
+
+
 </html>
 <jsp:include page="/template/footer.jsp"></jsp:include>
 
