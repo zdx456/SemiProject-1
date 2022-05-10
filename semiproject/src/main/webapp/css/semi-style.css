@@ -228,7 +228,7 @@ ul.menu a {
     border-radius: 50%;
 }
 .img.img-round {
-    border-radius: 30px;
+    border-radius: 10px;
 }
 .img.img-blur {
     /* opacity는 불투명도이며 0부터 1 사이로 설정한다. (0 - 투명 , 1 - 불투명) */
@@ -270,7 +270,7 @@ ul.menu a {
     overflow: hidden;            
 }
 .pagination > a {
-    color: white;
+    color: black;
     text-decoration: none;
 
     display: inline-block;
@@ -279,10 +279,12 @@ ul.menu a {
 
     text-align: center;
 
+    border:1px solid black;
 }
 .pagination > a:hover,
 .pagination > a.active {
-    color: #EDC948;
+    color: red;
+    border-color: red;
 }
 
 /* semi-style 버튼 스타일 입니다! */

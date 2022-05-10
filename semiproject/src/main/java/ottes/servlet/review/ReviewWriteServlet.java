@@ -28,6 +28,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			reviewDto.setReviewNo(reviewDao.getSequence());
 			
 			reviewDto.setReviewContent(req.getParameter("reviewContent"));
+			reviewDto.setReviewWriter(req.getParameter("reviewWriter")); // 등록할때  작성자 필요해서 추가했어요 ㅎㅎ - 조장's
 			reviewDto.setReviewScore(Integer.parseInt(req.getParameter("reviewScore")));
 			reviewDto.setContentsNo(Integer.parseInt(req.getParameter("contentsNo")));
 			
