@@ -229,6 +229,4 @@ public class ReviewDao {
 		return count;
 	}
 
-	}	
-
-}
+}	

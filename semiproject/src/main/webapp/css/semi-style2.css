@@ -94,12 +94,63 @@ nav {
 .main_menu > li > a:hover {
     color: #EDC948;
     font-weight: bolder;
+    
+    /* 
+    		셀 선택 시 배경색 추가
+     */
+    background-color: #333;
+    border-bottom: 1px solid #EDC948;
 }
 
 .main_menu span {
     color: #EDC948;
     font-weight: bolder;	
 }
+
+/* 
+메인 메뉴 > ul > li 스타일 추가 했습니다.
+@author: 이기주
+ */
+.main_menu>li:hover {
+    color: #EDC948;
+    font-weight: bolder;
+    background-color: #333;
+    border-bottom: 1px solid #EDC948;
+}
+
+ul.main_menu ul {
+    position: absolute;
+    width: 150px;
+    background-color: #333;
+}
+
+ul.main_menu ul>li {
+    display: none;
+    position: relative;
+    padding: 0.5em;
+}
+
+ul.main_menu li:hover {
+    display: block;
+    background-color: #333;
+}
+
+ul.main_menu li:hover li {
+    display: block;
+    background-color: #333;
+    padding: 1em;
+}
+
+ul.main_menu li>ul>li>a:hover {
+    color: #EDC948;
+}
+
+div.burger-menu>ul>li {
+    margin: 30px
+}
+
+
+
 
 /* 콘텐츠 영역 */
 
