@@ -39,7 +39,30 @@ AttachmentDao attachmentDao = new AttachmentDao();
 AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 	
 %>
+<style>
+	.like {
+		color : red;
+	}
+	.btn.btn-view {
+		 background-color: transparent;
+         border-color:transparent;
+         width : 30px;
+         font-size: 15px;
+	}
 
+</style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script type="text/javascript">
+
+    $(function(){
+
+        $("#like").click(function(){
+                $("#like").addClass("like");
+            });
+    });
+
+    </script>
 
 <!DOCTYPE html>
 <html>
@@ -71,8 +94,11 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 					<td>ott 가격</td>
 				</tr>
 				<tr>
-					<td>♥ <label><%=contentsDto.getContentsViews()%></label> 
+					<form>
+					<td>
+
 					</td>
+					</form>
 				</tr>
 				</thead>
 			</table>
