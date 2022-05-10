@@ -94,33 +94,6 @@ public class ContentsAttachmentDao {
 		return list;
 	}	
 	
-	// 최신순 콘텐츠 7개 포스터 출력
-	public List<ContentsAttachmentDto> selectRecentList() throws Exception {
-		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "select * from ("
-						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no "
-							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
-							+ "order by A.contents_no desc"
-						+ ") TMP"
-					+ ") where rn between 1 and 7";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-
-		List<ContentsAttachmentDto> list = new ArrayList<>();
-		while (rs.next()) {
-			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
-			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
-			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
-
-			list.add(contentsAttachmentDto);
-		}
-		con.close();
-		return list;
-	}
-	
 	// 내 장르 콘텐츠 평균 평점순 12개 포스터 출력
 	public List<ContentsAttachmentDto> selectMyGenreList(String clientId) throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -181,4 +154,79 @@ public class ContentsAttachmentDao {
 		con.close();
 		return list;
 	}	
+	
+	
+	// 최신순 콘텐츠 7개씩 포스터 출력
+	public List<ContentsAttachmentDto> selectRecentList() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select A.contents_no, B.attachment_no "
+							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+							+ "order by A.contents_no desc"
+						+ ") TMP"
+					+ ") where rn between 1 and 7";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 최신순 콘텐츠 7개씩 포스터 출력 (비동기 페이징)
+	public List<ContentsAttachmentDto> selectRecentListByPaging(int p) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select A.contents_no, B.attachment_no "
+							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+							+ "order by A.contents_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 페이지 카운팅
+	public int countByPaging() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from contents";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
 }
