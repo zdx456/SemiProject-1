@@ -133,6 +133,7 @@ public class ReviewDao {
 
 		con.close();
 		return count > 0;
+
 	}
 	
 	public List<ReviewDto> selectListContentsByPasing(int contentsNo,int p, int s) throws Exception{
@@ -227,4 +228,7 @@ public class ReviewDao {
 		
 		return count;
 	}
+
+	}	
+
 }
