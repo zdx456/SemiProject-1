@@ -1,0 +1,91 @@
+/* 
+햄버거 메뉴 style 입니다.
+@author : 이기주
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.hideChkbox {
+    display: none;
+}
+
+input[id="burger"]+label {
+    position: relative;
+    float: right;
+    display: block;
+    width: 40px;
+    height: 20px;
+    margin-top: 25px;
+    margin-right: 35%;
+    cursor: pointer;
+    
+}
+
+input[id="burger"]+label>span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 10px;
+    background: white;
+    transition: all 0.5s;
+    z-index: 2;
+
+}
+
+input[id="burger"]+label>span:nth-child(1) {
+    top: 0px;
+}
+
+input[id="burger"]+label>span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input[id="burger"]+label>span:nth-child(3) {
+    bottom: 0px;
+}
+
+
+input[id="burger"]:checked+label>span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+input[id="burger"]:checked+label>span:nth-child(2) {
+    opacity: 0;
+}
+
+input[id="burger"]:checked+label>span:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+#burger+label+#burger-menu {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: #333;
+    top: 0px;
+    padding: 30px 25px 25px 25px;
+    box-sizing: border-box;
+    right: -300px;
+    z-index: 1;
+    transition: all 0.5s;
+}
+
+#burger:checked+label+#burger-menu {
+    right: 0px;
+}
+
+#burger:checked+label+#burger-menu>ul>li {
+    padding: 20px;
+}
+
+#burger:checked+label+#burger-menu>ul>li>a {
+    color: white;
+}
