@@ -1,4 +1,8 @@
 
+<%@page import="ottes.beans.OttCheckVO"%>
+<%@page import="ottes.beans.OttDto"%>
+<%@page import="java.util.List"%>
+<%@page import="ottes.beans.OttDao"%>
 <%@page import="ottes.beans.AttachmentDto"%>
 <%@page import="ottes.beans.AttachmentDao"%>
 <%@page import="ottes.beans.ActorDto"%>
@@ -19,10 +23,44 @@
 	
 	AttachmentDao attachmentDao = new AttachmentDao();
 	AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
-
+	
+	OttDao ottDao = new OttDao();
+	List<OttCheckVO> checkList = ottDao.checkList(contentsNo);
 %>
+
     
 <jsp:include page="/template/header.jsp"></jsp:include>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		$(".select-all").click(function(){
+			if($(this).is(":checked")){
+				$(".select-item").prop("checked", true);
+			}
+			else {
+				$(".select-item").prop("checked", false);
+			}
+		});
+		
+		$(".select-item").click(function(){
+			var total = $("input:checkbox[name=ottName]").length;
+			var checked = $("input:checkbox[name=ottName]:checked").length;
+			//console.log(total);
+			//console.log(checked);
+			
+			if(total != checked){
+				$(".select-all").prop("checked", false);
+			}
+			else{
+				$(".select-all").prop("checked", true);
+			}
+		});
+		
+	});
+
+</script>
 
 <style>
 	.form-input[type=file]{
@@ -46,7 +84,6 @@
 	
 	
 </script>
-
 <div class="container w800 m30">
 	
 	<div class="row center">
@@ -207,6 +244,27 @@
 				<input type="text" name="actorName4" value="<%=actorDto.getActorName4() %>" autocomplete="off" class="form-input input-round">
 			</label>
 		</div>
+		
+		<!------------ OTT 등록 ------------>
+		<div class = "row">
+		<div>서비스 중인 OTT</div>
+			<label>전체 선택
+				<input type="checkbox" class="select-all">
+			</label>
+		</div>	
+		
+		<div class = "row">
+
+			<%for(OttCheckVO ottCheckVO : checkList){ %>
+				<label><%=ottCheckVO.getOttName() %></label>
+					<%if(ottCheckVO.isCheck()){%>
+						<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item" checked>
+					<%} else { %>
+						<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item">
+					<%} %>
+				<%} %>
+		</div>
+		
 		
 		<!-- 포스터 이미지 선택란 -->
 		<div class = "row">

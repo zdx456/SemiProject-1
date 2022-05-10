@@ -6,30 +6,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentsActorDao {
+public class OttContentsDao {
 	
-	//컨텐츠-배우 기능 테이블에 데이터 추가
-	public void insert(ContentsActorDto contentsActorDto) throws Exception {
+	public void insert(OttContentsDto ottContentsDto) throws Exception {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into contents_actor (contents_no, actor_no) values (?, ?)";
+		String sql = "insert into ott_contents(ott_no, contents_no) values(?, ?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, contentsActorDto.getContentsNo());
-		ps.setInt(2, contentsActorDto.getActorNo());
+		ps.setInt(1, ottContentsDto.getOttNo());
+		ps.setInt(2, ottContentsDto.getContentsNo());
 		
 		ps.execute();
 		
 		con.close();
 	}
 	
-	//삭제
 	public boolean delete(int contentsNo) throws Exception {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "delete contents_actor where contents_no = ?"; 
+		String sql = "delete ott_contents where contents_no = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, contentsNo);
@@ -39,5 +37,17 @@ public class ContentsActorDao {
 		
 		return count > 0;
 	}
-
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -131,8 +131,38 @@ public class AttachmentDao {
 		
 		return attachmentDto;
 	}
+	
+	//contents 번호로 attachment 테이블 삭제하기
+	public boolean delete(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete attachment where attachment_no = "
+				+ "(select A.attachment_no from attachment A"
+				+ "    left outer join contents_attachment C on A.attachment_no = C.attachment_no "
+				+ "    where contents_no=?)";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

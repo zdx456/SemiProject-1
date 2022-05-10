@@ -4,13 +4,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+	 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
+     <!-- <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>  경량형!--> 
+
+    <script type="text/javascript">
+        $(function(){
+           
+	//수정 부분 숨기기 등록
+            $(".edit-btn").click(function(){
+                $(this).parents(".show-row").hide();
+			    $(this).parents(".show-row").next().show();
+            });
+
+            $(".cancel-btn").click(function(){
+			$(this).parents(".edit-row").hide();
+			$(this).parents(".edit-row").prev().show();
+		});
+		
+
+            $(".edit-row").hide(); 
+
+            
+        });
+      </script>
+    
 <%
 	//내가 쓴 리뷰를 위한 reviewWriter 파라미터
 	String reviewWriter = request.getParameter("reviewWriter");
 
 	//컨텐츠 별 댓글을 보기위한 contentsNo 파라미터
 	
-	Integer contentsNo = Integer.valueOf(request.getParameter("contentsNo"));
+	// 사망연산자
+	// request.getParameter("contentsNo")가 null이 아니라면  Integer.valueOf(request.getParameter("contentsNo")) 를 리턴, 아니면 -1로 리턴
+	Integer contentsNo = request.getParameter("contentsNo") != null ? Integer.valueOf(request.getParameter("contentsNo")) : -1;
+	/* String contentsNoParam = request.getParameter("contentsNo");
+	Integer contentsNo = 0;
+	
+	if(contentsNoParam != null) {
+		contentsNo = Integer.valueOf(contentsNoParam);
+	} */
+	
 	// int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
 	
 	//목록에서 작성 하기 위한 작성자 세션!
@@ -22,6 +55,7 @@
 	ReviewDao reviewDao = new ReviewDao();
 
 	List<ReviewDto> list;
+	
 	if(searchWriter){
 		list = reviewDao.selectList(reviewWriter);
 	} else{
@@ -38,10 +72,10 @@
 	</div>
 	<%if(!searchWriter){ //내가 쓴 글에서 오면 등록은 불가능하게 만듬%>
 	<div class="row center">
-		<form action="reivew_insert.svt" method="post">
+		<form action="review_insert.svt" method="post">
 			<input type="hidden" name="contentsNo" value="<%=contentsNo%>" > <!-- contentsNo 파라미터 -->
 			<input type="hidden" name="reviewWriter" value="<%=clientId%>"> <!-- 로그인한 세션 아이디 hidden으로 작성자 보내기 -->
-			<textarea class="input-round" name="reviewContent" rows="4" cols="60" placeholder="리뷰내용"></textarea>
+			<textarea class="input-round" name="reviewsContent" rows="4" cols="60" placeholder="리뷰내용"></textarea>
 			<select name="reviewScore" class="form-input input-round">
 				<option value="1">★</option>
 				<option value="2">★★</option>
@@ -49,7 +83,7 @@
 				<option value="4">★★★★</option>
 				<option value="5">★★★★★</option>
 			</select>
-			<button type="submit" class="btn">등록</button>
+			<button type="submit" class="btn-mint">등록</button>
 		</form>
 	</div>
 	<%} %>
@@ -65,7 +99,7 @@
 				<th>삭제</th>
 			</tr>
 		<%for(ReviewDto reviewDto : list){ %>
-			<tr>
+			<tr class="show-row">
 				<td><%=reviewDto.getReviewWriter() %></td>
 				<td><%=reviewDto.getReviewTime()%></td>
 				<td><%=reviewDto.getReviewContent()%></td>
@@ -93,11 +127,11 @@
 						<%=starScore %>
 						<%} %>
 				</td>
-				<td><a href="#" class="link link-btn">수정</a></td>
-				<td><a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="link link-btn">삭제</a></td>
+				<td><a href="#" class="btn-mint edit-btn">수정</a></td>
+				<td><a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="btn-black">삭제</a></td>
 			</tr>
 				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계 예정 -->
-			<tr>
+			<tr class="edit-row">
 				<td>			
 						<input type="hidden" name="reviewNo" value="<%=reviewDto.getReviewNo()%>">
 						<input type="hidden" name="contentsNo" value="<%=reviewDto.getContentsNo()%>">
@@ -154,10 +188,10 @@
 						<%} %>
 					</td>
 					<td>
-						<button type="submit" class="btn">수정</button>
+						<button type="submit" class="btn-mint">수정</button>
 					</td>
 					<td>
-						<button class="btn">취소</button>
+						<button class="btn-black cancel-btn">취소</button>
 					</td>
 			</tr>
 		<%} %>

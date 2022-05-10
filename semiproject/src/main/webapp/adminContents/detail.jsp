@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.OttDto"%>
+<%@page import="ottes.beans.OttDao"%>
 <%@page import="ottes.beans.AttachmentDto"%>
 <%@page import="ottes.beans.AttachmentDao"%>
 <%@page import="ottes.beans.ActorDto"%>
@@ -24,6 +26,10 @@
 	//포스터 가져오기
 	AttachmentDao attachmentDao = new AttachmentDao();
 	AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
+	
+	//OTT 가져오기
+	OttDao ottDao = new OttDao();
+	List<OttDto> list = ottDao.selectList(contentsNo);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -106,11 +112,19 @@
 				</tr>
 				<%} %>
 
-			
 			<tr>
 				<td>줄거리</td>
 				<td><%=contentsDto.getContentsSummary() %></td>
 			</tr>
+			
+		<!-- 서비스 중인 OTT 목록 -->
+		<%for(OttDto ottDto : list) {%>
+		<tr>
+			<td>OTT</td>
+			<td><%=ottDto.getOttName() %></td>
+		</tr>
+		<%} %>
+			
 			
 		<!-- 버튼 영역 -->
 			<tr>

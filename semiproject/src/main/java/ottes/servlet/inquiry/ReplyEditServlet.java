@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.ReplyDao;
 import ottes.beans.ReplyDto;
 
-@WebServlet(urlPatterns = "/admin/reply_edit.svt")
+@WebServlet(urlPatterns = "/adminClient/reply_edit.svt")
 public class ReplyEditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

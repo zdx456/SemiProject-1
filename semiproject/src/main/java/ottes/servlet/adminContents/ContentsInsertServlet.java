@@ -22,6 +22,10 @@ import ottes.beans.ContentsAttachmentDao;
 import ottes.beans.ContentsAttachmentDto;
 import ottes.beans.ContentsDao;
 import ottes.beans.ContentsDto;
+import ottes.beans.OttContentsDao;
+import ottes.beans.OttContentsDto;
+import ottes.beans.OttDao;
+import ottes.beans.OttDto;
 
 @WebServlet(urlPatterns = "/adminContents/insert.svt")
 public class ContentsInsertServlet extends HttpServlet {
@@ -106,7 +110,33 @@ public class ContentsInsertServlet extends HttpServlet {
 			//[5] - 처리
 			ContentsActorDao contentsActorDao = new ContentsActorDao();
 			contentsActorDao.insert(contentsActorDto);
-		
+			
+			//*************** OTT 등록 ***************//
+			//[6] ottContents 테이블 등록
+			//[6] - 준비
+			//등록할 때, ott 이름으로 입력하면 ott DB에서 해당하는 ott번호를 가져와서 등록한다.
+			//그러므로 ott번호를 알고있을 필요 없음 
+			
+			String[] ottNames = mRequest.getParameterValues("ottName");
+			
+			for(int i = 0; i < ottNames.length; i++) {
+				
+				OttContentsDto ottContentsDto = new OttContentsDto();			
+				
+				OttDao ottDao = new OttDao();
+
+				String ottName = ottNames[i];
+				OttDto ottDto = ottDao.selectOne(ottName);
+				
+				ottContentsDto.setOttNo(ottDto.getOttNo());
+				ottContentsDto.setContentsNo(contentsDto.getContentsNo());
+				
+				//[6] - 처리
+				OttContentsDao ottContentsDao = new OttContentsDao();
+				ottContentsDao.insert(ottContentsDto);
+				
+			}
+			
 			
 			//출력
 			resp.sendRedirect(req.getContextPath()+"/adminContents/detail.jsp?contentsNo=" + contentsDto.getContentsNo());

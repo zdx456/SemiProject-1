@@ -1,14 +1,80 @@
-/*
-    @author : 이기주
-    semi-project용 style.css 만들어보았습.니다
-*/
 @charset "UTF-8";
 
-/* 
-    @author : 이기주    
-    홈페이지의 전체 lay-out 스타일 입니다.
+
+* {
+    box-sizing: border-box;
+}
+.container {
+    margin:auto;
+}
+.w100 { width :100px; }
+.w150 { width :150px; }
+.w200 { width :200px; }
+.w250 { width :250px; }
+.w300 { width :300px; }
+.w350 { width :350px; }
+.w400 { width :400px; }
+.w450 { width :450px; }
+.w500 { width :500px; }
+.w550 { width :550px; }
+.w600 { width :600px; }
+.w650 { width :650px; }
+.w700 { width :700px; }
+.w750 { width :750px; }
+.w800 { width :800px; }
+.w850 { width :850px; }
+.w900 { width :900px; }
+.w950 { width :950px; }
+.w1000 { width :1000px; }
+
+/*
+    컨테이너 내부 줄(row) 디자인
+    - 정렬을 선택할 수 있어야 한다.
+    - 상하간격을 선택할 수 있어야 한다.
+    - 상하간격은 0px부터 10px간격으로 50px까지 준비한다.
 */
-.main-semi {
+
+.row {
+    margin: 10px 0px;
+    text-align: left;
+}
+
+/*
+	우선순위를 최상위로 올리는 방법이 있다.
+	속성 값 뒤에 !important라고 추가하면 되는데 너무 많이쓰면 중요한 것들끼리 우선순위 충돌이 생기므로 가급적 사용을 자제
+*/
+
+.left        { text-align: left !important; }
+.center   { text-align: center !important; }
+.right     { text-align: right !important; }
+
+.m0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.m10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.m20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.m30 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.m40 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.m50 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+.main {
     width:1000px;
     margin:auto;
     background-color: #222831;
@@ -16,20 +82,20 @@
 
     text-align: center;
 }
-.header-semi{
+.header{
     padding: 12px;
     text-align: left;
 }
-.nav-semi {
+.nav {
     padding-left: 12px;
     height: 30px;
     
 }
-.footer-semi {
+.footer {
     min-height: 120px;
     padding: 20px;
 }
-.article-semi {
+.article {
     margin: 10px;
     border-top: 3px solid yellow;
     border-bottom: 3px solid yellow;
@@ -74,81 +140,333 @@
 
 }
 
-ul.menu-semi, 
-ul.menu-semi ul {
+ul.menu, 
+ul.menu ul {
     list-style: none;
 
     padding:0;
     margin:0;
 }
 
-ul.menu-semi::after {
+ul.menu::after {
     content:"";
     display:block;
     clear:both;
 }
-ul.menu-semi > li {
+ul.menu > li {
     float:left;
     width:150px;
 }
 
-ul.menu-semi ul {
+ul.menu ul {
     display: none;
 }
-ul.menu-semi li:hover > ul {
+ul.menu li:hover > ul {
     display: block;
 }
-ul.menu-semi li {
+ul.menu li {
     position:relative;
 }
-ul.menu-semi ul {
+ul.menu ul {
     position:absolute;
     top:100%;
     left:0%;
 }
-ul.menu-semi ul {
+ul.menu ul {
     width:100%;
 }
-ul.menu-semi {
+ul.menu {
     font-size: 16px;
 }
-ul.menu-semi, ul.menu-semi ul {
+ul.menu, ul.menu ul {
     background-color: #222831;
 }
-ul.menu-semi li {
+ul.menu li {
     padding: 0.5em;
     text-align: center;
 }
-ul.menu-semi a {
+ul.menu a {
     text-decoration: none;
     color:white;
 }
-ul.menu-semi li:hover {
+ul.menu li:hover {
     background-color: #636e72;
 }
-ul.menu-semi a {
+ul.menu a {
     display: block;
     width:100%;
 }
-ul.menu-semi > li.right-menu-semi {
+ul.menu > li.right-menu {
     float:right;
 }
-ul.menu-semi > li > ul ul {
+ul.menu > li > ul ul {
     top:0%;
     left:100%;
 }
-ul.menu-semi > li.right-menu-semi > ul ul {
+ul.menu > li.right-menu > ul ul {
     left:-100%;
 }
-ul.menu-semi a {
+ul.menu a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+/*
+    모든 이미지에 대한 공용 스타일
+*/
+.img {
+    /* transparent는 투명을 의미 */
+    border: 2px solid transparent;
+}
+
+/* class에 img가 있는 항목 중에서 .img-border라는 항목을 선택하라! */
+.img.img-border {
+    border: 2px solid black;
+}
+.img.img-circle {
+    border-radius: 50%;
+}
+.img.img-round {
+    border-radius: 10px;
+}
+.img.img-blur {
+    /* opacity는 불투명도이며 0부터 1 사이로 설정한다. (0 - 투명 , 1 - 불투명) */
+    opacity: 0.4;
+}
+/* 마우스가 올라가면 이미지가 선명해지도록 구현 */
+.img.img-hover {
+    opacity: 0.4;
+}
+/* 선택자 뒤에 :hover가 붙으면 마우스가 올라간 경우의 디자인을 구현 */
+.img.img-hover:hover {
+    opacity: 1;
+}
+/* 
+    이미지에 그림자를 부여 
+    box-shadow : x축이동정도 y축이동정도 번짐정도 확산정도 색상
+*/
+.img.img-shadow {
+    border:none;
+    /* box-shadow: 3px 3px 3px 0 black; */
+    box-shadow: 0 0 3px 1px black;
+}
+
+/*
+    연계 선택자
+    - 특정 태그를 "기준"으로 해서 경로를 탐색하는 선택자
+    - 상대 경로같은 개념
+    - 종류 : + , ~ , > , 띄어쓰기 까지 총 4종류가 존재
+        (1) + : 바로 뒤에 있는 태그를 선택
+        (2) ~ : 뒤에 있는 모든 태그를 선택
+        (3) > : 내부에 있는 직계 태그를 선택
+        (4) 띄어쓰기 : 내부에 있는 모든 태그를 선택
+*/
+.pagination {
+    text-align: center;
+    /* 이 설정을 하면 내부 항목의 줄바꿈이 일어나지 않는다 */
+    white-space: nowrap;
+    /* 영역을 넘어가는 내용에 대해 표시하지 않도록 설정한다 */
+    overflow: hidden;            
+}
+.pagination > a {
+    color: black;
+    text-decoration: none;
+
+    display: inline-block;
+    min-width:2em;
+    padding: 0.25em;
+
+    text-align: center;
+
+    border:1px solid black;
+}
+.pagination > a:hover,
+.pagination > a.active {
+    color: red;
+    border-color: red;
+}
+
+/* semi-style 버튼 스타일 입니다! */
+.btn-mint{
+    background: #00ADB5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #EDC948;
+}
+
+.btn-black{
+    background: #222831;
+    border: 2px solid #EDC948;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #EDC948;
+}
+.btn-yellow{
+    /* yellow */
+    background: #EDC948;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border-radius: 10px;
+    color: #00ADB5;
+}
+
+/*
+    입력창이 필요한 경우는 크게 두 종류이다.
+    (1) 회원가입, 로그인처럼 세로 배치가 이루어지는 경우
+        - 입력창의 폭을 100%로 설정해야 한다.
+        - 확장 스타일로 설정
+    (2) 검색화면처럼 가로 배치가 이루어지는 경우
+        - 입력창의 폭은 설정할 필요가 없다
+        - .form-input
+        - 기본 스타일로 설정
+*/
+.form-input {
+    /* outline은 선택 시 자동으로 생기는 테두리이다 */
+    outline: none;
+    padding: 0.5em;
+    border: 1px solid #b2bec3;
+    font:inherit;
+    background-color: transparent;
+}
+/*
+    :focus 는 해당 태그에 포커스가 맞춰진 경우 실행되는 조건부 선택자
+    = 입력창은 커서가 위치하면 포커스가 맞춰졌다고 본다
+*/
+.form-input:focus {
+    border-color: black;
+}
+
+.fill {
+    width:100%;
+}
+
+/* 확장 스타일 : 밑줄만 있는 입력창 */
+.form-input.input-underline {
+    border-top: none;
+    border-left: none;
+    border-right:none;
+}
+
+/* 확장 스타일 : 배경이미지가 좌측에 삽입되는 입력창 */
+.form-input.input-image {
+    padding-left: 2.5em;
+
+    /* 
+        배경 이미지는 url 함수로 설정하며, 상대경로밖에 지정할 수 없다(css 코드가 작성된 파일 기준)
+        배경은 기본적으로 반복해서 배치되게 되어 있다.
+    */
+    /* background-image: url("./image/lock.jpg"); */
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left 0.5em center;
+}
+
+/* 확장 스타일 : 모서리가 둥근 입력창 */
+.form-input.input-round {
+    border-radius: 0.25em;
+}
+
+/* textarea 폭 조절 금지 */
+textarea.form-input {
+    resize: vertical;
+}
 
 
+/*
+    테이블 디자인
+    - 사용하는 태그가 많고 체계가 정해져 있다
+    - 테이블에만 class를 붙여서 전부 다 제어할 수 있도록 한다
+    - 연계 선택자 중 자식 선택자가 필요하다!
+    - table
+        - thead
+            - tr
+                - th/td
+        - tbody
+            - tr
+                - th/td
+        - tfoot
+            - tr
+                - th/td
+    th와 td를 선택하는 방법
+    1. thead, tbody, tfoot을 각각 처리하는 방법
+        - .table > thead > tr > td
+        - 총 6개의 선택자를 만들어야 되서 귀찮다
+    2. 모두 한 번에 선택하는 방법
+        - .table td
+        - 테이블 안에 있는 테이블의 td에도 영향을 미친다
+*/
 
+/* 테이블 기본 스타일 */
+.table {
+    width:100%;
+    /* 테두리 병합 설정 */
+    border-collapse: collapse;
+}
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td 
+{
+    padding:0.5em;
+}
 
+.table.table-border {
+    border: 1px solid #929292;
+}
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td 
+{
+    border:1px solid #929292;
+}
 
+.table.table-hover {}
+.table.table-hover > thead > tr,
+.table.table-hover > tfoot > tr {
+    background-color: #929292;
+}
+.table.table-hover > tbody > tr:hover {
+    background-color: #929292;
+}
 
+.float-container {}
+.float-container > .float-left {
+    float:left;
+}
+.float-container > .float-right {
+    float:right;
+}
+ 
+.float-container::after {
+    content:"";
+    display: block;
+    clear:both;
+}
+
+/* 1단부터 5단까지 클래스를 이용해서 폭을 설정하도록 구현 */
+.layer-1 {
+    width:100%;
+}
+.layer-2 {
+    width:50%;
+}
+.layer-3 {
+    width:33.3333%;
+}
+.layer-4 {
+    width:25%;
+}
+.layer-5 {
+    width:20%;
+}
+
+/* 관리자 페이지 같은 제목 컬러~~ */
+.title{
+    color: #00ADB5;
+}
