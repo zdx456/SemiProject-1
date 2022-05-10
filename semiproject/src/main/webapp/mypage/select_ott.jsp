@@ -9,6 +9,7 @@
      <style>
 
         .ott{
+        display: none;
         }
          .ottChoice{
          	border-radius: 30px;
@@ -19,6 +20,9 @@
             width: 150px;
             height: 150px;
          }
+         .ottLogo{
+         	margin:10px;
+         }
      </style>
     
      <!-- jquery cdn -->
@@ -27,7 +31,17 @@
     <script type="text/javascript">
     $(function () {
     	
-	
+    	//초기 설정  - 선택 되어 있으면 img제거후 ottChoice 추가
+    	$(".ott").each(function(index, item){
+		if ($(this).prop("checked")) {
+
+    		$(this).next().children().removeClass("img");
+            $(this).next().children().addClass("ottChoice");
+        };
+	});
+    	
+    	 
+    	//전체 선택 
        $("#selectAll").on("input",function(){
              
         $(".ott").prop("checked",$(this).prop("checked"));
@@ -45,6 +59,7 @@
               
       	 });
        
+    	//체크박스 체크 될때
         $(".ott").on("input", function () {
 
         	
@@ -70,6 +85,8 @@
 
 String clientId = (String)session.getAttribute("login");
 
+ClientOttDao clientOttDao = new ClientOttDao();
+List<ClientOttDto> list = clientOttDao.selectList(clientId);
 
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -81,29 +98,66 @@ String clientId = (String)session.getAttribute("login");
 		<br><br>
 	</div>
 	<div class="row flex-container center">
-	
-		
+		<%boolean isNetflix = false; 
+		for(ClientOttDto clientOttDto : list){ 
+		 if(clientOttDto.getOttNo() == 1){ 
+		 	isNetflix = true;
+		  }
+		}		 %>
+		<%if (isNetflix){ %>
+		<input type="checkbox" name="ottNo" id="netflixCheck" value="1" class="ott" checked>
+		<%}  else {%>
 		<input type="checkbox" name="ottNo" id="netflixCheck" value="1" class="ott" >
-		<label for="netflixCheck">
+		<%} %>
+		<label for="netflixCheck" class="ottLogo">
     	<img src="<%=request.getContextPath()%>/image/netflixOtt.png" class="changing img img-round ottSize">
     	</label>
     	
     	
-    	
+    	<%boolean isWatcha = false; 
+		for(ClientOttDto clientOttDto : list){ 
+		 if(clientOttDto.getOttNo() == 2){ 
+		 	isWatcha= true;
+		  }
+		}		 %>
+		<%if (isWatcha){ %>
+		<input type="checkbox" name="ottNo" id="watchaCheck" value="2" class="ott" checked>
+		<%}  else {%>
 		<input type="checkbox" name="ottNo" id="watchaCheck" value="2" class="ott">
-		<label for="watchaCheck">
+		<%} %>
+		<label for="watchaCheck" class="ottLogo">
     	<img src="<%=request.getContextPath()%>/image/watcha.png" class="changing img img-round ottSize">
     	</label>
     	
     	
+    	<%boolean isWave = false; 
+		for(ClientOttDto clientOttDto : list){ 
+		 if(clientOttDto.getOttNo() == 3){ 
+		 	isWave= true;
+		  }
+		}		 %>
+		<%if (isWave){ %>
+		<input type="checkbox" name="ottNo" id="waveCheck" value="3" class="ott" checked>
+		<%}  else {%>
 		<input type="checkbox" name="ottNo" id="waveCheck" value="3" class="ott">
-		<label for="waveCheck" >
+		<%} %>
+		<label for="waveCheck"  class="ottLogo">
     	<img src="<%=request.getContextPath()%>/image/wave.png" class="changing img img-round ottSize">
     	</label>
 		
-	
+		
+		<%boolean isTving = false; 
+		for(ClientOttDto clientOttDto : list){ 
+		 if(clientOttDto.getOttNo() == 4){ 
+		 	isTving= true;
+		  }
+		}		 %>
+		<%if (isTving){ %>
+		<input type="checkbox" name="ottNo" id="tvingCheck" value="4" class="ott" checked>
+		<%}  else {%>
 		<input type="checkbox" name="ottNo" id="tvingCheck" value="4" class="ott">
-		<label for="tvingCheck">
+		<%} %>
+		<label for="tvingCheck" class="ottLogo">
     	<img src="<%=request.getContextPath()%>/image/tving.jpg" class="changing img img-round ottSize">
     	</label>
 
