@@ -26,14 +26,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display">
 
-    <!-- jquery CDN -->
+    <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    
-    <!-- 이미지 슬라이더(swiper) CDN -->
+
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    
-    <!-- JS -->
     <script src="<%=request.getContextPath()%>/js/script.js"></script>
 </head>
 <body>
