@@ -134,4 +134,97 @@ public class ReviewDao {
 		con.close();
 		return count > 0;
 	}
+	
+	public List<ReviewDto> selectListContentsByPasing(int contentsNo,int p, int s) throws Exception{
+		int end = p*s;
+		int begin = end -(s-1);
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from (select rownum rn, TMP.* from( "
+				+ " select * from review where contents_no = ?"
+				+ " )"
+				+ " TMP)where rn between ? and ? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		
+		ResultSet rs = ps.executeQuery();
+		
+
+		List<ReviewDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ReviewDto reviewDto = new ReviewDto();
+			reviewDto.setReviewNo(rs.getInt("review_no"));
+			reviewDto.setContentsNo(rs.getInt("contents_no"));
+			reviewDto.setReviewWriter(rs.getString("review_writer"));
+			reviewDto.setReviewContent(rs.getString("review_content"));
+			reviewDto.setReviewScore(rs.getInt("review_score"));
+			reviewDto.setReviewTime(rs.getDate("review_time"));
+
+			list.add(reviewDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	public List<ReviewDto> selectListWriterByPasing(String reviewWriter, int p, int s) throws Exception{
+		int end = p*s;
+		int begin = end -(s-1);
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from (select rownum rn, TMP.* from( "
+				+ " select * from review where review_writer = ?"
+				+ " )"
+				+ " TMP)where rn between ? and ? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, reviewWriter);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		
+
+		List<ReviewDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ReviewDto reviewDto = new ReviewDto();
+			reviewDto.setReviewNo(rs.getInt("review_no"));
+			reviewDto.setContentsNo(rs.getInt("contents_no"));
+			reviewDto.setReviewWriter(rs.getString("review_writer"));
+			reviewDto.setReviewContent(rs.getString("review_content"));
+			reviewDto.setReviewScore(rs.getInt("review_score"));
+			reviewDto.setReviewTime(rs.getDate("review_time"));
+
+			list.add(reviewDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	public int countWriterByPasing(String reviewWriter) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql ="select count(*) from review where review_writer = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, reviewWriter);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	public int countContentsByPasing(int contentsNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql ="select count(*) from review where contents_no = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
 }
