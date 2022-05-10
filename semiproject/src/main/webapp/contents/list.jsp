@@ -5,26 +5,22 @@
 <%@page import="ottes.beans.ContentsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%
-    
-	String type = request.getParameter("type");
-	String keyword = request.getParameter("keyword");
-    
-    boolean isSearch = (type != null && !type.equals("")) &&  (keyword != null && !keyword.equals(""));
+     
+<%
+	String keyword = request.getParameter("keyword");   
+    boolean isSearch = keyword != null && !keyword.equals("");
     
     ContentsDao contentsDao = new ContentsDao();
     
     List<ContentsDto> list;
     if(isSearch) {
-    	list = contentsDao.selectList(type, keyword);
+    	list = contentsDao.selectList(keyword);
     }
     else {
     	list = contentsDao.selectList();
     }
-    
+%>
 
-    %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="container w600 m50">
@@ -34,7 +30,7 @@
 	
 	<form action="" method="post">
 	
-		<%if(type == null){ %>
+<%-- 		<%if(type == null){ %>
 		
 					<select name="type">
 						<option value="none" selected>선택</option>
@@ -89,13 +85,13 @@
 							<option value="genre_name">장르</option>
 							<option value="region_name" selected>국가</option>
 						</select>
-		<%} %>
+		<%} %> --%>
 		
 		
-				<%if(isSearch){ %>
-		<input type="text" name="keyword" placeholder="검색어 입력"  value=<%=keyword %>>
+		<%if(isSearch){ %>
+			<input type="text" name="keyword" placeholder="검색어 입력"  value=<%=keyword %>>
 		<%} else { %>
-		<input type="text" name="keyword" placeholder="검색어 입력" >
+			<input type="text" name="keyword" placeholder="검색어 입력" >
 		<%} %>
 		<input type="submit" value="검색">
 	</form>

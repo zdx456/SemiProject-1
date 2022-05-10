@@ -26,7 +26,7 @@
 
 body {
     background-color: #222831;
-    min-width: 1300px;
+    min-width: 1600px;
 }
 
 main {
@@ -40,7 +40,7 @@ main {
 
 header {
     width: 100%;
-    min-width: 1300px;
+    min-width: 1600px;
     height: 70px;
     position: fixed;
     left: 0;
@@ -49,13 +49,13 @@ header {
     background: linear-gradient(to top, rgba(0, 0, 0, .2), rgba(0, 0, 0, 1));
     box-sizing: border-box;
     padding-bottom: 30px;
+    z-index: 999;
 }
 
 .logo {
     float: left;
     width: 250px;
     height: 70px;
-    z-index: 2;
 }
 
 .logo img {
@@ -105,8 +105,8 @@ nav {
 
 .bg_img {
     width: 100%;
-    height: 100%;
-    position: fixed;
+    height: 70%;
+    position: absolute;
     left: 0;
     top: 0;
     background-image: url(../image/test.PNG); 
@@ -117,22 +117,27 @@ nav {
 
 .bg_gradient {
     width: 100%;
-    height: 100%;
-    position: fixed;
+    height: 70%;
+    position: absolute;
     left: 0;
     top: 0;
-    background: linear-gradient(to top, rgba(34, 40, 49, 1), rgba(0, 0, 0, 0.4));
-    z-index: -1;
+    background: linear-gradient(to top, rgba(34, 40, 49, 1), rgba(0, 0, 0, 0.6));
+	z-index: -1;
 }
 
 
 article {  
     padding: 100px 100px 30px 100px;
-    text-align: left;
+    text-align: left;   
+}
+
+.content {
+	z-index: 2;
 }
 
 .search {
-    padding: 50px 0 200px 250px;
+    padding: 70px 0 130px 250px;
+    z-index: 5;
 }
 
 .search h2 {
@@ -143,12 +148,12 @@ article {
 }
 
 .search p {
-    font-size: 1.3em;
+    font-size: 1.2em;
     line-height: 35px;
 }
 
 .search p span {
-    color: #EDC948;
+    color: #00ADB5;
     font-weight: bolder;
 }
 
@@ -157,34 +162,76 @@ article {
 	outline: none;
     border-bottom: 5px solid #ffffff;
     background-color: transparent;
-    width: 400px;
+    width: 500px;
     height: 50px;
-    margin-top: 20px;
-    font-size: 1.8em; 
+    margin-top: 30px;
+    padding: 0 0 18px 70px;
+    font-size: 1.8em;
+    background-image: url(../image/search.png); 
+    background-repeat: no-repeat;
+    background-size: 35px;
+    background-position: 10px 0;
 }
 
 .search input::placeholder {
-    color: #ffffff;
+	font-size: 0.6em;
+    color: #929292;
 }
 
 .content h3 {
-    font-size: 1.5em;
-    font-weight: bolder;
+	font-size: 1.5em;
+	font-weight: bolder;
 }
 
+.like_list {
+	margin: 60px 0;
+}
 
 /* 슬라이더 */
 
 .swiper {
     margin: 30px 0;
+    overflow-y: visible;
+	height: 350px;
+}
+
+.swiper-slide {
+	position: relative;
+    width: 210px !important;
+	height: 300px;
+}
+
+.swiper-slide a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
 }
 
 .swiper-slide img {
-    width: 100%;
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	transform: translate(50, 50); 
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover; 
+	margin: auto;
+}
+
+.swiper-slide span {
+	position: absolute; 
+	top: 250px; 
+	left: 10px; 
+	z-index: 5;
+	font-size: 5em;
+	font-weight: 900;
+	font-style: italic;
+	text-shadow: 3px -2px 4px rgba(0,0,0,0.5);
 }
 
 .swiper-button-next,
 .swiper-button-prev {
+	top: 45%; 
     color: #ffffff;
 }
 
@@ -192,10 +239,9 @@ article {
 
 footer {
     width: 100%;
-    height: 150px;
     border-top: 1px solid #EDC948;
     background: rgba(0, 0, 0, .5);
-    padding: 20px 0;
+    padding: 40px 0;
 }
 
 .footer_wrap {
