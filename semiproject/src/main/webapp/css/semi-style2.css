@@ -27,6 +27,7 @@
 body {
     background-color: #222831;
     min-width: 1600px;
+    position: relative;
 }
 
 main {
@@ -46,7 +47,7 @@ header {
     left: 0;
     top: 0;
     border-bottom: 1px solid #EDC948;
-    background: linear-gradient(to top, rgba(0, 0, 0, .2), rgba(0, 0, 0, 1));
+    background: linear-gradient(to top, rgba(34, 40, 49, .4), rgba(0, 0, 0, .7));
     box-sizing: border-box;
     padding-bottom: 30px;
     z-index: 999;
@@ -149,46 +150,40 @@ div.burger-menu>ul>li {
     margin: 30px
 }
 
-
-
-
 /* 콘텐츠 영역 */
 
-.bg_img {
+.swiper_fade {
     width: 100%;
-    height: 70%;
+    height: 900px;
     position: absolute;
-    left: 0;
     top: 0;
-    background-image: url(../image/test.PNG); 
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -2;
+    left: 0;
+    z-index: -1 !important;
+    overflow: hidden;
+} 
+
+.swiper_fade .swiper-slide img {
+	width: 100%;      
 }
 
 .bg_gradient {
     width: 100%;
-    height: 70%;
+    height: 900px;
     position: absolute;
     left: 0;
     top: 0;
-    background: linear-gradient(to top, rgba(34, 40, 49, 1), rgba(0, 0, 0, 0.6));
-	z-index: -1;
+    background: linear-gradient(to top, rgba(34, 40, 49, 1), rgba(0, 0, 0, 0.4));
+    z-index: 1;
 }
 
-
 article {  
+	min-height: 800px;
     padding: 100px 100px 30px 100px;
     text-align: left;   
 }
 
-.content {
-	z-index: 2;
-}
-
 .search {
-    padding: 70px 0 130px 250px;
-    z-index: 5;
+    padding: 70px 0 120px 250px;
 }
 
 .search h2 {
@@ -240,25 +235,19 @@ article {
 
 /* 슬라이더 */
 
-.swiper {
+.content .swiper {
     margin: 30px 0;
     overflow-y: visible;
 	height: 350px;
 }
 
-.swiper-slide {
+.content .swiper-slide {
 	position: relative;
     width: 210px !important;
 	height: 300px;
 }
 
-.swiper-slide a {
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-}
-
-.swiper-slide img {
+.content .swiper-slide img {
 	position: absolute; 
 	top: 0; 
 	left: 0; 
@@ -269,7 +258,7 @@ article {
 	margin: auto;
 }
 
-.swiper-slide span {
+.content .swiper-slide .rank {
 	position: absolute; 
 	top: 250px; 
 	left: 10px; 
@@ -280,15 +269,58 @@ article {
 	text-shadow: 3px -2px 4px rgba(0,0,0,0.5);
 }
 
-.swiper-button-next,
-.swiper-button-prev {
+.content .swiper-button-next,
+.content .swiper-button-prev {
 	top: 45%; 
     color: #ffffff;
+}
+
+.content .cover {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6));
+	border: 1px solid #EDC948;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.content .cover_text {	
+	display: block;	
+	width: 70%;	
+	margin: 0 auto;	
+	margin-top: 220px;	
+}
+
+.content .cover_text span {
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bolder;
+	padding: 7px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;	
+}
+
+.content .cover .avg_score {
+	font-size: 1em;
+	color: #EDC948;
+	margin-left: 40px;	
+}
+
+.content .cover .count_like {
+	font-size: 1em;
+	color: #FF003A;	
 }
 
 .recent_list_style {
 	margin-right: 20px;
 }
+
+/* 더보기 버튼 */
 
 .btn_more_wrap {
 	height: 50px;
