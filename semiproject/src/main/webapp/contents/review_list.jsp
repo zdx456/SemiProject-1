@@ -5,6 +5,16 @@
     pageEncoding="UTF-8"%>
     
     <style>
+    
+    .review {
+	color: grey;
+	background-color: #313842;
+	border: transparent;
+	border-radius : 10px;
+	}
+	 
+
+	
     .star-select{
     background-color: transparent;
     color:#EDC948;
@@ -16,39 +26,41 @@
      border-radius: 0.25em;
     }
     
+    .review-table{
+	border-bottom: 1px solid grey;
+	width: 100%;
+	}
 
 	.review-table > tbody > tr > th,
 	.review-table > tbody > tr > td
 
 	{
     padding:0.5em;
+    border-bottom: 1px solid grey;
 	}
+	
+	.btn-insert{
+         padding-top: 5px;
+         padding-bottom:  5px;
+         padding-left: 20px;
+         padding-right: 20px;
+         font-size: 17px;
+         width: 25%
+         }
+         
+       .btn-table{
+         padding-top: 5px;
+         padding-bottom:  5px;
+         padding-left: 10px;
+         padding-right: 10px;
+         font-size: 10px;
+         }
+         .img-size{
+          width: 25px;
+          height : 25px;
+         }
     </style>
-    
-	 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-     <!-- <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>  경량형!--> 
-
-    <script type="text/javascript">
-        $(function(){
-           
-	//수정 부분 숨기기 등록
-            $(".edit-btn").click(function(){
-                $(this).parents(".show-row").hide();
-			    $(this).parents(".show-row").next().show();
-            });
-
-            $(".cancel-btn").click(function(){
-			$(this).parents(".edit-row").hide();
-			$(this).parents(".edit-row").prev().show();
-		});
-		
-
-            $(".edit-row").hide(); 
-
-            
-        });
-      </script>
-    
+   
 <%
 
 	// 페이지 파라미터
@@ -123,32 +135,79 @@
 	if(endBlock > lastPage){
 		endBlock = lastPage;
 	}
- 
+	
+	//관리자인지 판정
+	String memberGrade = (String)session.getAttribute("auth");
+	boolean isAdmin = memberGrade != null && memberGrade.equals("관리자");
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+	 <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.5/score.js"></script>
+     <!-- <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>  경량형!--> 
+
+    <script type="text/javascript">
+        $(function(){
+           
+	//수정 부분 숨기기 등록
+            $(".edit-btn").click(function(){
+                $(this).parents(".show-row").hide();
+			    $(this).parents(".show-row").next().show();
+            });
+
+            $(".cancel-btn").click(function(){
+			$(this).parents(".edit-row").hide();
+			$(this).parents(".edit-row").prev().show();
+		});
+		
+
+            $(".edit-row").hide(); 
+		
+        });
+      </script>
+    
+        <script>
+        $(function(){
+        	$(".score-show").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent"
+        	});
+        	$(".score-select").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent", 
+                editable:true,
+                integerOnly:true,
+                zeroAvailable:false,
+                send: {
+                    sendable:true,
+                    name:"reviewScore",
+                },
+                display:{
+                    showNumber:true,
+                    placeLimit:0,
+                }
+            });
+        });
+    </script>
+    
+
+		
 <div class="container w700">
-	<div class="row center">
+	<div class="row center ">
 		<h2>리뷰 목록</h2>
 		<hr>
 	</div>
 	<%if(!searchWriter){ //내가 쓴 글에서 오면 등록은 불가능하게 만듬%>
-	<div class="row center">
 		<form action="review_insert.svt" method="post">
+		<div class="row center review">
+		<br>
 			<input type="hidden" name="contentsNo" value="<%=contentsNo%>" > <!-- contentsNo 파라미터 -->
-			<textarea rows="2" cols="35" class="reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
-			<select name="reviewScore" class="star-select">
-				<option value="1" class="star-select">★</option>
-				<option value="2" class="star-select">★★</option>
-				<option value="3" class="star-select">★★★</option>
-				<option value="4" class="star-select">★★★★</option>
-				<option value="5" class="star-select">★★★★★</option>
-			</select>
-			<button type="submit" class="btn-mint">등록</button>
+			<textarea rows="3" cols="50" class=" reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
+			<label class="score-select" data-max="5"></label><br><br>
+		</div>
+		<div class="row center"><button type="submit" class="btn-mint btn-insert ">등록</button></div>
 		</form>
-	</div>
 	<%} %>
-	<div class="row">
+	<div class="row review">
 	<form action="review_edit.svt" method="post">
 		<table class="review-table ">
 			<tr>
@@ -156,105 +215,84 @@
 				<th>작성일</th>
 				<th>내용</th>
 				<th>평점</th>
-				<th>수정</th>
-				<th>삭제</th>
 			</tr>
 		<%for(ReviewDto reviewDto : list){ %>
 			<tr class="show-row center">
 				<td><%=reviewDto.getReviewWriter() %></td>
 				<td><%=reviewDto.getReviewTime()%></td>
 				<td class="left">
-					<textarea rows="2" cols="35" class="reviewCont " disabled><%=reviewDto.getReviewContent()%></textarea>
+					<textarea rows="3" cols="35" class="reviewCont " disabled><%=reviewDto.getReviewContent()%></textarea>
 				</td>
 				<td>
-						<%
-						String starScore = String.valueOf(reviewDto.getReviewScore());
-						if(reviewDto.getReviewScore() == 1){ %>
-						<% starScore = "★"; %>
-						<%=starScore %>
+						
+						<%if(reviewDto.getReviewScore() == 1){ %>
+						<label class="score-show" data-max="5" data-rate="1"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 2){ %>
-						<% starScore = "★★"; %>
-						<%=starScore %>
+						<label class="score-show" data-max="5" data-rate="2"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 3){ %>
-						<% starScore = "★★★"; %>
-						<%=starScore %>
+						<label class="score-show" data-max="5" data-rate="3"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 4){ %>
-						<% starScore = "★★★★"; %>
-						<%=starScore %>
+						<label class="score-show" data-max="5" data-rate="4"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 5){ %>
-						<% starScore = "★★★★★"; %>
-						<%=starScore %>
+						<label class="score-show" data-max="5" data-rate="5"></label>
 						<%} %>
 				</td>
-				<td><a href="#" class="btn-mint edit-btn">수정</a></td>
-				<td><a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="btn-black">삭제</a></td>
+			    <%
+					//본인이 작성한 댓글인지 여부를 미리 파악
+					boolean isReviewOwner = clientId != null && clientId.equals(reviewDto.getReviewWriter());
+				%>
+				<%if(isReviewOwner){ %>
+				<td>
+					<%-- <img src="<%=request.getContextPath()%>/image/edit_Icon.png" class="img-size edit-btn"> 이미지 조잡...함--%>
+					<button type="button" class="btn-mint btn-table edit-btn ">수정</button>
+				</td>
+				<%} %>
+				<%if(isReviewOwner || isAdmin) {%>
+				<td>
+					<a href="review_delete.svt?reviewNo=<%=reviewDto.getReviewNo()%>&contentsNo=<%=reviewDto.getContentsNo()%>" class="btn-black btn-table">
+						<%-- <img src="<%=request.getContextPath()%>/image/delete_Icon.png" class="img-size">	 --%>
+						삭제
+					</a>
+				</td>
+				<%} %>
 			</tr>
-				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계 예정 -->
+				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계  -->
 			<tr class="edit-row">
 				<td>			
 						<input type="hidden" name="reviewNo" value="<%=reviewDto.getReviewNo()%>">
 						<input type="hidden" name="contentsNo" value="<%=reviewDto.getContentsNo()%>">
-						<input type="text" name="reviewWriter" value="<%=reviewDto.getReviewWriter() %>" disabled class="form-input input-round">
+						<input type="hidden" name="reviewWriter" value="<%=reviewDto.getReviewWriter() %>" disabled class="form-input input-round">
+						<%=reviewDto.getReviewWriter() %>
 				</td>
 				<td colspan="2">
 						<textarea class=" reviewCont" name="reviewContent" rows="3" cols="50"><%=reviewDto.getReviewContent()%></textarea>
 				</td>
 				<td>
 						<%if(reviewDto.getReviewScore() == 1){ %>
-						<select name="reviewScore" class="form-input input-round">
-							<option value="1" selected>★</option>
-							<option value="2">★★</option>
-							<option value="3">★★★</option>
-							<option value="4">★★★★</option>
-							<option value="5">★★★★★</option>
-						</select>
+						<label class="score-select" data-max="5" data-rate="1"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 2){ %>
-						<select name="reviewScore" class="form-input input-round">
-							<option value="1">★</option>
-							<option value="2" selected>★★</option>
-							<option value="3">★★★</option>
-							<option value="4">★★★★</option>
-							<option value="5">★★★★★</option>
-						</select>
+						<label class="score-select" data-max="5" data-rate="2"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 3){ %>
-						<select name="reviewScore" class="form-input input-round">
-							<option value="1">★</option>
-							<option value="2">★★</option>
-							<option value="3" selected>★★★</option>
-							<option value="4">★★★★</option>
-							<option value="5">★★★★★</option>
-						</select>
+						<label class="score-select" data-max="5" data-rate="3"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 4){ %>
-						<select name="reviewScore" class="form-input input-round">
-							<option value="1">★</option>
-							<option value="2">★★</option>
-							<option value="3">★★★</option>
-							<option value="4" selected >★★★★</option>
-							<option value="5">★★★★★</option>
-						</select>
+						<label class="score-select" data-max="5" data-rate="4"></label>
 						<%} %>
 						<%if(reviewDto.getReviewScore() == 5){ %>
-						<select name="reviewScore" class="form-input input-round">
-							<option value="1">★</option>
-							<option value="2">★★</option>
-							<option value="3">★★★</option>
-							<option value="4">★★★★</option>
-							<option value="5" selected>★★★★★</option>
-						</select>
+						<label class="score-select" data-max="5" data-rate="5"></label>
 						<%} %>
 					</td>
 					<td>
-						<button type="submit" class="btn-mint btn-size">수정</button>
+						<button type="submit" class="btn-mint btn-size btn-table">수정</button>
 					</td>
 					<td>
-						<button type="button" class="btn-black cancel-btn">취소</button>
+						<button type="button" class="btn-black cancel-btn btn-table">취소</button>
 					</td>
 			</tr>
 		<%} %>
@@ -307,7 +345,7 @@
 			<%if(searchWriter){ %>
 			<a href="review_list.jsp?p=<%=lastPage%>&s=<%=s%>&reviewWriter=<%=reviewWriter%>">&raquo;</a>
 			<%} else { %>
-			<a href="review_list.jsp?p=<%=lastPage%>&s=<%=s%>contentsNo=<%=contentsNo%>">&raquo;</a>
+			<a href="review_list.jsp?p=<%=lastPage%>&s=<%=s%>&contentsNo=<%=contentsNo%>">&raquo;</a>
 			<%} %>
 		<%} %>		
 	</div>
