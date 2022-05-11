@@ -52,6 +52,20 @@ public class ClientOttDao {
 		return count > 0;
 	}
 	
+	public boolean delete(int ottNo) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete from client_ott where ott_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, ottNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
 	public List<ClientOttDto> selectList(String clientId) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		

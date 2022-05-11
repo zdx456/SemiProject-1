@@ -152,6 +152,19 @@ public class AttachmentDao {
 		
 		return count > 0;
 	}
+	
+	public boolean deleteOtt(int ottNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		String sql = "delete from attachment  where attachment_no = "
+				+ "(select A.attachment_no from attachment A left outer join ott_attachment O on O.attachment_no = A.attachment_no where ott_no = ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, ottNo);
+		int count = ps.executeUpdate();
+		con.close();
+		
+		return count > 0;
+	}	
 }
 
 

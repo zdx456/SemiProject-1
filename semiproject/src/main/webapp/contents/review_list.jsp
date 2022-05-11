@@ -33,7 +33,6 @@
 
 	.review-table > tbody > tr > th,
 	.review-table > tbody > tr > td
-
 	{
     padding:0.5em;
     border-bottom: 1px solid grey;
@@ -200,6 +199,7 @@
 		<form action="review_insert.svt" method="post">
 		<div class="row center review">
 		<br>
+			<h4>리뷰등록</h4><br><br>
 			<input type="hidden" name="contentsNo" value="<%=contentsNo%>" > <!-- contentsNo 파라미터 -->
 			<textarea rows="3" cols="50" class=" reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
 			<label class="score-select" data-max="5"></label><br><br>
