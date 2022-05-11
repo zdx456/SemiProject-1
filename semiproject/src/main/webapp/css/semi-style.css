@@ -56,6 +56,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.m15 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .m20 {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -71,6 +77,10 @@
 .m50 {
     margin-top: 50px;
     margin-bottom: 50px;
+}
+.m100 {
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 
@@ -327,6 +337,8 @@ ul.menu a {
     font:inherit;
     background-color: transparent;
 }
+
+
 /*
     :focus 는 해당 태그에 포커스가 맞춰진 경우 실행되는 조건부 선택자
     = 입력창은 커서가 위치하면 포커스가 맞춰졌다고 본다
@@ -424,14 +436,23 @@ textarea.form-input {
     border:1px solid #929292;
 }
 
+.flex-container {
+	display:flex;
+}
+.flex-container > div {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .table.table-hover {}
 .table.table-hover > thead > tr,
 .table.table-hover > tfoot > tr {
-    background-color: #929292;
+    border-color: #00ADB5;
+	  color: #00ADB5;
 }
-.table.table-hover > tbody > tr:hover {
-    background-color: #929292;
-}
+
+
 
 .float-container {}
 .float-container > .float-left {

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-</article>
+	</article>
         <footer>
             <ul class="footer_menu">
                 <li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>

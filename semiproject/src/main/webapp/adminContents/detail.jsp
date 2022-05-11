@@ -34,108 +34,344 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<style>
+
+	.m-title {
+		margin-bottom: 40px;
+		margin-top: 20px;
+	}
+	
+	.layer-6 {
+		width: 60%;
+	}
+	
+	.btn-ed-de {
+		padding-left: 6em;
+		padding-right: 6em;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
+	
+	.btn-list {
+		padding-left: 10em;
+		padding-right: 10em;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
+	
+	.layer-10pro {
+		width: 10%;
+	}
+	
+	div {
+    border: 1px dotted transparent;
+	}
+	
+</style>
+
+
 	<div class="container w800 m30">
 	
 		<div class="row center">
-			<h1>상세 페이지</h1>
+			<h1 class="title m-title">상세 페이지(관리자용)</h1>
 		</div>
 	
-		<table class="table">
+		<div class="float-container">
 		
 		<!-- 포스터 보여주기 -->
-			<tr>
-				<td>
-					<img src="file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" width="150" height="150" alt="포스터">
-				</td>
-			</tr>
+			<div class="float-left layer-2 center m40">
+				<img src="file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" width="250" height="350" alt="포스터">
+			</div>
 			
-			<tr>
-				<td>번호</td>
-				<td><%=contentsDto.getContentsNo() %></td>
-			</tr>
+			<div class="float-right layer-2">
 			
-			<tr>
-				<td>제목</td>
-				<td><%=contentsDto.getContentsTitle() %></td>
-			</tr>
-			
-			<tr>
-				<td>등급</td>
-				<td><%=contentsDto.getContentsGrade() %></td>
-			</tr>
-			
-			<tr>
-				<td>국가</td>
-				<td><%=contentsDto.getRegionName() %></td>
-			</tr>
-			
-			<tr>
-				<td>장르</td>
-				<td><%=contentsDto.getGenreName() %></td>
-			</tr>
-			
-			<tr>
-				<td>러닝타임</td>
-				<td><%=contentsDto.getContentsTime() %></td>
-			</tr>
-			
-			<tr>
-				<td>감독</td>
-				<td><%=contentsDto.getContentsDirector() %></td>
-			</tr>
-			
-				<%if(actorDto.getActorName1() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
-				<tr>
-					<td>배우1</td>
-					<td><%=actorDto.getActorName1() %></td>
-				</tr>
-				<%} %>
+				<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>콘텐츠 No</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsNo() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>제목</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsTitle() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>등급</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsGrade() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>국가</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getRegionName() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>장르</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getGenreName() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>러닝타임</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsTime() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>감독</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsDirector() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<%if(actorDto.getActorName1() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>배우1</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=actorDto.getActorName1() %></span>
+							</div>
+							
+						</div>
+					</div>
+					<%} %>
+					
+					<%if(actorDto.getActorName2() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>배우2</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=actorDto.getActorName2() %></span>
+							</div>
+							
+						</div>
+					</div>
+					<%} %>
 				
-				<%if(actorDto.getActorName2() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
-				<tr>
-					<td>배우2</td>
-					<td><%=actorDto.getActorName2() %></td>
-				</tr>
-				<%} %>
-				
-				<%if(actorDto.getActorName3() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
-				<tr>
-					<td>배우3</td>
-					<td><%=actorDto.getActorName3() %></td>
-				</tr>
-				<%} %>
-				
-				<%if(actorDto.getActorName4() != null) { //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
-				<tr>
-					<td>배우4</td>
-					<td><%=actorDto.getActorName4() %></td>
-				</tr>
-				<%} %>
 
-			<tr>
-				<td>줄거리</td>
-				<td><%=contentsDto.getContentsSummary() %></td>
-			</tr>
-			
-		<!-- 서비스 중인 OTT 목록 -->
-		<%for(OttDto ottDto : list) {%>
-		<tr>
-			<td>OTT</td>
-			<td><%=ottDto.getOttName() %></td>
-		</tr>
-		<%} %>
+				<%if(actorDto.getActorName3() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>배우3</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=actorDto.getActorName3() %></span>
+							</div>
+							
+						</div>
+					</div>
+					<%} %>
+				
+				<%if(actorDto.getActorName4() != null) {  //값이 null이 아니면 보여줘라(값이 null이면 안 보임) %>
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>배우4</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=actorDto.getActorName4() %></span>
+							</div>
+							
+						</div>
+					</div>
+					<%} %>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>줄거리</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15"> <%=contentsDto.getContentsSummary() %></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row m15">
+						<div class="float-container">
+						
+							<div class="float-left layer-5 center">
+									<label>OTT</label>
+							</div>
+							
+							<div class="float-left layer-5 center">
+								<span>:</span>
+							</div>
+							
+							<div class="float-left layer-6 left">
+								<span class="m15">
+									<%for(OttDto ottDto : list) {%>
+									 <%=ottDto.getOttName() %>
+									 <%} %>
+								</span>
+						</div>
+						
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
 			
 			
 		<!-- 버튼 영역 -->
-			<tr>
-				<td><a href="edit.jsp?contentsNo=<%=contentsDto.getContentsNo() %>">수정</a></td>
-				<td><a href="delete.svt?contentsNo=<%=contentsDto.getContentsNo() %>">삭제</a></td>
-			</tr>
-		</table>
+			<div class="row m30">
+				<div class="float-container">
+				
+					<div class="float-left layer-5"></div>
+					
+					<div class="float-left layer-4 center">
+						<a href="edit.jsp?contentsNo=<%=contentsDto.getContentsNo() %>" class="btn-black btn-ed-de">수정하기</a>
+					</div>
+					
+					<div class="float-left layer-10pro"></div>
+					
+					<div class="float-left layer-4 center">
+						<a href="delete.svt?contentsNo=<%=contentsDto.getContentsNo() %>" class="btn-black btn-ed-de">삭제하기</a>
+					</div>
+					
+					<div class="float-left layer-5"></div>
+			</div>
 		
-		<a href="list.jsp">목록</a>
+		<div class="row m50">
+			<div class="float-container">
+			
+				<div class="float-left layer-4"></div>
+				
+				<div class="float-left layer-2 center">
+					<a href="list.jsp" class="btn-mint btn-list center">목록으로 이동하기</a>
+				</div>
+				
+				<div class="float-left layer-4"></div>
+				
+			</div>
+		</div>
 		
 	</div>
+	
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
 

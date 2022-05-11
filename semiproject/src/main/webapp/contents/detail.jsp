@@ -1,3 +1,9 @@
+<%@page import="ottes.beans.OttAttachmentDto"%>
+<%@page import="ottes.beans.OttAttachmentDao"%>
+<%@page import="ottes.beans.OttContentsDto"%>
+<%@page import="ottes.beans.OttContentsDao"%>
+<%@page import="ottes.beans.OttDto"%>
+<%@page import="ottes.beans.OttDao"%>
 <%@page import="ottes.beans.LikeContentsDto"%>
 <%@page import="ottes.beans.LikeContentsDao"%>
 <%@page import="ottes.beans.ActorDto"%>
@@ -16,6 +22,7 @@
 Integer contentsNo = Integer.valueOf(request.getParameter("contentsNo"));
 // int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
 String reviewWriter = request.getParameter("reviewWriter");
+
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
@@ -36,6 +43,16 @@ boolean isLogin = clientId != null;
 LikeContentsDao likeContentsDao = new LikeContentsDao();
 LikeContentsDto likecontentsDto = likeContentsDao.find(clientId, contentsNo);//find는 좋아요 이력을 찾는 기능(단일조회와 비슷)
 
+// ott 정보 불러오기
+OttContentsDao ottContentsDao = new OttContentsDao();
+OttContentsDto ottContentsDto = ottContentsDao.selectOne(contentsNo);
+
+OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
+List<OttAttachmentDto> list = ottAttachmentDao.selectList(ottContentsDto.getOttNo());
+
+OttDao ottDao = new OttDao();
+List<OttDto> ottlist = ottDao.findPrice(contentsNo);
+
 // 관리자인지 판정
 String memberGrade = (String) session.getAttribute("auth");
 boolean isAdmin = clientId != null && memberGrade.equals("관리자");
@@ -54,13 +71,12 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 }
 #r1 {
 	position : absolute;
-	right : 30%;
+	right : 25%;
 }	
-#r2 {
-	position : absolute;
-	right :30%;
+.price {
+	color : white;
+	font-size : 13px;
 }
-
 .content {
 	padding :  0.3em;
 	font-size : 15px;	
@@ -72,6 +88,10 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 }
 .review.review-score {
 	color : #EDC948;
+}
+
+.review.review-list {
+	font-size : 12px;
 }
 
 .like {
@@ -131,26 +151,35 @@ $(function () {
 
 	<jsp:include page="/template/header.jsp"></jsp:include>
 
-	<div class="row float-container m50 center ">
+	<div class="row float-container m50 center">
 
 		<div class="float-left layer-2">
 
 			<label><h2><%=contentsDto.getContentsTitle()%></h2></label> <br>
 			<img
 				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
-				width="150" height="150" alt="포스터">
+				width="180" height="180" alt="포스터">
 
 
 			<table class="table center">
 				<thead>
 					<tr>
-						<td><img
-							src="<%=request.getContextPath()%>/image/netflix.png" width="30">
+						<td>
+						<%for(OttAttachmentDto ottAttachmentDto : list) { %>
+						<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
+				width="40" height="40" alt="ott">
+						<%} %>
 						</td>
+					
 					</tr>
 					<tr>
-						<td>ott 가격</td>
+						<td>
+						<%for(OttDto ottDto : ottlist) { %>
+						<span class="price"><%=ottDto.getOttPrice() %></span>
+						<%} %>
+						</td>
 					</tr>
+
 					<tr>
 						<td> <span class="count"><%=likeContentsDao.count()%></span>  
 						<% if (likecontentsDto != null) { %> 
@@ -259,14 +288,14 @@ $(function () {
 		<!--  댓글 목록 영역 -->
 
 		<br> <br>
-		<table class="table">
+		<table class="table review review-list w200">
 
 			<%
 			for (ReviewDto reviewDto : reviewList) {
 			%>
 
 			<tr>
-				<th width="10%"><%=reviewDto.getReviewWriter()%></th>
+				<th width="20%"><%=reviewDto.getReviewWriter()%></th>
 				<td width="20%"><%=reviewDto.getReviewTime()%></td>
 				<td width="30%">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
@@ -286,7 +315,7 @@ $(function () {
 					reviewScore = reviewScore.replaceAll("5", "★★★★★");
 				}
 				%>
-				<td width="10%"><%=reviewScore%></td>
+				<td width="10%" class="review review-score"><%=reviewScore%></td>
 			</tr>
 
 			<%

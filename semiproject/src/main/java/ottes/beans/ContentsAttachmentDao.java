@@ -44,9 +44,10 @@ public class ContentsAttachmentDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no "
+							+ "select A.contents_no, B.attachment_no, C.contents_title, avg(review_score) avg_score "
 							+ "from review A join contents_attachment B on A.contents_no = B.contents_no "
-							+ "group by A.contents_no, B.attachment_no "
+							+ "join contents C on B.contents_no = C.contents_no "
+							+ "group by A.contents_no, B.attachment_no, C.contents_title "
 							+ "order by avg(review_score) desc"
 						+ ") TMP"
 					+ ") where rn between 1 and 12";
@@ -59,6 +60,9 @@ public class ContentsAttachmentDao {
 			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
 			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
 			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
 
 			list.add(contentsAttachmentDto);
 		}
@@ -72,9 +76,10 @@ public class ContentsAttachmentDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no "
+							+ "select A.contents_no, B.attachment_no, C.contents_title, count(A.contents_no) count_like "
 							+ "from likecontents A join contents_attachment B on A.contents_no = B.contents_no "
-							+ "group by A.contents_no, B.attachment_no "
+							+ "join contents C on A.contents_no = C.contents_no "
+							+ "group by A.contents_no, B.attachment_no, C.contents_title "
 							+ "order by count(A.contents_no) desc"
 						+ ") TMP"
 					+ ") where rn between 1 and 12";
@@ -87,6 +92,9 @@ public class ContentsAttachmentDao {
 			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
 			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
 			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));
 
 			list.add(contentsAttachmentDto);
 		}
@@ -94,45 +102,19 @@ public class ContentsAttachmentDao {
 		return list;
 	}	
 	
-	// 최신순 콘텐츠 7개 포스터 출력
-	public List<ContentsAttachmentDto> selectRecentList() throws Exception {
-		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "select * from ("
-						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no "
-							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
-							+ "order by A.contents_no desc"
-						+ ") TMP"
-					+ ") where rn between 1 and 7";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-
-		List<ContentsAttachmentDto> list = new ArrayList<>();
-		while (rs.next()) {
-			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
-			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
-			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
-
-			list.add(contentsAttachmentDto);
-		}
-		con.close();
-		return list;
-	}
-	
 	// 내 장르 콘텐츠 평균 평점순 12개 포스터 출력
 	public List<ContentsAttachmentDto> selectMyGenreList(String clientId) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select B.contents_no, C.attachment_no "
+							+ "select B.contents_no, C.attachment_no, E.contents_title "
 							+ "from likegenre A join contents B on A.genre_name = B.genre_name "
 							+ "join contents_attachment C on B.contents_no = C.contents_no "
 							+ "join review D on B.contents_no = D.contents_no "
+							+ "join contents E on D.contents_no = E.contents_no "
 							+ "where A.client_id = ? "
-							+ "group by B.contents_no, C.attachment_no "
+							+ "group by B.contents_no, C.attachment_no, E.contents_title "
 							+ "order by avg(D.review_score) desc"
 						+ ") TMP"
 					+ ") where rn between 1 and 12";
@@ -146,6 +128,8 @@ public class ContentsAttachmentDao {
 			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
 			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
 			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
 
 			list.add(contentsAttachmentDto);
 		}
@@ -159,8 +143,9 @@ public class ContentsAttachmentDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no "
+							+ "select A.contents_no, B.attachment_no, C.contents_title "
 							+ "from likecontents A join contents_attachment B on A.contents_no = B.contents_no "
+							+ "join contents C on B.contents_no = C.contents_no "
 							+ "where A.client_id = ? "
 							+ "order by A.like_no desc"
 						+ ") TMP"
@@ -175,10 +160,61 @@ public class ContentsAttachmentDao {
 			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
 			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
 			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
 
 			list.add(contentsAttachmentDto);
 		}
 		con.close();
 		return list;
 	}	
+	
+	// 최신순 콘텐츠 7개씩 포스터 출력 (비동기 페이징)
+	public List<ContentsAttachmentDto> selectRecentListByPaging(int p) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select A.contents_no, B.attachment_no, A.contents_title "
+							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+							+ "order by A.contents_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 페이지 카운팅
+	public int countByPaging() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from contents";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
 }
