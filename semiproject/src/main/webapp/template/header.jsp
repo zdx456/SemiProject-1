@@ -43,7 +43,7 @@
 <body>
     <main>
         <header>
-            <div class="logo"><a href="#"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a></div>
             <nav>
                 <ul class="main_menu">
                     <li><a href="<%=request.getContextPath()%>">홈</a></li>
