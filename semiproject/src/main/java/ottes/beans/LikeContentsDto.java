@@ -4,6 +4,12 @@ public class LikeContentsDto {
 	
 	private String clientId;
 	private int contentsNo;
+	private int likeNo;
+	
+	
+	public LikeContentsDto() {
+		super();
+	}
 	public String getClientId() {
 		return clientId;
 	}
@@ -16,12 +22,16 @@ public class LikeContentsDto {
 	public void setContentsNo(int contentsNo) {
 		this.contentsNo = contentsNo;
 	}
-	public LikeContentsDto() {
-		super();
-	}
+
 	@Override
 	public String toString() {
-		return "LikeContentsDto [clientId=" + clientId + ", contentsNo=" + contentsNo + "]";
+		return "LikeContentsDto [clientId=" + clientId + ", contentsNo=" + contentsNo + ", likeNo=" + likeNo + "]";
+	}
+	public int getLikeNo() {
+		return likeNo;
+	}
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
 	}
 	
 }
