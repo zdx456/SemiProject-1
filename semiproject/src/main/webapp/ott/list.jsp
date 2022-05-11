@@ -48,6 +48,8 @@
 <%
 	OttDao ottDao = new OttDao();
 	List<OttDto> list = ottDao.selectList();
+	
+
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
