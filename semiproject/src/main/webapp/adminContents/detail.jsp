@@ -69,7 +69,6 @@
 	
 </style>
 
-
 	<div class="container w800 m30">
 	
 		<div class="row center">
