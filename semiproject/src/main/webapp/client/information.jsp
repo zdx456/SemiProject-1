@@ -12,7 +12,15 @@
 	ClientDto clientDto = clientDao.selectOne(clientId);
 	
 %>    
-    
+     <style>
+	#button{  
+	width:300px;
+	 background: #00ADB5;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    color: #EDC948;}
+	</style>
+ 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <form action="information.kh" method="post">
@@ -32,16 +40,19 @@
 	        <label>이메일</label>
 	        <input type="email" name="clientEmail" autocomplete="off" class="form-input fill input-round" value="<%=clientDto.getClientEmail()%>">	   
 		</div>
-	    <div class="row">
-	        <label>성별</label>
-	        <input type="text" name="clientGender" required class="form-input fill input-round">
+	     <div class="row">
+	        <br>
+	        <input type="radio" name="clientGender" required
+				value="남성">남성
+				<input type="radio" name="clientGender" required
+				value="여성">여성
 	    </div>
 	    <div class="row">
 	        <label>비밀번호 확인</label>
 	        <input type="password" name="clientPw" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
-	        <button type="submit" class="btn btn-primary fill">정보 변경하기</button>
+	    <div class="row center">
+	        <button type="submit" class="form-input fill input-round"  id = button >정보 변경하기</button>        
 	    </div>
 	    
 		<% if(request.getParameter("error") != null){ %>

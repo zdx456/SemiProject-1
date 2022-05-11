@@ -7,7 +7,15 @@
 	boolean type2 = error != null && error.equals("2");
 %>
  
-    
+    <style>
+	#button{  
+	width:300px;
+	height : 35px;
+	 background: #00ADB5;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #EDC948;}
+	</style>
   <jsp:include page="/template/header.jsp"></jsp:include>
 
 <form action="password.kh" method="post">
@@ -20,11 +28,11 @@
 	        <input type="password" name="currentPw" required class="form-input fill input-round">
 	    </div>
 	    <div class="row">
-	        <label>바꿀 비밀번호</label>
+	        <label>변경할 비밀번호</label>
 	        <input type="password" name="changePw" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
-	        <button type="submit" class="btn btn-primary fill">비밀번호 변경하기</button>
+	    <div class="row center">
+	        <button type="submit" id = "button" class="btn btn-primary fill">비밀번호 변경하기</button>
 	    </div>
 	    
 	    <%if(type1){ %>

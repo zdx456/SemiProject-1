@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    	<style>
+	#button{  
+	 background: #00ADB5;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #EDC948;}
+	</style>
         <jsp:include page="/template/header.jsp"></jsp:include>
 
     
@@ -22,7 +29,7 @@
        <div class="row">
 
 
-           <button type="submit" class="btn btn-primary fill">아이디 찾기</button>
+           <button type="submit" id= "button"  class="form-input fill input-round">아이디 찾기</button>
 
        </div>
       <%if(request.getParameter("error") != null){ %>

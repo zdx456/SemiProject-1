@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <jsp:include page="/template/header.jsp"></jsp:include>
-    
+   <style>
+	#button{  
+	width:300px;
+	 background: #00ADB5;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    color: #EDC948;}
+	</style>
  <form action="login.kh" method="post">
     <div class="container w400 m30">
         <div class="row center">
@@ -14,8 +21,11 @@
         
             <input type="password" name="clientPw" required placeholder="비밀번호" class="form-input fill input-round">
         </div>
-        <div class="row">
-            <input type="submit" value="로그인" class="btn btn-primary fill">
+        <div class="row center">
+            <input type="submit" value="로그인" id="button" class="form-input full input-round">
+        </div>
+        <div class="row center">
+            <input type="submit" value="회원가입" id="button" class="form-input full input-round" onclick="location.href = 'join.jsp';">
         </div>
         <div class="row center">
             <a href="find_id.jsp" class="link">아이디가 기억나지 않아요</a>
