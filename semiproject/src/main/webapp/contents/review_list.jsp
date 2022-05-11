@@ -12,7 +12,7 @@
 	border: transparent;
 	border-radius : 10px;
 	}
-	
+	 
 
 	
     .star-select{
