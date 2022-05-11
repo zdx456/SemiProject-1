@@ -25,14 +25,17 @@ public class LikeContentsInsertServlet extends HttpServlet{
 		try {
 			LikeContentsDto likeContentsDto = new LikeContentsDto();
 			likeContentsDto.setContentsNo(Integer.parseInt(req.getParameter("contentsNo")));
-			
 			String clientId =  (String) req.getSession().getAttribute("login");
 			likeContentsDto.setClientId(clientId);
 			
 			LikeContentsDao likeContentsDao = new LikeContentsDao();
+			int likeNo = likeContentsDao.getSequence();
+			likeContentsDto.setLikeNo(likeNo);
 			
 			boolean like;
+			
 			int contentsNo = Integer.parseInt(req.getParameter("contentsNo")); 
+			
 			if(likeContentsDao.find(clientId, contentsNo) != null) {
 				likeContentsDao.delete(clientId);
 				like = false;

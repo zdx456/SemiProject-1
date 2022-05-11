@@ -41,6 +41,7 @@ boolean isLogin = clientId != null;
 
 //좋아요 출력할 likeContents 불러오기
 LikeContentsDao likeContentsDao = new LikeContentsDao();
+
 LikeContentsDto likecontentsDto = likeContentsDao.find(clientId, contentsNo);//find는 좋아요 이력을 찾는 기능(단일조회와 비슷)
 
 // ott 정보 불러오기
@@ -71,7 +72,6 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 }
 #r1 {
 	position : absolute;
-	right : 25%;
 }	
 .price {
 	color : white;
@@ -153,7 +153,7 @@ $(function () {
 
 	<div class="row float-container m50 center">
 
-		<div class="float-left layer-2">
+		<div class="float-left layer-4">
 
 			<label><h2><%=contentsDto.getContentsTitle()%></h2></label> <br>
 			<img
@@ -248,12 +248,15 @@ $(function () {
 		<%
 		if (isLogin) {
 		%>
+			<div class="row center">
 			<input type="hidden" name="contentsNo"
 				value="<%=contentsDto.getContentsNo()%>"> <input
 				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
 				
 			<textarea name="reviewContent" class="review" rows="4" cols="80"
 				placeholder="리뷰 작성하기"></textarea>
+				</div>
+				
 				<br>
 				<br>
 			<div id="r1">
@@ -264,7 +267,7 @@ $(function () {
 				<option value="4" class="review">★★★★</option>
 				<option value="5" class="review">★★★★★</option>
 			</select> 
-			<input type="submit" class="review btn btn-yellow" value="리뷰 등록">
+			<input type="submit" class="review btn btn-yellow fill" value="리뷰 등록">
 			</div>
 			</div>
 			</div>
@@ -276,7 +279,7 @@ $(function () {
 		<textarea name="reviewContent"  class="review" rows="4" cols="80"
 			placeholder="로그인 후 댓글 작성 가능" disabled></textarea>
 		<div id="r1">
-		 <input type="submit" class="review btn btn-yellow" value="리뷰 등록">
+		 <input type="submit" class="review btn btn-yellow fill" value="리뷰 등록">
 		 </div>
 		<%
 		}
