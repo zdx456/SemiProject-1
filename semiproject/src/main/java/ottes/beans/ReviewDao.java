@@ -173,7 +173,7 @@ public class ReviewDao {
 		int begin = end -(s-1);
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select * from (select rownum rn, TMP.* from( "
-				+ " select * from review where review_writer = ?"
+				+ " select * from review where review_writer = ? order by review_time desc"
 				+ " )"
 				+ " TMP)where rn between ? and ? ";
 		PreparedStatement ps = con.prepareStatement(sql);
