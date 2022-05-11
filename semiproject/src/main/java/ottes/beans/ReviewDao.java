@@ -111,7 +111,7 @@ public class ReviewDao {
 	public boolean update(ReviewDto reviewDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update review set review_content = ?, review_score = ? where review_no = ?";
+		String sql = "update review set review_content = ?, review_score = ?, review_time = sysdate where review_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, reviewDto.getReviewContent());
 		ps.setInt(2, reviewDto.getReviewScore());
@@ -141,9 +141,9 @@ public class ReviewDao {
 		int begin = end -(s-1);
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select * from (select rownum rn, TMP.* from( "
-				+ " select * from review where contents_no = ?"
+				+ " select * from review where contents_no = ?  order by review_time desc"
 				+ " )"
-				+ " TMP)where rn between ? and ? ";
+				+ " TMP)where rn between ? and ?" ;
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, contentsNo);
 		ps.setInt(2, begin);
@@ -231,4 +231,4 @@ public class ReviewDao {
 
 	}	
 
-}
+

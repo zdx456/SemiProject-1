@@ -23,6 +23,20 @@
          .ottLogo{
          	margin:10px;
          }
+         .btn-mint.btn-size{
+         padding-top: 5px;
+         padding-bottom:  5px;
+         padding-left: 40px;
+         padding-right: 40px;
+         font-size: 17px;
+         }
+         .btn-black.btn-link{
+         padding-top: 5px;
+         padding-bottom:  5px;
+         padding-left: 40px;
+         padding-right: 40px;
+         font-size: 17px;
+         }
      </style>
     
      <!-- jquery cdn -->
@@ -163,7 +177,7 @@ List<ClientOttDto> list = clientOttDao.selectList(clientId);
 
 
 	</div>
-	<br><br><br><br>
+	<br><br><br><br><br><br><br>
 	<div class="row center">
 		<input type="checkbox" id="selectAll">
 		<label for="selectAll">
@@ -171,10 +185,10 @@ List<ClientOttDto> list = clientOttDao.selectList(clientId);
 		</label>
 	</div>
 	<div class="row center">
-		<button type="submit" class="btn-mint">등록</button>
+		<button type="submit" class="btn-mint btn-size">등록</button>
 	</div>
 	<div class="row center">
-		<a href="#" class="btn-black">스킵</a>
+		<a href="#" class="btn-black btn-link">스킵</a>
 	</div>
 </div>
 
