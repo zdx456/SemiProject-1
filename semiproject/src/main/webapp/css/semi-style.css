@@ -319,6 +319,18 @@ ul.menu a {
     color: #00ADB5;
 }
 
+.btn{
+  border: 2px solid #929292;
+  border-radius: 10px;
+  padding: 0.5em;
+
+  color: #929292;
+  background-color: transparent;
+
+  cursor: pointer;
+  font:inherit;
+}
+
 /*
     입력창이 필요한 경우는 크게 두 종류이다.
     (1) 회원가입, 로그인처럼 세로 배치가 이루어지는 경우
