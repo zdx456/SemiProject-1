@@ -73,6 +73,10 @@ padding-bottom: 0.5em;
 justify-content: center;
   align-items: center;
 }
+
+.form-input:focus {
+    border-color: #EDC948;
+}
 </style>
 
 <%
@@ -112,7 +116,7 @@ $(function(){
 		$(".page").eq(index).show();
 	
 		// 퍼센트 이동하는 사이즈
-		var percent = (index+1) * 100 / 2;
+		var percent = (index+1) * 100 / 3;
         $(".percent").css("width", percent+"%");
     }
 });
@@ -188,55 +192,69 @@ window.addEventListener("load", function(){
 
 </script>
 
-<div class="container w800">
+<div class="container w500">
 <form action="join.kh" method="post">
 
 <!--  페이지 상단 퍼센트 바 -->
-    <div class="container w500 m30">
-			<h1>회원가입</h1>
-        <div class="row">
+    <div class="container w400 m30">
+			<label class="center"><h2>회원가입</h2></label>
+        <div class="row center ">
             <div class="percent"></div>
         </div>
     </div>
     
 <!--  기본 정보 등록 : 1페이지 -->
-	<div class="container w500 m30 page">
+	<div class="container w400 m50 page">
 	
-		<table>
-			<tr>
-				<th>아이디</th>
-				<td><input type="text"  class="join" name="clientId" required
-					placeholder="아이디"></td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" class="join"  name="clientPw" required
-					placeholder="비밀번호"></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td><input type="text" class="join"  name="clientNick" required
-					placeholder="닉네임"></td>
-			</tr>
-			<tr>
-				<th>생년월일</th>
-				<td><input type="date" class="join"  name="clientBirth" required
-					placeholder="생일"></td>
-			</tr>
-			<tr>
-				<th>성별</th>
-				<td><input type="text" class="join"  name="clientGender" required
-					placeholder="남성/여성"></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td><input type="email" class="join" name="clientEmail" required
-					placeholder="이메일"></td>
-			</tr>
-
-	
-
-		</table>
+		<div class="row left" >
+			<label>아이디</label>
+			<div class="row">
+					<input type="text"  class="form form-input input-round fill " name="clientId" required
+					placeholder="아이디">
+			</div>
+		</div>
+			
+		<div class="row left">
+			<label>비밀번호</label>
+			<div class="row">
+				<input type="password" class="form form-input input-round fill"  name="clientPw" required
+					placeholder="비밀번호">
+			</div>
+		</div>
+		
+		<div class="row left">
+			<label>닉네임</label>
+			<div class="row">
+				<input type="password" class="form form-input input-round fill"  name="clientPw" required
+					placeholder="비밀번호">
+			</div>
+		</div>
+		
+		<div class="row left">
+			<label>생년월일</label>
+			<div class="row">
+				<input type="date" class="form form-input input-round fill"  name="clientBirth" required
+					placeholder="생년월일">
+			</div>
+		</div>
+		
+		<div class="row left">
+			<label>성별</label>
+			<div class="row">
+				<input type="text" class="form form-input input-round fill"  name="clientGender" required
+					placeholder="남성/여성">
+			</div>
+		</div>
+			
+		<div class="row left">
+			<label>이메일</label>
+			<div class="row">
+				<input type="email" class="form form-input input-round fill" name="clientEmail" required
+					placeholder="이메일">
+			</div>
+		</div>
+			
+			
 		
 		<div class="row center">
 			<button type="button" class="btn btn-prev">이전</button>
@@ -254,10 +272,10 @@ window.addEventListener("load", function(){
  					선호하는 OTT를 선택하세요.
  				</label>
  			</div>
+ 			<br>
  			
 	<div class="container">
 		<div class="row center">
-			<h2>구독중인 서비스를 선택 하세요</h2><br><br>
 		</div>
 		<div class="row flex-container centerFlex">
 
@@ -271,7 +289,7 @@ window.addEventListener("load", function(){
 			<label for="ottCheck<%=ottAttachmentDto.getOttNo()%>"
 				class="ottLogo"> 
 				<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
-				 class="changing img img-round ottSize">
+				 class="changing img img-round" width="100px" height="100px">
 			</label>
 			<%
 			}
@@ -284,10 +302,7 @@ window.addEventListener("load", function(){
 			<label for="selectAll">전체선택 </label>
 		</div>
 		<div class="row center">
-			<button type="submit" class="btn-mint btn-size">등록</button>
-		</div>
-		<div class="row center">
-			<a href="#" class="btn-black btn-link">스킵</a>
+			<a href="#" class="btn-black btn-link">SKIP</a>
 		</div>
 	</div>
 

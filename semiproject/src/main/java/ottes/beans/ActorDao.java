@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Arrays;
+
 public class ActorDao {
 	
 	// 배우 생성 - 시퀀스
@@ -179,6 +181,35 @@ public class ActorDao {
 		
 		return actorDto;
 		
+	}
+	
+	// 상세 페이지에서 사용할 배우 검색 메소드
+	public List<ActorDto> selectList(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from actor A"
+				+ "    left outer join contents_actor C on C.actor_no = A.actor_no where contents_no=? order by contents_no asc";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		ActorDto actorDto;
+		List<ActorDto> list = new ArrayList<ActorDto>();
+		
+		while(rs.next()) {
+			actorDto = new ActorDto();
+			actorDto.setActorName1(rs.getString("actor_name1"));
+			actorDto.setActorName2(rs.getString("actor_name2"));
+			actorDto.setActorName3(rs.getString("actor_name3"));
+			actorDto.setActorName4(rs.getString("actor_name4"));
+			actorDto.setActorNo(rs.getInt("actor_no"));
+			
+			list.add(actorDto);
+
+		}
+		con.close();
+		return list;
 	}
 	
 	//contents 번호로 actor 테이블 삭제하기
