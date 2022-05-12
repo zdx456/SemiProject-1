@@ -13,43 +13,123 @@
 %>    
     
 <jsp:include page="/template/header.jsp"></jsp:include>
+    <style>
+        .title {
+            color: #00ADB5;
+            text-align: center;
+            margin: 50px;
+            margin-bottom: 50px;
+        }
 
-	<table border="1" width="400">
-		<tr>
-			<th width="30%">아이디</th>
-			<td><%=clientId%></td>
-		</tr>
-		<tr>
-			<th>닉네임</th>
-			<td><%=clientDto.getClientNick()%></td>
-		</tr>
-		<tr>
-			<th>성별</th>
-			<td><%=clientDto.getClientGender()%></td>
-		</tr>
-		<tr>
-			<th>등급</th>
-			<td><%=clientDto.getClientGrade()%></td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td><%=clientDto.getClientEmail()%></td>
-		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td><%=clientDto.getClientBirth()%></td>
-		</tr>
-		<tr>
-			<th>마지막 접속일</th>
-			<td><%=clientDto.getClientJoindate()%></td>
-		</tr>
-	</table>
-	<div class="row center">
-		<a href="client_list.jsp" class="link link-btn fill">목록으로</a>
-		<a href="client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="link link-btn fill">회원 일반 정보 수정</a>
-		<a href="client_chgPw.jsp?clientId=<%=clientDto.getClientId()%>" class="link link-btn fill">회원 비밀번호 수정</a>
-		<a href="client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="link link-btn fill">회원 강제 탈퇴</a>
-	</div>
+        .btn-mint {
+            background: #00ADB5;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            color: #EDC948;
+            display: block;
+        }
+
+        .btn-black {
+            background: #222831;
+            border: 2px solid #EDC948;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            color: #EDC948;
+            
+        }
+
+        .btn-yellow {
+            /* yellow */
+            background: #EDC948;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            border-radius: 10px;
+            color: #00ADB5;
+        }
+
+        .btn:hover {
+            background: #EDC948;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            color: #00ADB5;
+            display: block;
+        }
+        
+        .btn-p3 {
+		padding-left: 2em;
+		padding-right: 2em;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	    }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table th,
+        table td {
+            width: 50%;
+        }
+
+        table,
+        table th,
+        table td,
+        table tr {
+            border-bottom: 1px solid #bcbcbc;
+        }
+
+        .div-container {
+            margin-left: 30%;
+            margin-right: 30%;
+        }
+    </style>
+    <div class="row center div-container">
+        <!-- style="display: flex; flex-direction: column; -->
+        <h1 class="title">회원 상세 정보</h1>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>아이디</th>
+                    <td><%=clientId%></td>
+                </tr>
+                <tr>
+                    <th>닉네임</th>
+                    <td><%=clientDto.getClientNick()%></td>
+                </tr>
+                <tr>
+                    <th>성별</th>
+                    <td><%=clientDto.getClientGender()%></td>
+                </tr>
+                <tr>
+                    <th>등급</th>
+                    <td><%=clientDto.getClientGrade()%></td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td><%=clientDto.getClientEmail()%></td>
+                </tr>
+                <tr>
+                    <th>생년월일</th>
+                    <td><%=clientDto.getClientBirth()%></td>
+                </tr>
+                <tr>
+                    <th>마지막 접속일</th>
+                    <td><%=clientDto.getClientJoindate()%></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row center">
+            <a href="client_list.jsp" class="btn-mint btn btn-p3 fill">목록으로</a>
+        </div>
+        <div class="row center">
+            <a href="client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-mint btn btn-p3 fill">정보 수정</a>
+        </div>
+        <div class="row center">
+            <a href="client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-mint btn btn-p3 fill">강제 탈퇴</a>
+        </div>
+    </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
 
