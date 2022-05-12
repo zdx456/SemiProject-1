@@ -45,7 +45,7 @@ public class LikeContentsInsertServlet extends HttpServlet{
 				like = true;
 			}
 			
-			int count = likeContentsDao.count();
+			int count = likeContentsDao.count(contentsNo);
 			
 			//사용자에게 JSON 형태로 like와 count를 전송해서 처리하도록 안내
 			Map<String, Object> data = new HashMap<>();
