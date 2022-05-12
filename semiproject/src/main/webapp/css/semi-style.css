@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-
 * {
     box-sizing: border-box;
+    color: #ffffff;    
 }
+
 .container {
     margin:auto;
 }
@@ -84,50 +85,10 @@
 }
 
 
-.main {
-    width:1000px;
-    margin:auto;
-    background-color: #222831;
-    color: white;
-
-    text-align: center;
-}
-.header{
-    padding: 12px;
-    text-align: left;
-}
-.nav {
-    padding-left: 12px;
-    height: 30px;
-    
-}
-.footer {
-    min-height: 120px;
-    padding: 20px;
-}
-.article {
-    margin: 10px;
-    border-top: 3px solid yellow;
-    border-bottom: 3px solid yellow;
-}
-
-
 /* 
 @author : 이기주 
 메뉴바 속성입니다. 
 */
-
-.logo{
-    /* Ottes */
-    font-style: normal ;
-    font-weight: 600 ;
-    font-size: 40px ;
-               
-    color: #00ADB5;
-
-    text-decoration: none;
-    
-}
 
 .home-menu{
     font-style: normal;

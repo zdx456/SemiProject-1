@@ -10,8 +10,7 @@
 /*  전체 lay-out 스타일 */
 
 * {
-    text-decoration: none;
-    color: #ffffff;
+    text-decoration: none;   
 }
 
 .hidden {
@@ -389,4 +388,270 @@ footer p {
     padding: 20px 0 0 0;
     color: #929292;
     font-size: 0.8em;
+}
+
+/* 고객센터 */
+
+.notice_bg {
+	position: absolute;
+    width: 100%;
+    height: 430px;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+	background-image: url(../image/notice_bg.jpg);
+	background-size: cover;
+	z-index: -1;
+}
+
+.faq_example  {
+	margin-top : 20px;
+	font-weight: bolder;
+}
+
+.faq_example a {
+	color: #EDC948;
+}
+
+.inquiry_write {
+	position: absolute;
+	top: 170px;
+    left: 950px;
+ 
+}
+
+.inquiry_write div {
+	background-color: rgba(255, 255, 255, .2);
+	width: 200px;
+	height: 50px;
+	margin: 35px 0;	
+}
+
+.inquiry_write div:hover {
+	background-color: rgba(255, 255, 255, .5);
+}
+
+.inquiry_write p {
+	margin-bottom: 15px;
+}
+
+.inquiry_write p:first-child {
+	font-weight: bolder;  
+}
+
+.inquiry_write a {
+	font-weight: bolder;   	
+	display: block;
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	color: #ffffff;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+.notice_sort form {
+	display: inline-block;
+}
+
+.notice_sort form::after {
+	content: "│";
+}
+
+.notice_sort form:last-child::after {
+	content: "";
+}
+
+.notice_sort input[type="submit"] {
+	background: none;
+	border: none;
+	font-size: 1.1em;
+	font-weight: bolder;
+	padding: 20px 0;
+	cursor: pointer;
+}
+
+.notice_sort input[type="submit"]:hover {
+	color: #EDC948;
+}
+
+.notice {
+	margin-bottom: 30px;
+}
+
+.notice > table {
+	width: 100%;
+}
+
+.notice > table > thead > tr > th,
+.notice > table > tbody > tr > td {
+    border-bottom: 1px solid rgba(146, 146, 146, 0.2);
+    height: 50px;
+    line-height: 50px;
+}
+
+.notice > table > thead {
+	background-color: rgba(0, 0, 0, 0.3);
+	font-weight: bolder;
+	font-size: 1.1em;
+}
+
+.notice > table > thead > tr > th:nth-child(1),
+.notice > table > tbody > tr > td:nth-child(1) {
+	font-weight: bolder;
+	width: 8%;
+}
+
+.notice > table > tbody > tr:hover {
+	background-color: rgba(146, 146, 146, 0.2);
+}
+
+.notice > table > thead > tr > th:nth-child(2) > a, 
+.notice > table > tbody > tr > td a {
+	display: block;
+	padding-left: 50px;	
+	width: 1300px;	
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.notice > table > thead > tr > th:nth-child(3) {
+	width: 12%;
+}
+
+.notice > table > tbody > tr > td:nth-child(3) {
+	color: rgb(146, 146, 146);
+}
+
+.notice_detail > table > thead > tr > th {
+    height: 80px;
+    line-height: 80px;
+}
+
+.notice_detail > table > thead > tr > th:nth-child(3) {
+	color: rgb(146, 146, 146);
+	font-weight: normal;
+}
+
+.notice_detail > table > tbody > tr:first-child > td {
+	padding: 30px 80px;
+	line-height: 40px;
+}
+
+.notice_detail > table > tbody > tr:first-child:hover {
+	background-color: transparent;
+}
+
+.notice_detail pre { 
+	white-space: pre-wrap;
+	color: rgba(255, 255, 255, .8);
+}
+
+.table_active {
+	color: #EDC948;
+	font-weight: bolder;
+}
+
+.inquiry h2 {
+    font-weight: bolder;
+    font-size: 2em;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(146, 146, 146, .5);
+}
+
+.inquiry form {
+	margin: 30px 0;
+}
+
+.inquiry input[type=radio] {
+	display: none;
+}
+
+.inquiry input[type=radio]+label {
+    position: relative;
+    display: block;
+    padding-left: 28px;
+    font-size: 0.9em;
+    height: 30px;
+    line-height: 30px;
+}
+
+.inquiry input[type=radio]+label::before {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    content: "";
+    border-radius: 50%;
+    background-color: rgba(237, 201, 72, .2);
+}
+
+.inquiry input[type=radio]+label::after {
+	display: none;
+	position: absolute;
+    content: "";
+    top: 11px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #EDC948;
+}
+
+.inquiry input[type=radio]:checked+label::after {
+    display: inline-block;
+}
+
+.inquiry input, .inquiry textarea {
+	background-color: rgba(0, 0, 0, .1);
+	border: 1px solid rgba(146, 146, 146, .5);
+	border-radius: 10px;
+	padding: 10px 15px;
+	font-size: 0.9em;
+	line-height: 20px;
+}
+
+.inquiry input:focus, .inquiry textarea:focus {
+	border: 1px solid #EDC948;
+}
+
+.inquiry .input-inquiry {
+	border-top: 1px solid rgba(146, 146, 146, .5);
+	margin: 30px 0;
+}
+
+label[for=input_inquiry_content], label[for=input_inquiry_title] {
+    display: block;
+    font-size: 1.1em;
+	font-weight: bolder;
+}
+
+label[for=input_inquiry_title] {
+    height: 70px;
+    line-height: 90px;		
+}
+
+label[for=input_inquiry_content] {
+	height: 50px;
+    line-height: 40px;	
+}
+
+.inquiry span {
+	color: #FF003A;
+}
+
+.inquiry .btn-mint {
+    height: 50px;
+    line-height: 50px;
+    margin: 40px 0 30px 0;
+    font-weight: bolder;
+    font-size: 1.1em;
+    background-color: rgba(0, 173, 181, .8);
+}
+
+.inquiry .btn-mint:hover {
+	background-color: #00ADB5;
 }

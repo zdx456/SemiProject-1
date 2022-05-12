@@ -10,6 +10,16 @@ public class NoticeDto {
 	private String noticeContent;
 	private Date noticeDate;
 	
+	// 이전글
+	private int noticeNoPrev;
+	private String noticeTitlePrev;
+	private Date noticeDatePrev;
+	
+	// 다음글
+	private int noticeNoNext;
+	private String noticeTitleNext;
+	private Date noticeDateNext;
+	
 	public NoticeDto() {
 		super();
 	}
@@ -60,6 +70,54 @@ public class NoticeDto {
 
 	public void setNoticeDate(Date noticeDate) {
 		this.noticeDate = noticeDate;
+	}
+
+	public int getNoticeNoPrev() {
+		return noticeNoPrev;
+	}
+
+	public void setNoticeNoPrev(int noticeNoPrev) {
+		this.noticeNoPrev = noticeNoPrev;
+	}	
+
+	public String getNoticeTitlePrev() {
+		return noticeTitlePrev;
+	}
+
+	public void setNoticeTitlePrev(String noticeTitlePrev) {
+		this.noticeTitlePrev = noticeTitlePrev;
+	}
+
+	public Date getNoticeDatePrev() {
+		return noticeDatePrev;
+	}
+
+	public void setNoticeDatePrev(Date noticeDatePrev) {
+		this.noticeDatePrev = noticeDatePrev;
+	}
+
+	public int getNoticeNoNext() {
+		return noticeNoNext;
+	}
+
+	public void setNoticeNoNext(int noticeNoNext) {
+		this.noticeNoNext = noticeNoNext;
+	}	
+	
+	public String getNoticeTitleNext() {
+		return noticeTitleNext;
+	}
+
+	public void setNoticeTitleNext(String noticeTitleNext) {
+		this.noticeTitleNext = noticeTitleNext;
+	}
+
+	public Date getNoticeDateNext() {
+		return noticeDateNext;
+	}
+
+	public void setNoticeDateNext(Date noticeDateNext) {
+		this.noticeDateNext = noticeDateNext;
 	}
 
 	@Override
