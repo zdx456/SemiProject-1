@@ -473,7 +473,7 @@
 		</div>
 		
 		<div class="row m10">
-			<button type="submit" class="fill btn-black btn-list fontSizeUp">콘텐츠 등록하기</button>
+			<button type="submit" class="fill btn-black btn-list fontSizeUp">컨텐츠 등록하기</button>
 			
 		</div>
 		

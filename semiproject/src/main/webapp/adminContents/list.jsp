@@ -281,7 +281,7 @@
 			
 				<div class="layer-2">
 					<div class="layer-2">
-						<a href="insert.jsp" class="btn-black btn-p3">콘텐츠 등록하기</a>
+						<a href="insert.jsp" class="btn-black btn-p3">컨텐츠 등록하기</a>
 					</div>
 					<div class="layer-2">					
 						<a href="list.jsp" class="btn-black btn-p3">전체 목록</a>
