@@ -87,7 +87,7 @@
 	
 	// 사망연산자
 	// request.getParameter("contentsNo")가 null이 아니라면  Integer.valueOf(request.getParameter("contentsNo")) 를 리턴, 아니면 -1로 리턴
-	Integer contentsNo = request.getParameter("contentsNo") != null ? Integer.valueOf(request.getParameter("contentsNo")) : -1;
+	int contentsNo = request.getParameter("contentsNo") != null ? Integer.valueOf(request.getParameter("contentsNo")) : -1;
 	/* String contentsNoParam = request.getParameter("contentsNo");
 	Integer contentsNo = 0;
 	
@@ -99,6 +99,7 @@
 	
 	//목록에서 작성 하기 위한 작성자 세션!
 	String clientId = (String)session.getAttribute("login");
+	boolean islogin = clientId != null && !clientId.equals("");
 
 	boolean searchWriter = reviewWriter != null && !reviewWriter.equals("");
 	 // contentsNo가 없고 reviewWriter만 있으면
@@ -195,16 +196,16 @@
 		<h2>리뷰 목록</h2>
 		<hr>
 	</div>
-	<%if(!searchWriter){ //내가 쓴 글에서 오면 등록은 불가능하게 만듬%>
+	<%if(!searchWriter && islogin){ //내가 쓴 글, 로그인이 안되면  등록은 불가능하게 만듬%>
 		<form action="review_insert.svt" method="post">
 		<div class="row center review">
 		<br>
 			<h4>리뷰등록</h4><br><br>
 			<input type="hidden" name="contentsNo" value="<%=contentsNo%>" > <!-- contentsNo 파라미터 -->
 			<textarea rows="3" cols="50" class=" reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
-			<label class="score-select" data-max="5"></label><br><br>
+			<label class="score-select" data-max="5" data-rate="3"></label><br><br>
 		</div>
-		<div class="row center"><button type="submit" class="btn-mint btn-insert ">등록</button></div>
+		<div class="row center"><button type="submit" class="btn-yellow btn-insert ">등록</button></div>
 		</form>
 	<%} %>
 	<div class="row review">
