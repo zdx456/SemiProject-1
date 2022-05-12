@@ -34,6 +34,7 @@ ActorDto actorDto = actorDao.selectName(contentsNo);
 ReviewDao reviewDao = new ReviewDao();
 List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 
+
 // 현재 로그인한 사용자가 댓글 작성자인지 확인하는 코드
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
 String clientId = (String) session.getAttribute("login");
@@ -105,7 +106,8 @@ main{
     vertical-align: middle;
 }
 .review {
-	color: grey;
+	color: #00ADB5;
+	paddint : 0.5em;
 	background-color: #313842;
 	border: transparent;
 	border-radius : 10px;
@@ -154,6 +156,18 @@ textarea::placeholder {
 	color : #00ADB5;
 }
 
+.flex-container {
+	background: rgb(54,60,70);
+	background: linear-gradient(180deg, rgba(54,60,70,0.7936216723017332) 1%, rgba(98,105,113,0.4630894594165791) 74%);
+	padding : 1em;
+	margin : 20px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width : 100%;
+	border-radius: 20px;
+	
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -246,8 +260,8 @@ $(function () {
 
 <main>
 
-	
-	<div id="box1" class="content">
+	<div class="row flex-container center">
+	<div id="box1" class="content center">
 			
 			<img
 				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
@@ -274,6 +288,28 @@ $(function () {
 						</td>
 					</tr>
 
+						<tr>
+						<td>
+						<span>
+						<%if(reviewDao.avg(contentsNo) == 1){ %>
+						<label class="score-show" data-max="5" data-rate="1"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 2){ %>
+						<label class="score-show" data-max="5" data-rate="2"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 3){ %>
+						<label class="score-show" data-max="5" data-rate="3"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 4){ %>
+						<label class="score-show" data-max="5" data-rate="4"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 5){ %>
+						<label class="score-show" data-max="5" data-rate="5"></label>
+						<%} %>
+						</span>
+						</td>
+					</tr>
+
 					<tr>
 						<td> <span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
 						<% if (likecontentsDto != null) { %> 
@@ -283,6 +319,7 @@ $(function () {
 						<% } %>
 						</td>
 					</tr>
+				
 				</thead>
 			</table>
 		
@@ -342,8 +379,9 @@ $(function () {
 
 			</table>
 		
-		
 	</div>
+	
+	
 	<div id="box3" class="right m20">
 		
 		<!-- 댓글 작성 영역 -->
@@ -422,7 +460,7 @@ $(function () {
 		
 	</div>
 	
-	
+	</div>
 </main>
 
 
