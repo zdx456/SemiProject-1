@@ -1,4 +1,6 @@
 
+<%@page import="ottes.beans.LikeGenreDto"%>
+<%@page import="ottes.beans.LikeGenreDao"%>
 <%@page import="ottes.beans.ClientDto"%>
 <%@page import="ottes.beans.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,6 +16,9 @@
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.selectOne(clientId);
 	
+	// like genre table 추가
+	LikeGenreDao likeGenreDao = new LikeGenreDao();
+	LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
 %>    
  
 <%-- 출력 --%>
@@ -46,6 +51,10 @@
 	<tr>
 		<th>가입일</th>
 		<td><%=clientDto.getClientJoindate()%></td>
+	</tr>
+	<tr>
+		<th>선호하는 장르</th>
+		<td><%=likeGenreDto.getGenreName() %></td>
 	</tr>
 </table>
 

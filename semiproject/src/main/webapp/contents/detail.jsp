@@ -64,15 +64,59 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 %>
 <style>
 
+
+main{
+	margin: 0 auto; /* auto 알아서 중앙으로 맞춰줌 */
+	padding: 30px 0 30px 0; 
+}
+
+#box0 {
+ 	background-color : white;
+ 	width: 700px;
+	height: 120px;
+ 	
+}
+
+#box1{
+	
+	display: inline-table;
+	width: 300px;
+	height: 120px;
+	float: left;
+	padding: 10px 0 50px 0px; 
+}
+#box2{
+	display: inline-table;
+	width: 400px;
+	height: 120px;
+	float: left;
+	padding: 10px 0 30px 0; 
+}
+
+#box3{
+	display: inline-table;
+	width: 500px;
+	height: 120px;
+	float: left;
+	padding: 0 0 0 40px; 
+}
+
+.content {
+    vertical-align: middle;
+}
 .review {
 	color: grey;
 	background-color: #313842;
 	border: transparent;
 	border-radius : 10px;
 }
-#r1 {
-	position : absolute;
-}	
+
+.contentsTitle {
+	color : white;
+	font-size : 18px;
+	font-weight : bold;
+}
+
 .price {
 	color : white;
 	font-size : 13px;
@@ -82,8 +126,10 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 	font-size : 15px;	
 }
 
-.btn {
+.button {
 	padding: 0.3em;
+	font-size : 14px;
+	border-radius: 30px;
 
 }
 .review.review-score {
@@ -97,6 +143,10 @@ AttachmentDto attachmentDto = attachmentDao.selectAttachment(contentsNo);
 .like {
 	border-color: red;
 	color: red;
+}
+
+.img.img-logo {
+    border-radius: 10px;
 }
 
 textarea::placeholder {
@@ -151,23 +201,24 @@ $(function () {
 
 	<jsp:include page="/template/header.jsp"></jsp:include>
 
-	<div class="row float-container m50 center">
 
-		<div class="float-left layer-4">
+<main>
 
-			<label><h2><%=contentsDto.getContentsTitle()%></h2></label> <br>
+	
+	<div id="box1" class="content">
+			
 			<img
 				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
-				width="180" height="180" alt="포스터">
+				width="200" height="250" alt="포스터">
 
 
-			<table class="table center">
+			<table class="table center ">
 				<thead>
 					<tr>
 						<td>
 						<%for(OttAttachmentDto ottAttachmentDto : list) { %>
 						<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
-				width="40" height="40" alt="ott">
+				width="40" height="40" class="img img-logo" alt="ott">
 						<%} %>
 						</td>
 					
@@ -191,19 +242,20 @@ $(function () {
 					</tr>
 				</thead>
 			</table>
+		
+	</div>
+	
+	<div id="box2" class="m0 content">
+			
+			<label class="contentsTitle">
+			<%=contentsDto.getContentsTitle()%>
+			</label>
+		
+		<table class="table m10 review content ">
 
-		</div>
-
-		<div class="float-left layer-4">
-
-			<table class="table m50 review content">
 				<tr>
-				<tr>
-					<td>제목 : <%=contentsDto.getContentsTitle()%>
-					</td>
-				</tr>
-				<tr>
-					<td>등급 : <%=contentsDto.getContentsGrade()%>
+					<td >등급 : 
+					<%=contentsDto.getContentsGrade()%>
 					</td>
 				</tr>
 
@@ -234,71 +286,59 @@ $(function () {
 				</tr>
 
 			</table>
-
-		</div>
-
-
+		
+		
+	</div>
+	<div id="box3" class="right m20">
+		
 		<!-- 댓글 작성 영역 -->
 	
 		<form action="review_insert.svt" method="post">
-			<div class="container">
 
-			<div class="row center">
 
 		<%
 		if (isLogin) {
 		%>
-			<div class="row center">
 			<input type="hidden" name="contentsNo"
 				value="<%=contentsDto.getContentsNo()%>"> <input
 				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
 				
-			<textarea name="reviewContent" class="review" rows="4" cols="80"
+			<textarea name="reviewContent" class="review" rows="4" cols="65"
 				placeholder="리뷰 작성하기"></textarea>
-				</div>
 				
-				<br>
-				<br>
-			<div id="r1">
-			<select name="reviewScore" class="review review-score" id="rb2">
+			<br>
+				
+			<select name="reviewScore" class="review review-score" >
 				<option value="1" class="review">★</option>
 				<option value="2" class="review">★★</option>
 				<option value="3" class="review">★★★</option>
 				<option value="4" class="review">★★★★</option>
 				<option value="5" class="review">★★★★★</option>
 			</select> 
-			<input type="submit" class="review btn btn-yellow fill" value="리뷰 등록">
-			</div>
-			</div>
-			</div>
+			<input type="submit" class="btn-yellow button" value="리뷰 등록">
 		</form>
 	
 	
-		<div class="row" >
 		<% } else { %>
-		<textarea name="reviewContent"  class="review" rows="4" cols="80"
+		<textarea name="reviewContent"  class="review" rows="4" cols="65"
 			placeholder="로그인 후 댓글 작성 가능" disabled></textarea>
-		<div id="r1">
-		 <input type="submit" class="review btn btn-yellow fill" value="리뷰 등록">
-		 </div>
+		 <input type="submit" class="btn-yellow button" value="리뷰 등록">
 		<%
 		}
 		%>
-		</div>
-	</div>
-	
+
 	
 		<!--  댓글 목록 영역 -->
-
-		<br> <br>
-		<table class="table review review-list w200">
+		
+			<br> <br>
+		<table class="table review review-list ">
 
 			<%
 			for (ReviewDto reviewDto : reviewList) {
 			%>
 
 			<tr>
-				<th width="20%"><%=reviewDto.getReviewWriter()%></th>
+				<th width="10%"><%=reviewDto.getReviewWriter()%></th>
 				<td width="20%"><%=reviewDto.getReviewTime()%></td>
 				<td width="30%">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
@@ -318,7 +358,7 @@ $(function () {
 					reviewScore = reviewScore.replaceAll("5", "★★★★★");
 				}
 				%>
-				<td width="10%" class="review review-score"><%=reviewScore%></td>
+				<td width="5%" class="review review-score"><%=reviewScore%></td>
 			</tr>
 
 			<%
@@ -326,12 +366,16 @@ $(function () {
 			%>
 		</table>
 		<br>
-		<div class="row center">
 		<form action="review_list.jsp?contentsNo=<%=contentsNo%>" method="post">
-			<input type="submit" class="btn btn-mint" id="rb2" value="리뷰 전체 보기"></input>
+			<input type="submit" class="button btn-mint" id="rb2" value="리뷰 전체 보기"></input>
 		</form>
-		</div>
-</body>
+		
+	</div>
+	
+	
+</main>
+
+
 
 
 </html>
