@@ -158,6 +158,23 @@ textarea::placeholder {
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+
+$(function() {
+	
+});
+function isEmpty(value){
+
+    if(value == null || value.length === 0) {
+
+           return "";
+
+     } else{
+
+            return value;
+
+     }
+
+}
       
       
 $(function () {
@@ -306,8 +323,10 @@ $(function () {
 				</tr>
 
 				<tr>
-					<td>배우 : <%=actorDto.getActorName1()%>, <%=actorDto.getActorName2()%>,
-						<%=actorDto.getActorName3()%>, <%=actorDto.getActorName4()%>
+					<td>배우 : 
+					<%=actorDto.getActorName1() %> <%=actorDto.getActorName2() %>
+					<%=actorDto.getActorName3() %> <%=actorDto.getActorName4() %>
+
 					</td>
 				</tr>
 
