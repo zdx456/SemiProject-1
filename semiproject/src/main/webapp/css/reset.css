@@ -84,3 +84,15 @@ h6 {
 html {
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+/* 버튼 초기화 */
+
+button {
+	background: inherit; 
+	border:none; 
+	box-shadow:none; 
+	border-radius:0; 
+	padding:0; 
+	overflow:visible; 
+	cursor:pointer
+}

@@ -8,15 +8,27 @@ import java.util.List;
 
 public class LikeContentsDao {
 	
+	public int getSequence() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select likecontents_seq.nextval from dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int likeNo = rs.getInt("nextval");
+		con.close();
+		return likeNo;
+	}
+	
 
 	// 컨텐츠 좋아요 등록
 	
 public void insert(LikeContentsDto likeContentsDto) throws Exception{
 	Connection con = JdbcUtils.getConnection();
-	String sql = "insert into likecontents values (?, ?)";
+	String sql = "insert into likecontents (like_no, client_id, contents_no) values (?, ?, ?)";
 	PreparedStatement ps = con.prepareStatement(sql);
-	ps.setString(1, likeContentsDto.getClientId());
-	ps.setInt(2, likeContentsDto.getContentsNo());
+	ps.setInt(1, likeContentsDto.getLikeNo());
+	ps.setString(2, likeContentsDto.getClientId());
+	ps.setInt(3, likeContentsDto.getContentsNo());
 	
 	ps.execute();
 	con.close();

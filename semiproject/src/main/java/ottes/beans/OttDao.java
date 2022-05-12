@@ -51,6 +51,28 @@ public class OttDao {
 		return list;
 	}
 	
+	
+	public List<OttDto> findPrice(int contentsNo) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from ott O left outer join ott_contents C on O.ott_no = C.ott_no where C.contents_no = ? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		List<OttDto> list = new ArrayList<>();
+		while(rs.next()) {
+			OttDto ottDto = new OttDto();
+			ottDto.setOttNo(rs.getInt("ott_no"));
+			ottDto.setOttName(rs.getString("ott_name"));
+			ottDto.setOttPrice(rs.getInt("ott_price"));
+			
+			list.add(ottDto);
+		}
+		con.close();
+		return list;
+	}
+	
 	public boolean update(OttDto ottDto) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		String sql = "update ott set ott_name = ?, ott_price = ? where ott_no = ?";

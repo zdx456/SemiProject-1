@@ -13,6 +13,7 @@
 	
 %>    
      <style>
+     
 	#button{  
 	width:300px;
 	 background: #00ADB5;
@@ -23,7 +24,7 @@
  
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<form action="information.kh" method="post">
+<form action="information.kh" method="post" >
 	<div class="container w450 m30">
 	    <div class="row center">
 	        <h1>개인정보 변경</h1>

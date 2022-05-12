@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -53,7 +54,7 @@
     </script>
 
 </head>
-<body>
+
     <form method="post" action="join.kh">
         <div class="container w500 m30">
             <div class="row center m30">
@@ -75,7 +76,6 @@
             <div class="row">           
                 <input type="text" name="clientNick" placeholder="닉네임" class="form-input fill input-round regex-input" autocomplete="off" data-regex="^[가-힣0-9]{2,10}$" data-success-msg="멋진 닉네임이에요!" data-fail-msg="한글,영어,숫자 2~10 내외로 작성하세요">
                 <span></span>
-                <div class="row">
 	        <br>
 	        <input type="date" name="clientBirth" required placeholder="생년월일" class="form-input input-round" autocomplete="off">
 	    </div>
@@ -96,8 +96,7 @@
             </div>
         </div>
     </form>
-</body>
 
-<jsp:include page="/template/footer.jsp"></jsp:include>
+
 
 

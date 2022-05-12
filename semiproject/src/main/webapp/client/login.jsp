@@ -33,7 +33,6 @@
         <div class="row center">
             <a href="find_pw.jsp" class="link">비밀번호가 기억나지 않아요</a>
         </div>
-        
       <%-- 에러 표시가 있는 경우 메세지를 출력 --%>
 		<% if(request.getParameter("error") != null) { %>
 		<div class="row center">
