@@ -49,7 +49,7 @@ OttContentsDao ottContentsDao = new OttContentsDao();
 OttContentsDto ottContentsDto = ottContentsDao.selectOne(contentsNo);
 
 OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
-List<OttAttachmentDto> list = ottAttachmentDao.selectList(ottContentsDto.getOttNo());
+List<OttAttachmentDto> list = ottAttachmentDao.selectList( contentsNo);
 
 OttDao ottDao = new OttDao();
 List<OttDto> ottlist = ottDao.findPrice(contentsNo);
@@ -200,6 +200,31 @@ $(function () {
 <body>
 
 	<jsp:include page="/template/header.jsp"></jsp:include>
+	
+	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.5/score.js"></script>
+	 <script>
+        $(function(){
+        	$(".score-show").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent"
+        	});
+        	$(".score-select").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent", 
+                editable:true,
+                integerOnly:true,
+                zeroAvailable:false,
+                send: {
+                    sendable:true,
+                    name:"reviewScore",
+                },
+                display:{
+                    showNumber:false,
+                    placeLimit:0,
+                }
+            });
+        });
+    </script>
 
 
 <main>
@@ -217,6 +242,7 @@ $(function () {
 					<tr>
 						<td>
 						<%for(OttAttachmentDto ottAttachmentDto : list) { %>
+						 <%System.out.println("a");%>
 						<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
 				width="40" height="40" class="img img-logo" alt="ott">
 						<%} %>
@@ -232,7 +258,7 @@ $(function () {
 					</tr>
 
 					<tr>
-						<td> <span class="count"><%=likeContentsDao.count()%></span>  
+						<td> <span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
 						<% if (likecontentsDto != null) { %> 
 						<label class="heart like">♥</label> 
 						<% } else { %> 
@@ -308,13 +334,7 @@ $(function () {
 				
 			<br>
 				
-			<select name="reviewScore" class="review review-score" >
-				<option value="1" class="review">★</option>
-				<option value="2" class="review">★★</option>
-				<option value="3" class="review">★★★</option>
-				<option value="4" class="review">★★★★</option>
-				<option value="5" class="review">★★★★★</option>
-			</select> 
+			<span class="score-select" data-max="5" data-rate="3"></span>
 			<input type="submit" class="btn-yellow button" value="리뷰 등록">
 		</form>
 	
@@ -343,22 +363,23 @@ $(function () {
 				<td width="30%">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
 				</td>
-				
-				<% String reviewScore = Integer.toString(reviewDto.getReviewScore());
-
-				if (reviewScore.equals("1")) {
-					reviewScore = reviewScore.replaceAll("1", "★");
-				} else if (reviewScore.equals("2")) {
-					reviewScore = reviewScore.replaceAll("2", "★★");
-				} else if (reviewScore.equals("3")) {
-					reviewScore = reviewScore.replaceAll("3", "★★★");
-				} else if (reviewScore.equals("4")) {
-					reviewScore = reviewScore.replaceAll("4", "★★★★");
-				} else if (reviewScore.equals("5")) {
-					reviewScore = reviewScore.replaceAll("5", "★★★★★");
-				}
-				%>
-				<td width="5%" class="review review-score"><%=reviewScore%></td>
+				<td width="10%">
+						<%if(reviewDto.getReviewScore() == 1){ %>
+						<label class="score-show" data-max="5" data-rate="1"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 2){ %>
+						<label class="score-show" data-max="5" data-rate="2"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 3){ %>
+						<label class="score-show" data-max="5" data-rate="3"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 4){ %>
+						<label class="score-show" data-max="5" data-rate="4"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 5){ %>
+						<label class="score-show" data-max="5" data-rate="5"></label>
+						<%} %>
+						</td>
 			</tr>
 
 			<%
