@@ -272,10 +272,10 @@
 	<div class="container w800 m30">
 	
 		<div class="row center">
-			<h1 class="title m-title">컨텐츠 목록(관리자용)</h1>
+			<h1 class="title m-title">콘텐츠 목록(관리자용)</h1>
 		</div>
 		
-		<!-- 컨텐츠 등록 & 검색 -->
+		<!-- 콘텐츠 등록 & 검색 -->
 		<div class="row m30">
 			<div class="flex-container">
 			
