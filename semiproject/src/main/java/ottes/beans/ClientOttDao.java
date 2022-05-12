@@ -8,14 +8,14 @@ import java.util.List;
 
 public class ClientOttDao {
 
-	public void insert(String clientNo, int ottNo) throws Exception {
+	public void insert(String clientId, int ottNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "insert into client_ott values (?, ?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 	
-			ps.setString(1, clientNo);
+			ps.setString(1, clientId);
 			ps.setInt(2, ottNo);
 		
 		ps.execute();
@@ -69,7 +69,7 @@ public class ClientOttDao {
 	public List<ClientOttDto> selectList(String clientId) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from client_ott where client_id = ?order by ott_no asc";
+		String sql = "select * from client_ott where client_id = ? order by ott_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientId);
 		ResultSet rs = ps.executeQuery();
