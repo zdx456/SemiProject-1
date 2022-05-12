@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
 
 <% 
+	// 로그인 판정
 	String clientId = (String) session.getAttribute("login");
 	boolean login = clientId != null;
 	

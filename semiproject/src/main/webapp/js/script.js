@@ -73,4 +73,21 @@ $(function(){
 	$(document).on('mouseleave', '.swiper-slide', (function(){
     	$(this).find('.cover').fadeOut(120);
 	}));
+	
+	// 호버 시 테이블 행 강조 효과 (고객센터)
+	$(document).on('mouseenter', '.notice > table > tbody > tr', (function(){
+    	$(this).find('a').addClass('table_active');
+	}));
+	$(document).on('mouseleave', '.notice > table > tbody > tr', (function(){
+    	$(this).find('a').removeClass('table_active');
+	}));
+	
+	// 고객센터 말머리 색 구분
+	for(var i = 0; i < $('.notice_type').length; i++) {
+		if($('.notice_type').eq(i).text() == '공지') {
+			$('.notice_type').eq(i).css("color", "#FF003A");
+		} else {
+			$('.notice_type').eq(i).css("color", "#00ADB5");
+		}
+	}
 });

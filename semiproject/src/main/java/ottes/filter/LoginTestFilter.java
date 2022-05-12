@@ -13,8 +13,10 @@ public class LoginTestFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		//테스트 중 세션이 잡혀서 닫아뒀습니다 송현도
-		req.getSession().setAttribute("login", "testuser");
-		req.getSession().setAttribute("auth", "관리자");
+		/*
+		 * req.getSession().setAttribute("login", "testuser");
+		 * req.getSession().setAttribute("auth", "관리자");
+		 */
 		
 		chain.doFilter(request, response);
 		 

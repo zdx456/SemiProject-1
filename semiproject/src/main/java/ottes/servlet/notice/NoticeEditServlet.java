@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ottes.beans.NoticeDao;
 import ottes.beans.NoticeDto;
 
-@WebServlet(urlPatterns = "/admin/notice_edit.svt")
+@WebServlet(urlPatterns = "/adminClient/notice_edit.svt")
 public class NoticeEditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
