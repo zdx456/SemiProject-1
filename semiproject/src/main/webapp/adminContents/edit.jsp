@@ -156,7 +156,7 @@
 		background-color: white;
 		padding: 0.4em;
 	}
-
+	
 
 </style>
 
@@ -273,23 +273,7 @@
 			
 		});
 		
-		$(function(){
-       $("#requiredSubmit").on('click', function(e){
-         $("#requiredForm").on('submit', function(e){
-           e.preventDefault();
-           
-           $(':required', this).parent().show();
-           
-           var invalidInputs = $("invalid", this);
-           
-           if(invalidInputs.length > 0){
-               return location.href='edit.svt';
-           } else {
-               return e.preventDefault();
-           }
-         });
-       });
-     });
+		
 
 </script>
 
@@ -327,6 +311,22 @@
 		});
 	});
 	
+	//필수입력 항목 검사
+	$(function() {
+		    
+    $(".form-submit").on("submit", function(e){
+    	 
+    	var title = $("input[name=contentsTitle]").val() == "";
+    	var time = $("input[name=contentsTime]").val() == "";
+    	var director = $("input[name=contentsDirector]").val() == "";
+    	var summary = $("textarea[name=contentsSummary]").val() == "";
+    	
+    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary){
+    		e.preventDefault();
+    	}
+    });
+	});
+	
 	
 </script>
 <div class="container w500 m30">
@@ -335,7 +335,7 @@
 		<h1 class="title m-title">컨텐츠 수정</h1>
 	</div>
 
-	<form action="edit.svt" method="post" enctype="multipart/form-data">
+	<form action="edit.svt" method="post" enctype="multipart/form-data" class="form-submit">
 		
 		<input type="hidden" name="contentsNo" value="<%=contentsDto.getContentsNo() %>">
 		<input type="hidden" name="attachmentNo" value="<%=attachmentDto.getAttachmentNo() %>">
@@ -344,7 +344,7 @@
 		<div class="row">
 				<label>제목 (*필수)</label>
 				<div class="row-label"></div>
-					<input type="text" name="contentsTitle" value="<%=contentsDto.getContentsTitle() %>" autocomplete="off" class="form-input input-round fill" required id="requiredForm">
+					<input type="text" name="contentsTitle" value="<%=contentsDto.getContentsTitle() %>" autocomplete="off" class="form-input input-round fill">
 			</div>
 			
 			
@@ -506,20 +506,20 @@
 		<div class="row">	
 			<label>러닝타임(분)(숫자만 입력) (*필수)</label>
 			<div class="row-label"></div>
-				<input type="text" name="contentsTime" value="<%=contentsDto.getContentsTime() %>" autocomplete="off" class="form-input input-round fill" required id="requiredForm">
+				<input type="text" name="contentsTime" value="<%=contentsDto.getContentsTime() %>" autocomplete="off" class="form-input input-round fill">
 		</div>
 			
 
 		<div class="row">
 			<label>감독 (*필수)</label>
 			<div class="row-label"></div>
-				<input type="text" name="contentsDirector" value="<%=contentsDto.getContentsDirector() %>" autocomplete="off" class="form-input input-round fill" required id="requiredForm">
+				<input type="text" name="contentsDirector" value="<%=contentsDto.getContentsDirector() %>" autocomplete="off" class="form-input input-round fill">
 		</div>
 
 		<div class="row">
 				줄거리 (*필수)
 				<div class="row-label"></div>
-				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary" required><%=contentsDto.getContentsSummary() %></textarea>
+				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary"><%=contentsDto.getContentsSummary() %></textarea>
 				
 				<div class="row right">
 					<span class="length">
@@ -619,7 +619,7 @@
 		<!-- ---------------- -->
 		
 		<div class="row m10">
-			<button type="submit" class="fill btn-black btn-list fontSizeUp"  id="requiredSubmit">수정하기</button>
+			<button type="submit" class="fill btn-black btn-list fontSizeUp">수정하기</button>
 			
 		</div>
 		
