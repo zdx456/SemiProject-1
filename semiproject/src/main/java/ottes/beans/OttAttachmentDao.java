@@ -52,16 +52,16 @@ public OttAttachmentDto selectOne(int ottNo) throws Exception {
 return ottAttachmentDto;
 }
 
-public List<OttAttachmentDto> selectList(int ottNo) throws Exception {
+public List<OttAttachmentDto> selectList(int contentsNo) throws Exception {
 	
 	Connection con = JdbcUtils.getConnection();
 	
 	String sql = "select * from ott_attachment O left outer join ott_contents C on O.ott_no = C.ott_no "
 			+ "left outer join contents B on B.contents_no = C.contents_no "
-			+ "where O.ott_no = ?";
+			+ "where B.contents_no = ? ";
 			
 	PreparedStatement ps = con.prepareStatement(sql);
-	ps.setInt(1, ottNo);
+	ps.setInt(1, contentsNo);
 	ResultSet rs = ps.executeQuery();
 	
 	OttAttachmentDto ottAttachmentDto;

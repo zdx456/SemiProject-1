@@ -135,17 +135,16 @@ public void insert(LikeContentsDto likeContentsDto) throws Exception{
 	return likeContentsDto;
 }
 	
-	public int count() throws Exception {
+	public int count(int contentsNo) throws Exception {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select count(*) from likecontents";
+		String sql = "select count(*) from likecontents where contents_no = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
 		ResultSet rs = ps.executeQuery();
 		
-		LikeContentsDto likeContentsDto;
-
 		  int likeCount = 0;
 	        
 	        if(rs.next()) { 
