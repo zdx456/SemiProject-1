@@ -324,8 +324,18 @@ $(function () {
 
 				<tr>
 					<td>배우 : 
-					<%=actorDto.getActorName1() %> <%=actorDto.getActorName2() %>
-					<%=actorDto.getActorName3() %> <%=actorDto.getActorName4() %>
+					<%if(actorDto.getActorName1() != null) { %>
+					<%=actorDto.getActorName1() %> 
+					<%} %>
+					<%if(actorDto.getActorName2() !=null) { %>
+					<%=actorDto.getActorName2() %>
+					<%} %>
+					<%if(actorDto.getActorName3() != null) { %>
+					<%=actorDto.getActorName3() %> 
+					<%} %>
+					<%if(actorDto.getActorName4() !=null) { %>
+					<%=actorDto.getActorName4() %>
+					<%} %>
 
 					</td>
 				</tr>
