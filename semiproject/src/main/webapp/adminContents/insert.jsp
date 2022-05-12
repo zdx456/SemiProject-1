@@ -220,13 +220,13 @@
 			
 		});
 		
+		//러닝타임에 숫자 이외 입력 방지
 		$(function(){
 			$("input[name=contentsTime]").on("keyup", function() {
 			    $(this).val($(this).val().replace(/[^0-9]/g,""));
 			});
 
 		});
-		
 		
 		
 		//줄거리 글자 수 카운트
@@ -239,13 +239,32 @@
 				target.text(size);
 				
 				if(size > 1300){
-					target.css("color", "red");
+					target.css("clor", "red");
 				}
 				else {
 					target.css("color", "white");
 				}
 				
 			});
+		});
+		
+		//필수입력 항목 검사
+		$(function() {
+		    
+		    $(".form-submit").on("submit", function(e){
+		    	 
+		    	var title = $("input[name=contentsTitle]").val() == "";
+		    	var time = $("input[name=contentsTime]").val() == "";
+		    	var director = $("input[name=contentsDirector]").val() == "";
+		    	var summary = $("input[name=contentsSummary]").val() == "";
+		    	var attach = $("input[name=contentsAttachment]").val() == "";
+		    	
+		    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || attach){
+		    		e.preventDefault();
+		    		
+		    	}
+		    	
+		    });
 		});
 		
 
@@ -256,7 +275,7 @@
 
 <div class="container w800 m30">
 
-	<form action="insert.svt" method="post" enctype="multipart/form-data" class="requiredForm">
+	<form action="insert.svt" method="post" enctype="multipart/form-data" class="form-submit">
 	
 	<!-- 1페이지 시작 -->
 		<div class="container w500 m30 page">
@@ -268,7 +287,7 @@
 			<div class="row">
 				<label>제목 (*필수)</label>
 				<div class="row-label"></div>
-					<input type="text" name="contentsTitle" autocomplete="off" class="form-input input-round fill" required>
+					<input type="text" name="contentsTitle" autocomplete="off" class="form-input input-round fill">
 			</div>
 				
 			<div class="row">
@@ -277,7 +296,7 @@
 				
 				<div class="selectbox">
 					<label for="select">선택</label>
-					<select name="regionName" id="select" required>
+					<select name="regionName" id="select">
 						<option>한국</option>
 						<option>아시아</option>
 						<option>할리우드</option>
@@ -291,7 +310,7 @@
 				
 				<div class="selectbox">
 					<label for="select">선택</label>
-					<select name="genreName" id="select" required>
+					<select name="genreName" id="select">
 						<option>영화</option>
 						<option>드라마</option>
 						<option>버라이어티</option>
@@ -307,7 +326,7 @@
 				
 				<div class="selectbox">
 					<label for="select">선택</label>
-					<select name="contentsGrade" id="select" required>
+					<select name="contentsGrade" id="select">
 						<option>전체</option>
 						<option>12세</option>
 						<option>15세</option>
@@ -320,19 +339,19 @@
 			<div class="row">	
 				<label>러닝타임(분)(숫자만 입력) (*필수)</label>
 				<div class="row-label"></div>
-					<input type="text" name="contentsTime" autocomplete="off" class="form-input input-round fill" required>
+					<input type="text" name="contentsTime" autocomplete="off" class="form-input input-round fill">
 			</div>
 				
 			<div class="row">
 				<label>감독 (*필수)</label>
 				<div class="row-label"></div>
-					<input type="text" name="contentsDirector" autocomplete="off" class="form-input input-round fill" required>
+					<input type="text" name="contentsDirector" autocomplete="off" class="form-input input-round fill">
 			</div>
 				
 			<div class="row">
 				줄거리 (*필수)
 				<div class="row-label"></div>
-				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary" required></textarea>
+				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary"></textarea>
 				
 				<div class="row right">
 					<span class="length">
@@ -349,7 +368,7 @@
 			<div class = "row">
 				<label>이미지(.jpg/ .png) (*필수)</label>
 				<div class="row-label"></div>
-				<input type="file" name="contentsAttachment" accept=".jpg, .png" class="form-input input-round fill" required>
+				<input type="file" name="contentsAttachment" accept=".jpg, .png" class="form-input input-round fill required-check">
 			</div>
 			
 			<!-- 이전, 다음 버튼 -->
