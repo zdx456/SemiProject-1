@@ -13,10 +13,10 @@
 <script 
   src="http://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-		
+
         $(function(){
             $(".regex-input").blur(function(){
-                var regex = new RegExp($(this).data("regex"));//(참고) data는 읽기만 가능(쓰기 불가)
+                var regex = new RegExp($(this).data("regex"));
                 var value = $(this).val();
                 var judge = regex.test(value);
 
@@ -60,7 +60,7 @@
                 <h1>회원가입</h1>
             </div>
             <div class="row">               
-                <input type="text" name="clientId" placeholder="아이디" autocomplete="off" class="form-input fill input-round regex-input id_input" data-regex="^[a-z][a-z0-9]{0,14}$" data-success-msg="멋진 아이디네요!" data-fail-msg="영어,숫자 15자이내로 작성하세요">
+                <input type="text" name="clientId" placeholder="아이디" autocomplete="off" class="form-input fill input-round regex-input id_input" data-regex="^[a-z][a-z0-9]{0,14}$" data-success-msg="사용가능한 아이디 입니다." data-fail-msg="영어,숫자 15자이내로 작성하세요">
                 <span></span>
             </div>
             <div class="row">

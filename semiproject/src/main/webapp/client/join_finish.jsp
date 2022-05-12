@@ -9,6 +9,7 @@
     color: #EDC948;}
 	</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
+
 <div class="row center">
 <h1>회원 가입 완료!</h1>
 </div>
