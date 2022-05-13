@@ -196,7 +196,7 @@ $(function(){
 			var clientPw = $("#clientPw").val();
 			var psJudge = psRegex.test(clientPw);
 			if(!psJudge){
-				alert("영어,숫자,특수문자 8~16자로 입력해주세요");
+				alert("비밀번호를 영어,숫자,특수문자 8~16자로 입력해주세요");
 				$("input[name='clientPw']").focus();		
 				return;
 			}
