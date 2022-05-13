@@ -42,7 +42,7 @@ public class ClientJoinServlet extends HttpServlet {
 			clientDto.setClientEmail(req.getParameter("clientEmail"));
 
 			ClientDao clientDao = new ClientDao();
-			clientDao.insert(clientDto);
+			clientDao.insert(clientDto); //회원인서트
 
 			// --------- 선호하는 장르 등록 --------- //
 			// like genre 테이블 준비
@@ -51,27 +51,31 @@ public class ClientJoinServlet extends HttpServlet {
 			likeGenreDto.setGenreName(req.getParameter("genreName"));
 
 			LikeGenreDao likeGenreDao = new LikeGenreDao();
-			likeGenreDao.insert(likeGenreDto);
+			
+			likeGenreDao.insert(likeGenreDto); //선호장르 인서트 -> 예외처리 해야함
 
 			// -------- ott 선택 페이지 등록 -----------//
 
 			// 배열로 받기! 체크박스 값 여러개 가능 하므로
 			String[] ottNoStr = req.getParameterValues("ottNo");
 
-			// String 배열은 int 배열로 변환 (stream 이용)
-			int[] ottNoArray = Arrays.stream(ottNoStr).mapToInt(Integer::parseInt).toArray();
+			if(ottNoStr != null) { 
+			 // String 배열은 int 배열로 변환 (stream 이용)
+				int[] ottNoArray = Arrays.stream(ottNoStr).mapToInt(Integer::parseInt).toArray();
 
-			ClientOttDao clientOttDao = new ClientOttDao();
-			String clientId = req.getParameter("clientId");
+				ClientOttDao clientOttDao = new ClientOttDao();
+				String clientId = req.getParameter("clientId");
 
 
-			for (int i = 0; i < ottNoArray.length; i++) {
-				int ottNo = ottNoArray[i];
+				for (int i = 0; i < ottNoArray.length; i++) {
+					int ottNo = ottNoArray[i];
 
-				clientOttDao.insert(clientId, ottNo);
+					clientOttDao.insert(clientId, ottNo); //체크박스 인서트
 
+				} 
 			}
-			resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
+			
+			resp.sendRedirect("join_finish.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();

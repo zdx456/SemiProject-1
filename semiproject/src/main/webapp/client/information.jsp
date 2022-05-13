@@ -35,7 +35,7 @@
 	    </div>
 	    <div class="row">
 	        <label>생년월일</label><br>
-	        <input type="date" name="clientBirth" autocomplete="off" required class="form-input input-round" value="<%=clientDto.getClientBirth()%>">
+	        <input type="date" name="clientBirth" autocomplete="off" required class="form-input input-round fill" value="<%=clientDto.getClientBirth()%>">
 	    </div>	   
 	    <div class="row">
 	        <label>이메일</label>

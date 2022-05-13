@@ -119,6 +119,8 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 닉네임입니다");
 					status.nick = true;
+					
+					$("#clientNick").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 닉네임입니다");
@@ -150,6 +152,7 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 아이디입니다");
 					status.id = true;
+					$("#clientId").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 아이디입니다");

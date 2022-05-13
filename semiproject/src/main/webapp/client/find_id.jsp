@@ -16,15 +16,14 @@
        <div class="row center">
            <h1>아이디 찾기</h1>
        </div>
-       <div class="row">
-	        <label>닉네임</label>
-	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round">
+       <div class="row">	        
+	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round" placeholder="닉네임">
 	    </div>
          <div class="row">
                  <input type="email" name="clientEmail "required  placeholder="이메일"  class="form-input fill input-round" autocomplete="off">
        </div>
        <div class="row">
-           <input type="date" name="clientBirth" autocomplete="off" required   placeholder="생일"  class="form-input input-round">
+           <input type="date" name="clientBirth" autocomplete="off" required  class="form-input input-round fill">
        </div>
        <div class="row">
 
