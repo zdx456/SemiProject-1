@@ -16,14 +16,15 @@ import ottes.beans.ContentsAttachmentDto;
 
 @WebServlet(urlPatterns = "/search/list.svt")
 public class searchListServlet  extends HttpServlet{
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
 			String keyword = req.getParameter("keyword"); // 검색 키워드
-
+			
+			System.out.println(p);
+			System.out.println(keyword);
+			
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
 			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.search(p, keyword); 
 
@@ -32,8 +33,6 @@ public class searchListServlet  extends HttpServlet{
 
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonString);
-			
-			resp.sendRedirect(req.getContextPath()+"/contents/list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

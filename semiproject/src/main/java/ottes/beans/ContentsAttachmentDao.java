@@ -227,12 +227,15 @@ public class ContentsAttachmentDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+							+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
 							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 							+ "join contents_actor D on D.contents_no = B.contents_no "
 							+ "join actor C on D.actor_no = C.actor_no "
+							+ "join review E on E.contents_no = A.contents_no "
+							+ "join likecontents F on F.contents_no = A.contents_no "
 							+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 							+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+							+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
 							+ "order by A.contents_no desc"
 						+ ") TMP"
 					+ ") where rn between ? and ?";
@@ -259,10 +262,228 @@ public class ContentsAttachmentDao {
 			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
 			
 			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));
 			
 			list.add(contentsAttachmentDto);
 		}
 		con.close();
 		return list;
 	}
+	
+	// 검색 결과 페이지 (장르 정렬)
+	public List<ContentsAttachmentDto> searchGenreSort(int p, String keyword, String type) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
+					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+					+ "join contents_actor D on D.contents_no = B.contents_no "
+					+ "join actor C on D.actor_no = C.actor_no "
+					+ "join review E on E.contents_no = A.contents_no "
+					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "and A.genre_name = ? "
+					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+					+ "order by A.contents_no desc"
+				+ ") TMP"
+			+ ") where rn between ? and ?";		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setString(8, type);
+		ps.setInt(9, begin);
+		ps.setInt(10, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 검색 결과 페이지 (국가 정렬)
+	public List<ContentsAttachmentDto> searchRegionSort(int p, String keyword, String type) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
+					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+					+ "join contents_actor D on D.contents_no = B.contents_no "
+					+ "join actor C on D.actor_no = C.actor_no "
+					+ "join review E on E.contents_no = A.contents_no "
+					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "and A.region_name = ? "
+					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+					+ "order by A.contents_no desc"
+				+ ") TMP"
+			+ ") where rn between ? and ?";		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setString(8, type);
+		ps.setInt(9, begin);
+		ps.setInt(10, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));			
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 검색 결과 페이지 (평균 평점 정렬)
+	public List<ContentsAttachmentDto> searchScoreSort(int p, String keyword) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
+					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+					+ "join contents_actor D on D.contents_no = B.contents_no "
+					+ "join actor C on D.actor_no = C.actor_no "
+					+ "join review E on E.contents_no = A.contents_no "
+					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+					+ "order by avg(E.review_score) desc"
+				+ ") TMP"
+			+ ") where rn between ? and ?";		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setInt(8, begin);
+		ps.setInt(9, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));			
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}	
+	
+	// 검색 결과 페이지 (관심 수 정렬)
+	public List<ContentsAttachmentDto> searchLikeSort(int p, String keyword) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
+					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+					+ "join contents_actor D on D.contents_no = B.contents_no "
+					+ "join actor C on D.actor_no = C.actor_no "
+					+ "join review E on E.contents_no = A.contents_no "
+					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+					+ "order by count(F.contents_no) desc"
+				+ ") TMP"
+			+ ") where rn between ? and ?";		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setInt(8, begin);
+		ps.setInt(9, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));			
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}	
 }
