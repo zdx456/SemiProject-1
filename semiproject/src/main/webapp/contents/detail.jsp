@@ -104,6 +104,12 @@ main{
 
 .content {
     vertical-align: middle;
+    justify-content: center;
+	align-items: center;
+	height: 300px;
+	border-radius: 20px;
+	padding : 1em;
+	line-height : 20px;
 }
 .review {
 	color: #00ADB5;
@@ -122,10 +128,6 @@ main{
 .price {
 	color : white;
 	font-size : 13px;
-}
-.content {
-	padding :  0.3em;
-	font-size : 15px;	
 }
 
 .button {
@@ -325,60 +327,44 @@ $(function () {
 		
 	</div>
 	
-	<div id="box2" class="m0 content">
+	<div id="box2" class="m0">
 			
 			<label class="contentsTitle">
 			<%=contentsDto.getContentsTitle()%>
 			</label>
-		
-		<table class="table m10 review content ">
-
-				<tr>
-					<td >등급 : 
-					<%=contentsDto.getContentsGrade()%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>러닝타임 : <%=contentsDto.getContentsTime()%> 분
-					</td>
-				</tr>
-
-				<tr>
-					<td>장르 : <%=contentsDto.getGenreName()%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>줄거리 : <%=contentsDto.getContentsSummary()%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>감독 : <%=contentsDto.getContentsDirector()%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>배우 : 
-					<%if(actorDto.getActorName1() != null) { %>
-					<%=actorDto.getActorName1() %> 
-					<%} %>
-					<%if(actorDto.getActorName2() !=null) { %>
-					<%=actorDto.getActorName2() %>
-					<%} %>
-					<%if(actorDto.getActorName3() != null) { %>
-					<%=actorDto.getActorName3() %> 
-					<%} %>
-					<%if(actorDto.getActorName4() !=null) { %>
-					<%=actorDto.getActorName4() %>
-					<%} %>
-
-					</td>
-				</tr>
-
-			</table>
-		
+			<div class="review content">
+				<div class="row">
+					<label>등급 : <%=contentsDto.getContentsGrade()%></label>
+				</div>
+				<div class="row">
+					<label>러닝타임 : <%=contentsDto.getContentsTime()%> 분</label>
+				</div>
+				<div class="row">
+					<label>장르 : <%=contentsDto.getGenreName()%></label>
+				</div>
+				<div class="row">
+					<label>줄거리 : <%=contentsDto.getContentsSummary()%></label>
+				</div>
+				<div class="row">
+					<label>감독 : <%=contentsDto.getContentsDirector()%></label>
+				</div>
+				<div class="row">
+					<label>배우 : 
+							<%if(actorDto.getActorName1() != null) { %>
+							<%=actorDto.getActorName1() %> 
+							<%} %>
+							<%if(actorDto.getActorName2() !=null) { %>
+							<%=actorDto.getActorName2() %>
+							<%} %>
+							<%if(actorDto.getActorName3() != null) { %>
+							<%=actorDto.getActorName3() %> 
+							<%} %>
+							<%if(actorDto.getActorName4() !=null) { %>
+							<%=actorDto.getActorName4() %>
+							<%} %>
+					</label>
+				</div>
+			</div>
 	</div>
 	
 	

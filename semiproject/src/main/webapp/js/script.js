@@ -9,7 +9,7 @@ $(function(){
     });
             
     function loadPage(page) {
-    	$.ajax({
+    	$.ajax({	
         	url:"http://localhost:8080/semiproject/main/list.svt",
             type:"post",
             data:{
@@ -19,7 +19,7 @@ $(function(){
             	if(resp.length < 7) {
                 	$(".btn_more").remove();
                 }
-                
+
                 var div1 = $("<div>").addClass("swiper");
                 var div2 = $("<div>").addClass("swiper-wrapper");
                  
@@ -91,6 +91,10 @@ $(function(){
 		}
 	}
 	
+
+
+	
+	
 	// 헤더 메뉴 하나 누르면 다른 하나는 사라지게 하는 스크립트 추가 했습니다.
 	// @author:이기주
 	$(function(){
@@ -101,4 +105,5 @@ $(function(){
 	        }
 	    });
 	});
+
 });
