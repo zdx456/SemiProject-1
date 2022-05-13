@@ -182,7 +182,7 @@
                     name:"reviewScore",
                 },
                 display:{
-                    showNumber:true,
+                    showNumber: false,
                     placeLimit:0,
                 }
             });
@@ -205,7 +205,7 @@
 			<textarea rows="3" cols="50" class=" reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
 			<label class="score-select" data-max="5" data-rate="3"></label><br><br>
 		</div>
-		<div class="row center"><button type="submit" class="btn-yellow btn-insert ">등록</button></div>
+		<div class="row center"><button type="submit" class="btn-mint btn-insert ">등록</button></div>
 		</form>
 	<%} %>
 	<div class="row review">
@@ -249,7 +249,7 @@
 				<%if(isReviewOwner){ %>
 				<td>
 					<%-- <img src="<%=request.getContextPath()%>/image/edit_Icon.png" class="img-size edit-btn"> 이미지 조잡...함--%>
-					<button type="button" class="btn-mint btn-table edit-btn ">수정</button>
+					<button type="button" class="btn-yellow btn-table edit-btn ">수정</button>
 				</td>
 				<%} %>
 				<%if(isReviewOwner || isAdmin) {%>
@@ -290,7 +290,7 @@
 						<%} %>
 					</td>
 					<td>
-						<button type="submit" class="btn-mint btn-size btn-table">수정</button>
+						<button type="submit" class="btn-yellow btn-size btn-table">수정</button>
 					</td>
 					<td>
 						<button type="button" class="btn-black cancel-btn btn-table">취소</button>
