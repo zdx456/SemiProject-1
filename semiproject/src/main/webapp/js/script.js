@@ -82,7 +82,7 @@ $(function(){
     	$(this).find('a').removeClass('table_active');
 	}));
 	
-	// 고객센터 말머리 색 구분
+	// 공지 말머리 색 구분
 	for(var i = 0; i < $('.notice_type').length; i++) {
 		if($('.notice_type').eq(i).text() == '공지') {
 			$('.notice_type').eq(i).css("color", "#FF003A");
@@ -90,4 +90,40 @@ $(function(){
 			$('.notice_type').eq(i).css("color", "#00ADB5");
 		}
 	}
+	
+	// 문의 말머리 색 구분
+	for(var i = 0; i < $('.inquiry_type').length; i++) {
+		if($('.inquiry_type').eq(i).text() == '오류제보') {
+			$('.inquiry_type').eq(i).css("color", "#FF003A");
+		} else if ($('.inquiry_type').eq(i).text() == '문의사항') {
+			$('.inquiry_type').eq(i).css("color", "#00ADB5");
+		} else {
+			$('.inquiry_type').eq(i).css("color", "#865DBB");
+		}
+	}
+	
+	// 고객센터 활성화 정렬 색 표시
+	if (decodeURI(location.search) == "") {
+		$('.notice_sort input[value=전체보기]').css("color", "#EDC948");
+	} 
+	if (decodeURI(location.search) == "?type=공지") {
+		$('.notice_sort input[value=공지]').css("color", "#EDC948");
+	} 
+	if (decodeURI(location.search) == "?type=FAQ") {
+		$('.notice_sort input[value=FAQ]').css("color", "#EDC948");
+	}
+	if (decodeURI(location.search) == "?type=오류제보") {
+		$('.notice_sort input[value=오류제보]').css("color", "#EDC948");
+	}
+	if (decodeURI(location.search) == "?type=문의사항") {
+		$('.notice_sort input[value=문의사항]').css("color", "#EDC948");
+	}
+	if (decodeURI(location.search) == "?type=기타") {
+		$('.notice_sort input[value=기타]').css("color", "#EDC948");
+	}	
+	
+	// 댓글 수정 영역 표시 토글
+	$('.reply_edit_btn').click(function(){
+        $(this).siblings('.reply_edit').toggle();
+    });		
 });

@@ -24,6 +24,7 @@ public class ReplyWriteServlet extends HttpServlet{
 			replyDto.setReplyWriter((String)req.getSession().getAttribute("login"));
 
 			ReplyDao replyDao = new ReplyDao();
+			replyDto.setReplyNo(replyDao.getSequence());
 			replyDao.insert(replyDto);
 			
 			InquiryDao inquiryDao = new InquiryDao();

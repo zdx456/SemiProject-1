@@ -86,7 +86,7 @@
 		<h2><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></h2>
 		<form action="list.jsp" method="get">
 			<%if(search) {%>	
-			<input type="search" name="keyword" value=<%=keyword%> placeholder="어떤 도움이 필요하세요?" required autocomplete="off">		
+			<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
 			<%} else {%>
 			<input type="search" name="keyword" placeholder="어떤 도움이 필요하세요?" required autocomplete="off">
 			<%} %>
@@ -127,7 +127,7 @@
 					<tr>
 						<td class="notice_type center"><%=noticeDto.getNoticeType()%></td>
 						<td>
-							<a href="detail.jsp?noticeNo=<%=noticeDto.getNoticeNo()%>">
+							<a href="<%=request.getContextPath()%>/notice/detail.jsp?noticeNo=<%=noticeDto.getNoticeNo()%>">
 								<%=noticeDto.getNoticeTitle()%>
 							</a>
 						</td>
