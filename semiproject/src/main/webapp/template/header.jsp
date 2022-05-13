@@ -37,6 +37,7 @@
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/script.js"></script>
+    <script src="<%=request.getContextPath()%>/js/search.js"></script>
     
     <!-- 제발 하느님 -->
 </head>

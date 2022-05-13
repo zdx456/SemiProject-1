@@ -6,6 +6,7 @@ public class ContentsAttachmentDto {
 	
 	// 조인용
 	private String contentsTitle; // 콘텐츠 제목
+	private String contentsSummary; // 콘텐츠 줄거리
 	private float avgScore; // 평균 평점
 	private int countLike; // 관심 수
 	
@@ -50,6 +51,15 @@ public class ContentsAttachmentDto {
 		this.countLike = countLike;
 	}
 
+	
+	public String getContentsSummary() {
+		return contentsSummary;
+	}
+
+	public void setContentsSummary(String contentsSummary) {
+		this.contentsSummary = contentsSummary;
+	}
+	
 	@Override
 	public String toString() {
 		return "ContentsAttachmentDto [contentsNo=" + contentsNo + ", attachmentNo=" + attachmentNo + "]";
