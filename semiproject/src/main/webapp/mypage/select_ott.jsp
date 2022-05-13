@@ -168,7 +168,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 			<button type="submit" class="btn-mint btn-size">등록</button>
 		</div>
 		<div class="row center">
-			<a href="#" class="btn-black btn-link">스킵</a>
+			<a href="<%=request.getContextPath() %>/client/mypage.jsp" class="btn-black btn-link">뒤로</a>
 		</div>
 	</div>
 

@@ -156,7 +156,7 @@
 			<%=ottDto.getOttName()%>
 			</td>
 			<td><%=ottDto.getOttPrice()%></td>
-			<td><button type="button" class="btn-mint edit-btn btn-table">수정</button></td>
+			<td><button type="button" class="btn-yellow edit-btn btn-table">수정</button></td>
 			<td><a href="delete.svt?ottNo=<%=ottDto.getOttNo()%>" class="btn-black btn-table">삭제</a></td> 
 		</tr>
 		
@@ -172,7 +172,7 @@
 					<input type="number" name="ottPrice" value="<%=ottDto.getOttPrice() %>" min="0" step="100" class="form-input input-round">
 			</td>
 			<td>
-					<button type="submit" class="btn-mint btn-table">수정</button>
+					<button type="submit" class="btn-yellow btn-table">수정</button>
 			</td>
 			<td>
 					<%-- 취소 버튼 클릭시 수정 input 안보이게  예정 --%>
