@@ -78,9 +78,10 @@ LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
 </div>
 
 <div class="row center">
-	<button  type="button"  class="form-input full input-round btn_css1" onclick="location.href = 'password.jsp';" >비밀번호 변경</button>
-	<button type="button" class="form-input full input-round btn_css1"  onclick="location.href = 'information.jsp';">회원정보 변경</button>
-	<button type="button" class="form-input full input-round btn-black" onclick="location.href = 'exit.jsp';">탈퇴하기</button>	
+	<button  type="button"  class="form-input full  btn_css1" onclick="location.href = 'password.jsp';" >비밀번호 변경</button>
+	<button type="button" class="form-input full  btn_css1"  onclick="location.href = 'information.jsp';">회원정보 변경</button>
+	<button type="button" class="form-input full  btn-black" onclick="location.href = 'exit.jsp';">회원 탈퇴하기</button>	
+	
 </div>
 <!--//container w400 m50 page -->
  
