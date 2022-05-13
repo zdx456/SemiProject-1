@@ -5,6 +5,13 @@
 	String clientId = request.getParameter("clientId");
 %>
  
+<!--  
+	관리자가 회원의 비밀번호까지 변경하는 것은 월권인것 같아서 사용하지 않습니다.
+	혹시 필요할지 몰라 삭제는 임시보류 중입니다.
+	@author: 이기주
+  -->
+ 
+ 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <form action="chg_pw.svt" method="post">

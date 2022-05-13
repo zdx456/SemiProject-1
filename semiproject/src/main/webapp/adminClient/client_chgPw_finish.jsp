@@ -3,6 +3,12 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<!--  
+	관리자가 회원의 비밀번호까지 변경하는 것은 월권인것 같아서 사용하지 않습니다.
+	혹시 필요할지 몰라 삭제는 임시보류 중입니다.
+	@author: 이기주
+-->
+
 <div class="row">
 	<h1>비밀번호 재설정이 완료되었습니다</h1>
 </div>

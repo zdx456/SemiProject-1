@@ -8,18 +8,16 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <style>
- .percent {
-            background : #00adb5;
-            height: 10px;
-            width:0%;
+.percent {
+	background: #00adb5;
+	height: 10px;
+	width: 0%;
+	transition: width 0.25s ease-in-out;
+}
 
-            transition: width 0.25s ease-in-out;
-        }
-        
 .btn-join {
-
-padding-top: 0.5em;
-padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 }
 
 .fontSizeUp {
@@ -27,15 +25,15 @@ padding-bottom: 0.5em;
 }
 
 .join {
-	color : black;
+	color: black;
 }
 
 .row {
-    margin: 15px 0px;
-    text-align: right;
-	}
-	
-	.ott {
+	margin: 15px 0px;
+	text-align: right;
+}
+
+.ott {
 	display: none;
 }
 
@@ -69,13 +67,13 @@ padding-bottom: 0.5em;
 	font-size: 17px;
 }
 
-.centerFlex{
-justify-content: center;
-  align-items: center;
+.centerFlex {
+	justify-content: center;
+	align-items: center;
 }
 
 .form-input:focus {
-    border-color: #EDC948;
+	border-color: #EDC948;
 }
 </style>
 
@@ -89,23 +87,171 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 <script type="text/javascript">
 
 
+
+
 $(function(){
+	var status ={
+			id : false,			
+			nick : false
+	};
+	
+
+    var index = 0;
+	move(index);
+	
+	//닉네임 중복체크 버튼
+	$("#btnCheckNick").click(function(){
+		var Nickregex =/^[a-zA-Z0-9]{1,10}$/;//영문 숫자 15자 이내
+		var clientNick = $("#clientNick").val();
+	
+		var Nickjudge = Nickregex.test(clientNick);
+		if(!Nickjudge){
+			alert("영어,숫자 2~10자이내로 작성해주세요");
+			status.nick=false;
+			return;
+		}
+		
+		$.ajax({
+			url:"http://localhost:8080/semiproject/checkNick.kh?clientNick="+clientNick,
+			type:"get",
+			
+			success:function(resp){
+				if(resp === "yes"){
+					alert("사용 가능한 닉네임입니다");
+					status.nick = true;
+				}
+				else if(resp ==="no"){
+					alert("중복된 닉네임입니다");
+					status.nick = false;
+		
+				}
+			}	
+		})
+		
+	});
+	
+	//아이디 중복체크 버튼
+	$("#btnCheckId").click(function(){
+		var regex =/^[a-zA-Z0-9]{1,15}$/;//영문 숫자 15자 이내
+		var clientId = $("#clientId").val();
+	
+		var judge = regex.test(clientId);
+		if(!judge){
+			alert("영어,숫자 15자이내로 작성해주세요");
+			status.id=false;
+			return;
+		}
+		
+		$.ajax({
+			url:"http://localhost:8080/semiproject/checkId.kh?clientId="+clientId,
+			type:"get",
+			
+			success:function(resp){
+				if(resp === "yes"){
+					alert("사용 가능한 아이디입니다");
+					status.id = true;
+				}
+				else if(resp ==="no"){
+					alert("중복된 아이디입니다");
+					status.id = false;
+		
+				}
+			}	
+		})
+		
+	});
 	
     $(".select-all").on("input", function(){
         // this == 체크변화가 발생한 체크박스
         var checked = $(this).prop("checked");
         $(".select-item").prop("checked", checked);
     });
-    
-    var index = 0;
-	move(index);
+
 	
 	$(".btn-next").not(":last").click(function(){
+		
+		if(index == 0){ //첫번째 버튼 
+		
+			if($("#clientId").val() == ""){
+				alert("아이디를 입력하세요");
+				$("#clientId").focus();
+				return;
+				
+			}
+			
+			if(status.id == false){ //중복체크를 하지 않거나 통과하지 못한경우
+				alert("아이디 중복체크하세요");
+				return;
+				
+			}
+			
+			if($("#clientPw").val() == ""){
+				alert("비밀번호를 입력하세요");
+				$("#clientPw").focus();
+				return;
+			}
+
+			//비밀번호 형식체크  
+			var psRegex =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{7,16}$/;  //영어,숫자,특수문자 8~16
+			var clientPw = $("#clientPw").val();
+			var psJudge = psRegex.test(clientPw);
+			if(!psJudge){
+				alert("비밀번호를 영어,숫자,특수문자 8~16자로 입력해주세요");
+				$("input[name='clientPw']").focus();		
+				return;
+			}
+			
+			//비밀번호 일치확인
+			var passwordCheck =$("#password-check").val();
+			if(clientPw!=passwordCheck){
+				alert("비밀번호가 같은지 확인해주세요");
+				$("#password-check").focus();		
+				return;
+			}
+			
+			
+			if($("#clientNick").val() == ""){
+				alert("닉네임을 입력하세요");
+				$("#clientNick").focus();
+				return;
+			} 
+			
+			if($("#clientNick").val() == ""){
+				alert("닉네임을 입력하세요");
+				$("#clientNick").focus();
+				return;
+				
+			}
+			
+			if(status.nick == false){ //중복체크를 하지 않거나 통과하지 못한경우
+				alert("닉네임을 중복체크하세요");
+				return;
+				
+			}
+			
+			if($("#clientBirth").val() == ""){
+				alert("생년월일을 입력하세요");
+				$("#clientBirth").focus();
+				return;
+			} 
+			if($("#clientEmail").val() == ""){
+				alert("이메일을 입력하세요");
+				$("#clientEmail").focus();
+				return;
+			} 
+			
+		}else if(index == 1){ //2번째 다음버튼
+			
+		}
+		
 		index++;
 		move(index);
 	});
-	
+ 
 	$(".btn-prev").not(":first").click(function(){
+		//to-do 진짜 이동할꺼냐 ? 
+				
+		
 		index--;
 		move(index);
 		
@@ -193,189 +339,182 @@ window.addEventListener("load", function(){
 </script>
 
 <div class="container w500">
-<form action="join.kh" method="post">
+	<form action="join.kh" method="post">
 
-<!--  페이지 상단 퍼센트 바 -->
-    <div class="container w400 m30">
+		<!--  페이지 상단 퍼센트 바 -->
+		<div class="container w400 m30">
 			<label class="center"><h2>회원가입</h2></label>
-        <div class="row center ">
-            <div class="percent"></div>
-        </div>
-    </div>
-    
-<!--  기본 정보 등록 : 1페이지 -->
-	<div class="container w400 m50 page">
-	
-		<div class="row left" >
-			<label>아이디</label>
-			<div class="row">
-					<input type="text"  class="form form-input input-round fill " name="clientId" required
-					placeholder="아이디">
+			<div class="row center ">
+				<div class="percent"></div>
 			</div>
 		</div>
-			
-		<div class="row left">
-			<label>비밀번호</label>
+
+		<!--  기본 정보 등록 : 1페이지 -->
+		<div class="container w400 m50 page">
+			<div class="row left">
+				<label>아이디</label>
+				<div class="row left">
+					<input type="text"
+						class="form-input input-round regex-input id_input" value=""
+						name="clientId" required placeholder="아이디" id="clientId" style="width:310px;"/>
+					<button type="button" id="btnCheckId" class="btn" >중복체크</button>
+				</div>
+			</div>
+
+			<div class="row left">
+				<label>비밀번호</label>
+				<div class="row">
+					<input type="password"
+						class="form form-input input-round fill regex-input" value=""
+						name="clientPw" required placeholder="비밀번호" id="clientPw">
+					<span></span>
+				</div>
+			</div>
+
 			<div class="row">
-				<input type="password" class="form form-input input-round fill"  name="clientPw" required
-					placeholder="비밀번호">
+				<input type="password" id="password-check" placeholder="비밀번호 확인"
+					value="" class="form-input fill input-round"> <span></span>
+			</div>
+			<div class="row left">
+				<label>닉네임</label>
+				<div class="row">
+					<input type="text"
+						class="form form-input input-round fill regex-input"
+						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px;"
+						value=""/>
+					<button type="button" id="btnCheckNick" class="btn">중복체크</button>
+
+				</div>
+			</div>
+
+			<div class="row left">
+				<label>생년월일</label>
+				<div class="row">
+					<input type="date" class="form form-input input-round fill"
+						name="clientBirth" required placeholder="생년월일" id="clientBirth"
+						value="">
+				</div>
+			</div>
+
+			<div class="row left">
+				<label>성별</label>
+				<div class="row left">
+					<input type="radio" name="clientGender" required value="남성" checked>남성
+					<input type="radio" name="clientGender" required value="여성">여성
+				</div>
+			</div>
+
+			<div class="row left">
+				<label>이메일</label>
+				<div class="row">
+					<input type="email" class="form form-input input-round fill"
+						name="clientEmail" required placeholder="이메일" id="clientEmail">
+				</div>
+			</div>
+
+
+
+			<div class="row center">
+				<button type="button" class="btn btn-prev" id="btnPrev1">이전</button>
+				<button type="button" class="btn btn-next" id="btnNext1">다음</button>
 			</div>
 		</div>
-		
-		<div class="row left">
-			<label>닉네임</label>
-			<div class="row">
-				<input type="password" class="form form-input input-round fill"  name="clientPw" required
-					placeholder="비밀번호">
-			</div>
-		</div>
-		
-		<div class="row left">
-			<label>생년월일</label>
-			<div class="row">
-				<input type="date" class="form form-input input-round fill"  name="clientBirth" required
-					placeholder="생년월일">
-			</div>
-		</div>
-		
-		<div class="row left">
-			<label>성별</label>
-			<div class="row">
-				<input type="text" class="form form-input input-round fill"  name="clientGender" required
-					placeholder="남성/여성">
-			</div>
-		</div>
-			
-		<div class="row left">
-			<label>이메일</label>
-			<div class="row">
-				<input type="email" class="form form-input input-round fill" name="clientEmail" required
-					placeholder="이메일">
-			</div>
-		</div>
-			
-			
-		
-		<div class="row center">
-			<button type="button" class="btn btn-prev">이전</button>
-			<button type="button" class="btn btn-next">다음</button>
-		</div>
-		</div>
-		
-		
-		
+
+
 		<!-- 2페이지 : ott 선택 -->
-		
-		 <div class="container w400 m50 page">
- 			<div class="row center">
- 				<label>
- 					선호하는 OTT를 선택하세요.
- 				</label>
- 			</div>
- 			<br>
- 			
-	<div class="container">
-		<div class="row center">
-		</div>
-		<div class="row flex-container centerFlex">
 
-			<%
-			for (OttAttachmentDto ottAttachmentDto : listOtt) {
-			%>
+		<div class="container w400 m50 page">
+			<div class="row center">
+				<label> 선호하는 OTT를 선택하세요. </label>
+			</div>
+			<br>
 
-			<input type="checkbox" name="ottNo"
-				id="ottCheck<%=ottAttachmentDto.getOttNo()%>"
-				value="<%=ottAttachmentDto.getOttNo()%>" class="ott">
-			<label for="ottCheck<%=ottAttachmentDto.getOttNo()%>"
-				class="ottLogo"> 
-				<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
-				 class="changing img img-round" width="100px" height="100px">
-			</label>
-			<%
+			<div class="container">
+				<div class="row center"></div>
+				<div class="row flex-container centerFlex">
+
+					<%
+							for (OttAttachmentDto ottAttachmentDto : listOtt) {
+						%>
+
+					<input type="checkbox" name="ottNo"
+						id="ottCheck<%=ottAttachmentDto.getOttNo()%>"
+						value="<%=ottAttachmentDto.getOttNo()%>" class="ott"> <label
+						for="ottCheck<%=ottAttachmentDto.getOttNo()%>" class="ottLogo">
+						<img
+						src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
+						class="changing img img-round" width="100px" height="100px">
+					</label>
+					<%
 			}
 			%>
 
-		</div>
-		<br><br><br><br>
-		<div class="row center">
-			<input type="checkbox" id="selectAll"> 
-			<label for="selectAll">전체선택 </label>
-		</div>
-		<div class="row center">
-			<a href="#" class="btn-black btn-link">SKIP</a>
-		</div>
-	</div>
-
-		
+				</div>
+				<br> <br> <br> <br>
 				<div class="row center">
-			<button type="button" class="btn btn-prev">이전</button>
-			<button type="button" class="btn btn-next">다음</button>
-		</div>
-		</div>
-		
-		<!------- 3페이지 : 선호 장르 선택 ----- -->
-		 <div class="container w400 m50 page">
- 			<div class="row center">
- 				<label>
- 					선호하는 장르를 선택하세요.
- 				</label>
- 			</div>
- 			
-        <br>
-        
-        
-            <div class="row center">
-            <label>
-            <input type="checkbox" name="genreName" value="영화" class="select-item">
-                영화
-            </label>
-                 <label>
-            <input type="checkbox" name="genreName" value="드라마" class="select-item">
-            	드라마
-            </label>
-        </div>
+					<input type="checkbox" id="selectAll"> <label
+						for="selectAll">전체선택 </label>
+				</div>
+				<div class="row center">
+					<a href="#" class="btn-black btn-link">SKIP</a>
+				</div>
+			</div>
 
-	        <div class="row center">
-	            <label>
-	            <input type="checkbox" name="genreName" value="다큐" class="select-item">
-	        	    다큐
-	            </label>
-	            <label>
-	            <input type="checkbox" name="genreName" value="애니메이션" class="select-item">
-	            	애니메이션
-	      	  </label>
-	            <label>
-	            <input type="checkbox" name="genreName"  value="버라이어티" class="select-item">
-	          	  버라이어티
-	  	      </label>
-	    	    </div>
-			<br>
-			<br>
-			
-               <div class="row center">
-            <label>
-            <input type="checkbox" class="select-all select-item">
-            전체 선택
-        </label>
-        </div>
-        
-        	<br>
-        	<br>
-        <div class="row m10">
-			<input type="submit" class="fill btn-yellow btn-join fontSizeUp pass-form"  value="회원가입">
+
+			<div class="row center">
+				<button type="button" class="btn btn-prev">이전</button>
+				<button type="button" class="btn btn-next">다음</button>
+			</div>
 		</div>
-		
-		
-        <div class="row center">
-			<button type="button" class="btn btn-prev">이전</button>
-			<button type="button" class="btn btn-next">다음</button>
+
+		<!------- 3페이지 : 선호 장르 선택 ----- -->
+		<div class="container w400 m50 page">
+			<div class="row center">
+				<label> 선호하는 장르를 선택하세요. </label>
+			</div>
+
+			<br>
+
+
+			<div class="row center">
+				<label> <input type="checkbox" name="genreName" value="영화"
+					class="select-item"> 영화
+				</label> <label> <input type="checkbox" name="genreName" value="드라마"
+					class="select-item"> 드라마
+				</label>
+			</div>
+
+			<div class="row center">
+				<label> <input type="checkbox" name="genreName" value="다큐"
+					class="select-item"> 다큐
+				</label> <label> <input type="checkbox" name="genreName"
+					value="애니메이션" class="select-item"> 애니메이션
+				</label> <label> <input type="checkbox" name="genreName"
+					value="버라이어티" class="select-item"> 버라이어티
+				</label>
+			</div>
+			<br> <br>
+
+			<div class="row center">
+				<label> <input type="checkbox"
+					class="select-all select-item"> 전체 선택
+				</label>
+			</div>
+
+			<br> <br>
+			<div class="row m10">
+				<input type="submit"
+					class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
+			</div>
+
+
+			<div class="row center">
+				<button type="button" class="btn btn-prev">이전</button>
+				<button type="button" class="btn btn-next">다음</button>
+			</div>
 		</div>
-        </div>
-        
-        
-        </div>
-</form>
+
+	</form>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
 
