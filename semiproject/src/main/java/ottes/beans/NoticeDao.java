@@ -116,6 +116,44 @@ public class NoticeDao {
 		con.close();
 		
 		return list;
+	}
+	
+	// 공지&FAQ 게시판 리스트 출력 (관리자 페이지 옵션 검색)
+	public List<NoticeDto> selectListByPaging(int p, int s, String option, String keyword) throws Exception {
+		int end = p * s;
+		int begin = end - (s - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from notice where instr(#1, ?) > 0 order by notice_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+		sql = sql.replace("#1", option);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<NoticeDto> list = new ArrayList<>();
+		while(rs.next()) {
+			NoticeDto noticeDto = new NoticeDto();
+			
+			noticeDto.setNoticeNo(rs.getInt("notice_no"));
+			noticeDto.setNoticeWriter(rs.getString("notice_writer"));
+			noticeDto.setNoticeTitle(rs.getString("notice_title"));
+			noticeDto.setNoticeContent(rs.getString("notice_content"));
+			noticeDto.setNoticeDate(rs.getDate("notice_date"));
+			noticeDto.setNoticeType(rs.getString("notice_type"));
+			
+			list.add(noticeDto);
+		}
+		
+		con.close();
+		
+		return list;
 	}	
 	
 	// 페이지 카운팅
@@ -157,6 +195,23 @@ public class NoticeDao {
 		String sql = "select count(*) from notice where notice_type = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, type);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}	
+	
+	// 페이지 카운팅 (관리자 페이지 옵션 검색)
+	public int countByPaging(String option, String keyword) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from notice where instr(#1, ?) > 0";
+		sql = sql.replace("#1", option);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);

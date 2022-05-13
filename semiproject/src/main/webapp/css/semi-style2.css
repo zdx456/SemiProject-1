@@ -461,10 +461,7 @@ footer p {
 
 .notice {
 	margin-bottom: 30px;
-}
-
-.notice > table {
-	width: 100%;
+	width: 1650px;	
 }
 
 .notice > table > thead > tr > th,
@@ -483,7 +480,7 @@ footer p {
 .notice > table > thead > tr > th:nth-child(1),
 .notice > table > tbody > tr > td:nth-child(1) {
 	font-weight: bolder;
-	width: 8%;
+	width: 130px;
 }
 
 .notice > table > tbody > tr:hover {
@@ -493,15 +490,15 @@ footer p {
 .notice > table > thead > tr > th:nth-child(2) > a, 
 .notice > table > tbody > tr > td a {
 	display: block;
-	padding-left: 50px;	
-	width: 1300px;	
+	padding: 0 40px;	
+	width: 1350px;	
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .notice > table > thead > tr > th:nth-child(3) {
-	width: 12%;
+	width: 170px;
 }
 
 .notice > table > tbody > tr > td:nth-child(3) {
@@ -638,4 +635,275 @@ label[for=input_inquiry_content] {
 
 .inquiry .btn-mint:hover {
 	background-color: #00ADB5;
+}
+
+.inquiry_success {
+	margin-top: 130px;
+}
+
+.inquiry_success h2 {
+    font-weight: bolder;
+    font-size: 2em;
+}
+
+.inquiry_success p {
+    font-size: 1em;
+    padding-bottom: 15px;	
+}
+
+.inquiry_success .emoji {
+    font-size: 4em;
+    margin: 50px;
+}
+
+.my_inquiry_btn {
+	width: 200px;
+	height: 40px;
+	margin: 30px auto 0 auto;
+}
+
+.my_inquiry_btn a {
+	display: block;
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	color: #00ADB5;
+	font-weight: bolder;
+	border-radius: 10px;
+	background-color: rgba(237, 201, 72, .9);
+}
+
+.my_inquiry_btn a:hover {
+	background-color: rgba(237, 201, 72, 1);	
+}
+
+.admin_notice h2 {
+    font-weight: bolder;
+    font-size: 2em;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(146, 146, 146, .5);	
+}
+
+.admin_notice .wrap {
+	position: relative;
+	width: 1678px;
+}
+
+.admin_notice .admin_search {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(-55%, -50%);
+}
+
+.admin_notice .admin_search input, 
+.admin_notice .admin_search select,
+.admin_notice .admin_search option {
+	color: #000000;
+	height: 30px;
+	padding: 0 10px;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+}
+
+.admin_notice .my_inquiry_btn {
+	position: absolute;
+	height: 30px;
+	line-height: 30px;
+	width: 130px;
+	top: 50%;
+	right: 0;
+	margin: 0;
+	transform: translate(0, -50%);
+}
+
+.admin_notice .my_inquiry_btn a {
+	width: 130px;	
+	height: 30px;
+	line-height: 30px;
+	font-size: 0.95em;
+}
+
+.admin_notice {
+	width: 1678px;
+}
+
+.admin_notice table > thead > tr > th:nth-child(2) > a, 
+.admin_notice table > tbody > tr > td > a {	
+	width: 1270px;
+}
+
+.admin_notice table > tbody > tr > td:nth-child(4) > a {
+	width: 130px;
+	color: rgb(237, 201, 72);
+}
+
+.notice_edit_wrap {
+	position: relative;
+}
+
+.notice_edit_wrap .notice_sort {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 100px;
+}
+
+.notice_edit_wrap .notice_sort input:focus {
+	border:none;
+}
+
+.admin_inquiry table > thead > tr > th:nth-child(2) > a, 
+.admin_inquiry table > tbody > tr > td > a {	
+	width: 1140px;
+}
+
+.admin_inquiry table > tbody > tr > td:nth-child(3) {
+	color: #ffffff;
+}
+
+.admin_inquiry table > tbody > tr > td:nth-child(4) {
+	width: 130px;
+	color: rgb(146, 146, 146);
+}
+
+.admin_inquiry table > tbody > tr > td:nth-child(5) {
+	width: 130px;
+	color: rgb(237, 201, 72);
+}
+
+.admin_notice_detail table {
+	width: 1678px;
+}
+
+.admin_notice_detail table > thead > tr > th:nth-child(2) > a {	
+	width: 1000px;
+}
+
+.reply {
+	width: 1678px;
+	position: relative;
+	border-bottom: 1px solid rgba(146, 146, 146, .5);
+	padding-bottom: 30px;	
+}
+
+.reply h3 {
+	font-size: 1.2em;
+	font-weight: bolder;
+	padding: 40px 0 20px 0;
+}
+
+.reply h4 {
+	font-size: 1.1em;
+	font-weight: bolder;
+	color: #00ADB5;
+	padding: 30px 0 20px 0;
+}
+
+.reply p {
+	position: absolute;
+	top: 40px;
+	right: 10px;
+}
+
+.reply textarea { 
+	width: 1678px;
+	white-space: pre-wrap;
+	background-color: rgba(0, 0, 0, .1);
+	border: 1px solid rgba(146, 146, 146, .5);
+	border-radius: 10px;
+	padding: 10px 15px;
+	font-size: 0.9em;
+	line-height: 20px;
+	resize: none;
+	height: 150px;
+	margin-bottom: 10px;
+}
+
+.reply pre {
+	width: 1678px;
+	white-space: pre-wrap;
+	background-color: rgba(0, 0, 0, .1);
+	padding: 30px 30px;
+	font-size: 0.9em;
+	line-height: 20px;
+}
+
+.reply pre:focus, 
+.reply textarea:focus {
+	border: 1px solid #EDC948;
+}
+
+.reply .reply_edit_btn {
+	position: absolute;
+	width: 130px;
+	top: 40px;
+	right: 80px;
+	font-weight: bolder;
+	cursor: pointer;
+	color: #EDC948;
+}
+
+.reply .reply_delete_btn {
+	position: absolute;
+	width: 130px;
+	top: 40px;
+	right: 30px;	
+}
+
+.reply .reply_write_btn {
+	position: absolute;
+	width: 80px;
+	bottom: 0;
+	right: 10px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 50px;
+	background-color: #00ADB5;
+	color: #EDC948;
+	font-weight: bolder;	
+    border-radius: 10px;
+	border:none; 
+	box-shadow:none;
+	cursor:pointer;	    				
+}
+
+.reply_edit {
+	padding: 30px 0;
+	position: relative;
+}
+
+.reply_edit input[type=submit] {
+	position: absolute;
+	width: 80px;
+	bottom: 0;
+	right: 10px;
+	height: 30px;
+	line-height: 30px;	
+	margin-top: 50px;
+	background-color: #EDC948;
+	color: #00ADB5;
+	font-weight: bolder;
+	border-radius: 10px;
+	border:none; 
+	box-shadow:none;
+	cursor:pointer;	 				
+}
+
+.reply_write {
+	border: none;
+}
+
+.my_inquiry .admin_search {
+	right: 25px;
+}
+
+.my_inquiry table {
+	width: 1678px;	
+}
+
+.inquiry_state {
+	color: #EDC948 !important;
+	font-weight: bolder;
 }

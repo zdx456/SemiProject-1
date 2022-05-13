@@ -20,7 +20,7 @@ public class ReplyDao {
 		con.close();
 		
 		return number;
-	}	
+	}
 	
 	// 문의 댓글 등록
 	public void insert(ReplyDto replyDto) throws Exception {

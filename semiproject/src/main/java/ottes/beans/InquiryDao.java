@@ -83,8 +83,8 @@ public class InquiryDao {
 		return list;
 	}
 	
-	// 문의&오류 게시판 리스트 출력 (검색 결과)
-	public List<InquiryDto> selectListByPaging(int p, int s, String type, String keyword) throws Exception {
+	// 문의&오류 게시판 리스트 출력 (옵션 검색 결과)
+	public List<InquiryDto> selectListByPaging(int p, int s, String option, String keyword) throws Exception {
 		int end = p * s;
 		int begin = end - (s - 1); 
 		
@@ -95,7 +95,7 @@ public class InquiryDao {
 							+ "select * from inquiry where instr(#1, ?) > 0 order by inquiry_no desc"
 						+ ") TMP"
 					+ ") where rn between ? and ?";
-		sql = sql.replace("#1", type);
+		sql = sql.replace("#1", option);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setInt(2, begin);
@@ -121,9 +121,9 @@ public class InquiryDao {
 		
 		return list;
 	}
-	
-	// 내가 접수한 문의&오류 리스트 출력 (검색 결과)
-	public List<InquiryDto> selectMyListByPaging(int p, int s, String type, String keyword, String writer) throws Exception {
+
+	// 문의&오류 게시판 리스트 출력 (통합 검색 결과)
+	public List<InquiryDto> selectListByPaging(int p, int s, String keyword) throws Exception {
 		int end = p * s;
 		int begin = end - (s - 1); 
 		
@@ -131,12 +131,132 @@ public class InquiryDao {
 		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
-							+ "select * from inquiry where instr(#1, ?) > 0 and inquiry_writer = ? order by inquiry_no desc"
+							+ "select * from inquiry where instr(inquiry_writer, ?) > 0 or instr(inquiry_title, ?) > 0 or instr(inquiry_content, ?) > 0 "
+							+ "order by inquiry_no desc"
 						+ ") TMP"
 					+ ") where rn between ? and ?";
-		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setInt(4, begin);
+		ps.setInt(5, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<InquiryDto> list = new ArrayList<>();
+		while(rs.next()) {
+			InquiryDto inquiryDto = new InquiryDto();
+			
+			inquiryDto.setInquiryNo(rs.getInt("inquiry_no"));
+			inquiryDto.setInquiryWriter(rs.getString("inquiry_writer"));
+			inquiryDto.setInquiryType(rs.getString("inquiry_type"));
+			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
+			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
+			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
+			
+			list.add(inquiryDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
+	// 내가 접수한 문의&오류 리스트 출력 (통합 검색 결과)
+	public List<InquiryDto> selectMyListByPaging(int p, int s, String keyword, String writer) throws Exception {
+		int end = p * s;
+		int begin = end - (s - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from inquiry where instr(inquiry_title, ?) > 0 or instr(inquiry_content, ?) > 0 and inquiry_writer = ? order by inquiry_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, writer);
+		ps.setInt(4, begin);
+		ps.setInt(5, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<InquiryDto> list = new ArrayList<>();
+		while(rs.next()) {
+			InquiryDto inquiryDto = new InquiryDto();
+			
+			inquiryDto.setInquiryNo(rs.getInt("inquiry_no"));
+			inquiryDto.setInquiryWriter(rs.getString("inquiry_writer"));
+			inquiryDto.setInquiryType(rs.getString("inquiry_type"));
+			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
+			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
+			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
+			
+			list.add(inquiryDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}	
+	
+	// 문의&오류 게시판 리스트 출력 (정렬)
+	public List<InquiryDto> selectListSortByPaging(int p, int s, String type) throws Exception {
+		int end = p * s;
+		int begin = end - (s - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from inquiry where inquiry_type = ? order by inquiry_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, type);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<InquiryDto> list = new ArrayList<>();
+		while(rs.next()) {
+			InquiryDto inquiryDto = new InquiryDto();
+			
+			inquiryDto.setInquiryNo(rs.getInt("inquiry_no"));
+			inquiryDto.setInquiryWriter(rs.getString("inquiry_writer"));
+			inquiryDto.setInquiryType(rs.getString("inquiry_type"));
+			inquiryDto.setInquiryTitle(rs.getString("inquiry_title"));
+			inquiryDto.setInquiryContent(rs.getString("inquiry_content"));
+			inquiryDto.setInquiryDate(rs.getDate("inquiry_date"));
+			inquiryDto.setInquiryReplycount(rs.getInt("inquiry_replycount"));
+			
+			list.add(inquiryDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}	
+
+	// 내가 접수한 문의&오류 리스트 출력 (정렬)
+	public List<InquiryDto> selectMyListSortByPaging(int p, int s, String type, String writer) throws Exception {
+		int end = p * s;
+		int begin = end - (s - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select * from inquiry where inquiry_type = ? and inquiry_writer = ? order by inquiry_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, type);
 		ps.setString(2, writer);
 		ps.setInt(3, begin);
 		ps.setInt(4, end);
@@ -177,12 +297,12 @@ public class InquiryDao {
 		return count;
 	}
 	
-	// 페이지 카운팅 (검색 결과)
-	public int countByPaging(String type, String keyword) throws Exception {
+	// 페이지 카운팅 (옵션 검색 결과)
+	public int countByPaging(String option, String keyword) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select count(*) from inquiry where instr(#1, ?) > 0";
-		sql = sql.replace("#1", type);
+		sql = sql.replace("#1", option);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);		
 		ResultSet rs = ps.executeQuery();
@@ -193,6 +313,91 @@ public class InquiryDao {
 		
 		return count;
 	}
+
+	// 페이지 카운팅 (통합 검색 결과)
+	public int countByPaging(String keyword) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from inquiry where instr(inquiry_writer, ?) > 0 or instr(inquiry_title, ?) > 0 or instr(inquiry_content, ?) > 0";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);	
+		ps.setString(3, keyword);	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	// 페이지 카운팅 (정렬)
+	public int countSortByPaging(String type) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from inquiry where inquiry_type = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, type);		
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	// 내 문의 페이지 카운팅
+	public int countMyListByPaging(String clientId) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from inquiry where inquiry_writer = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, clientId);	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+
+	// 내 문의 페이지 카운팅 (통합 검색 결과)
+	public int countMyListByPaging(String keyword, String clientId) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from inquiry where instr(inquiry_title, ?) > 0 or instr(inquiry_content, ?) > 0 and inquiry_writer = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);	
+		ps.setString(3, clientId);	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+	
+	// 내 문의 페이지 카운팅 (정렬)
+	public int countMyListSortByPaging(String type, String clientId) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from inquiry where inquiry_type = ? and inquiry_writer = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, type);	
+		ps.setString(2, clientId);	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}	
 	
 	// 문의&오류 게시글 상세보기
 	public InquiryDto selectOne(int inquiryNo) throws Exception {
