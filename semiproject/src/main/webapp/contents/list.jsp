@@ -1,11 +1,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
-<%
-
-
-%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script src="<%=request.getContextPath()%>/js/search.js"></script>
@@ -42,6 +37,7 @@
 		<div class="score_more hidden">평점순 더보기</div>
 		<div class="like_more hidden">좋아요순 더보기</div>
 		<div class="genre_more hidden">장르 더보기</div>
+		<div class="genre_more_all hidden">모든 장르 더보기</div>
 		<div class="region_more hidden">국가 더보기</div>
 	</div>
 </div>
