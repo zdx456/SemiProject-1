@@ -907,3 +907,7 @@ label[for=input_inquiry_content] {
 	color: #EDC948 !important;
 	font-weight: bolder;
 }
+
+.search_img {
+	width: 100px;
+}
