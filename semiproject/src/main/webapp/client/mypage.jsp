@@ -4,89 +4,89 @@
 <%@page import="ottes.beans.ClientDto"%>
 <%@page import="ottes.beans.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
-	String clientId = (String) session.getAttribute("login");
-	ClientDao clientDao = new ClientDao();
-	ClientDto clientDto = clientDao.selectOne(clientId);
+String clientId = (String) session.getAttribute("login");
+ClientDao clientDao = new ClientDao();
+ClientDto clientDto = clientDao.selectOne(clientId);
 
-	// like genre table 추가
-		LikeGenreDao likeGenreDao = new LikeGenreDao();
-		//LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
-		
-		//임시 (송현도)
-		LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
-%>    
-	
+// like genre table 추가
+LikeGenreDao likeGenreDao = new LikeGenreDao();
+//LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
+
+//임시 (송현도)
+LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
+%>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
-<style>
 
-        .table>thead>tr,
-        .table>tbody>tr {
-            font-weight: bold;
-            /* background-color: #929292; */
-            border-bottom: 1px solid white;
-            color: white;
-        }
-
-        .table tbody a:hover,
-        .table tbody tr:hover {
-            color: #EDC948 !important;
-            background-color: #222831;
-        }
-</style>
 <div class="row center">
-<h1>회원 정보</h1>
+	<h1>MY PAGE</h1>
 </div>
-<table class="table table_line row center" style="margin-left: auto; margin-right: auto;">
+<div class="container w400 m50 page">
+	<div class="row left">
+		<label>아이디</label>
+		<div class="row left">
+			<input type="text" class="form form-input input-round fill"
+				value="<%=clientDto.getClientId()%>" disabled>
+		</div>
+	</div>
+	<div class="row left">
+		<label>닉네임</label>
+		<div class="row left">
+			<input type="text" class="form form-input input-round fill"
+				value="<%=clientDto.getClientNick()%>" disabled>
+		</div>
+	</div>
+	<div class="row left">
+		<label>생년월일</label>
+		<div class="row left">
+			<input type="date" class="form form-input input-round fill"
+				value="<%=clientDto.getClientBirth()%>" disabled>
+		</div>
+	</div>
+	<div class="row left">
+		<label>이메일</label>
+		<div class="row left">
+			<input type="email" class="form form-input input-round fill"
+				value="<%=clientDto.getClientEmail()%>" disabled>
+		</div>
+	</div>
+	<div class="row left">
+		<label>가입일</label>
+		<div class="row left">
+			<input type="date" class="form form-input input-round fill"
+				value="<%=clientDto.getClientJoindate()%>" disabled>
+		</div>
+	</div>
+	<div class="row left">
+		<label>등급</label>
+		<div class="row left">
+			<input type="text" class="form form-input input-round fill"
+				value="<%=clientDto.getClientGrade()%>" disabled>
 
-	<tr>
-		<th class="row right" width="30%">아이디</th>
-		<td class="line_under"><%=clientDto.getClientId()%></td>
-	</tr>
-	<tr>
-		<th class="row right">닉네임</th>
-		<td ><%=clientDto.getClientNick()%></td>
-	</tr>
-	<tr>
-		<th class="row right">생년월일</th>
-		<td><%=clientDto.getClientBirth()%></td>
-	</tr>
-	<tr>
-		<th class="row right">이메일</th>
-		<td ><%=clientDto.getClientEmail()%></td>
-	</tr>
-	<tr>
-		<th class="row right">등급</th>
-		<td><%=clientDto.getClientGrade()%></td>
-	</tr>
-	<tr>
-		<th class="row right">가입일</th>
-		<td><%=clientDto.getClientJoindate()%></td>
-	</tr>
-	<tr>
-		<th class="row right">선호하는 장르</th>
-		<td><%=likeGenreDto.getGenreName() %></td>
-	</tr>
-	
-	
-</table>
+		</div>
+	</div>
+	<div class="row left">
+		<label>나의 선호장르</label>
+		<div class="row left">
+			<input type="text" class="form form-input input-round fill"
+				value="<%=likeGenreDto.getGenreName()%>" disabled>
+
+		</div>
+	</div>
+
+</div>
+
 <div class="row center">
-            <input type="submit" value="비밀번호 변경" id="button" class="form-input full input-round btn_css1" onclick="location.href = 'password.jsp';">
-        </div>
-<div class="row center">
-            <input  type="submit" value="구독 ott 변경" id="button" class="form-input full input-round btn_css1" onclick="location.href = 'select_ott.jsp';">
-        </div>
-      
-<div class="row center">
-            <input type="submit" value="개인정보 변경" id="button" class="form-input full input-round btn_css1"  onclick="location.href = 'information.jsp';">
-        </div>
-<div class="row center">
-            <input type="submit" value="탈퇴하기" id="button" class="form-input full input-round btn_css1" onclick="location.href = 'exit.jsp';">
-        </div>
-        <div class="row center">
-            <input type="submit" value="나의 리뷰보기" id="button" class="form-input full input-round btn_css1" onclick="location.href='/semiproject/contents/review_list.jsp?reviewWriter=<%=clientId %>'" />
-        </div>
+	<button  type="button"  class="form-input full input-round btn_css1" onclick="location.href = 'password.jsp';" >비밀번호 변경</button>
+	<button type="button" class="form-input full input-round btn_css1"  onclick="location.href = 'information.jsp';">회원정보 변경</button>
+	<button type="button" class="form-input full input-round btn-black" onclick="location.href = 'exit.jsp';">탈퇴하기</button>
+</div>
+<!--//container w400 m50 page -->
+ 
+
+
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
