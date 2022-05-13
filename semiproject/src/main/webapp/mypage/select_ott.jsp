@@ -165,7 +165,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 			<label for="selectAll">전체선택 </label>
 		</div>
 		<div class="row center">
-			<button type="submit" class="btn-mint btn-size">등록</button>
+			<button type="submit" class="btn-mint btn-size">등록</button><br><br>
 		</div>
 		<div class="row center">
 			<a href="<%=request.getContextPath() %>/client/mypage.jsp" class="btn-black btn-link">뒤로</a>
