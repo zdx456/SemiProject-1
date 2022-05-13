@@ -217,4 +217,52 @@ public class ContentsAttachmentDao {
 		
 		return count;
 	}
+	
+	// 검색 결과 페이지
+	public List<ContentsAttachmentDto> search(int p, String keyword) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+							+ "join contents_actor D on D.contents_no = B.contents_no "
+							+ "join actor C on D.actor_no = C.actor_no "
+							+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+							+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+							+ "order by A.contents_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setInt(8, begin);
+		ps.setInt(9, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
 }

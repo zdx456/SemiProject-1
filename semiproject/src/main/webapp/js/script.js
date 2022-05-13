@@ -9,7 +9,7 @@ $(function(){
     });
             
     function loadPage(page) {
-    	$.ajax({
+    	$.ajax({	
         	url:"http://localhost:8080/semiproject/main/list.svt",
             type:"post",
             data:{
@@ -19,7 +19,7 @@ $(function(){
             	if(resp.length < 7) {
                 	$(".btn_more").remove();
                 }
-                
+
                 var div1 = $("<div>").addClass("swiper");
                 var div2 = $("<div>").addClass("swiper-wrapper");
                  
@@ -90,7 +90,7 @@ $(function(){
 			$('.notice_type').eq(i).css("color", "#00ADB5");
 		}
 	}
-	
+
 	// 문의 말머리 색 구분
 	for(var i = 0; i < $('.inquiry_type').length; i++) {
 		if($('.inquiry_type').eq(i).text() == '오류제보') {
@@ -137,4 +137,5 @@ $(function(){
 	        }
 	    });
 	});
+
 });

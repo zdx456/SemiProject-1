@@ -20,6 +20,8 @@ public class ContentsDownloadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//준비
+			
+			//Integer attachmentNo = Integer.valueOf(req.getParameter("attachmentNo"));
 			int attachmentNo = Integer.parseInt(req.getParameter("attachmentNo"));
 			
 			//처리
