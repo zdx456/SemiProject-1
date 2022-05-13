@@ -13,7 +13,9 @@
 	// like genre table 추가
 		LikeGenreDao likeGenreDao = new LikeGenreDao();
 		//LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
-				LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
+		
+		//임시 (송현도)
+		LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
 %>    
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
