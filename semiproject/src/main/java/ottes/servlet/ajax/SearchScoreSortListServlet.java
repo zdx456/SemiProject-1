@@ -14,26 +14,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ottes.beans.ContentsAttachmentDao;
 import ottes.beans.ContentsAttachmentDto;
 
-@WebServlet(urlPatterns = "/search/list.svt")
-public class searchListServlet  extends HttpServlet{
-	
+@WebServlet(urlPatterns = "/search/score_sort.svt")
+public class SearchScoreSortListServlet  extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
 			String keyword = req.getParameter("keyword"); // 검색 키워드
 
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
-			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.search(p, keyword); 
+			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchScoreSort(p, keyword); 
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(searchList);
 
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonString);
-			
-			resp.sendRedirect(req.getContextPath()+"/contents/list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
