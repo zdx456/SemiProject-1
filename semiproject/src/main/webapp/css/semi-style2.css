@@ -911,3 +911,63 @@ label[for=input_inquiry_content] {
 .search_img {
 	width: 100px;
 }
+
+.search_result_sort {
+	width: 500px;
+}
+
+.search_result_sort > div {
+	float: left;
+	display: block;
+	width: 130px;
+	height: 30px;
+	font-weight: bolder;
+	font-size: 1.1em;	
+}
+
+.search_list {
+	position: relative;
+}
+
+.search_list img {
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 150px; 
+	height: 150px; 
+	object-fit: cover; 
+	margin: auto;
+}
+
+.search_list a {
+	display: block;
+	width: 150px; 
+	height: 150px; 	
+}
+
+.search_list p:nth-child(1) {
+	position: absolute; 
+	top: 0; 
+	left: 170px; 	
+	font-size: 1.2em;
+	font-weight: bolder;
+}
+
+.search_list p:nth-child(2) {
+	position: absolute; 
+	top: 50px; 
+	left: 170px; 		
+	line-height: 20px;
+}
+
+.search_list p:nth-child(3) {
+	position: absolute; 
+	top: 30px; 
+	left: 170px; 	
+}
+
+.search_list p:nth-child(4) {
+	position: absolute; 
+	top: 30px; 
+	left: 190px; 	
+}

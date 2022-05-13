@@ -232,7 +232,7 @@ public class ContentsAttachmentDao {
 							+ "join contents_actor D on D.contents_no = B.contents_no "
 							+ "join actor C on D.actor_no = C.actor_no "
 							+ "join review E on E.contents_no = A.contents_no "
-							+ "join likecontents F on F.contents_no = A.contents_no "
+							+ "left outer join likecontents F on F.contents_no = A.contents_no "
 							+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 							+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 							+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
@@ -285,9 +285,9 @@ public class ContentsAttachmentDao {
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
 					+ "join review E on E.contents_no = A.contents_no "
-					+ "join likecontents F on F.contents_no = A.contents_no "
-					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
-					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "where (instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0) "
 					+ "and A.genre_name = ? "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
 					+ "order by A.contents_no desc"
@@ -322,6 +322,7 @@ public class ContentsAttachmentDao {
 			
 			list.add(contentsAttachmentDto);
 		}
+		System.out.println("list: " + list);
 		con.close();
 		return list;
 	}
@@ -340,9 +341,9 @@ public class ContentsAttachmentDao {
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
 					+ "join review E on E.contents_no = A.contents_no "
-					+ "join likecontents F on F.contents_no = A.contents_no "
-					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
-					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
+					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "where (instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0) "
 					+ "and A.region_name = ? "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
 					+ "order by A.contents_no desc"
@@ -395,7 +396,7 @@ public class ContentsAttachmentDao {
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
 					+ "join review E on E.contents_no = A.contents_no "
-					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join likecontents F on F.contents_no = A.contents_no "
 					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
@@ -430,7 +431,9 @@ public class ContentsAttachmentDao {
 			
 			list.add(contentsAttachmentDto);
 		}
+		
 		con.close();
+		
 		return list;
 	}	
 	
@@ -448,7 +451,7 @@ public class ContentsAttachmentDao {
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
 					+ "join review E on E.contents_no = A.contents_no "
-					+ "join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join likecontents F on F.contents_no = A.contents_no "
 					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
