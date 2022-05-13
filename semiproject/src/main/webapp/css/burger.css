@@ -3,7 +3,7 @@
 @author : 이기주
  */
 
-* {
+ * {
     margin: 0;
     padding: 0;
 }
@@ -13,7 +13,7 @@
     display: none;
 }
 
-input[id="burger"]+label {
+.burger+label { /*input[id="burger"]+label */
     position: relative;
     float: right;
     display: block;
@@ -25,7 +25,7 @@ input[id="burger"]+label {
     
 }
 
-input[id="burger"]+label>span {
+.burger+label>span {
     position: absolute;
     display: block;
     width: 100%;
@@ -33,59 +33,88 @@ input[id="burger"]+label>span {
     border-radius: 10px;
     background: white;
     transition: all 0.5s;
-    z-index: 2;
+    z-index: 1;
 
 }
 
-input[id="burger"]+label>span:nth-child(1) {
+.burger+label>span:nth-child(1) {
     top: 0px;
 }
 
-input[id="burger"]+label>span:nth-child(2) {
+.burger+label>span:nth-child(2) {
     top: 50%;
     transform: translateY(-50%);
 }
 
-input[id="burger"]+label>span:nth-child(3) {
+.burger+label>span:nth-child(3) {
     bottom: 0px;
 }
 
 
-input[id="burger"]:checked+label>span:nth-child(1) {
+.burger:checked+label>span:nth-child(1) {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
 }
 
-input[id="burger"]:checked+label>span:nth-child(2) {
+.burger:checked+label>span:nth-child(2) {
     opacity: 0;
 }
 
-input[id="burger"]:checked+label>span:nth-child(3) {
+.burger:checked+label>span:nth-child(3) {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
 }
 
-#burger+label+#burger-menu {
+.burger+label+.burger-menu {
     position: fixed;
     width: 300px;
     height: 100%;
-    background: #333;
-    top: 0px;
-    padding: 30px 25px 25px 25px;
+	background: rgba(51, 51, 51, 0.8);
+    top: 70px;
+	padding: 30px 10px 10px 10px;
     box-sizing: border-box;
     right: -300px;
     z-index: 1;
     transition: all 0.5s;
 }
 
-#burger:checked+label+#burger-menu {
-    right: 0px;
-}
-
-#burger:checked+label+#burger-menu>ul>li {
+.burger-menu > ul > li{
+    display: block;
     padding: 20px;
 }
 
-#burger:checked+label+#burger-menu>ul>li>a {
+.burger:checked +label+.burger-menu {
+    right: 0px;
+}
+
+.burger:checked +label+.burger-menu>ul>li {
+    padding: 20px;
+}
+
+.burger:checked +label+.burger-menu>ul>li>a {
     color: white;
 }
+
+.burger:checked +label+.burger-menu>ul>li>a:hover {
+    color: #EDC948;
+	font-weight: bold;
+}
+
+.burger + label + .burger-menu .hr {
+    margin: 0px;
+    padding: none;
+    width: 100%;
+    display: block;
+    size: 5px;
+}
+
+
+.burger +label+.burger-menu > .hr hr{
+    width: 100%;
+    size: 150px;
+}
+
+
+
+
+

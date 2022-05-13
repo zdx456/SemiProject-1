@@ -90,4 +90,15 @@ $(function(){
 			$('.notice_type').eq(i).css("color", "#00ADB5");
 		}
 	}
+	
+	// 헤더 메뉴 하나 누르면 다른 하나는 사라지게 하는 스크립트 추가 했습니다.
+	// @author:이기주
+	$(function(){
+	    $('input[type="checkbox"][name="headerchk"]').click(function(){
+	        if($(this).prop('checked')){
+	            $('input[type="checkbox"][name="headerchk"]').prop('checked', false);
+	            $(this).prop('checked', true);
+	        }
+	    });
+	});
 });

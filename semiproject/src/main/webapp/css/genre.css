@@ -1,0 +1,65 @@
+/* 
+장르 메뉴 style 입니다.
+@author : 이기주
+ */
+
+ * {
+    margin: 0;
+    padding: 0;
+}
+
+
+.hideChkbox {
+    display: none;
+}
+
+.genre+label {
+    position: relative;
+    float: right;
+    display: block;
+    width: 40px;
+    height: 20px;
+    margin-top: 28px;
+    margin-right: 35%;
+    cursor: pointer;
+    
+}
+
+.genre+label:hover {
+    color: #EDC948;
+    font-weight: bold;
+}
+
+.genre+label+.genre-menu {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: rgba(51, 51, 51, 0.8);
+    top: 70px;
+    padding: 30px 10px 10px 10px;
+    box-sizing: border-box;
+    right: -300px;
+    z-index: 1;
+    transition: all 0.5s;
+}
+
+.genre-menu>ul>li{
+    display: block;
+    padding: 20px;
+}
+
+.genre:checked+label+.genre-menu {
+    right: 0px;
+}
+
+.genre:checked+label+.genre-menu>ul>li {
+    padding: 20px;
+}
+
+.genre:checked+label+.genre-menu>ul>li>a {
+    color: white;
+}
+.genre:checked+label+.genre-menu>ul>li>a:hover {
+    color: #EDC948;
+	font-weight: bold;
+}
