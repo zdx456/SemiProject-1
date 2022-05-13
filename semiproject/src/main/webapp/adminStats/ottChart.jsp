@@ -1,10 +1,15 @@
+<%@page import="ottes.beans.StatsDto"%>
+<%@page import="java.util.List"%>
+<%@page import="ottes.beans.StatsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <!-- 원인 : 위와 같은 에러가 난다면, dbpool이 가득차서 그렇다
-db pool을 확인해 보면 active가 가득차 있는걸 알 수있다.
-[Pool=db1,Active=0,Idle=5][Pool=db2,Active=0,Idle=5]
-해결 : db를 사용하고 close하지 않은 곳이 있는지 확인하고 닫아준다.
-db.close();  -->
+    
+<%
+	StatsDao statsDao = new StatsDao();
+	List<StatsDto> list = statsDao.contentsCount();
+	
+%>
+   
 
    
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -25,8 +30,20 @@ db.close();  -->
   width: 33%;
   }
   
+  .w20{
+  width: 20%;
+  }
+  
   .w50{
   width: 50%;
+  }
+  
+  .w60 {
+  width: 60%;
+  }
+  
+  .w40 {
+  width: 40%;
   }
   
   .back{
@@ -43,14 +60,36 @@ db.close();  -->
   .fsize{
   font-size: 25px;
   }
+  
+  .table.table-border {
+   	border-bottom:1px solid #929292;
+	}
 	
+	.table.table-border.total-border {
+		
+    border: 10px double white;
+ 
+	}
+	
+	.ver-center{
+		vertical-align: middle;
+	}
+	
+	.table.table-border > thead > tr > th {
+		font-weight: bold;
+		background-color: #929292;
+		color: black;
+		border-color: white;
+	}
+	
+
 
 </style>
 
   <script>
     $(function () {
       $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+    	  url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -61,13 +100,13 @@ db.close();  -->
           var labels = [];
 
           for (var i = 0; i < resp.length; i++) {
-            labels.push(resp[i].genreName);
+            labels.push(resp[i].ottName);
           }
 
-          var cntTotalGenre = [];
+          var cntTotalOtt = [];
 
           for (var i = 0; i < resp.length; i++) {
-            cntTotalGenre.push(resp[i].cntTotalGenre);
+        	  cntTotalOtt.push(resp[i].cntTotalOtt);
           }
 
           //data : 차트에 표시될 데이터
@@ -81,7 +120,7 @@ db.close();  -->
                 
               ], //배경색
               borderColor: 'white', //테두리색
-              data: cntTotalGenre, //데이터
+              data: cntTotalOtt, //데이터
             }]
           };
 
@@ -106,7 +145,7 @@ db.close();  -->
       });
     
       $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+        url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -117,7 +156,7 @@ db.close();  -->
           var labels = [];
 
           for (var i = 0; i < resp.length; i++) {
-            labels.push(resp[i].genreName);
+            labels.push(resp[i].ottName);
           }
 
           var cntMan = [];
@@ -162,18 +201,18 @@ db.close();  -->
     });
 
     $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+    	url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
           //차트 생성
-          //console.log(resp);
+          console.log(resp);
 
           //label : X축에 표시될 항목들
           var labels = [];
 
           for (var i = 0; i < resp.length; i++) {
-            labels.push(resp[i].genreName);
+            labels.push(resp[i].ottName);
           }
 
           var cntWoman = [];
@@ -218,7 +257,7 @@ db.close();  -->
     
     $(function () {
         $.ajax({
-          url: "http://localhost:8080/semiproject/ajax/genreAgeChart.svt",
+        	url: "http://localhost:8080/semiproject/ajax/ottAgeChart.svt",
           type: "post",
           //data: {},
           success: function (resp) {
@@ -230,7 +269,7 @@ db.close();  -->
             var labels = [];
 
             for (var i = 0; i < resp.length; i++) {
-              labels.push(resp[i].genreName);
+              labels.push(resp[i].ottName);
             }
 
             //데이터 불러오기
@@ -324,6 +363,68 @@ db.close();  -->
         })
       });
     
+    $(function () {
+        //차트는 시작하자마자 화면에 표시되어야 한다.
+        // -> 시작하자마자 서버에 비동기 통신 요청을 보내 데이터를 가져와야한다
+        // -> 가져온 데이터에서 제목과 내용을 분리해서 설정한다.
+        // -> (중요) 통신이 끝나야 차트가 나올 수 있다.
+
+        $.ajax({
+            url: "http://localhost:8080/semiproject/ajax/OttContentsChart.svt",
+            type: "post",
+            // data : {}
+            success: function (resp) {
+                //차트 생성
+                console.log(resp);
+
+                //laber : X축에 표시될 항목들
+                var labels = [];
+
+                for (var i = 0; i < resp.length; i++) {
+                    labels.push(resp[i].ottName);
+                }
+
+
+                var cnt = [];
+                for (var i = 0; i < resp.length; i++) {
+                    cnt.push(resp[i].contentsNo);
+                }
+                var data = {
+                    labels: labels,
+                    datasets: [{
+                        label: '가입인원 수', //범례
+                        backgroundColor: [
+                                    '#eb3b5a',
+                                    '#20bf6b',
+                                    '#4b7bec',
+                                    '#a55eea',
+                                    '#fa8231',
+                                    '#f7b731'
+                                ],
+                        borderColor : "grey",
+                                    hoverOffset: 4,
+                        data: cnt, //데이터
+                    }]
+                };
+
+                var config = {
+                    type: 'doughnut', //차트의 모양 line,bar,pie
+                    data: data, //차트 데이터
+                    options: {
+                    	
+                    }
+                }
+
+
+                var myChart = new Chart(
+                    document.querySelector('#ottContents'), //차드 적용 대상
+                    config //차트의 옵션
+                );
+            }
+        });
+
+    });
+    
   </script>
 
 
@@ -332,7 +433,7 @@ db.close();  -->
   
   	
 		    <div class="row center m30">
-		      <h1 class="title">선호 장르(전체)</h1>
+		      <h1 class="title">가입한 OTT 종류 (전체)</h1>
 		    </div>
 		    <div class="row">
 		      <canvas id="myChart1"></canvas>
@@ -344,7 +445,7 @@ db.close();  -->
 		<div class="flex-container">
 			<div class="w50">
 		    <div class="row center m30">
-		      <span class="title fsize">남성 선호 장르</span>
+		      <span class="title fsize">남성 가입한 OTT 종류</span>
 		    </div>
 		    <div class="row">
 		      <canvas id="myChart2"></canvas>
@@ -353,7 +454,7 @@ db.close();  -->
 	
 			<div class="w50">
 		    <div class="row center m30">
-		      <span class="title fsize">여성 선호 장르</span>
+		      <span class="title fsize">여성 가입한 OTT 종류</span>
 		    </div>
 		    <div class="row">
 		      <canvas id="myChart3"></canvas>
@@ -367,14 +468,97 @@ db.close();  -->
 	    
 	  <div class="back">
 	    <div class="row center m30">
-	      <h1 class="title">연령별 선호 장르</h1>
+	      <h1 class="title">연령별 가입한 OTT 종류</h1>
 	    </div>
 	
 	    <div class="row">
 	      <canvas id="myChart4"></canvas>
 	    </div>
 	   </div>
+	   
+	   <div class="row m100"></div>
+	   
+	 <!-- ott/국가/장르별 콘텐츠 수 -->
+	 <hr></hr>
 	 
+	<div class="row m100"></div>
+	 
+	
+		<div class="row center m30">
+		<div class="row center">
+			<h1 class="title">OTT별/장르별/국가별 콘텐츠 수</h1>
+		</div>
+		 
+			    
+		 <table class="table table-border">
+		 
+		 	<thead>
+		 		<tr>
+		 			<th rowspan="2" class="center ver-center">구분</th>
+		 			<th rowspan="2" class="center ver-center">전체</th>
+		 			<th colspan="5" class="center">장르</th>
+		 			<th colspan="3" class="center">국가</th>
+		 		</tr>
+		 
+				<tr class="center">
+					
+					<th>다큐멘터리</th>
+					<th>드라마</th>
+					<th>버라이어티</th>
+					<th>애니메이션</th>
+					<th>영화</th>
+					<th>아시아</th>
+					<th>한국</th>
+					<th>할리우드</th>
+				</tr>
+			</thead>
+				
+				<%for(StatsDto statsDto : list) {%>
+				<tr class="center">
+				<%if(statsDto.getOttName() == null) {%>
+				<td class="total-border"><span>전체</span></td>
+				<%} else {  %>
+					<td><%=statsDto.getOttName() %></td>
+				<%} %>
+					<td><%=statsDto.getConTotal() %></td>
+					<td><%=statsDto.getConDocumentary() %></td>
+					<td><%=statsDto.getConDrama() %></td>
+					<td><%=statsDto.getConVariety() %></td>
+					<td><%=statsDto.getConAnimation() %></td>
+					<td><%=statsDto.getConMovie() %></td>
+					<td><%=statsDto.getConAsia() %></td>
+					<td><%=statsDto.getConKorea() %></td>
+					<td><%=statsDto.getConHollywood() %></td>
+				</tr>
+		<%} %>
+			
+			</table>
+		</div>
+					
+				<div class="row m100"></div>	
+				
+					<div class="row center m30">
+						<h1 class="title">OTT별 콘텐츠 수 (차트)</h1>
+					</div>
+			
+			<div class="flex-container">
+				
+					<div class="row w20"></div>
+				
+					<div class="row w60">
+		        <div class="row center">
+		            <canvas id="ottContents"></canvas>
+		        </div>
+		      </div>
+		      
+		      <div class="row w20"></div>
+		      
+	    </div>
+	   
+	     </div>
+    
+	 
+	 <!-- 버튼 -->
 	  <div class="row m100"></div>
 	  
 	  <div class="w25">
@@ -393,10 +577,7 @@ db.close();  -->
 	      </div>
 	     </div>
 	     </div>
-	     
-	    </div>
-	    
-  
+	   </div>
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

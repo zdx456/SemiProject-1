@@ -245,6 +245,13 @@
 	    border-right: none;
 	}
 	
+	.btn-mint{
+    background: transparent;
+    border: 2px solid #00ADB5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #00ADB5;
+	}
 
 </style>
 
@@ -281,7 +288,7 @@
 			
 				<div class="layer-2">
 					<div class="layer-2">
-						<a href="insert.jsp" class="btn-black btn-p3">콘텐츠 등록하기</a>
+						<a href="insert.jsp" class="btn-mint btn-p3">콘텐츠 등록하기</a>
 					</div>
 					<div class="layer-2">					
 						<a href="list.jsp" class="btn-black btn-p3">전체 목록</a>
