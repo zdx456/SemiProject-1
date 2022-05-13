@@ -24,7 +24,7 @@ public class SearchScoreSortListServlet  extends HttpServlet{
 
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
 			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchScoreSort(p, keyword); 
-
+			
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(searchList);
 
