@@ -34,6 +34,7 @@ ActorDto actorDto = actorDao.selectName(contentsNo);
 ReviewDao reviewDao = new ReviewDao();
 List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 
+
 // 현재 로그인한 사용자가 댓글 작성자인지 확인하는 코드
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
 String clientId = (String) session.getAttribute("login");
@@ -49,7 +50,7 @@ OttContentsDao ottContentsDao = new OttContentsDao();
 OttContentsDto ottContentsDto = ottContentsDao.selectOne(contentsNo);
 
 OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
-List<OttAttachmentDto> list = ottAttachmentDao.selectList(ottContentsDto.getOttNo());
+List<OttAttachmentDto> list = ottAttachmentDao.selectList( contentsNo);
 
 OttDao ottDao = new OttDao();
 List<OttDto> ottlist = ottDao.findPrice(contentsNo);
@@ -105,7 +106,8 @@ main{
     vertical-align: middle;
 }
 .review {
-	color: grey;
+	color: #00ADB5;
+	paddint : 0.5em;
 	background-color: #313842;
 	border: transparent;
 	border-radius : 10px;
@@ -154,10 +156,39 @@ textarea::placeholder {
 	color : #00ADB5;
 }
 
+.flex-container {
+	background: rgb(54,60,70);
+	background: linear-gradient(180deg, rgba(54,60,70,0.7936216723017332) 1%, rgba(98,105,113,0.4630894594165791) 74%);
+	padding : 1em;
+	margin : 20px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width : 100%;
+	border-radius: 20px;
+	
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+
+$(function() {
+	
+});
+function isEmpty(value){
+
+    if(value == null || value.length === 0) {
+
+           return "";
+
+     } else{
+
+            return value;
+
+     }
+
+}
       
       
 $(function () {
@@ -200,12 +231,37 @@ $(function () {
 <body>
 
 	<jsp:include page="/template/header.jsp"></jsp:include>
+	
+	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.5/score.js"></script>
+	 <script>
+        $(function(){
+        	$(".score-show").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent"
+        	});
+        	$(".score-select").score({
+        		starColor: "gold", 
+        	    backgroundColor: "transparent", 
+                editable:true,
+                integerOnly:true,
+                zeroAvailable:false,
+                send: {
+                    sendable:true,
+                    name:"reviewScore",
+                },
+                display:{
+                    showNumber:false,
+                    placeLimit:0,
+                }
+            });
+        });
+    </script>
 
 
 <main>
 
-	
-	<div id="box1" class="content">
+	<div class="row flex-container center">
+	<div id="box1" class="content center">
 			
 			<img
 				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
@@ -217,6 +273,7 @@ $(function () {
 					<tr>
 						<td>
 						<%for(OttAttachmentDto ottAttachmentDto : list) { %>
+						 <%System.out.println("a");%>
 						<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
 				width="40" height="40" class="img img-logo" alt="ott">
 						<%} %>
@@ -231,8 +288,30 @@ $(function () {
 						</td>
 					</tr>
 
+						<tr>
+						<td>
+						<span>
+						<%if(reviewDao.avg(contentsNo) == 1){ %>
+						<label class="score-show" data-max="5" data-rate="1"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 2){ %>
+						<label class="score-show" data-max="5" data-rate="2"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 3){ %>
+						<label class="score-show" data-max="5" data-rate="3"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 4){ %>
+						<label class="score-show" data-max="5" data-rate="4"></label>
+						<%} %>
+						<%if(reviewDao.avg(contentsNo) == 5){ %>
+						<label class="score-show" data-max="5" data-rate="5"></label>
+						<%} %>
+						</span>
+						</td>
+					</tr>
+
 					<tr>
-						<td> <span class="count"><%=likeContentsDao.count()%></span>  
+						<td> <span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
 						<% if (likecontentsDto != null) { %> 
 						<label class="heart like">♥</label> 
 						<% } else { %> 
@@ -240,6 +319,7 @@ $(function () {
 						<% } %>
 						</td>
 					</tr>
+				
 				</thead>
 			</table>
 		
@@ -280,15 +360,28 @@ $(function () {
 				</tr>
 
 				<tr>
-					<td>배우 : <%=actorDto.getActorName1()%>, <%=actorDto.getActorName2()%>,
-						<%=actorDto.getActorName3()%>, <%=actorDto.getActorName4()%>
+					<td>배우 : 
+					<%if(actorDto.getActorName1() != null) { %>
+					<%=actorDto.getActorName1() %> 
+					<%} %>
+					<%if(actorDto.getActorName2() !=null) { %>
+					<%=actorDto.getActorName2() %>
+					<%} %>
+					<%if(actorDto.getActorName3() != null) { %>
+					<%=actorDto.getActorName3() %> 
+					<%} %>
+					<%if(actorDto.getActorName4() !=null) { %>
+					<%=actorDto.getActorName4() %>
+					<%} %>
+
 					</td>
 				</tr>
 
 			</table>
 		
-		
 	</div>
+	
+	
 	<div id="box3" class="right m20">
 		
 		<!-- 댓글 작성 영역 -->
@@ -308,13 +401,7 @@ $(function () {
 				
 			<br>
 				
-			<select name="reviewScore" class="review review-score" >
-				<option value="1" class="review">★</option>
-				<option value="2" class="review">★★</option>
-				<option value="3" class="review">★★★</option>
-				<option value="4" class="review">★★★★</option>
-				<option value="5" class="review">★★★★★</option>
-			</select> 
+			<span class="score-select" data-max="5" data-rate="3"></span>
 			<input type="submit" class="btn-yellow button" value="리뷰 등록">
 		</form>
 	
@@ -343,22 +430,23 @@ $(function () {
 				<td width="30%">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
 				</td>
-				
-				<% String reviewScore = Integer.toString(reviewDto.getReviewScore());
-
-				if (reviewScore.equals("1")) {
-					reviewScore = reviewScore.replaceAll("1", "★");
-				} else if (reviewScore.equals("2")) {
-					reviewScore = reviewScore.replaceAll("2", "★★");
-				} else if (reviewScore.equals("3")) {
-					reviewScore = reviewScore.replaceAll("3", "★★★");
-				} else if (reviewScore.equals("4")) {
-					reviewScore = reviewScore.replaceAll("4", "★★★★");
-				} else if (reviewScore.equals("5")) {
-					reviewScore = reviewScore.replaceAll("5", "★★★★★");
-				}
-				%>
-				<td width="5%" class="review review-score"><%=reviewScore%></td>
+				<td width="10%">
+						<%if(reviewDto.getReviewScore() == 1){ %>
+						<label class="score-show" data-max="5" data-rate="1"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 2){ %>
+						<label class="score-show" data-max="5" data-rate="2"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 3){ %>
+						<label class="score-show" data-max="5" data-rate="3"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 4){ %>
+						<label class="score-show" data-max="5" data-rate="4"></label>
+						<%} %>
+						<%if(reviewDto.getReviewScore() == 5){ %>
+						<label class="score-show" data-max="5" data-rate="5"></label>
+						<%} %>
+						</td>
 			</tr>
 
 			<%
@@ -372,7 +460,7 @@ $(function () {
 		
 	</div>
 	
-	
+	</div>
 </main>
 
 

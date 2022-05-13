@@ -332,7 +332,7 @@
 <div class="container w500 m30">
 	
 	<div class="row center m30">
-		<h1 class="title m-title">컨텐츠 수정</h1>
+		<h1 class="title m-title">콘텐츠 수정</h1>
 	</div>
 
 	<form action="edit.svt" method="post" enctype="multipart/form-data" class="form-submit">

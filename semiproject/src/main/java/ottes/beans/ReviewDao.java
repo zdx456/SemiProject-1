@@ -31,6 +31,28 @@ public class ReviewDao {
 		return list;
 	}
 	
+	// 리뷰 별점 불러오기 위한 메소드
+	public int avg(int contentsNo) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql= "select avg(review_score) from review where contents_no = ? group by contents_no";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ResultSet rs = ps.executeQuery();
+		
+		int avg = 0;
+		
+		if(rs.next()) {
+			avg = rs.getInt(1);
+		}
+		
+		con.close();
+		return avg;
+	
+	}
+	
 	// 내가 쓴 review 보기 위한 메소드
 	public List<ReviewDto> selectList(String reviewWriter) throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -58,7 +80,14 @@ public class ReviewDao {
 	// 컨텐츠별 리뷰 보기!
 		public List<ReviewDto> selectList(int contentsNo) throws Exception {
 			Connection con = JdbcUtils.getConnection();
-			String sql = "select * from review where contents_no = ? order by review_no desc";
+			// 컨텐츠 상세 보기에서는 리뷰 5개까지만 보여주기
+			String sql = 
+					"select * from( "
+					+ "  select rownum RN, TMP.* from ("
+					+ "  select review.* from review where contents_no = ? order by review_no desc"
+					+ "        ) TMP"
+					+ ") where RN between 1 and 5";
+			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, contentsNo);
 			ResultSet rs = ps.executeQuery();

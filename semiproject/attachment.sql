@@ -16,8 +16,10 @@ attachment_size number default 0 not null
 create table contents_attachment (
 contents_no number references contents(contents_no) on delete cascade,
 attachment_no number references attachment(attachment_no) on delete cascade,
-primary key(contents_no, attachment__no)
+primary key(contents_no, attachment_no)
 );
+
+
 
 /* ott-첨부파일 테이블(ottFile)*/
  

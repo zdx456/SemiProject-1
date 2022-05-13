@@ -280,7 +280,7 @@
 	<!-- 1페이지 시작 -->
 		<div class="container w500 m30 page">
 			<div class="row center m30">
-				<h1 class="title m-title">컨텐츠 등록(1/3)</h1>
+				<h1 class="title m-title">콘텐츠 등록(1/3)</h1>
 			</div>
 		
 		
@@ -385,7 +385,7 @@
 		<!-- 2페이지 시작 -->
 		<div class="container w500 m30 page">
 			<div class="row center m30">
-				<h1 class="title m-title">컨텐츠 등록(2/3)</h1>
+				<h1 class="title m-title">콘텐츠 등록(2/3)</h1>
 			</div>
 		
 			<!------------ 배우 등록 ------------>
@@ -428,7 +428,7 @@
 		
 		<div class="container w500 m30 page">
 			<div class="row center m30">
-				<h1 class="title m-title">컨텐츠 등록(3/3)</h1>
+				<h1 class="title m-title">콘텐츠 등록(3/3)</h1>
 			</div>
 			
 		<!------------ OTT 등록 ------------>

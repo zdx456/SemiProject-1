@@ -15,7 +15,7 @@
 <%
 	int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
 
-	//컨텐츠 정보 가져오기
+	//콘텐츠 정보 가져오기
 	ContentsDao contentsDao = new ContentsDao();
 	ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
 	

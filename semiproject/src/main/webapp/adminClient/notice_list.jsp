@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%-- <%@page import="java.util.List"%>
 <%@page import="ottes.beans.NoticeDao"%>
 <%@page import="ottes.beans.NoticeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -194,5 +194,5 @@
 			<%} %>
 		<%} %>		
 	</div>
-</div>	
-<jsp:include page="/template/footer.jsp"></jsp:include>
+</div>
+<jsp:include page="/template/footer.jsp"></jsp:include> --%>
