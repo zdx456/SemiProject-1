@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+  <!-- 원인 : 위와 같은 에러가 난다면, dbpool이 가득차서 그렇다
+db pool을 확인해 보면 active가 가득차 있는걸 알 수있다.
+[Pool=db1,Active=0,Idle=5][Pool=db2,Active=0,Idle=5]
+해결 : db를 사용하고 close하지 않은 곳이 있는지 확인하고 닫아준다.
+db.close();  -->
 
    
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -107,7 +111,7 @@
         //data: {},
         success: function (resp) {
           //차트 생성
-          console.log(resp);
+          //console.log(resp);
 
           //label : X축에 표시될 항목들
           var labels = [];
@@ -163,7 +167,7 @@
         //data: {},
         success: function (resp) {
           //차트 생성
-          console.log(resp);
+          //console.log(resp);
 
           //label : X축에 표시될 항목들
           var labels = [];
@@ -384,7 +388,7 @@
 	          <a href="genreChart.jsp" class="btn-black btn-size">선호장르</a>
 	        </div>
 	        <div class="m33">
-	          <a href="#" class="btn-black btn-size">Ott</a>
+	          <a href="ottChart.jsp" class="btn-black btn-size">Ott</a>
 	        </div>
 	      </div>
 	     </div>
@@ -392,7 +396,7 @@
 	     
 	    </div>
 	    
-  </div>
+  
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
