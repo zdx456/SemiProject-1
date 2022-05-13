@@ -50,7 +50,7 @@
 		<header>
 			<div class="header_left">
 				<div class="logo">
-					<a href="#"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a>
+					<a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/image/logo.png" alt="#"></a>
 				</div>
 			</div>
 			<div class="header_right">
@@ -89,6 +89,15 @@
 								<ul>
 									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
 						            <li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>
+						            <li>
+							            <a href="<%=request.getContextPath()%>/contents/review_list.jsp?reviewWriter=<%=clientId%>">
+							            내가 쓴 리뷰
+							            </a>
+						            </li>
+						            <li><a href="<%=request.getContextPath()%>/mypage/select_ott.jsp">나의 OTT</a></li>
+						            <li>
+						            		<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
+						            </li>
 						            <li class="hr"><hr></li>
 									<li><a href="<%=request.getContextPath()%>/adminClient/client_list.jsp">회원목록</a></li>
 						            <li><a href="<%=request.getContextPath()%>/adminContents/list.jsp">콘텐츠 관리</a></li>
@@ -115,6 +124,15 @@
 								<ul>
 									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
 						            <li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>
+						            <li>
+							            <a href="<%=request.getContextPath()%>/contents/review_list.jsp?reviewWriter=<%=clientId%>">
+							            내가 쓴 리뷰
+							            </a>
+						            </li>
+						            <li><a href="<%=request.getContextPath()%>/mypage/select_ott.jsp">나의 OTT</a></li>
+						            <li>
+						            		<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
+						            </li>
 								</ul>
 							</div>
 						</li>
