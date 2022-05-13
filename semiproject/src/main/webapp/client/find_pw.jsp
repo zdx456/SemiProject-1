@@ -16,19 +16,16 @@
 	        <h1>비밀번호 찾기</h1>
 	    </div>
 	    <div class="row">
-	        <label>아이디</label>
-	        <input type="text" name="clientId" autocomplete="off" required class="form-input fill input-round">
+	        <input type="text" name="clientId" autocomplete="off" required class="form-input fill input-round" placeholder ="아이디">
 	    </div>
 	    <div class="row">
-	        <label>닉네임</label>
-	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round">
+	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round" placeholder ="닉네임">
 	    </div>
 	    <div class="row">
-           <input type="date" name="clientBirth" autocomplete="off" required   placeholder="생일"  class="form-input input-round">
+           <input type="date" name="clientBirth" autocomplete="off" required    class="form-input input-round fill">
        </div>
 	    <div class="row">
-	        <label>이메일</label>
-	        <input type="email" name="clientEmail" autocomplete="off" required class="form-input fill input-round">
+	        <input type="email" name="clientEmail" autocomplete="off" required class="form-input fill input-round" placeholder ="이메일">
 	    </div>
 	    
 	    <div class="row center">

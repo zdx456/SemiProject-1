@@ -12,12 +12,11 @@ ClientDto clientDto = clientDao.selectOne(clientId);
 
 // like genre table 추가
 LikeGenreDao likeGenreDao = new LikeGenreDao();
-//LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
+LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
 
-//임시 (송현도)
-LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
+//임시 (송현도) 
+//LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
 %>
-
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="row center">
@@ -81,7 +80,7 @@ LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
 <div class="row center">
 	<button  type="button"  class="form-input full input-round btn_css1" onclick="location.href = 'password.jsp';" >비밀번호 변경</button>
 	<button type="button" class="form-input full input-round btn_css1"  onclick="location.href = 'information.jsp';">회원정보 변경</button>
-	<button type="button" class="form-input full input-round btn-black" onclick="location.href = 'exit.jsp';">탈퇴하기</button>
+	<button type="button" class="form-input full input-round btn-black" onclick="location.href = 'exit.jsp';">탈퇴하기</button>	
 </div>
 <!--//container w400 m50 page -->
  
