@@ -28,8 +28,14 @@ $(function(){
 	
 	$(".genre").change(function(){
 		$('.search_list').empty();
-	    searchGenreFirstPage(keyword, $(this).val());	
-	    $('.genre_more').removeClass('hidden');	
+		if (keyword == null) {
+			searchGenreFirstPage($(this).val());
+			$('.genre_more_all').removeClass('hidden');				
+		} else {
+			searchGenreFirstPage(keyword, $(this).val());
+			$('.genre_more').removeClass('hidden');	
+		} 	
+	    
 	});
 	
 	$(".region").change(function(){
@@ -59,16 +65,19 @@ $(function(){
 	
 	$(".genre_more").click(function(){
 		page2++;
-	    searchGenrePage(page2, keyword, $(".genre").val());
+		searchGenrePage(page2, keyword, $(".genre").val()); 
 	});			
+
+	$(".genre_more_all").click(function(){
+		page2++;
+		searchGenrePage(page2, $(".genre").val()); 
+	});	
 	
 	$(".region_more").click(function(){
 		page2++;
 	    searchRegionPage(page2, keyword, $(".region").val());
 	});			
-	
-
-			        
+	        
 	function searchPage(keyword) {
 	    $.ajax({
 	        url:"http://localhost:8080/semiproject/search/list.svt",
@@ -130,6 +139,36 @@ $(function(){
 	    });
 	}
 
+	function searchGenrePage(page2, type) {
+	    $.ajax({
+	        url:"http://localhost:8080/semiproject/search/genre_sort2.svt",
+	        type:"post",
+	        data:{
+	            p : page2, 
+	            type : type
+	        },
+	        success:function(resp){
+	            if(resp.length < 7) {
+	                $(".genre_more_all").remove();
+	            }
+	             
+	            for(var i=0; i < resp.length; i++) {
+	                var div = $("<div>");
+	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var p1 = $("<p>").text(resp[i].contentsTitle);
+	                var p2 = $("<p>").text(resp[i].contentsSummary);
+	                var p3 = $("<p>").text(resp[i].avgScore);
+	                var p4 = $("<p>").text(resp[i].countLike);
+	
+	                img.append(a);
+	                div.append(img).append(p1).append(p2).append(p3).append(p4);
+	                $(".search_list").append(div);
+	            }
+	        }
+	    });
+	}
+
 	function searchGenreFirstPage(keyword, type) {
 	    $.ajax({
 	        url:"http://localhost:8080/semiproject/search/genre_sort.svt",
@@ -137,6 +176,36 @@ $(function(){
 	        data:{
 	            p : 1, 
 	            keyword : keyword,
+	            type : type
+	        },
+	        success:function(resp){
+	            if(resp.length < 7) {
+	                $(".genre_more").remove();
+	            }
+	             
+	            for(var i=0; i < resp.length; i++) {
+	                var div = $("<div>");
+	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var p1 = $("<p>").text(resp[i].contentsTitle);
+	                var p2 = $("<p>").text(resp[i].contentsSummary);
+	                var p3 = $("<p>").text(resp[i].avgScore);
+	                var p4 = $("<p>").text(resp[i].countLike);
+	
+	                img.append(a);
+	                div.append(img).append(p1).append(p2).append(p3).append(p4);
+	                $(".search_list").append(div);
+	            }
+	        }
+	    });
+	}
+
+	function searchGenreFirstPage(type) {
+	    $.ajax({
+	        url:"http://localhost:8080/semiproject/search/genre_sort2.svt",
+	        type:"post",
+	        data:{
+	            p : 1, 
 	            type : type
 	        },
 	        success:function(resp){
