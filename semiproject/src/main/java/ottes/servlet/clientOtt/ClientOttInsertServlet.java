@@ -40,11 +40,11 @@ public class ClientOttInsertServlet extends HttpServlet {
 			}
 			
 			
-			resp.sendRedirect(req.getContextPath()+"/mypage/main.jsp");
+			resp.sendRedirect(req.getContextPath()+"/client/mypage.jsp");
 			}
 			else {
 				clientOttDao.delete(clientId);
-				resp.sendRedirect(req.getContextPath()+"/mypage/main.jsp");
+				resp.sendRedirect(req.getContextPath()+"/client/mypage.jsp");
 			}
 		}
 		catch(Exception e) {
