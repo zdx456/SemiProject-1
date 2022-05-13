@@ -10,8 +10,8 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script src="<%=request.getContextPath()%>/js/search.js"></script>
 
-<div class="all">전체</div>
-<div class="genre">
+<!-- <div class="all">전체</div> -->
+<!-- <div class="genre">
 <form>
 	<select name="type">
 		<option value="다큐멘터리">다큐멘터리</option>
@@ -28,10 +28,12 @@
 		<option value="아시아">아시아</option>
 		<option value="할리우드">할리우드</option>
 	</select>
-</div>
+</div> -->
 <div class="score">평균 평점</div>
 <div class="like">관심 수</div>
 <div class="search_list"></div>
 <div class="btn_searchmore"></div>
 
+<div class="score_more">더보기</div>
+<div class="like_more">더보기</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
