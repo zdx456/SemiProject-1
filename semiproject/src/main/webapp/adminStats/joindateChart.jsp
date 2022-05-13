@@ -153,10 +153,10 @@
 	        	<a href="joindateChart.jsp" class="btn-black btn-size">가입자 수</a>
 	        	</div>
 	        	<div class="m33">
-	        	<a href="#" class="btn-black btn-size">선호장르</a>
+	        	<a href="genreChart.jsp" class="btn-black btn-size">선호장르</a>
 	        	</div>
 	        	<div class="m33">
-	        	<a href="#" class="btn-black btn-size">Ott</a>
+	        	<a href="ottChart.jsp" class="btn-black btn-size">Ott</a>
 	        	</div>
 	        </div>
         </div>
