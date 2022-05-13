@@ -84,7 +84,7 @@
 							<div class="burger-menu">
 								<!-- 메뉴 -->
 								<ul>
-									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
+									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp?clientId=<%=clientId%>">마이페이지</a></li>
 						            <li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>
 						            <li class="hr"><hr></li>
 									<li><a href="<%=request.getContextPath()%>/adminClient/client_list.jsp">회원목록</a></li>
@@ -110,7 +110,7 @@
 							<div class="burger-menu">
 								<!-- 메뉴 -->
 								<ul>
-									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
+									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp?clientId=<%=clientId%>">마이페이지</a></li>
 						            <li><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></li>
 								</ul>
 							</div>
