@@ -129,6 +129,7 @@
             type: 'bar', //차트의 모양
             data: data, //차트의 데이터
             options: {
+            	maxBarThickness: 100,
 							legend: {
 				        display: false
 				    	}
@@ -448,7 +449,7 @@
 		      <span class="title fsize">남성 가입한 OTT 종류</span>
 		    </div>
 		    <div class="row">
-		      <canvas id="myChart2"></canvas>
+		      <canvas id="myChart2" width="300" height="300"></canvas>
 		    </div>
 	   	</div>
 	
@@ -457,7 +458,7 @@
 		      <span class="title fsize">여성 가입한 OTT 종류</span>
 		    </div>
 		    <div class="row">
-		      <canvas id="myChart3"></canvas>
+		      <canvas id="myChart3" width="300" height="300"></canvas>
 		    </div>
 		   </div>
 	   </div>
@@ -494,22 +495,22 @@
 		 
 		 	<thead>
 		 		<tr>
-		 			<th rowspan="2" class="center ver-center">구분</th>
-		 			<th rowspan="2" class="center ver-center">전체</th>
+		 			<th rowspan="2" class="center ver-center" width="100">구분</th>
+		 			<th rowspan="2" class="center ver-center" width="100">전체</th>
 		 			<th colspan="5" class="center">장르</th>
 		 			<th colspan="3" class="center">국가</th>
 		 		</tr>
 		 
 				<tr class="center">
 					
-					<th>다큐멘터리</th>
-					<th>드라마</th>
-					<th>버라이어티</th>
-					<th>애니메이션</th>
-					<th>영화</th>
-					<th>아시아</th>
-					<th>한국</th>
-					<th>할리우드</th>
+					<th width="100">영화</th>
+					<th width="100">드라마</th>
+					<th width="100">다큐멘터리</th>
+					<th width="100">애니메이션</th>
+					<th width="100">버라이어티</th>
+					<th width="100">아시아</th>
+					<th width="100">한국</th>
+					<th width="100">할리우드</th>
 				</tr>
 			</thead>
 				
@@ -521,11 +522,11 @@
 					<td><%=statsDto.getOttName() %></td>
 				<%} %>
 					<td><%=statsDto.getConTotal() %></td>
-					<td><%=statsDto.getConDocumentary() %></td>
-					<td><%=statsDto.getConDrama() %></td>
-					<td><%=statsDto.getConVariety() %></td>
-					<td><%=statsDto.getConAnimation() %></td>
 					<td><%=statsDto.getConMovie() %></td>
+					<td><%=statsDto.getConDrama() %></td>
+					<td><%=statsDto.getConDocumentary() %></td>
+					<td><%=statsDto.getConAnimation() %></td>
+					<td><%=statsDto.getConVariety() %></td>
 					<td><%=statsDto.getConAsia() %></td>
 					<td><%=statsDto.getConKorea() %></td>
 					<td><%=statsDto.getConHollywood() %></td>
@@ -547,7 +548,7 @@
 				
 					<div class="row w60">
 		        <div class="row center">
-		            <canvas id="ottContents"></canvas>
+		            <canvas id="ottContents" width="400" height="400"></canvas>
 		        </div>
 		      </div>
 		      
