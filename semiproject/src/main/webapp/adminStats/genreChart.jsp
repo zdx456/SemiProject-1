@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <!-- 원인 : 위와 같은 에러가 난다면, dbpool이 가득차서 그렇다
-db pool을 확인해 보면 active가 가득차 있는걸 알 수있다.
-[Pool=db1,Active=0,Idle=5][Pool=db2,Active=0,Idle=5]
-해결 : db를 사용하고 close하지 않은 곳이 있는지 확인하고 닫아준다.
-db.close();  -->
 
-   
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -90,6 +84,7 @@ db.close();  -->
             type: 'bar', //차트의 모양
             data: data, //차트의 데이터
             options: {
+            	maxBarThickness: 100,
 							legend: {
 				        display: false
 				    	}
@@ -347,13 +342,13 @@ db.close();  -->
 		      <span class="title fsize">남성 선호 장르</span>
 		    </div>
 		    <div class="row">
-		      <canvas id="myChart2"></canvas>
+		      <canvas id="myChart2" width="300" height="300"></canvas>
 		    </div>
 	   	</div>
 	
 			<div class="w50">
 		    <div class="row center m30">
-		      <span class="title fsize">여성 선호 장르</span>
+		      <span class="title fsize" width="300" height="300">여성 선호 장르</span>
 		    </div>
 		    <div class="row">
 		      <canvas id="myChart3"></canvas>
