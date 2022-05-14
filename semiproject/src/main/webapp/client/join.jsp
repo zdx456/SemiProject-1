@@ -474,9 +474,6 @@ window.addEventListener("load", function(){
 					<input type="checkbox" id="selectAll"> <label
 						for="selectAll">전체선택 </label>
 				</div>
-				<div class="row center">
-					<a href="#" class="btn-black btn-link">SKIP</a>
-				</div>
 			</div>
 
 
@@ -527,14 +524,14 @@ window.addEventListener("load", function(){
 			</div>
 
 			<br> <br>
-			<div class="row m10">
+			<div class="row m10 pass-form">
 				<input type="submit" class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
 			</div>
 
 
 			<div class="row center">
 				<button type="button" class="btn btn-prev">이전</button>
-				<button type="button" class="btn btn-next">다음</button>
+				<button type="button" class="btn btn-next hidden">다음</button>
 			</div>
 		</div>
 
