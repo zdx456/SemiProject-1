@@ -44,7 +44,7 @@ header {
     position: fixed;
     left: 0;
     top: 0;
-    border-bottom: 2px solid #EDC948;
+    border-bottom: 1px solid #EDC948;
     background: linear-gradient(to top, rgba(0, 0, 0, .2), rgba(0, 0, 0, 1));
     box-sizing: border-box;
     padding-bottom: 30px;
@@ -399,8 +399,8 @@ footer p {
 
 .inquiry_write {
 	position: absolute;
-	top: 170px;
-    left: 950px;
+	top: 80px;
+    left: 850px;
  
 }
 
@@ -970,4 +970,10 @@ label[for=input_inquiry_content] {
 	position: absolute; 
 	top: 30px; 
 	left: 190px; 	
+}
+
+.top_wrap {
+	width: 1650px;
+	margin: auto;
+	position: relative;
 }
