@@ -82,6 +82,10 @@
 	  border: 2px solid #b2bec3;
 
 	}
+
+	select:focus {
+  border-color: black;
+	}
 	
 	/* padding 수정하고 싶어서.. */
 	.form-input {
@@ -91,7 +95,7 @@
     border: 1px solid #b2bec3;
     font:inherit;
     background-color: transparent;
-}
+	}
 
 	.borderOtt {
 		border: 2px solid #b2bec3;
@@ -258,8 +262,11 @@
 		    	var director = $("input[name=contentsDirector]").val() == "";
 		    	var summary = $("input[name=contentsSummary]").val() == "";
 		    	var attach = $("input[name=contentsAttachment]").val() == "";
+		    	var region = $("select[name=regionName]").val() == "";
+		    	var genre = $("select[name=genreName]").val() == "";
+		    	var grade = $("select[name=contentsGrade]").val() == "";
 		    	
-		    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || attach){
+		    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || attach ||region || genre || grade){
 		    		e.preventDefault();
 		    		
 		    	}
@@ -267,9 +274,28 @@
 		    });
 		});
 		
-
+		//이미지 미리보기
+		$(function(){
+			
+			
+			$("input[name=contentsAttachment]").change(function(){
+				$("#preview").empty();
+				setImageFromFile(this, '#preview');
 		
-
+			});
+			
+			function setImageFromFile(input, expression){
+				if(input.files && input.files[0])
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$(expression).attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+					$("#preview").show();
+			}
+			
+		});
+		
 
 </script>
 
@@ -297,6 +323,7 @@
 				<div class="selectbox">
 					<label for="select">선택</label>
 					<select name="regionName" id="select">
+						<option value="" hidden selected>선택</option>
 						<option>한국</option>
 						<option>아시아</option>
 						<option>할리우드</option>
@@ -311,6 +338,7 @@
 				<div class="selectbox">
 					<label for="select">선택</label>
 					<select name="genreName" id="select">
+						<option value="" hidden selected>선택</option>
 						<option>영화</option>
 						<option>드라마</option>
 						<option>버라이어티</option>
@@ -327,6 +355,7 @@
 				<div class="selectbox">
 					<label for="select">선택</label>
 					<select name="contentsGrade" id="select">
+						<option value="" hidden selected>선택</option>
 						<option>전체</option>
 						<option>12세</option>
 						<option>15세</option>
@@ -368,7 +397,11 @@
 			<div class = "row">
 				<label>이미지(.jpg/ .png) (*필수)</label>
 				<div class="row-label"></div>
-				<input type="file" name="contentsAttachment" accept=".jpg, .png" class="form-input input-round fill required-check">
+				<div class="form-input input-round fill">
+					<input type="file" name="contentsAttachment" accept=".jpg, .png" class=" required-check">
+					<br><br>
+					<img src ="" id="preview" width="150" height="150" alt="포스터" hidden>
+				</div>
 			</div>
 			
 			<!-- 이전, 다음 버튼 -->
