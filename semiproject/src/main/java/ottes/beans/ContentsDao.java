@@ -322,6 +322,45 @@ public class ContentsDao {
 		return count;
 	}
 	
+	//컨텐츠 등록 시 중복 검사
+	public ContentsDto findContents(String region, String genre, String title, String grade, String director) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from contents where region_name=? and genre_name=? and contents_title=? and  "
+				+ "contents_grade=? and  contents_director=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, region);
+		ps.setString(2, genre);
+		ps.setString(3, title);
+		ps.setString(4, grade);
+		ps.setString(5, director);
+		ResultSet rs = ps.executeQuery();
+		
+		ContentsDto contentsDto;
+		if(rs.next()) {
+			contentsDto = new ContentsDto();
+			contentsDto.setContentsNo(rs.getInt("contents_no"));
+			contentsDto.setRegionName(rs.getString("region_name"));
+			contentsDto.setGenreName(rs.getString("genre_name"));
+			contentsDto.setContentsTitle(rs.getString("contents_title"));
+			contentsDto.setContentsViews(rs.getInt("contents_views"));
+			contentsDto.setContentsGrade(rs.getString("contents_grade"));
+			contentsDto.setContentsTime(rs.getInt("contents_time"));
+			contentsDto.setContentsDirector(rs.getString("contents_director"));
+			contentsDto.setContentsSummary(rs.getString("contents_summary"));
+			
+		}
+		else {
+			contentsDto = null;
+		}
+		
+		con.close();
+		
+		return contentsDto;
+	}
+	
 }
 
 
