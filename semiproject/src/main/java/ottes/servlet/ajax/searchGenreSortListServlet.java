@@ -33,6 +33,7 @@ public class searchGenreSortListServlet  extends HttpServlet{
 
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonString);
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();

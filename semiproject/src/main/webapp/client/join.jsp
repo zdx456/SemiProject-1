@@ -119,8 +119,6 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 닉네임입니다");
 					status.nick = true;
-					
-					$("#clientNick").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 닉네임입니다");
@@ -152,7 +150,6 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 아이디입니다");
 					status.id = true;
-					$("#clientId").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 아이디입니다");
@@ -338,6 +335,25 @@ window.addEventListener("load", function(){
 
 });
 
+// 장르 체크박스 선택시 "없음:selected" 취소하는 기능!
+// @author : 이기주
+      
+    $(function(){
+    		$('input[type="checkbox"][id="skip-item"]').click(function () {
+            if ($(this).prop('checked')) {
+                $('input[type="checkbox"][id="select-skip"]').prop('checked', false);
+                $(this).prop('checked', true);
+            }
+        });
+
+        $('input[type="checkbox"][id="select-all"]').click(function () {
+            if ($(this).prop('checked')) {
+                $('input[type="checkbox"][id="select-skip"]').prop('checked', false);
+                $(this).prop('checked', true);
+            }
+        });
+    });
+
 
 </script>
 
@@ -481,33 +497,38 @@ window.addEventListener("load", function(){
 
 			<div class="row center">
 				<label> <input type="checkbox" name="genreName" value="영화"
-					class="select-item"> 영화
+					class="select-item" id="skip-item"> 영화
 				</label> <label> <input type="checkbox" name="genreName" value="드라마"
-					class="select-item"> 드라마
+					class="select-item" id="skip-item"> 드라마
 				</label>
 			</div>
 
 			<div class="row center">
 				<label> <input type="checkbox" name="genreName" value="다큐"
-					class="select-item"> 다큐
+					class="select-item" id="skip-item"> 다큐
 				</label> <label> <input type="checkbox" name="genreName"
-					value="애니메이션" class="select-item"> 애니메이션
+					value="애니메이션" class="select-item" id="skip-item"> 애니메이션
 				</label> <label> <input type="checkbox" name="genreName"
-					value="버라이어티" class="select-item"> 버라이어티
+					value="버라이어티" class="select-item" id="skip-item"> 버라이어티
+				</label>
+				<!-- 
+					장르 "없음" 추가(이기주)
+				-->
+				<label style="display: none;">
+				    <input type="checkbox" name="genreName" value="없음" id="select-skip" checked>
 				</label>
 			</div>
 			<br> <br>
 
 			<div class="row center">
-				<label> <input type="checkbox"
-					class="select-all select-item"> 전체 선택
+				<label> 
+					<input type="checkbox" class="select-all select-item" id="select-all" > 전체 선택
 				</label>
 			</div>
 
 			<br> <br>
 			<div class="row m10">
-				<input type="submit"
-					class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
+				<input type="submit" class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
 			</div>
 
 
