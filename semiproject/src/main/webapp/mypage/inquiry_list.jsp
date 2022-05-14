@@ -66,122 +66,124 @@
 %>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
-<div class="admin_notice admin_inquiry my_inquiry">
-	<div>
-		<h2><a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">내 1:1 문의 &#38; 답변</a></h2>
-	</div>	
-	<div class="wrap">
-		<div class="notice_sort">
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden">		
-				<input type="submit" value="전체보기">
-			</form>
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="오류제보">		
-				<input type="submit" value="오류제보">
-			</form>
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="문의사항">		
-				<input type="submit" value="문의사항">
-			</form>	
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="기타">		
-				<input type="submit" value="기타">
-			</form>					
-		</div>
-		<div class="admin_search">
-			<form action="inquiry_list.jsp" method="get">
-				<%if(search) {%>	
-				<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
-				<%} else {%>
-				<input type="search" name="keyword" placeholder="검색어를 입력하세요" required autocomplete="off">
-				<%} %>
-				<button type="submit" value="검색"></button>
-			</form>
+<div class="top_wrap">
+	<div class="admin_notice admin_inquiry my_inquiry">
+		<div>
+			<h2><a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">내 1:1 문의 &#38; 답변</a></h2>
 		</div>	
-		<div class="my_inquiry_btn center">
-			<a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a>
-		</div>	
-	</div>		
-	<div class="notice admin_notice">
-		<table>
-			<thead>
-				<tr>
-					<th class="center">분류</th>
-					<th><a>제목</a></th>				
-					<th class="center">작성일</th>
-					<th class="center">처리 상태</th>
-				</tr>
-			</thead>		
-			<tbody>
-				<%for(InquiryDto inquiryDto : list){ %>
+		<div class="wrap">
+			<div class="notice_sort">
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden">		
+					<input type="submit" value="전체보기">
+				</form>
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="오류제보">		
+					<input type="submit" value="오류제보">
+				</form>
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="문의사항">		
+					<input type="submit" value="문의사항">
+				</form>	
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="기타">		
+					<input type="submit" value="기타">
+				</form>					
+			</div>
+			<div class="admin_search">
+				<form action="inquiry_list.jsp" method="get">
+					<%if(search) {%>	
+					<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
+					<%} else {%>
+					<input type="search" name="keyword" placeholder="검색어를 입력하세요" required autocomplete="off">
+					<%} %>
+					<button type="submit" value="검색"></button>
+				</form>
+			</div>	
+			<div class="my_inquiry_btn center">
+				<a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a>
+			</div>	
+		</div>		
+		<div class="notice admin_notice">
+			<table>
+				<thead>
 					<tr>
-						<td class="inquiry_type center"><%=inquiryDto.getInquiryType()%></td>
-						<td>
-							<a href="<%=request.getContextPath()%>/mypage/inquiry_detail.jsp?inquiryNo=<%=inquiryDto.getInquiryNo()%>">
-								<%=inquiryDto.getInquiryTitle()%>
-							</a>
-						</td>
-						<td class="center"><%=inquiryDto.getInquiryDate()%></td>
-						<!-- 댓글 개수로 문의 처리 여부 판단 -->
-						<%if(inquiryDto.getInquiryReplycount() > 0){ %>
-							<td class="center inquiry_state">답변 완료</td>
-						<%} else { %>
-							<td class="center">확인 중</td>
-						<%} %>
+						<th class="center">분류</th>
+						<th><a>제목</a></th>				
+						<th class="center">작성일</th>
+						<th class="center">처리 상태</th>
 					</tr>
-				<%} %>			
-			</tbody>
-		</table>
-	</div>		
-	<div class="pagination">
-		<%if(p > 1){ %>
-			<%if(search){ %>
-			<a href="inquiry_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
-			<%} else { %>
-			<a href="inquiry_list.jsp?p=1&s=<%=s%>">&laquo;</a>
-			<%} %>
-		<%} %>
-		
-		<%if(startBlock > 1){ %>
-			<%if(search){ %>
-			<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
-			<%} else { %>
-			<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
-			<%} %>
-		<%} %>
-
-		<%for(int i=startBlock; i <= endBlock; i++){ %>
-			<%if(search){ %>
-				<%if(i == p){ %>
-				<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
+				</thead>		
+				<tbody>
+					<%for(InquiryDto inquiryDto : list){ %>
+						<tr>
+							<td class="inquiry_type center"><%=inquiryDto.getInquiryType()%></td>
+							<td>
+								<a href="<%=request.getContextPath()%>/mypage/inquiry_detail.jsp?inquiryNo=<%=inquiryDto.getInquiryNo()%>">
+									<%=inquiryDto.getInquiryTitle()%>
+								</a>
+							</td>
+							<td class="center"><%=inquiryDto.getInquiryDate()%></td>
+							<!-- 댓글 개수로 문의 처리 여부 판단 -->
+							<%if(inquiryDto.getInquiryReplycount() > 0){ %>
+								<td class="center inquiry_state">답변 완료</td>
+							<%} else { %>
+								<td class="center">확인 중</td>
+							<%} %>
+						</tr>
+					<%} %>			
+				</tbody>
+			</table>
+		</div>		
+		<div class="pagination">
+			<%if(p > 1){ %>
+				<%if(search){ %>
+				<a href="inquiry_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
 				<%} else { %>
-				<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
-				<%} %>
-			<%} else { %>
-				<%if(i == p){ %>
-				<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
-				<%} else { %>
-				<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+				<a href="inquiry_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%} %>
 			<%} %>
-		<%} %>
-
-		<%if(endBlock < lastPage){ %>
-			<%if(search){ %>
-			<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
-			<%} else { %>
-			<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+			
+			<%if(startBlock > 1){ %>
+				<%if(search){ %>
+				<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+				<%} else { %>
+				<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
+				<%} %>
 			<%} %>
-		<%} %>
-		
-		<%if(p < lastPage){ %>
-			<%if(search){ %>
-			<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
-			<%} else { %>
-			<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+	
+			<%for(int i=startBlock; i <= endBlock; i++){ %>
+				<%if(search){ %>
+					<%if(i == p){ %>
+					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
+					<%} else { %>
+					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
+					<%} %>
+				<%} else { %>
+					<%if(i == p){ %>
+					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+					<%} else { %>
+					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+					<%} %>
+				<%} %>
 			<%} %>
-		<%} %>		
+	
+			<%if(endBlock < lastPage){ %>
+				<%if(search){ %>
+				<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+				<%} else { %>
+				<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+				<%} %>
+			<%} %>
+			
+			<%if(p < lastPage){ %>
+				<%if(search){ %>
+				<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
+				<%} else { %>
+				<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+				<%} %>
+			<%} %>		
+		</div>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

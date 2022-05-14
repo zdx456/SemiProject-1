@@ -15,7 +15,8 @@
 %>    
     
 <jsp:include page="/template/header.jsp"></jsp:include>
-	<div class="notice_bg"></div>
+<div class="notice_bg"></div>
+<div class="top_wrap">
 	<div class="inquiry_write">
 		<%if(login) {%>
 		<p>찾으시는 내용이 없다면 1:1 문의를 이용해주세요.</p>
@@ -90,4 +91,5 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

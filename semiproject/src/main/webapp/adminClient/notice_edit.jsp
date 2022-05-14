@@ -9,6 +9,7 @@
 	NoticeDto noticeDto = noticeDao.selectOne(noticeNo);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<div class="top_wrap">
 	<div class="admin_notice">
 		<div class="inquiry container w900">
 		    <div class="notice_edit_wrap">
@@ -62,5 +63,6 @@
 			    </div>
 		    </form>
 	    </div>	
-	</div>				
+	</div>
+</div>					
 <jsp:include page="/template/footer.jsp"></jsp:include>

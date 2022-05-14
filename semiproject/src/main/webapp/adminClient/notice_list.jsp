@@ -71,128 +71,130 @@
 %>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
-<div class="admin_notice">
-	<div>
-		<h2><a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp">공지사항 관리</a></h2>
-	</div>
-	<div class="wrap">
-		<div class="notice_sort">
-			<form action="notice_list.jsp" method="get">		
-				<input type="text" class="hidden">		
-				<input type="submit" value="전체보기">
-			</form>
-			<form action="notice_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="공지">		
-				<input type="submit" value="공지">
-			</form>	
-			<form action="notice_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="FAQ">		
-				<input type="submit" value="FAQ">
-			</form>					
+<div class="top_wrap">
+	<div class="admin_notice">
+		<div>
+			<h2><a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp">공지사항 관리</a></h2>
 		</div>
-		<div class="admin_search">
-			<form action="notice_list.jsp" method="get">
-				<select name="option">
-					<option value="all">전체</option>
-					<option value="notice_title">제목</option>
-					<option value="notice_content">내용</option>
-				</select>	
-				<%if(search) {%>	
-				<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
-				<%} else {%>
-				<input type="search" name="keyword" placeholder="검색어를 입력하세요" required autocomplete="off">
-				<%} %>
-				<button type="submit" value="검색"></button>
-			</form>
-		</div>	
-		<div class="my_inquiry_btn center">
-			<a href="<%=request.getContextPath()%>/adminClient/notice_write.jsp">새 공지 등록</a>
-		</div>	
-	</div>
-	<div class="notice admin_notice">
-		<table>
-			<thead>
-				<tr>
-					<th class="center">분류</th>
-					<th><a>제목</a></th>
-					<th class="center">작성일</th>
-					<th class="center">공지 삭제</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%for(NoticeDto noticeDto : list){ %>
+		<div class="wrap">
+			<div class="notice_sort">
+				<form action="notice_list.jsp" method="get">		
+					<input type="text" class="hidden">		
+					<input type="submit" value="전체보기">
+				</form>
+				<form action="notice_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="공지">		
+					<input type="submit" value="공지">
+				</form>	
+				<form action="notice_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="FAQ">		
+					<input type="submit" value="FAQ">
+				</form>					
+			</div>
+			<div class="admin_search">
+				<form action="notice_list.jsp" method="get">
+					<select name="option">
+						<option value="all">전체</option>
+						<option value="notice_title">제목</option>
+						<option value="notice_content">내용</option>
+					</select>	
+					<%if(search) {%>	
+					<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
+					<%} else {%>
+					<input type="search" name="keyword" placeholder="검색어를 입력하세요" required autocomplete="off">
+					<%} %>
+					<button type="submit" value="검색"></button>
+				</form>
+			</div>	
+			<div class="my_inquiry_btn center">
+				<a href="<%=request.getContextPath()%>/adminClient/notice_write.jsp">새 공지 등록</a>
+			</div>	
+		</div>
+		<div class="notice admin_notice">
+			<table>
+				<thead>
 					<tr>
-						<td class="notice_type center"><%=noticeDto.getNoticeType()%></td>
-						<td><a href="<%=request.getContextPath()%>/adminClient/notice_edit.jsp?noticeNo=<%=noticeDto.getNoticeNo()%>"><%=noticeDto.getNoticeTitle()%></a></td>
-						<td class="center"><%=noticeDto.getNoticeDate()%></td>
-						<td class="center"><a href="notice_delete.svt?noticeNo=<%=noticeDto.getNoticeNo()%>">삭제</a></td>
+						<th class="center">분류</th>
+						<th><a>제목</a></th>
+						<th class="center">작성일</th>
+						<th class="center">공지 삭제</th>
 					</tr>
-				<%} %>
-			</tbody>
-		</table>
-	</div>
-	<div class="pagination">
-		<%if(p > 1){ %>
-			<%if(searchAll){ %>
-			<a href="notice_list.jsp?p=1&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&laquo;</a>
-			<%} else if(sort){ %>
-			<a href="notice_list.jsp?p=1&s=<%=s%>&type=<%=type%>">&laquo;</a>
-			<%} else { %>
-			<a href="notice_list.jsp?p=1&s=<%=s%>">&laquo;</a>
-			<%} %>
-		<%} %>
-		
-		<%if(startBlock > 1){ %>
-			<%if(searchAll || search){ %>
-			<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&lt;</a>
-			<%} else if(sort){ %>
-			<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>">&lt;</a>
-			<%} else { %>
-			<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
-			<%} %>
-		<%} %>
-
-		<%for(int i=startBlock; i <= endBlock; i++){ %>
-			<%if(searchAll || search){ %>
-				<%if(i == p){ %>
-				<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>	
+				</thead>
+				<tbody>
+					<%for(NoticeDto noticeDto : list){ %>
+						<tr>
+							<td class="notice_type center"><%=noticeDto.getNoticeType()%></td>
+							<td><a href="<%=request.getContextPath()%>/adminClient/notice_edit.jsp?noticeNo=<%=noticeDto.getNoticeNo()%>"><%=noticeDto.getNoticeTitle()%></a></td>
+							<td class="center"><%=noticeDto.getNoticeDate()%></td>
+							<td class="center"><a href="notice_delete.svt?noticeNo=<%=noticeDto.getNoticeNo()%>">삭제</a></td>
+						</tr>
+					<%} %>
+				</tbody>
+			</table>
+		</div>
+		<div class="pagination">
+			<%if(p > 1){ %>
+				<%if(searchAll){ %>
+				<a href="notice_list.jsp?p=1&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&laquo;</a>
+				<%} else if(sort){ %>
+				<a href="notice_list.jsp?p=1&s=<%=s%>&type=<%=type%>">&laquo;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>
+				<a href="notice_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%} %>
-			<%} else if(sort){ %>
-				<%if(i == p){ %>
-				<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>	
+			<%} %>
+			
+			<%if(startBlock > 1){ %>
+				<%if(searchAll || search){ %>
+				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&lt;</a>
+				<%} else if(sort){ %>
+				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>">&lt;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>
+				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
 				<%} %>
-			<%} else { %>
-				<%if(i == p){ %>
-				<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+			<%} %>
+	
+			<%for(int i=startBlock; i <= endBlock; i++){ %>
+				<%if(searchAll || search){ %>
+					<%if(i == p){ %>
+					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>	
+					<%} else { %>
+					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>
+					<%} %>
+				<%} else if(sort){ %>
+					<%if(i == p){ %>
+					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>	
+					<%} else { %>
+					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>
+					<%} %>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+					<%if(i == p){ %>
+					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+					<%} else { %>
+					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+					<%} %>
 				<%} %>
 			<%} %>
-		<%} %>
-
-		<%if(endBlock < lastPage){ %>
-			<%if(searchAll || search){ %>
-			<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&gt;</a>
-			<%} else if(sort){ %>
-			<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>">&gt;</a>
-			<%} else { %>
-			<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+	
+			<%if(endBlock < lastPage){ %>
+				<%if(searchAll || search){ %>
+				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&gt;</a>
+				<%} else if(sort){ %>
+				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>">&gt;</a>
+				<%} else { %>
+				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+				<%} %>
 			<%} %>
-		<%} %>
-		
-		<%if(p < lastPage){ %>
-			<%if(searchAll || search){ %>
-			<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&raquo;</a>
-			<%} else if(sort){ %>
-			<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>">&raquo;</a>
-			<%} else { %>
-			<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
-			<%} %>
-		<%} %>		
+			
+			<%if(p < lastPage){ %>
+				<%if(searchAll || search){ %>
+				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&raquo;</a>
+				<%} else if(sort){ %>
+				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>">&raquo;</a>
+				<%} else { %>
+				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+				<%} %>
+			<%} %>		
+		</div>
 	</div>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

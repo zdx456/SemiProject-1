@@ -34,7 +34,7 @@
 					<div class="swiper-slide"><img src="<%=request.getContextPath()%>/image/bg3.jpg"></div>
 				</div>
 				<div class="bg_gradient"></div>
-			</div>`
+			</div>
         	<div class="content">
 	            <div class="search">
 	                <h2>내가 찾는 콘텐츠, OTT에 있을까?</h2>

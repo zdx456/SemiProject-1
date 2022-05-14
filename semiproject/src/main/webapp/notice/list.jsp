@@ -69,13 +69,13 @@
 %>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
-
-	<div class="notice_bg"></div>
+<div class="notice_bg"></div>
+<div class="top_wrap">
 	<div class="inquiry_write">
 		<%if(login) {%>
 		<p>찾으시는 내용이 없다면 1:1 문의를 이용해주세요.</p>
 		<div><a href="<%=request.getContextPath()%>/inquiry/write.jsp">1:1 문의 접수</a></div>
-		<%} else {%>
+		<%} else { %>
 		<p>로그인 하시면 1:1 문의를 이용하실 수 있습니다.</p>
 		<div><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></div>		
 		<%} %>
@@ -200,5 +200,5 @@
 			<%} %>
 		<%} %>		
 	</div>
-
+</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
