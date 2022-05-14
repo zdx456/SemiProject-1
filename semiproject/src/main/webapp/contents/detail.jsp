@@ -97,19 +97,26 @@ main{
 #box3{
 	display: inline-table;
 	width: 500px;
+	height: 400px;
 	height: 120px;
 	float: left;
 	padding: 0 0 0 40px; 
 }
-
+.writereview{
+	padding : 2em;
+}
 .content {
     vertical-align: middle;
     justify-content: center;
 	align-items: center;
-	height: 300px;
+	height: 400px;
 	border-radius: 20px;
 	padding : 1em;
 	line-height : 20px;
+	font-size : 13px;
+}
+.summary {
+	line-height : 30px;
 }
 .review {
 	color: #00ADB5;
@@ -328,10 +335,12 @@ $(function () {
 	</div>
 	
 	<div id="box2" class="m0">
-			
+			<div>
 			<label class="contentsTitle">
 			<%=contentsDto.getContentsTitle()%>
 			</label>
+			</div>
+			<br>	
 			<div class="review content">
 				<div class="row">
 					<label>등급 : <%=contentsDto.getContentsGrade()%></label>
@@ -342,7 +351,7 @@ $(function () {
 				<div class="row">
 					<label>장르 : <%=contentsDto.getGenreName()%></label>
 				</div>
-				<div class="row">
+				<div class="row summary">
 					<label>줄거리 : <%=contentsDto.getContentsSummary()%></label>
 				</div>
 				<div class="row">
@@ -378,24 +387,25 @@ $(function () {
 		<%
 		if (isLogin) {
 		%>
+		<div>
 			<input type="hidden" name="contentsNo"
 				value="<%=contentsDto.getContentsNo()%>"> <input
 				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
 				
-			<textarea name="reviewContent" class="review" rows="4" cols="65"
+			<textarea name="reviewContent" class="write review review" rows="4" cols="65"
 				placeholder="리뷰 작성하기"></textarea>
-				
+		</div>		
 			<br>
 				
 			<span class="score-select" data-max="5" data-rate="3"></span>
-			<input type="submit" class="btn-yellow button" value="리뷰 등록">
+			<input type="submit" class="btn-mint button" value="리뷰 등록">
 		</form>
 	
 	
 		<% } else { %>
 		<textarea name="reviewContent"  class="review" rows="4" cols="65"
 			placeholder="로그인 후 댓글 작성 가능" disabled></textarea>
-		 <input type="submit" class="btn-yellow button" value="리뷰 등록">
+		 <input type="submit" class="btn-mint button" value="리뷰 등록">
 		<%
 		}
 		%>
@@ -441,7 +451,7 @@ $(function () {
 		</table>
 		<br>
 		<form action="review_list.jsp?contentsNo=<%=contentsNo%>" method="post">
-			<input type="submit" class="button btn-mint" id="rb2" value="리뷰 전체 보기"></input>
+			<input type="submit" class="button btn-yellow" id="rb2" value="리뷰 전체 보기"></input>
 		</form>
 		
 	</div>
