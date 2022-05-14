@@ -33,15 +33,15 @@ public class StatsDto {
 	private int conVariety;
 	private int conAnimation;
 	private int conMovie;
+	private int conNot;
+	
 	private int conAsia;
 	private int conKorea;
 	private int conHollywood;
 	
-	
 	public StatsDto() {
 		super();
 	}
-	
 	public String getGenreName() {
 		return genreName;
 	}
@@ -150,6 +150,12 @@ public class StatsDto {
 	public void setConMovie(int conMovie) {
 		this.conMovie = conMovie;
 	}
+	public int getConNot() {
+		return conNot;
+	}
+	public void setConNot(int conNot) {
+		this.conNot = conNot;
+	}
 	public int getConAsia() {
 		return conAsia;
 	}
@@ -168,9 +174,6 @@ public class StatsDto {
 	public void setConHollywood(int conHollywood) {
 		this.conHollywood = conHollywood;
 	}
-	
-	
-	
-	
+
 	
 }
