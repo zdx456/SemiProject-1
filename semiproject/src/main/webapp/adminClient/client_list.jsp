@@ -63,6 +63,7 @@
     
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<script src="<%=request.getContextPath()%>/js/tableSort.js"></script>
     <style>
         body {
             background-color: #222831;
@@ -162,7 +163,6 @@
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             color: white;
-            width: 80px;
             height: 42px;
             border-radius: 0.25em;
 
@@ -175,7 +175,6 @@
             border-radius: 10px;
             padding: 10px;
             color: white;
-            width: 300px;
             height: 42px;
             border-radius: 0.25em;
             font-size: 15px;
@@ -232,20 +231,24 @@
         }
 
         .form-mine {
-            float: right;
-            margin-right: 50px;
             margin-bottom: 50px;
             padding: auto;
 
         }
+
+        th:hover {
+            cursor: pointer;
+            color: #EDC948;
+        }
     </style>
 
-<h1 class="title">관리자 페이지</h1>
 
-    <section class="container">
+<section class="container w800">
+	<h1 class="title">회원 목록</h1>
 
-        <div class="row center">
-            <div class="row center">
+        <div class="float-container">
+        	<div class="float-left" style="width: 50%;"></div>
+            <div class="float-right" style="width: 50%;">
                 <form action="#" method="get" class="form-mine">
                     <select name="type" class="input-type">
                         <option value="client_id" style="color:white">아이디</option>
@@ -333,6 +336,6 @@
 
         </div>
 
-    </section>
+</section>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

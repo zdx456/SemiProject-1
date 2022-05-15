@@ -128,7 +128,7 @@ ClientDto clientDto = clientDao.selectOne(clientId);
             <form action="delete.svt" method="post" >
                 <input type="text" class="form form-input input-round fill" name="clientId" placeholder="<%=clientDto.getClientId()%>" required>
                 <br><br>
-                <input type="submit" class="btn-black fill btn-p3 red" value="강 퇴 하 기">
+                <input type="submit" class="btn-black fill btn-p3 red" value="회 원 탈 퇴">
             </form>
         </div>
         <div class="row center">

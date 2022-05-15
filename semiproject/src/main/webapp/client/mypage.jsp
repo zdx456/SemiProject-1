@@ -22,10 +22,6 @@ String clientId = (String) session.getAttribute("login");
 ClientDao clientDao = new ClientDao();
 ClientDto clientDto = clientDao.selectOne(clientId);
 
-// like genre table 추가
-LikeGenreDao likeGenreDao = new LikeGenreDao();
-LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
-
 ClientOttDao clientOttDao = new ClientOttDao();
 List<ClientOttDto> list = clientOttDao.selectList(clientId);
 
@@ -82,14 +78,6 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 		<div class="row left">
 			<input type="text" class="form form-input input-round fill"
 				value="<%=clientDto.getClientGrade()%>" disabled>
-
-		</div>
-	</div>
-	<div class="row left">
-		<label>나의 선호장르</label>
-		<div class="row left">
-			<input type="text" class="form form-input input-round fill"
-				value="<%=likeGenreDto.getGenreName()%>" disabled>
 
 		</div>
 	</div>
