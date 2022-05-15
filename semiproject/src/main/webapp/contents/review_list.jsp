@@ -147,7 +147,7 @@
 
     <script type="text/javascript">
         $(function(){
-           
+           console.log(document.getElementsByName('reviewNo'));
 	//수정 부분 숨기기 등록
             $(".edit-btn").click(function(){
                 $(this).parents(".show-row").hide();
@@ -209,7 +209,6 @@
 		</form>
 	<%} %>
 	<div class="row review">
-	<form action="review_edit.svt" method="post">
 		<table class="review-table ">
 			<tr>
 				<th>작성자</th>
@@ -218,6 +217,7 @@
 				<th>평점</th>
 			</tr>
 		<%for(ReviewDto reviewDto : list){ %>
+
 			<tr class="show-row center">
 				<td><%=reviewDto.getReviewWriter() %></td>
 				<td><%=reviewDto.getReviewTime()%></td>
@@ -225,7 +225,6 @@
 					<textarea rows="3" cols="35" class="reviewCont " disabled><%=reviewDto.getReviewContent()%></textarea>
 				</td>
 				<td>
-						
 						<%if(reviewDto.getReviewScore() == 1){ %>
 						<label class="score-show" data-max="5" data-rate="1"></label>
 						<%} %>
@@ -263,6 +262,10 @@
 			</tr>
 				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계  -->
 			<tr class="edit-row">
+	<td colspan="6">
+	<form action="review_edit.svt" method="post">
+	<table class="review-table">
+		<tr>
 				<td>			
 						<input type="hidden" name="reviewNo" value="<%=reviewDto.getReviewNo()%>">
 						<input type="hidden" name="contentsNo" value="<%=reviewDto.getContentsNo()%>">
@@ -295,10 +298,13 @@
 					<td>
 						<button type="button" class="btn-black cancel-btn btn-table">취소</button>
 					</td>
-			</tr>
+					</tr>
+					</table>
+		</form>
+		</td>
+		</tr>
 		<%} %>
 		</table>
-		</form>
 	</div>
 	
 		<div class="row center pagination">
