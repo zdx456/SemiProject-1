@@ -503,7 +503,7 @@ $(function() {
 				<label> <input type="checkbox"
 					class="select-all select-item"> 전체 선택
 				</label>
-			</div>
+			</div> 
 
 			<br> <br>
 			<div class="row m10">
