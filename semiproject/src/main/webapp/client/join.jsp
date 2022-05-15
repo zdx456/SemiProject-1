@@ -101,12 +101,12 @@ $(function(){
 	
 	//닉네임 중복체크 버튼
 	$("#btnCheckNick").click(function(){
-		var Nickregex =/^[a-zA-Z0-9]{1,10}$/;//영문 숫자 15자 이내
+		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,15}$/;
 		var clientNick = $("#clientNick").val();
 	
 		var Nickjudge = Nickregex.test(clientNick);
 		if(!Nickjudge){
-			alert("영어,숫자 2~10자이내로 작성해주세요");
+			alert("한글,영어,숫자 2~10자이내로 작성해주세요");
 			status.nick=false;
 			return;
 		}
@@ -119,6 +119,8 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 닉네임입니다");
 					status.nick = true;
+					
+					$("#clientNick").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 닉네임입니다");
@@ -150,6 +152,7 @@ $(function(){
 				if(resp === "yes"){
 					alert("사용 가능한 아이디입니다");
 					status.id = true;
+					$("#clientId").attr("disabled","disabled");
 				}
 				else if(resp ==="no"){
 					alert("중복된 아이디입니다");
@@ -250,8 +253,6 @@ $(function(){
  
 	$(".btn-prev").not(":first").click(function(){
 		//to-do 진짜 이동할꺼냐 ? 
-				
-		
 		index--;
 		move(index);
 		
@@ -261,6 +262,19 @@ $(function(){
 		$(".page").hide();
 		$(".page").eq(index).show();
 	
+		//이전 버튼 컨트롤
+		if(index == 0){
+			$(".btn-prev").hide();
+		}else{
+			$(".btn-prev").show();
+		}
+		
+		//다음버튼 컨트롤
+		if(index == 2){
+			$(".btn-next").hide();
+		}else{
+			$(".btn-next").show();
+		}
 		// 퍼센트 이동하는 사이즈
 		var percent = (index+1) * 100 / 3;
         $(".percent").css("width", percent+"%");
@@ -320,41 +334,6 @@ $(function() {
 
 });
 
-
-// beforeunload 이벤트 추가
-
-window.addEventListener("beforeunload", unloadListener);
-window.addEventListener("load", function(){
-    var forms = document.querySelectorAll(".pass-form");
-
-    for(var i = 0; i<forms.length; i++) {
-        forms[i].addEventListener("submit", function(){
-            window.removeEventListener("beforeunload", unloadListener);
-        });
-    }
-
-});
-
-// 장르 체크박스 선택시 "없음:selected" 취소하는 기능!
-// @author : 이기주
-      
-    $(function(){
-    		$('input[type="checkbox"][id="skip-item"]').click(function () {
-            if ($(this).prop('checked')) {
-                $('input[type="checkbox"][id="select-skip"]').prop('checked', false);
-                $(this).prop('checked', true);
-            }
-        });
-
-        $('input[type="checkbox"][id="select-all"]').click(function () {
-            if ($(this).prop('checked')) {
-                $('input[type="checkbox"][id="select-skip"]').prop('checked', false);
-                $(this).prop('checked', true);
-            }
-        });
-    });
-
-
 </script>
 
 <div class="container w500">
@@ -375,6 +354,7 @@ window.addEventListener("load", function(){
 				<div class="row left">
 					<input type="text"
 						class="form-input input-round regex-input id_input" value=""
+						autocomplete="off"
 						name="clientId" required placeholder="아이디" id="clientId" style="width:310px;"/>
 					<button type="button" id="btnCheckId" class="btn" >중복체크</button>
 				</div>
@@ -385,6 +365,7 @@ window.addEventListener("load", function(){
 				<div class="row">
 					<input type="password"
 						class="form form-input input-round fill regex-input" value=""
+							autocomplete="off"
 						name="clientPw" required placeholder="비밀번호" id="clientPw">
 					<span></span>
 				</div>
@@ -392,6 +373,7 @@ window.addEventListener("load", function(){
 
 			<div class="row">
 				<input type="password" id="password-check" placeholder="비밀번호 확인"
+					autocomplete="off"
 					value="" class="form-input fill input-round"> <span></span>
 			</div>
 			<div class="row left">
@@ -399,6 +381,7 @@ window.addEventListener("load", function(){
 				<div class="row">
 					<input type="text"
 						class="form form-input input-round fill regex-input"
+							autocomplete="off"
 						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px;"
 						value=""/>
 					<button type="button" id="btnCheckNick" class="btn">중복체크</button>
@@ -427,6 +410,7 @@ window.addEventListener("load", function(){
 				<label>이메일</label>
 				<div class="row">
 					<input type="email" class="form form-input input-round fill"
+						autocomplete="off"
 						name="clientEmail" required placeholder="이메일" id="clientEmail">
 				</div>
 			</div>
@@ -474,6 +458,9 @@ window.addEventListener("load", function(){
 					<input type="checkbox" id="selectAll"> <label
 						for="selectAll">전체선택 </label>
 				</div>
+				<div class="row center">
+					<a href="#" class="btn-black btn-link">SKIP</a>
+				</div>
 			</div>
 
 
@@ -494,48 +481,42 @@ window.addEventListener("load", function(){
 
 			<div class="row center">
 				<label> <input type="checkbox" name="genreName" value="영화"
-					class="select-item" id="skip-item"> 영화
+					class="select-item"> 영화
 				</label> <label> <input type="checkbox" name="genreName" value="드라마"
-					class="select-item" id="skip-item"> 드라마
+					class="select-item"> 드라마
 				</label>
 			</div>
 
 			<div class="row center">
 				<label> <input type="checkbox" name="genreName" value="다큐"
-					class="select-item" id="skip-item"> 다큐
+					class="select-item"> 다큐
 				</label> <label> <input type="checkbox" name="genreName"
-					value="애니메이션" class="select-item" id="skip-item"> 애니메이션
+					value="애니메이션" class="select-item"> 애니메이션
 				</label> <label> <input type="checkbox" name="genreName"
-					value="버라이어티" class="select-item" id="skip-item"> 버라이어티
-				</label>
-				<!-- 
-					장르 "없음" 추가(이기주)
-				-->
-				<label style="display: none;">
-				    <input type="checkbox" name="genreName" value="없음" id="select-skip" checked>
+					value="버라이어티" class="select-item"> 버라이어티
 				</label>
 			</div>
 			<br> <br>
 
 			<div class="row center">
-				<label> 
-					<input type="checkbox" class="select-all select-item" id="select-all" > 전체 선택
+				<label> <input type="checkbox"
+					class="select-all select-item"> 전체 선택
 				</label>
 			</div>
 
 			<br> <br>
-			<div class="row m10 pass-form">
-				<input type="submit" class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
+			<div class="row m10">
+				<button type="submit"
+					class="fill btn-yellow btn-join fontSizeUp pass-form" >회원가입</button>
 			</div>
 
 
 			<div class="row center">
 				<button type="button" class="btn btn-prev">이전</button>
-				<button type="button" class="btn btn-next hidden">다음</button>
+				<button type="button" class="btn btn-next">다음</button>
 			</div>
 		</div>
 
 	</form>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
