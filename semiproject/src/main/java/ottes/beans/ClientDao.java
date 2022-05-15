@@ -270,14 +270,13 @@ public class ClientDao {
 		ResultSet rs = ps.executeQuery();
 		
 		String clientId;
-		
 		if(rs.next()) {
 			clientId = rs.getString("client_id");
 		}
 		else {
-			clientId = null;
+			clientId = "";
 		}
-		System.out.println("ClientDao >> findPw0 >> clientPw "+clientId);
+		//System.out.println("ClientDao >> findPw0 >> clientId "+clientId);
 
 		con.close();
 		
@@ -388,5 +387,4 @@ public class ClientDao {
 			}
 ///////////
 }
-
 
