@@ -64,7 +64,7 @@
 									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=드라마">드라마</a></li>
 									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=버라이어티">버라이어티</a></li>
 									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=다큐멘터리">다큐멘터리</a></li>
-									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=에니메이션">에니메이션</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=애니메이션">애니메이션</a></li>
 								</ul>
 							</div>
 						</li>
