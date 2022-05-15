@@ -60,11 +60,11 @@
 							<div class="genre-menu">
 								<!-- 메뉴 -->
 								<ul>
-									<li><a href="#">영화</a></li>
-									<li><a href="#">드라마</a></li>
-									<li><a href="#">버라이어티</a></li>
-									<li><a href="#">다큐멘터리</a></li>
-									<li><a href="#">애니메이션</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=영화">영화</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=드라마">드라마</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=버라이어티">버라이어티</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=다큐멘터리">다큐멘터리</a></li>
+									<li><a href="<%=request.getContextPath()%>/contents/list.jsp?type=에니메이션">에니메이션</a></li>
 								</ul>
 							</div>
 						</li>
@@ -92,7 +92,7 @@
 						            </li>
 						            <li><a href="<%=request.getContextPath()%>/mypage/select_ott.jsp">나의 OTT</a></li>
 						            <li>
-						            		<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
+						            	<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
 						            </li>
 						            <li class="hr"><hr></li>
 									<li><a href="<%=request.getContextPath()%>/adminClient/client_list.jsp">회원목록</a></li>
@@ -101,8 +101,7 @@
 						            <li><a href="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp">문의사항 관리</a></li>
 								</ul>
 							</div>
-						</li>
-						
+						</li>	
 						<%} else if(login) { %>
 						<li><a href="<%=request.getContextPath()%>/client/logout.svt">로그아웃</a></li>
 						<li><a href="#"><%=clientId %>님</a></li>
@@ -127,22 +126,16 @@
 						            </li>
 						            <li><a href="<%=request.getContextPath()%>/mypage/select_ott.jsp">나의 OTT</a></li>
 						            <li>
-						            		<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
+						            	<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">나의 1:1 문의내역</a>
 						            </li>
 								</ul>
 							</div>
-						</li>
-						
-						
+						</li>					
 						<% }else{ %>
 						<li><a href="<%=request.getContextPath()%>/client/join.jsp">회원가입</a></li>
 						<li><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></li>
-						<%} %>
-						
+						<%} %>						
 					</ul>
-
-
-
 				</nav>
 			</div>
 		</header>

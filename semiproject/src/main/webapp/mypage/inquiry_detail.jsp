@@ -22,24 +22,27 @@
 		<div class="admin_notice">
 			<h2><a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp">내 1:1 문의 &#38; 답변</a></h2>
 		</div>
-		<div class="notice_sort">
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden">		
-				<input type="submit" value="전체보기">
-			</form>
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="오류제보">		
-				<input type="submit" value="오류제보">
-			</form>
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="문의사항">		
-				<input type="submit" value="문의사항">
-			</form>	
-			<form action="inquiry_list.jsp" method="get">		
-				<input type="text" class="hidden" name="type" value="기타">		
-				<input type="submit" value="기타">
-			</form>						
-		</div>
+			<div class="notice_sort">
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden">		
+					<input type="submit" value="전체보기">
+				</form>
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="오류제보">		
+					<input type="submit" value="오류제보">
+				</form>
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="문의사항">		
+					<input type="submit" value="문의사항">
+				</form>	
+				<form action="inquiry_list.jsp" method="get">		
+					<input type="text" class="hidden" name="type" value="기타">		
+					<input type="submit" value="기타">
+				</form>						
+			</div>
+			<div class="inquiry_delete center">
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_delete.svt?inquiryNo=<%=inquiryDto.getInquiryNo()%>">문의 삭제</a>
+			</div>	
 		<div class="notice notice_detail inquiry_detail">
 			<!-- 문의 내용 -->
 			<table>

@@ -40,6 +40,7 @@ main {
 
 header {
     width: 100%;
+    min-width: 1600px;
     height: 70px;
     position: fixed;
     left: 0;
@@ -130,9 +131,6 @@ div.genre-menu > ul > li {
     width: 150px;
 }
 
-
-
-
 /* 콘텐츠 영역 */
 
 .swiper_fade {
@@ -205,6 +203,18 @@ article {
 .search input::placeholder {
 	font-size: 0.6em;
     color: #929292;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+	display: none; width : 0; height: 0;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration { 
+	display: none; 
 }
 
 .content h3 {
@@ -908,68 +918,172 @@ label[for=input_inquiry_content] {
 	font-weight: bolder;
 }
 
+.inquiry_delete {
+	height: 30px;
+	line-height: 30px;
+	width: 130px;
+	position: absolute;
+    right: -28px;
+    top: 110px;	
+}
+
+.inquiry_delete a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	width: 130px;
+	color: #00ADB5;
+	font-weight: bolder;
+	border-radius: 10px;
+	background-color: rgba(237, 201, 72, .9);
+}
+
 .search_img {
 	width: 100px;
 }
 
+.search_position {
+	padding: 0px 0 50px 0;
+}
+
+.ott_filter {
+	width: 50px; 
+	height: 50px; 
+	object-fit: cover;
+	border-radius: 10px;
+	margin: 0 10px 20px 0;
+	cursor: pointer;
+}
+
 .search_result_sort {
-	width: 500px;
+	width: 1000px;
+	height: 80px;
 }
 
 .search_result_sort > div {
 	float: left;
 	display: block;
-	width: 130px;
-	height: 30px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
 	font-weight: bolder;
-	font-size: 1.1em;	
+	font-size: 1em;
+	margin-right: 10px;
+	border: 1px solid rgba(0, 173, 181, .1);
+	background-color: rgba(0, 173, 181, .1);
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.search_result_sort select {
+	background-color: transparent;
+	border: none;
+	font-size: 1em;
+	font-weight: bolder;
+	cursor: pointer;				
+}
+
+.search_result_sort select option {
+	font-size: 0.9em;
+	font-weight: bolder;
+	color: #000000;
+}
+
+.search_result_sort select:focus {
+	outline:none;
+}
+
+.search_result_sort .sort_active {
+	background-color: rgba(0, 173, 181, 1);
+	color: #EDC948;
 }
 
 .search_list {
-	position: relative;
-}
-
-.search_list img {
-	position: absolute; 
-	top: 0; 
-	left: 0; 
-	width: 150px; 
-	height: 150px; 
-	object-fit: cover; 
+	width: 1600px;
 	margin: auto;
 }
 
-.search_list a {
-	display: block;
-	width: 150px; 
-	height: 150px; 	
+.search_list_wrap {
+	width: 1600px;
+	height: 350px;
+	border-bottom: 1px solid rgba(146, 146, 146, 0.2);
+	position: relative;
 }
 
-.search_list p:nth-child(1) {
-	position: absolute; 
-	top: 0; 
-	left: 170px; 	
-	font-size: 1.2em;
+.search_list_wrap a {
+	position: absolute;
+	display: block;
+	width: 1600px;
+	height: 350px;
+	z-index: 1;	
+}
+
+.search_list_wrap a:hover {
+	background-color: rgba(146, 146, 146, 0.1);
+}
+
+.search_list_wrap img {
+	width: 210px; 
+	height: 300px; 
+	object-fit: cover; 
+	float: left;
+	margin: 25px 0 25px 40px;
+}
+
+.search_list_text_wrap {
+	position: absolute;
+	top: 0;
+	left: 290px;
+	padding: 40px 100px 40px 0;
+	width: 1360px;
+}
+
+.search_list_text_wrap p:nth-child(1) {
+	font-size: 2em;
 	font-weight: bolder;
 }
 
-.search_list p:nth-child(2) {
-	position: absolute; 
-	top: 50px; 
-	left: 170px; 		
-	line-height: 20px;
+.search_list_text_wrap p:nth-child(2) {	
+	font-weight: bolder;
+	color: #EDC948;
+	font-size: 1.3em;
+	float: left;
+	padding: 30px 30px 20px 0;	
 }
 
-.search_list p:nth-child(3) {
-	position: absolute; 
-	top: 30px; 
-	left: 170px; 	
+.search_list_text_wrap p:nth-child(3) {
+	font-weight: bolder;
+	color: #FF003A;	
+	font-size: 1.3em;
+	padding: 30px 0 20px 0;	
+	clear: right;			
 }
 
-.search_list p:nth-child(4) {
-	position: absolute; 
-	top: 30px; 
-	left: 190px; 	
+.search_list_text_wrap p:nth-child(4) {
+	line-height: 30px;
+}
+
+.search_result_more {
+	height: 150px;
+	position: relative;	
+}
+
+.search_result_more > div {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 1.2em;
+	color: #EDC948;
+	font-weight: bolder;
+	margin: 0 auto;
+	cursor: pointer;
+	text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+	animation: motion 0.5s linear 0s infinite alternate; 
 }
 
 .top_wrap {
