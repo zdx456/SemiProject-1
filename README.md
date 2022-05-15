@@ -41,7 +41,7 @@
 ## 디자인, 초안과 비교
 
 
-<img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/mainDraft.PNG" width="250" height="400">
+<img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/main.PNG" width="250" height="400">
 
 <img src="img/detailDraft.PNG" width="250" height="500">　　　　　<img src="img/detailDraft.PNG" width="250" height="500">
 
