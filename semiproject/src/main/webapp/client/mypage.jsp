@@ -1,10 +1,22 @@
 
+<%@page import="ottes.beans.OttAttachmentDto"%>
+<%@page import="ottes.beans.ClientOttDto"%>
+<%@page import="ottes.beans.OttAttachmentDao"%>
+<%@page import="java.util.List"%>
+<%@page import="ottes.beans.ClientOttDao"%>
 <%@page import="ottes.beans.LikeGenreDao"%>
 <%@page import="ottes.beans.LikeGenreDto"%>
 <%@page import="ottes.beans.ClientDto"%>
 <%@page import="ottes.beans.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<style>
+	.ottSize {
+	width: 60px;
+	height: 60px;
+}
+	</style>
 <%
 String clientId = (String) session.getAttribute("login");
 ClientDao clientDao = new ClientDao();
@@ -13,6 +25,13 @@ ClientDto clientDto = clientDao.selectOne(clientId);
 // like genre table 추가
 LikeGenreDao likeGenreDao = new LikeGenreDao();
 LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
+
+ClientOttDao clientOttDao = new ClientOttDao();
+List<ClientOttDto> list = clientOttDao.selectList(clientId);
+
+OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
+int OAcount = ottAttachmentDao.count();
+List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 
 //임시 (송현도) 
 //LikeGenreDto likeGenreDto = likeGenreDao.selectOne("admin");
@@ -71,6 +90,29 @@ LikeGenreDto likeGenreDto = likeGenreDao.selectOne(clientId);
 		<div class="row left">
 			<input type="text" class="form form-input input-round fill"
 				value="<%=likeGenreDto.getGenreName()%>" disabled>
+
+		</div>
+	</div>
+	<div class="row left">
+		<label>가입한 ott</label>
+		<div class="row left">
+			<%
+			for (OttAttachmentDto ottAttachmentDto : listOtt) {
+			%>
+			<%
+			boolean isSearch = false;
+			for (ClientOttDto clientOttDto : list) {
+				if (clientOttDto.getOttNo() == ottAttachmentDto.getOttNo()) {
+					isSearch = true;
+				}
+			}%>
+			<%
+			if (isSearch) {
+			%> 
+			<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
+				 class="img img-round ottSize">
+			<%} %>
+			<%} %>
 
 		</div>
 	</div>

@@ -55,7 +55,7 @@ public class ClientJoinServlet extends HttpServlet {
 
 			// -------- ott 선택 페이지 등록 -----------//
 
-			boolean haveOtt = req.getParameter("ottNo")!=null && req.getParameter("ottNo").equals("");
+			boolean haveOtt = req.getParameter("ottNo") != null && !req.getParameter("ottNo").equals("");
 			
 			if(haveOtt) {
 			// 배열로 받기! 체크박스 값 여러개 가능 하므로
@@ -72,9 +72,9 @@ public class ClientJoinServlet extends HttpServlet {
 				int ottNo = ottNoArray[i];
 
 				clientOttDao.insert(clientId, ottNo);
-
 			}
 			}
+			
 			resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
 
 		} catch (Exception e) {
