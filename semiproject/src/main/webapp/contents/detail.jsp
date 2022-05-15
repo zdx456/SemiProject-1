@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="ottes.beans.OttAttachmentDto"%>
 <%@page import="ottes.beans.OttAttachmentDao"%>
 <%@page import="ottes.beans.OttContentsDto"%>
@@ -26,6 +27,7 @@ String reviewWriter = request.getParameter("reviewWriter");
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
+
 
 ActorDao actorDao = new ActorDao();
 ActorDto actorDto = actorDao.selectName(contentsNo);
@@ -125,6 +127,9 @@ main{
 	border: transparent;
 	border-radius : 10px;
 }
+textarea {
+	padding : 10px;
+}
 
 .contentsTitle {
 	color : white;
@@ -134,7 +139,8 @@ main{
 
 .price {
 	color : white;
-	font-size : 13px;
+	font-size : 12px;
+	line-height : 1px;
 }
 
 .button {
@@ -281,13 +287,14 @@ $(function () {
 				<thead>
 					<tr>
 						<td>
-						<%for(OttAttachmentDto ottAttachmentDto : list) { %>
-						 <%System.out.println("a");%>
-						<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
+								
+							
+		<%for(OttAttachmentDto ottAttachmentDto : list) { %>
+			<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
 				width="40" height="40" class="img img-logo" alt="ott">
-						<%} %>
-						</td>
+										<%} %>
 					
+						</td>
 					</tr>
 					<tr>
 						<td>
@@ -392,7 +399,7 @@ $(function () {
 				value="<%=contentsDto.getContentsNo()%>"> <input
 				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
 				
-			<textarea name="reviewContent" class="write review review" rows="4" cols="65"
+			<textarea name="reviewContent" class="write review review" rows="7" cols="65"
 				placeholder="리뷰 작성하기"></textarea>
 		</div>		
 			<br>
