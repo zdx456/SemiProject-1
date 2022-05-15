@@ -2,6 +2,7 @@
 
 ### 역할
 
+
 ```
 ● 유성현 : 형상관리 - 코드승인 , 저장소,관리                                      │ 컨텐츠 리뷰, ott관리, 통계
 
@@ -36,15 +37,20 @@
 
 
 
-## 주요 페이지 초안과 비교
+## 디자인, 초안과 비교
+
 
 <img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/mainDraft.PNG" width="250" height="400">
 
 <img src="img/mainDraft.PNG" width="250" height="500">　　　　　<img src="img/mainDraft.PNG" width="250" height="500">
 
++ 폰트 : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
+
++ 모든 초안 디자인 : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
 
 
 ##  기능 구현
+
 
 | 기능 | 구현 | 기능 내용 |
 | ------ | ------ | ----------- |
@@ -58,8 +64,9 @@
 | ? |  | ?  |
 
 
-
+***
 ## ○참고문서
+
 <https://gist.github.com/ihoneymon/652be052a0727ad59601>
 
 <https://mini-min-dev.tistory.com/56>
