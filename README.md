@@ -41,28 +41,32 @@
 ## 디자인, 초안과 비교
 
 
-<img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/main.PNG" width="250" height="400">
+<img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/main.PNG" width="400" height="400">
 
-<img src="img/detailDraft.PNG" width="250" height="500">　　　　　<img src="img/detail.PNG" width="250" height="500">
+<img src="img/searchDraft.PNG" width="250" height="500">　　　　　<img src="img/search.PNG" width="400" height="500">
 
 + 폰트 : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
 
 + 모든 초안 디자인 : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
 
 
-##  기능 구현
+## 주요 기능 구현
 
 
 | 기능 | 구현 | 기능 내용 |
 | ------ | ------ | ----------- |
-| ? | ☑️ | ? |
-| ? | ☑️ |? |
-| ? | ☑️ |? |
-| ? | ☑️ | ? |
-| ? |  | ? |
-| ? |  | ? |
-| ? |  | ? |
-| ? |  | ?  |
+| 관심콘텐츠 | ☑️ | 하트를 눌러 관심콘텐츠 등록 |
+| 포스터 출력 | ☑️ | 콘텐츠 등록시 첨부파일 업로드,다운로드 관리 |
+| 검색 | ☑️ | 검색시 비동기통신을 이용한 정렬 |
+| 회원정보관리 | ☑️ | 선택한 장르, 가입한Ott 수정과 등록가능 |
+| 메인페이지 | ☑️ | 별점순, 관심순, 내가 관심을 선택한 콘텐츠 목록 출력|
+| 통계 | ☑️ | 가입일, 성별, 연령별, Ott별 콘텐츠 |
+| 리뷰 | ☑️ | 별점 부여, 등록, 수정, 삭제 |
+| 게시판 | ☑️ | 1:1문의, 공지, 답변  |
+| 콘텐츠 | ☑️ | 콘텐츠 정보, 배우, 제공Ott, 장르, 상세보기(별점,관심컨텐츠,리뷰) |
+| Ott | ☑️ | 로고 첨부, 수정, 삭제, 등록  |
+| 예고편 | ❌ | 콘텐츠 상세보기에서 동영상 삽입  |
+| 영화 월드컵 | ❌ | 월드컵 기능을 이용하여 선호 콘텐츠 제공  |
 
 
 ***
