@@ -193,7 +193,7 @@ $(function(){
 			}
 
 			//비밀번호 형식체크  
-			var psRegex =/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{7,16}$/;  //영어,숫자,특수문자 8~16
+			var psRegex =/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,16}$/;  //영어,숫자,특수문자 8~16
 			var clientPw = $("#clientPw").val();
 			var psJudge = psRegex.test(clientPw);
 			if(!psJudge){
@@ -321,7 +321,7 @@ $(function() {
 });
 //장르 체크박스 선택시 "없음:selected" 취소하는 기능!
 //@author : 이기주
-   
+   /* 
  $(function(){
  		$('input[type="checkbox"][id="skip-item"]').click(function () {
          if ($(this).prop('checked')) {
@@ -335,7 +335,7 @@ $(function() {
              $(this).prop('checked', true);
          }
      });
- });
+ }); */
 </script>
 
 <div class="container w500">

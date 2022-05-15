@@ -19,7 +19,7 @@ $(function(){
 
 	//비밀번호 형식체크  
 	$(".btn-next").click(function(){
-		var psRegex =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{7,16}$/;  //영어,숫자,특수문자 8~16
+		var psRegex =/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,16}$/;  //영어,숫자,특수문자 8~16
 		var clientPw = $("#clientPw").val();
 		var psJudge = psRegex.test(clientPw);
 		if(!psJudge){
