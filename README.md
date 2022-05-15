@@ -9,7 +9,7 @@
 
 ● 민유경 : 데이터 베이스 관리 - ERD 수정/관리, 테이블 생성 / 변경/ 관리            │ 컨텐츠 등록, 통계
 
-● 이유나 : 데이터 베이스 관리 - ERD 수정/관리, 테이블 생성 / 변경/ 관리  	        │ 컨텐츠 상세, 컨텐츠 검색
+● 이유나 : UI 관리 - 홈페이지 화면에 대한 설계, flow, 예상기능 등에 대한 관리      │ 컨텐츠 상세, 컨텐츠 검색
  
 ● 천지연 : UI 관리 - 홈페이지 화면에 대한 설계, flow, 예상기능 등에 대한 관리      │ 게시판, 메인페이지, 컨텐츠검색
 
@@ -33,6 +33,15 @@
 + font : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
 
 + Screen form : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
+
+
+
+## 주요 페이지 초안과 비교
+
+<img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/mainDraft.PNG" width="250" height="400">
+
+<img src="img/mainDraft.PNG" width="250" height="500">　　　　　<img src="img/mainDraft.PNG" width="250" height="500">
+
 
 
 ##  기능 구현
