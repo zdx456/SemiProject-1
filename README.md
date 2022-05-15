@@ -1,4 +1,4 @@
-# 코딩해조
+# 코딩해조    <img src="img/LOGO.PNG" width="150" height="75">
 
 ### 역할
 
