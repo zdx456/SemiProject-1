@@ -39,16 +39,16 @@
 
         }
         
-        .btn-black:hover {
-            background: #EDC948;
-            border: 2px solid #EDC948;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
-            color: #222831;
-            display: block;
-            font-size: 13px;
+/*         .btn-black:hover { */
+/*             background: #EDC948; */
+/*             border: 2px solid #EDC948; */
+/*             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+/*             border-radius: 10px; */
+/*             color: #222831; */
+/*             display: block; */
+/*             font-size: 13px; */
 
-        }
+/*         } */
 
         .btn-yellow {
             /* yellow */
@@ -102,6 +102,13 @@
             color: black;
         }
     </style>
+    
+    <script type="text/javascript">
+    	$(function(){
+    		
+    	});
+
+	</script>
 
 <div class="container w500 m30">
         <form action="edit.svt" method="post">
@@ -115,7 +122,7 @@
             </div>
             <div class="row">
                 <label>성별</label><br>
-                <select name="clientGender" class="form-input fill input-round">
+                <select name="clientGender" class="form-input fill input-round" style="background-color: #222831;">
                     <%if(clientDto.getClientGender().equals("남성")){ %>
                     <option selected>남성</option>
                     <%} else { %>
@@ -131,7 +138,7 @@
             </div>
             <div class="row">
                 <label>등급</label>
-                <select name="clientGrade" class="form-input fill input-round">
+                <select name="clientGrade" class="form-input fill input-round" style="background-color: #222831"> 
                     <%if(clientDto.getClientGrade().equals("일반회원")){ %>
                     <option selected>일반회원</option>
                     <%} else { %>
@@ -160,7 +167,7 @@
             </div>
 
             <div class="row">
-                <button type="submit" class="btn-black btn-p3 btn-primary fill">정 보 변 경</button>
+                <button type="submit" class="btn-yellow btn-p3 btn-primary fill">정 보 변 경</button>
             </div>
             <div class="row center">
                 <a href="client_detail.jsp?clientId=<%=clientId%>" class="btn-black btn-p3 btn-primary fill">돌 아 가 기</a>

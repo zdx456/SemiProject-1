@@ -28,13 +28,13 @@
             color: #EDC948;
             display: block;
         }
-
         .btn-black {
             background: #222831;
             border: 2px solid #EDC948;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             color: #EDC948;
+            display: block;
             
         }
 
@@ -45,15 +45,25 @@
             border-radius: 10px;
             border-radius: 10px;
             color: #00ADB5;
-        }
-
-        .btn:hover {
-            background: #EDC948;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
-            color: #00ADB5;
             display: block;
         }
+/*         .btn-yellow:hover { */
+/*             /* yellow */ */
+/*             background: #00ADB5; */
+/*             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+/*             border-radius: 10px; */
+/*             border-radius: 10px; */
+/*             color: #EDC948; */
+/*             display: block; */
+/*         } */
+
+/*         .btn-mint:hover { */
+/*             background: #EDC948; */
+/*             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+/*             border-radius: 10px; */
+/*             color: #00ADB5; */
+/*             display: block; */
+/*         } */
         
         .btn-p3 {
 		padding-left: 2em;
@@ -113,10 +123,6 @@
                     <th>생년월일</th>
                     <td><%=clientDto.getClientBirth()%></td>
                 </tr>
-                <tr>
-                    <th>마지막 접속일</th>
-                    <td><%=clientDto.getClientJoindate()%></td>
-                </tr>
             </table>
         </div>
 
@@ -124,10 +130,10 @@
             <a href="client_list.jsp" class="btn-mint btn btn-p3 fill">목록으로</a>
         </div>
         <div class="row center">
-            <a href="client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-mint btn btn-p3 fill">정보 수정</a>
+            <a href="client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-yellow btn btn-p3 fill">정보 수정</a>
         </div>
         <div class="row center">
-            <a href="client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-mint btn btn-p3 fill">강제 탈퇴</a>
+            <a href="client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-black btn btn-p3 fill">강제 탈퇴</a>
         </div>
     </div>
 

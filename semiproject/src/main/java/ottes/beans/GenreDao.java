@@ -52,4 +52,28 @@ public class GenreDao {
 		return list;
 	}
 	
+	/*
+	 	선호 장르 선택을 위한 출력구문 추가했습니다.
+	 	author: 이기주
+	*/
+	
+	public List<GenreDto> selectListNoOrder() throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from genre";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<GenreDto> list = new ArrayList<>();
+		while(rs.next()) {
+			GenreDto genreDto = new GenreDto();
+			genreDto.setGenreName(rs.getString("genre_name"));
+			
+			list.add(genreDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	
+	
 }
