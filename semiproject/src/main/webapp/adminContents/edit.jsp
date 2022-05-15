@@ -327,6 +327,28 @@
     });
 	});
 	
+	//이미지 미리보기
+	$(function(){
+		
+		
+		$("input[name=contentsAttachment]").change(function(){
+			$("#preview").empty();
+			setImageFromFile(this, '#preview');
+	
+		});
+		
+		function setImageFromFile(input, expression){
+			if(input.files && input.files[0])
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(expression).attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+				$("#preview").show();
+		}
+		
+	});
+	
 	
 </script>
 <div class="container w500 m30">
@@ -480,7 +502,7 @@
 			<%} else if(contentsDto.getContentsGrade().equals("15세")) { %>
 				<div class="row-label"></div>
 				<div class="selectbox">
-					<label for="select">15세세</label>
+					<label for="select">15세</label>
 					<select name="contentsGrade" id="select" required>
 						<option>전체</option>
 						<option>12세</option>
@@ -612,6 +634,8 @@
 				<span class="file-name">
 					<%=attachmentDto.getAttachmentUploadname() %>
 				</span>
+				<br><br>
+				<img src ="file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo() %>" id="preview" width="150" height="150" alt="포스터">
 			</label>
 			</div>
 		</div>
