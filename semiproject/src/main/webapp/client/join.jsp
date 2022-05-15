@@ -138,7 +138,7 @@ $(function(){
 	
 		var judge = regex.test(clientId);
 		if(!judge){
-			alert("영어,숫자 15자이내로 작성해주세요");
+			alert("영어,숫자 15자이하로 작성해주세요");
 			status.id=false;
 			return;
 		}
@@ -321,7 +321,7 @@ $(function() {
 });
 //장르 체크박스 선택시 "없음:selected" 취소하는 기능!
 //@author : 이기주
-   /* 
+   
  $(function(){
  		$('input[type="checkbox"][id="skip-item"]').click(function () {
          if ($(this).prop('checked')) {
@@ -335,7 +335,7 @@ $(function() {
              $(this).prop('checked', true);
          }
      });
- }); */
+ });
 </script>
 
 <div class="container w500">
@@ -491,9 +491,7 @@ $(function() {
             </label> <label> <input type="checkbox" name="genreName"
                value="버라이어티" class="select-item" id="skip-item"> 버라이어티
             </label>
-            <!-- 
-               장르 "없음" 추가(이기주)
-            -->
+           
             
 			</div>
 
