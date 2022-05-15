@@ -43,7 +43,7 @@
 
 <img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/main.PNG" width="250" height="400">
 
-<img src="img/detailDraft.PNG" width="250" height="500">　　　　　<img src="img/detailDraft.PNG" width="250" height="500">
+<img src="img/detailDraft.PNG" width="250" height="500">　　　　　<img src="img/detail.PNG" width="250" height="500">
 
 + 폰트 : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
 
