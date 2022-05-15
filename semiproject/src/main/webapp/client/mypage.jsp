@@ -81,6 +81,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 
 		</div>
 	</div>
+	
 	<div class="row left">
 		<label>가입한 ott</label>
 		<div class="row left">

@@ -20,7 +20,7 @@
 	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round" placeholder="닉네임">
 	    </div>
          <div class="row">
-                 <input type="email" name="clientEmail "required  placeholder="이메일"  class="form-input fill input-round" autocomplete="off">
+                 <input type="email" name="clientEmail" required  placeholder="이메일"  class="form-input fill input-round" autocomplete="off">
        </div>
        <div class="row">
            <input type="date" name="clientBirth" autocomplete="off" required  class="form-input input-round fill">

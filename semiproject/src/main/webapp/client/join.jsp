@@ -101,7 +101,7 @@ $(function(){
 	
 	//닉네임 중복체크 버튼
 	$("#btnCheckNick").click(function(){
-		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,15}$/;
+		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,15}$/;
 		var clientNick = $("#clientNick").val();
 	
 		var Nickjudge = Nickregex.test(clientNick);
@@ -193,7 +193,7 @@ $(function(){
 			}
 
 			//비밀번호 형식체크  
-			var psRegex =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{7,16}$/;  //영어,숫자,특수문자 8~16
+			var psRegex =/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{7,16}$/;  //영어,숫자,특수문자 8~16
 			var clientPw = $("#clientPw").val();
 			var psJudge = psRegex.test(clientPw);
 			if(!psJudge){
@@ -494,16 +494,8 @@ $(function() {
             <!-- 
                장르 "없음" 추가(이기주)
             -->
-            <label style="display: none;">
-                <input type="checkbox" name="genreName" value="없음" id="select-skip" checked>
-            </label>
-         </div>
-         <br> <br>
-			<div class="row center">
-				<label> <input type="checkbox"
-					class="select-all select-item"> 전체 선택
-				</label>
-			</div> 
+            
+			</div>
 
 			<br> <br>
 			<div class="row m10">
