@@ -25,11 +25,14 @@ public class ClientFindPwServlet extends HttpServlet {
 			clientDto.setClientEmail(req.getParameter("clientEmail"));		
 			ClientDao clientDao = new ClientDao();
 			String clientId = clientDao.findPw(clientDto);
-			if (clientId == null) {
-				resp.sendRedirect("set_pw.jsp?error");
-			} else {
-				resp.sendRedirect("set_pw.jsp");
-				req.getSession().setAttribute("clientId", clientId);
+			//System.out.println("clinetid="+clientId);
+			
+			if (!clientId.equals("")) {
+			    resp.sendRedirect("set_pw.jsp");
+			    req.getSession().setAttribute("clientId", clientId);
+			}
+			else {
+			    resp.sendRedirect("find_pw.jsp?error");
 			}
 
 		} catch (Exception e) {

@@ -101,12 +101,12 @@ $(function(){
 	
 	//닉네임 중복체크 버튼
 	$("#btnCheckNick").click(function(){
-		var Nickregex =/^[a-zA-Z0-9]{1,10}$/;//영문 숫자 15자 이내
+		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,15}$/;
 		var clientNick = $("#clientNick").val();
 	
 		var Nickjudge = Nickregex.test(clientNick);
 		if(!Nickjudge){
-			alert("영어,숫자 2~10자이내로 작성해주세요");
+			alert("한글,영어,숫자 2~10자이내로 작성해주세요");
 			status.nick=false;
 			return;
 		}
@@ -253,8 +253,6 @@ $(function(){
  
 	$(".btn-prev").not(":first").click(function(){
 		//to-do 진짜 이동할꺼냐 ? 
-				
-		
 		index--;
 		move(index);
 		
@@ -264,6 +262,19 @@ $(function(){
 		$(".page").hide();
 		$(".page").eq(index).show();
 	
+		//이전 버튼 컨트롤
+		if(index == 0){
+			$(".btn-prev").hide();
+		}else{
+			$(".btn-prev").show();
+		}
+		
+		//다음버튼 컨트롤
+		if(index == 2){
+			$(".btn-next").hide();
+		}else{
+			$(".btn-next").show();
+		}
 		// 퍼센트 이동하는 사이즈
 		var percent = (index+1) * 100 / 3;
         $(".percent").css("width", percent+"%");
@@ -323,22 +334,6 @@ $(function() {
 
 });
 
-
-// beforeunload 이벤트 추가
-
-window.addEventListener("beforeunload", unloadListener);
-window.addEventListener("load", function(){
-    var forms = document.querySelectorAll(".pass-form");
-
-    for(var i = 0; i<forms.length; i++) {
-        forms[i].addEventListener("submit", function(){
-            window.removeEventListener("beforeunload", unloadListener);
-        });
-    }
-
-});
-
-
 </script>
 
 <div class="container w500">
@@ -359,6 +354,7 @@ window.addEventListener("load", function(){
 				<div class="row left">
 					<input type="text"
 						class="form-input input-round regex-input id_input" value=""
+						autocomplete="off"
 						name="clientId" required placeholder="아이디" id="clientId" style="width:310px;"/>
 					<button type="button" id="btnCheckId" class="btn" >중복체크</button>
 				</div>
@@ -369,6 +365,7 @@ window.addEventListener("load", function(){
 				<div class="row">
 					<input type="password"
 						class="form form-input input-round fill regex-input" value=""
+							autocomplete="off"
 						name="clientPw" required placeholder="비밀번호" id="clientPw">
 					<span></span>
 				</div>
@@ -376,6 +373,7 @@ window.addEventListener("load", function(){
 
 			<div class="row">
 				<input type="password" id="password-check" placeholder="비밀번호 확인"
+					autocomplete="off"
 					value="" class="form-input fill input-round"> <span></span>
 			</div>
 			<div class="row left">
@@ -383,6 +381,7 @@ window.addEventListener("load", function(){
 				<div class="row">
 					<input type="text"
 						class="form form-input input-round fill regex-input"
+							autocomplete="off"
 						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px;"
 						value=""/>
 					<button type="button" id="btnCheckNick" class="btn">중복체크</button>
@@ -411,6 +410,7 @@ window.addEventListener("load", function(){
 				<label>이메일</label>
 				<div class="row">
 					<input type="email" class="form form-input input-round fill"
+						autocomplete="off"
 						name="clientEmail" required placeholder="이메일" id="clientEmail">
 				</div>
 			</div>
@@ -506,8 +506,8 @@ window.addEventListener("load", function(){
 
 			<br> <br>
 			<div class="row m10">
-				<input type="submit"
-					class="fill btn-yellow btn-join fontSizeUp pass-form" value="회원가입">
+				<button type="submit"
+					class="fill btn-yellow btn-join fontSizeUp pass-form" >회원가입</button>
 			</div>
 
 
