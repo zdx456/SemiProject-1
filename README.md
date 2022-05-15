@@ -20,8 +20,12 @@
 
 ## 주제
 
+***
 ### 선택한 콘텐츠를 제공하는 OTT의 종류와 OTT 월별 가격을 비교하는 사이트
 ***
+
+
+## 설계
 
 + 롤모델 사이트 : <https://www.justwatch.com/kr>
 
@@ -30,10 +34,6 @@
 + Flow Chart : https://app.diagrams.net/#Hzdx456%2FSemiProject-1%2Fmain%2Fsemi-1.drawio
 
 
-
-+ font : Noto Sans Korean - https://fonts.google.com/noto/specimen/Noto+Sans+KR
-
-+ Screen form : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
 
 
 
