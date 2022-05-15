@@ -14,6 +14,8 @@ $(function(){
 	// 상단 메뉴의 장르 카테고리로 들어갈 시
 	if (type != null) {
 		$('.search_result_sort').addClass('hidden');
+		$('.search_position').addClass('hidden');
+		$('.ott_filter').addClass('hidden');
 		searchGenreFirstSortPage(type);
 		$('.genre_more_all').removeClass('hidden');
 	};
@@ -242,7 +244,7 @@ $(function(){
 
 	$(".genre_more_all").click(function(){
 		page5++;
-		searchGenreSortPage(page5, $(".genre").val()); 
+		searchGenreSortPage(page5, type); 
 	});	
 	
 	$(".region_more").click(function(){
