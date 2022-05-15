@@ -14,30 +14,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ottes.beans.ContentsAttachmentDao;
 import ottes.beans.ContentsAttachmentDto;
 
-@WebServlet(urlPatterns = "/search/genre_sort2.svt")
-public class searchGenreSortListServlet2  extends HttpServlet{
+@WebServlet(urlPatterns = "/search/ott_sort.svt")
+public class SearchOttSortListServlet  extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
-			String type =  req.getParameter("type"); // 국가
-			
+			String keyword = req.getParameter("keyword"); // 검색 키워드
+			String ottNo = req.getParameter("ottNo"); // ott 번호
 
-			
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
-			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchGenreSort(p, type); 
-
+			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchOttSort(p, keyword, ottNo); 
+			
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(searchList);
 
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonString);
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
 	}
-
 }

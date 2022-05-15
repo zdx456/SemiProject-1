@@ -23,8 +23,6 @@ public class searchGenreSortListServlet  extends HttpServlet{
 			String keyword = req.getParameter("keyword"); // 검색 키워드
 			String type =  req.getParameter("type"); // 국가
 			
-
-			
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
 			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchGenreSort(p, keyword, type); 
 

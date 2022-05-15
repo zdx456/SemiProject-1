@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ottes.beans.InquiryDao;
 
-@WebServlet(urlPatterns = "/adminClient/inquiry_delete.svt")
+@WebServlet(urlPatterns = "/mypage/inquiry_delete.svt")
 public class InquiryDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class InquiryDeleteServlet extends HttpServlet {
 			boolean success = inquiryDao.delete(inquiryNo);
 
 			if(success) {
-				resp.sendRedirect("inquiry_list.jsp");
+				resp.sendRedirect(req.getContextPath()+"/mypage/inquiry_list.jsp");
 			}
 			else {
 				resp.sendError(404);

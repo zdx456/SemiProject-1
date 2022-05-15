@@ -109,7 +109,7 @@
 			<div class="my_inquiry_btn center">
 				<a href="<%=request.getContextPath()%>/adminClient/notice_write.jsp">새 공지 등록</a>
 			</div>	
-		</div>
+		</div>	
 		<div class="notice admin_notice">
 			<table>
 				<thead>

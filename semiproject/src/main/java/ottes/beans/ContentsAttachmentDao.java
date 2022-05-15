@@ -222,7 +222,7 @@ public class ContentsAttachmentDao {
 	public List<ContentsAttachmentDto> search(int p, String keyword) throws Exception {
 		int end = p * 7;
 		int begin = end - (7 - 1); 
-		
+
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from ("
@@ -231,8 +231,8 @@ public class ContentsAttachmentDao {
 							+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 							+ "join contents_actor D on D.contents_no = B.contents_no "
 							+ "join actor C on D.actor_no = C.actor_no "
-							+ "join review E on E.contents_no = A.contents_no "
-							+ "left outer join likecontents F on F.contents_no = A.contents_no "
+							+ "left outer join review E on E.contents_no = A.contents_no "
+							+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 							+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 							+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 							+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
@@ -267,6 +267,7 @@ public class ContentsAttachmentDao {
 			
 			list.add(contentsAttachmentDto);
 		}
+		
 		con.close();
 		return list;
 	}
@@ -284,8 +285,8 @@ public class ContentsAttachmentDao {
 					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
-					+ "join review E on E.contents_no = A.contents_no "
-					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 					+ "where (instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0) "
 					+ "and A.genre_name = ? "
@@ -322,7 +323,6 @@ public class ContentsAttachmentDao {
 			
 			list.add(contentsAttachmentDto);
 		}
-		System.out.println("list: " + list);
 		con.close();
 		return list;
 	}
@@ -339,8 +339,8 @@ public class ContentsAttachmentDao {
 					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
-					+ "join review E on E.contents_no = A.contents_no "
-					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 					+ "where A.genre_name = ? "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
 					+ "order by A.contents_no desc"
@@ -368,7 +368,6 @@ public class ContentsAttachmentDao {
 			
 			list.add(contentsAttachmentDto);
 		}
-		System.out.println("list: " + list);
 		con.close();
 		return list;
 	}
@@ -385,8 +384,8 @@ public class ContentsAttachmentDao {
 					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
-					+ "join review E on E.contents_no = A.contents_no "
-					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 					+ "where (instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0) "
 					+ "and A.region_name = ? "
@@ -440,12 +439,12 @@ public class ContentsAttachmentDao {
 					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
-					+ "join review E on E.contents_no = A.contents_no "
-					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
-					+ "order by avg(E.review_score) desc"
+					+ "order by avg(E.review_score) desc nulls last"
 				+ ") TMP"
 			+ ") where rn between ? and ?";		
 		
@@ -495,8 +494,8 @@ public class ContentsAttachmentDao {
 					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
 					+ "join contents_actor D on D.contents_no = B.contents_no "
 					+ "join actor C on D.actor_no = C.actor_no "
-					+ "join review E on E.contents_no = A.contents_no "
-					+ "left outer join likecontents F on F.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
 					+ "where instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
 					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0 "
 					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
@@ -515,6 +514,62 @@ public class ContentsAttachmentDao {
 		ps.setString(7, keyword);
 		ps.setInt(8, begin);
 		ps.setInt(9, end);
+		
+		ResultSet rs = ps.executeQuery();
+
+		List<ContentsAttachmentDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ContentsAttachmentDto contentsAttachmentDto = new ContentsAttachmentDto();
+			contentsAttachmentDto.setContentsNo(rs.getInt("contents_no"));
+			contentsAttachmentDto.setAttachmentNo(rs.getInt("attachment_no"));
+			contentsAttachmentDto.setContentsSummary(rs.getString("contents_summary"));
+			
+			contentsAttachmentDto.setContentsTitle(rs.getString("contents_title"));
+			contentsAttachmentDto.setAvgScore(rs.getFloat("avg_score"));
+			contentsAttachmentDto.setCountLike(rs.getInt("count_like"));			
+			
+			list.add(contentsAttachmentDto);
+		}
+		con.close();
+		return list;
+	}
+	
+	// 검색 결과 페이지 (OTT 필터)
+	public List<ContentsAttachmentDto> searchOttSort(int p, String keyword, String ottNo) throws Exception {
+		int end = p * 7;
+		int begin = end - (7 - 1); 
+		
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select A.contents_no, B.attachment_no, A.contents_title, A.contents_summary, avg(E.review_score) avg_score, count(F.contents_no) count_like "
+					+ "from contents A join contents_attachment B on A.contents_no = B.contents_no "
+					+ "join contents_actor D on D.contents_no = B.contents_no "
+					+ "join actor C on D.actor_no = C.actor_no "
+					+ "join ott_contents O on O.contents_no = A.contents_no "
+					+ "left outer join review E on E.contents_no = A.contents_no "
+					+ "left outer join (select contents_no, count(contents_no) from likecontents where contents_no is not null group by contents_no) F on F.contents_no = A.contents_no "
+					+ "where (instr(A.contents_title, ?) > 0 or instr(A.contents_director, ?) > 0 or instr(A.contents_summary, ?) > 0 "
+					+ "or instr(C.actor_name1, ?) > 0 or instr(C.actor_name2, ?) > 0 or instr(C.actor_name3, ?) > 0 or instr(C.actor_name4, ?) > 0) "
+					+ "and O.ott_no = ? "
+					+ "group by A.contents_no, B.attachment_no, A.contents_title, A.contents_summary "
+					+ "order by count(F.contents_no) desc"
+				+ ") TMP"
+			+ ") where rn between ? and ?";		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		ps.setString(2, keyword);
+		ps.setString(3, keyword);
+		ps.setString(4, keyword);
+		ps.setString(5, keyword);
+		ps.setString(6, keyword);
+		ps.setString(7, keyword);
+		ps.setString(8, ottNo);
+		ps.setInt(9, begin);
+		ps.setInt(10, end);
 		
 		ResultSet rs = ps.executeQuery();
 
