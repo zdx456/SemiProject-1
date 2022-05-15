@@ -108,10 +108,12 @@
                           if(resp == "N"){
                               $(".coment").css("color", "red")
                               $(".coment").text("이미 존재하는 Ott입니다.")
+                              $(".btn-lock").prop("disabled",true);
                               return false;
                           } else if (resp == "Y"){
                               $(".coment").css("color", "green")
                               $(".coment").text("등록 가능한 Ott입니다.")
+                              $(".btn-lock").prop("disabled",false);
                           } 
                       }
                   });
@@ -135,7 +137,7 @@
 	<h1>OTT관리 페이지</h1><br><br>
 </div>
 <div class="row center">
-<form action="update.svt" method="post">
+
 <table class="review-table">
 		<tr>
 			<th>Ott 번호</th>
@@ -162,26 +164,34 @@
 		
 		<%-- 수정 버튼 클릭이 수정화면 나옴 그전엔 hide   예정--%>
 		<tr class="edit-row">
-			<td>
+			<td colspan="7">
+			<form action="update.svt" method="post">
+			<table class="review-table">
+			<tr>
+				<td>
 					<input type="hidden" name ="ottNo" value="<%=ottDto.getOttNo()%>">
-			</td>
-			<td>
+				</td>
+
+				<td>
 					<input type="text" name="ottName" value="<%=ottDto.getOttName()%>" class="form-input input-round">
-			</td>
-			<td>
+				</td>
+				<td>
 					<input type="number" name="ottPrice" value="<%=ottDto.getOttPrice() %>" min="0" step="100" class="form-input input-round">
-			</td>
-			<td>
+				</td>
+				<td>
 					<button type="submit" class="btn-yellow btn-table">수정</button>
-			</td>
-			<td>
+				</td>
+				<td>
 					<%-- 취소 버튼 클릭시 수정 input 안보이게  예정 --%>
 					<button type="button" class="btn-black cancel-btn btn-table">취소</button>
+				</td>
+			</tr>
+			</table>
+			</form>
 			</td>
 		</tr>
-	<%} %>
-</table>
-</form>
+		<%} %>
+	</table>
 </div>
 <div class = "row center">
 	<button type="button" class=" btn-mint btn-size insert-btn">등록하기</button><br>
@@ -196,7 +206,7 @@
 	<input type="number"  name="ottPrice" placeholder="Ott월별가격(basic)" min="0" step="100"  class="form-input input-round">
 	<input type="file" name="ottLogo" accept=".jpg,.png" class="logoFile"><br><br>
 	<span class="coment"></span><br><br>
-	<button type="submit" class="btn-mint btn-insert">등록</button>
+	<button type="submit" class="btn-mint btn-insert btn-lock">등록</button>
 	</form>
 </div>
 </div>

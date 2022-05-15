@@ -28,59 +28,64 @@ import ottes.beans.OttDto;
 
 @WebServlet(urlPatterns = "/client/join.kh")
 public class ClientJoinServlet extends HttpServlet {
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
+   @Override
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      try {
 
-			req.setCharacterEncoding("UTF-8");
-			ClientDto clientDto = new ClientDto();
-			clientDto.setClientId(req.getParameter("clientId"));
-			clientDto.setClientPw(req.getParameter("clientPw"));
-			clientDto.setClientNick(req.getParameter("clientNick"));
-			clientDto.setClientGender(req.getParameter("clientGender"));
-			clientDto.setClientBirth(req.getParameter("clientBirth"));
-			clientDto.setClientEmail(req.getParameter("clientEmail"));
+         req.setCharacterEncoding("UTF-8");
+         ClientDto clientDto = new ClientDto();
+         clientDto.setClientId(req.getParameter("clientId"));
+         clientDto.setClientPw(req.getParameter("clientPw"));
+         clientDto.setClientNick(req.getParameter("clientNick"));
+         clientDto.setClientGender(req.getParameter("clientGender"));
+         clientDto.setClientBirth(req.getParameter("clientBirth"));
+         clientDto.setClientEmail(req.getParameter("clientEmail"));
 
-			ClientDao clientDao = new ClientDao();
-			clientDao.insert(clientDto);
+         ClientDao clientDao = new ClientDao();
+         clientDao.insert(clientDto);
 
-			// --------- 선호하는 장르 등록 --------- //
-			// like genre 테이블 준비
-			LikeGenreDto likeGenreDto = new LikeGenreDto();
-			likeGenreDto.setClientId(req.getParameter("clientId"));
-			likeGenreDto.setGenreName(req.getParameter("genreName"));
+         // -------- ott 선택 페이지 등록 -----------//
 
-			LikeGenreDao likeGenreDao = new LikeGenreDao();
-			likeGenreDao.insert(likeGenreDto);
+         boolean haveOtt = req.getParameter("ottNo") != null && !req.getParameter("ottNo").equals("");
+         
+         if(haveOtt) {
+         // 배열로 받기! 체크박스 값 여러개 가능 하므로
+         String[] ottNoStr = req.getParameterValues("ottNo");
 
-			// -------- ott 선택 페이지 등록 -----------//
+         // String 배열은 int 배열로 변환 (stream 이용)
+         int[] ottNoArray = Arrays.stream(ottNoStr).mapToInt(Integer::parseInt).toArray();
 
-			boolean haveOtt = req.getParameter("ottNo") != null && !req.getParameter("ottNo").equals("");
-			
-			if(haveOtt) {
-			// 배열로 받기! 체크박스 값 여러개 가능 하므로
-			String[] ottNoStr = req.getParameterValues("ottNo");
-
-			// String 배열은 int 배열로 변환 (stream 이용)
-			int[] ottNoArray = Arrays.stream(ottNoStr).mapToInt(Integer::parseInt).toArray();
-
-			ClientOttDao clientOttDao = new ClientOttDao();
-			String clientId = req.getParameter("clientId");
+         ClientOttDao clientOttDao = new ClientOttDao();
+         String clientId = req.getParameter("clientId");
 
 
-			for (int i = 0; i < ottNoArray.length; i++) {
-				int ottNo = ottNoArray[i];
+         for (int i = 0; i < ottNoArray.length; i++) {
+            int ottNo = ottNoArray[i];
 
-				clientOttDao.insert(clientId, ottNo);
-			}
-			}
-			
-			resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
+            clientOttDao.insert(clientId, ottNo);
+         }
+         }
+         
+         
+         // --------- 선호하는 장르 등록 --------- //
+         // @author: 이기주
+         LikeGenreDao likeGenreDao = new LikeGenreDao();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			resp.sendError(500);
-		}
+         String[] whatIsGenreName = req.getParameterValues("genreName");
+         
+         String clientId = req.getParameter("clientId");
+         
+         for (int i = 0; i < whatIsGenreName.length; i++) {
+            String genreName = whatIsGenreName[i];
 
-	}
+            likeGenreDao.insert2(clientId, genreName);
+         }
+      
+         resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
+      } catch (Exception e) {
+         e.printStackTrace();
+         resp.sendError(500);
+      }
+
+   }
 }
