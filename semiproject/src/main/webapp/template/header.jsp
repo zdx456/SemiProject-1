@@ -99,8 +99,14 @@
 						            <li><a href="<%=request.getContextPath()%>/adminContents/list.jsp">콘텐츠 관리</a></li>
 						            <li><a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp">공지사항 관리</a></li>
 						            <li><a href="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp">문의사항 관리</a></li>
+						            <li>
+						            	<a href="<%=request.getContextPath()%>/ott/list.jsp">OTT관리</a>
+						            </li>
+						            <li>
+						            	<a href="<%=request.getContextPath() %>/adminStats/joindateChart.jsp">통계</a>
+						            </li> 
 								</ul>
-							</div>
+							</div> 
 						</li>	
 						<%} else if(login) { %>
 						<li><a href="<%=request.getContextPath()%>/client/logout.svt">로그아웃</a></li>
