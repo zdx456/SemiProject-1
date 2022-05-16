@@ -46,7 +46,6 @@ List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
 String clientId = (String) session.getAttribute("login");
 boolean isLogin = clientId != null;
-boolean isCorrect = clientId.equals(reviewWriter);
 
 //좋아요 출력할 likeContents 불러오기
 LikeContentsDao likeContentsDao = new LikeContentsDao();
@@ -198,25 +197,15 @@ textarea {
 	border-radius: 20px;
 	
 }
+.score-show{
+    cursor: default !important;
+    }
 
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 
-// 리뷰 한 번만 작성하기
-$(function () {
-	
-    var login = <%=(String)session.getAttribute("login")%>;
-    var isCorrect = <%=clientId.equals(reviewWriter)%>;
-
-    if(login && !isCorrect) {
-			$(".reviewC").click(function(e){
-				e.preventDefault();
-			});
-
-    }
-});
 
 
 $(function(){
@@ -493,7 +482,7 @@ $(function () {
 			%>
 
 			<tr>
-				<th width="10%"><%=reviewDto.getReviewWriter()%></th>
+				<th width="10%"><%=reviewDto.getClientNick()%></th>
 				<td width="20%"><%=reviewDto.getReviewTime()%></td>
 				<td width="30%" class="rs">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>

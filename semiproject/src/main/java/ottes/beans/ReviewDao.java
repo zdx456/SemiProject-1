@@ -24,6 +24,7 @@ public class ReviewDao {
 			reviewDto.setReviewContent(rs.getString("review_content"));
 			reviewDto.setReviewScore(rs.getInt("review_score"));
 			reviewDto.setReviewTime(rs.getDate("review_time"));
+			reviewDto.setClientNick(rs.getString("client_nick"));
 
 			list.add(reviewDto);
 		}
@@ -71,6 +72,7 @@ public class ReviewDao {
 			reviewDto.setReviewContent(rs.getString("review_content"));
 			reviewDto.setReviewScore(rs.getInt("review_score"));
 			reviewDto.setReviewTime(rs.getDate("review_time"));
+			reviewDto.setClientNick(rs.getString("client_nick"));
 
 			list.add(reviewDto);
 		}
@@ -82,11 +84,13 @@ public class ReviewDao {
 			Connection con = JdbcUtils.getConnection();
 			// 컨텐츠 상세 보기에서는 리뷰 5개까지만 보여주기
 			String sql = 
-					"select * from( "
-					+ "  select rownum RN, TMP.* from ("
-					+ "  select review.* from review where contents_no = ? order by review_time desc"
-					+ "        ) TMP"
-					+ ") where RN between 1 and 5";
+					"select * from (select rownum rn, TMP.* from( "
+							+ " 	  select R.*, C.client_nick, A.contents_title from review R  "
+							+ "                  left outer join client C on R.review_writer = C.client_id "
+							+ "                  left outer join contents A on R.contents_no = A.contents_no "
+							+ "                  where R.contents_no = ? order by review_time desc  "
+							+ " )"
+							+ " TMP)where rn between 1 and 5" ;
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, contentsNo);
@@ -102,6 +106,7 @@ public class ReviewDao {
 				reviewDto.setReviewContent(rs.getString("review_content"));
 				reviewDto.setReviewScore(rs.getInt("review_score"));
 				reviewDto.setReviewTime(rs.getDate("review_time"));
+				reviewDto.setClientNick(rs.getString("client_nick"));
 
 				list.add(reviewDto);
 			}
