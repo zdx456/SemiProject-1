@@ -77,7 +77,7 @@
 
 ## 디자인, 초안과 비교
 
-
+                 초안                                                     개발화면
 <img src="img/mainDraft.PNG" width="250" height="400">　　　　　<img src="img/main.PNG" width="400" height="400">
 
 <img src="img/searchDraft.PNG" width="250" height="500">　　　　　<img src="img/search.PNG" width="400" height="500">
@@ -108,8 +108,10 @@
 
 
 ## 체크리스트 체크
+
+* 크로스 체킹을 통해 개발하지 않은 파트를 체크함
 <img src="img/checkList.PNG" width="1000" height="400">
-+ 체크리스트 전체 : https://docs.google.com/spreadsheets/d/1OokltEsb8Sa3Pvoue279jifhWzBXDaaLW_sOCUll_XE/edit#gid=0
+* 체크리스트 전체 : https://docs.google.com/spreadsheets/d/1OokltEsb8Sa3Pvoue279jifhWzBXDaaLW_sOCUll_XE/edit#gid=0
 
 
 ***
