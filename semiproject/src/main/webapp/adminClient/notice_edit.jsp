@@ -52,11 +52,11 @@
 			<%} %>	
 			    <div class="input-inquiry">
 			        <label for="input_inquiry_title">제목 <span>&#42;</span></label>
-			        <input type="text" name="noticeTitle" class="form-input fill" id="input_inquiry_title" value="<%=noticeDto.getNoticeTitle()%>" autocomplete="off" required>	
+			        <input type="text" name="noticeTitle" class="form-input fill" id="input_inquiry_title" value="<%=noticeDto.getNoticeTitle()%>" autocomplete="off" required maxlength="100">	
 			    </div>
 			    <div>
 			        <label for="input_inquiry_content">내용 <span>&#42;</span></label>
-			        <textarea name="noticeContent" class="form-input fill" id="input_inquiry_content" required rows="12"><%=noticeDto.getNoticeContent()%></textarea>
+			        <textarea name="noticeContent" class="form-input fill" id="input_inquiry_content" required rows="12" maxlength="1300"><%=noticeDto.getNoticeContent()%></textarea>
 			    </div>
 			    <div>
 			        <button type="submit" class="fill btn-mint">수정하기</button>

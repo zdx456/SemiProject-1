@@ -924,7 +924,7 @@ label[for=input_inquiry_content] {
 	width: 130px;
 	position: absolute;
     right: -28px;
-    top: 110px;	
+    top: 110px;
 }
 
 .inquiry_delete a {
@@ -932,10 +932,11 @@ label[for=input_inquiry_content] {
 	height: 30px;
 	line-height: 30px;
 	width: 130px;
-	color: #00ADB5;
+    background-color: transparent;
+    color: #EDC948;
 	font-weight: bolder;
 	border-radius: 10px;
-	background-color: rgba(237, 201, 72, .9);
+	border: 1px solid #EDC948;
 }
 
 .search_img {
