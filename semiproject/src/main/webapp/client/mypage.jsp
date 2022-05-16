@@ -116,14 +116,14 @@ List<GenreDto> genreList = genreDao.selectListNoOrder();
 					if (isMatch && !genreDto.getGenreName().equals("없음")) {
 					%>
 					<input type="hidden" name="clientId" value="<%=clientId%>"> 
-					<input type="checkbox" name="genreName"	value="<%=genreDto.getGenreName()%>" checked disabled>
+					<input type="checkbox" name="genreName"	value="<%=genreDto.getGenreName()%>" checked>
 					<%=genreDto.getGenreName()%> <!-- 장르 이름 출력 -->
 					<br><br>
 					<%
 					} else if(!isMatch && !genreDto.getGenreName().equals("없음")) {
 					%>
 					<input type="hidden" name="clientId" value="<%=clientId%>"> 
-					<input type="checkbox" name="genreName"	value="<%=genreDto.getGenreName()%>" disabled>
+					<input type="checkbox" name="genreName"	value="<%=genreDto.getGenreName()%>">
 					<%=genreDto.getGenreName()%> <!-- 장르 이름 출력 -->
 				<br><br>
 				<%}	%>
