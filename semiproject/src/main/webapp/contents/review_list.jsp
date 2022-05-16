@@ -9,6 +9,9 @@
     pageEncoding="UTF-8"%>
     
     <style>
+    .score-show{
+    cursor: default !important;
+    }
     
     .btn-contents {
          padding-top: 5px;
