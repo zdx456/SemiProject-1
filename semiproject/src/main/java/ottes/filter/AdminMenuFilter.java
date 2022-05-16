@@ -12,7 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName="f3", urlPatterns = {
-		"/adminClient/*"
+		"/adminClient/*",
+		"/adminContents/detail.jsp",
+		"/adminContents/edit.jsp",
+		"/adminContents/insert.jsp",
+		"/adminContents/list.jsp",
+		"/adminContents/delete.svt",
+		"/adminContents/edit.svt",
+		"/adminContents/insert.svt",		
+		"/adminStats/*", 
+		"/ott/*"
 })
 public class AdminMenuFilter implements Filter{
 	@Override
@@ -24,9 +33,15 @@ public class AdminMenuFilter implements Filter{
 		
 		try {
 			String clientGrade = (String) req.getSession().getAttribute("auth");
-			if(clientGrade.equals("관리자")) {
+			System.out.println(clientGrade);
+			
+			if(clientGrade == null) {
+				resp.sendRedirect(req.getContextPath()+ "/client/login.jsp");	
+			}
+			else if(clientGrade.equals("관리자")) {
 				chain.doFilter(request, response);
-				return;
+			} else {
+				resp.sendRedirect(req.getContextPath()+ "/client/login.jsp");	
 			}
 			
 		} catch (Exception e) {
@@ -35,7 +50,3 @@ public class AdminMenuFilter implements Filter{
 		}
 	}
 }
-
-
-
-

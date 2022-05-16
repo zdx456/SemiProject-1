@@ -12,18 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName="f2", urlPatterns = {
-		"/exam/*",
-		"/score/*",
-		"/product/*",
-		"/Client/password.jsp", "/Client/password.kh",
-		"/Client/information.jsp", "/Client/information.kh",
-		"/Client/exit.jsp", "/Client/exit.kh",
-		"/board/write.jsp", "/board/write.kh",
-		"/board/edit.jsp", "/board/edit.kh",
-		"/board/delete.kh",
-		"/board/reply_insert.kh",
-		"/board/reply_edit.kh",
-		"/board/reply_delete.kh"
+		"/inquiry/*",
+		"/mypage/*",
+		"/client/exit_finish.jsp",
+		"/client/exit.jsp",
+		"/client/information.jsp",
+		"/client/mypage.jsp",
+		"/client/password.jsp",
+		"/client/password.jsp",
+		"/client/exit.kh",
+		"/client/information.kh",
+		"/client/logout.svt",
+		"/contents/review_insert.svt",
+		"/contents/review_edit.svt",
+		"/contents/review_delete.svt"
 })
 public class LoginClientFilter implements Filter{
 	@Override
@@ -33,15 +35,12 @@ public class LoginClientFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse) response;
 		
 		try {
-			//세션 검사
 			String ClientId = (String) req.getSession().getAttribute("login");
-
+			
 			if(ClientId == null) {
-				//로그인 페이지로 강제 이동 처리
-				//resp.sendError(401); //401(Unauthorize - 미인증)
+				resp.sendRedirect(req.getContextPath()+ "/client/login.jsp");	
 			}
 			else {
-				//chain.doFilter(req, resp);
 				chain.doFilter(request, response);
 			}
 		}
