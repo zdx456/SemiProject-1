@@ -107,9 +107,7 @@
 	if(contentsNoParam != null) {
 		contentsNo = Integer.valueOf(contentsNoParam);
 	} */
-	
-	// int contentsNo = Integer.parseInt(request.getParameter("contentsNo"));
-	
+
 	//목록에서 작성 하기 위한 작성자 세션!
 	String clientId = (String)session.getAttribute("login");
 	boolean islogin = clientId != null && !clientId.equals("");
@@ -152,6 +150,9 @@
 	//관리자인지 판정
 	String memberGrade = (String)session.getAttribute("auth");
 	boolean isAdmin = memberGrade != null && memberGrade.equals("관리자");
+	
+	
+	boolean isWrite = reviewDao.checkWriter(contentsNo, clientId);
 	
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -216,9 +217,11 @@
 
             if(size > 100){
                 target.css("color", "red");//전체 count 선택
+                $(".btnlock").prop("disabled",true);
             }
             else {
                 target.css("color", "white");
+                $(".btnlock").prop("disabled",false);
             }
            
         });
@@ -226,14 +229,14 @@
     
     </script>
     
-
 		
 <div class="container w700">
 	<div class="row center ">
 		<h2> 리뷰 목록</h2>
 		<hr>
 	</div>
-	<%if(!searchWriter && islogin){ //내가 쓴 글, 로그인이 안되면  등록은 불가능하게 만듬%>
+
+	<%if(!searchWriter && islogin && !isWrite ){ //내가 쓴 리뷰 목록, 비회원, 이미 작성한 사람은 등록 불가능%>
 		<form action="review_insert.svt" method="post">
 		<div class="row center review">
 		<br>
@@ -247,7 +250,7 @@
             </span>
 			<label class="score-select" data-max="5" data-rate="3"></label><br><br>
 		</div>
-		<div class="row center"><button type="submit" class="btn-mint btn-insert btnsub ">등록</button></div>
+		<div class="row center"><button type="submit" class="btn-mint btn-insert btnlock ">등록</button></div>
 		</form>
 	<%} %>
 	
@@ -327,10 +330,10 @@
 						<input type="hidden" name="reviewNo" value="<%=reviewDto.getReviewNo()%>">
 						<input type="hidden" name="contentsNo" value="<%=reviewDto.getContentsNo()%>">
 						<input type="hidden" name="reviewWriter" value="<%=reviewDto.getReviewWriter() %>" disabled class="form-input input-round">
-						<%=reviewDto.getClientNick() %>
+						<%=reviewDto.getClientNick()%>
 				</td>
 				<td colspan="2">
-						<textarea class=" reviewCont" name="reviewContent" rows="3" cols="45"><%=reviewDto.getReviewContent()%></textarea>
+						<textarea class=" reviewCont reviewSize" name="reviewContent" rows="3" cols="45"><%=reviewDto.getReviewContent()%></textarea>
 						<span class="length">
 			                <span class="count">0</span> 
 			                / 
@@ -355,7 +358,7 @@
 						<%} %>
 					</td>
 					<td>
-						<button type="submit" class="btn-yellow btn-size btn-table">수정</button>
+						<button type="submit" class="btn-yellow btn-size btn-table btnlock">수정</button>
 					</td>
 					<td>
 						<button type="button" class="btn-black cancel-btn btn-table">취소</button>

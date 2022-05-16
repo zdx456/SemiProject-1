@@ -267,7 +267,19 @@ public class ReviewDao {
 		
 		return count;
 	}
-
-
+	
+	public boolean checkWriter(int contentsNo, String clientId) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql = " select * from review where contents_no = ? and review_writer = ? order by review_time desc";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, contentsNo);
+		ps.setString(2, clientId);
+		
+		int isWrite = ps.executeUpdate();
+		
+		con.close();
+		
+		return isWrite > 0;
+	}
 	}	
 
