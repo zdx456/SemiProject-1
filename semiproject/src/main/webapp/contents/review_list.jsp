@@ -233,7 +233,7 @@
     </script>
     
 		
-<div class="container w700">
+<div class="container w800">
 	<div class="row center ">
 		<h2> 리뷰 목록</h2>
 		<hr>
