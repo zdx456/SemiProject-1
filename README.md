@@ -1,4 +1,4 @@
-# 코딩해조    <img src="img/LOGO.PNG" width="150" height="75">
+# 코딩해조    <img src="img/logo.png" width="200" height="75">
 
 ### 역할
 
@@ -19,15 +19,15 @@
 ### 개발 당담
 
 ```
-● 유성현 : 컨텐츠 리뷰 CRUD , ott CRUD , 통계(가입일, ott컨텐츠 개수)
+● 유성현 : 콘텐츠 리뷰 CRUD , ott CRUD , 통계(가입일, ott컨텐츠 개수)
 
 ● 이기주 :  템플릿(해더, 푸터, 햄버거 버튼) , 회원목록 관리 CRUD
  
-● 민유경 : 컨텐츠 CRUD (포스터,ott 등록), 통계 (연령별,성별,장르별, ott별)
+● 민유경 : 콘텐츠 CRUD (포스터,ott 등록), 통계 (연령별,성별,장르별, ott별)
 
-● 이유나 : 컨텐츠 상세(관심컨텐츠), 리뷰(등록 조회), 컨텐츠 검색(비동기통신 정렬)
+● 이유나 : 콘텐츠 상세(관심컨텐츠), 리뷰(등록 조회), 콘텐츠 검색(비동기통신 정렬)
  
-● 천지연 : 게시판 CRUD(고객센터,1:1문의), 메인페이지(슬라이더, 정렬), 컨텐츠검색(비동기통신 정렬)
+● 천지연 : 게시판 CRUD(고객센터,1:1문의), 메인페이지(슬라이더, 정렬), 텐츠검색(비동기통신 정렬)
 
 ● 송현도 : 회원 CRUD (중복검사), Id/Pw 찾기, 마이페이지
 ```
@@ -40,6 +40,23 @@
 ### 선택한 콘텐츠를 제공하는 OTT의 종류와 OTT 월별 가격을 비교하는 사이트
 ***
 
+## 주제 선정 이유
+***
+1. Ott 이용자 증가 - Ott 이용이 증가하는 추세(2020년 66.3%,2021년 69.5% 출처 : 2021년 방송매체 이용행태 조사)
+
+2. Ott 종류 증가 - Ott 종류가 증가함에 따라 이용자의 Ott 선택 
+
+3. 합리적인 선택을 지원 - 특정 컨텐츠를 제공하는 Ott 종류와 월별 가격을 제공하여 합리적 선택을 도와준다
+
+## 개발환경
+***
+* 운영체제 - window10, window11
+
+
+* 사용 언어 - java 1.8(JDK 1,8), Oracle 21.4.3, JavaScript, HTML
+
+
+* IDE(개발환경) - Eclipse(4.22.0), Visual Studio Code(1.67.1)
 
 ## 설계
 
@@ -48,6 +65,10 @@
 + ERD주소 : <https://www.erdcloud.com/d/jxvri2DP6RiyLcoXe>
  <img src="img/erd.PNG" width="700" height="400">
 
+
++ usecase Diagram : 
+ <img src="img/useCase.PNG" width="800" height="500">
+ 
 + Flow Chart : https://app.diagrams.net/#Hzdx456%2FSemiProject-1%2Fmain%2Fsemi-1.drawio
 
 
@@ -66,7 +87,7 @@
 + 모든 초안 디자인 : https://www.figma.com/file/ui61FPwGa3Nb15vadIXM3X/%EC%BD%94%EB%94%A9%ED%95%B4%EC%A1%B0-team-library?node-id=414%3A2
 
 
-## 주요 기능 구현
+## 주요 기능 구현 여부
 
 
 | 기능 | 구현 | 기능 내용 |
@@ -83,6 +104,12 @@
 | Ott | ☑️ | 로고 첨부, 수정, 삭제, 등록  |
 | 예고편 | 🔺 | 콘텐츠 상세보기에서 동영상 삽입  |
 | 영화 월드컵 | 🔺 | 월드컵 기능을 이용하여 선호 콘텐츠 제공  |
+
+
+
+## 체크리스트 체크
+<img src="img/checkList.PNG" width="1000" height="400">
++ 체크리스트 전체 : https://docs.google.com/spreadsheets/d/1OokltEsb8Sa3Pvoue279jifhWzBXDaaLW_sOCUll_XE/edit#gid=0
 
 
 ***
