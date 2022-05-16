@@ -186,7 +186,7 @@
 							</div>
 							
 							<div class="float-left layer-6 left">
-								<span class="m15"> <%=contentsDto.getContentsTime() %></span>
+								<span class="m15"> <%=contentsDto.getContentsTime() %>분</span>
 							</div>
 							
 						</div>
