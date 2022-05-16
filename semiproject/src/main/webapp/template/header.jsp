@@ -120,7 +120,7 @@
 								<span></span>
 								<span></span>
 							</label>
-							<div class="burger-menu">
+							<div class="burger-menu"> 
 								<!-- 메뉴 -->
 								<ul>
 									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
