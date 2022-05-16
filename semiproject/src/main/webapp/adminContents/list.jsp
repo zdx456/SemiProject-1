@@ -67,6 +67,7 @@
    
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+
 <style>
 
 	.m-title {
@@ -105,8 +106,8 @@
 
 	
 	.btn-p3 {
-		padding-left: 2em;
-		padding-right: 2em;
+		padding-left: 2.5em;
+		padding-right: 2.5em;
 		padding-top: 0.5em;
 		padding-bottom: 0.5em;
 	}
@@ -187,6 +188,7 @@
     border-radius: 10px;
     display: inline-block;
     z-index: 1;
+    
 	}
 	
 	/* 가상 선택자를 활용 화살표 대체 */
@@ -201,6 +203,7 @@
 	    border-left: 5px solid transparent;
 	    border-right: 5px solid transparent;
 	    border-top: 5px solid #b2bec3;
+	   
 	}
 	
 	.selectbox label {
@@ -210,6 +213,7 @@
 	    padding: .8em .5em;  /* select의 여백 크기 만큼 */
 	    color: #999;
 	    z-index: -1;  /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+	   
 	}
 	
 	.selectbox select {
@@ -225,6 +229,7 @@
 	    appearance: none;
 	    background-color: #222831;
 	    border: 2px solid #b2bec3;
+	    cursor: pointer;
 	}
 	
 	.table.table-border {
@@ -252,6 +257,23 @@
     border-radius: 10px;
     color: #00ADB5;
 	}
+	
+	.title-a {
+		width: 400px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inlie-block;
+	}
+	
+	.director-a {
+		width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inlie-block;
+	}
+	
 
 </style>
 
@@ -276,7 +298,7 @@
 </script>
 
 
-	<div class="container w800 m30">
+	<div class="container w1000 m30">
 	
 		<div class="row center">
 			<h1 class="title m-title">콘텐츠 목록(관리자용)</h1>
@@ -406,24 +428,24 @@
 				
 					<thead>
 						<tr class="center">
-							<th>번호</th>
-							<th>제목</th>
-							<th>등급</th>
-							<th>감독</th>
-							<th>장르</th>
-							<th>국가</th>
+							<th width="10%">번호</th>
+							<th width="40%">제목</th>
+							<th width="10%">등급</th>
+							<th width="15%">감독</th>
+							<th width="10%">장르</th>
+							<th width="15%">국가</th>
 						</tr>
 					</thead>
 					
 					<tbody>
 					<%for(ContentsDto contentsDto : list) {%>
 						<tr class="center">
-							<td><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsNo() %></a></td>
-							<td><a class="left list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsTitle() %></a></td>
-							<td><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsGrade() %></a></td>
-							<td><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsDirector() %></a></td>
-							<td><a class="list-box " href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getGenreName() %></a></td>
-							<td><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getRegionName() %></a></td>
+							<td width="10%"><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsNo() %></a></td>
+							<td width="40%"><a class="left list-box title-a" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsTitle() %></a></td>
+							<td width="10%"><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsGrade() %></a></td>
+							<td width="15%"><a class="list-box director-a" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getContentsDirector() %></a></td>
+							<td width="10%"><a class="list-box " href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getGenreName() %></a></td>
+							<td width="15%"><a class="list-box" href="detail.jsp?contentsNo=<%=contentsDto.getContentsNo() %>"><%=contentsDto.getRegionName() %></a></td>
 						</tr>
 						<%} %>
 					</tbody>
