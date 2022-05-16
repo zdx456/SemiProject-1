@@ -133,7 +133,7 @@
 ***
 ## ○참고문서
 
-*
-<https://gist.github.com/ihoneymon/652be052a0727ad59601> 
+* 마크다운
+ <https://gist.github.com/ihoneymon/652be052a0727ad59601> 
 
-<https://mini-min-dev.tistory.com/56>  
+ <https://mini-min-dev.tistory.com/56>  
