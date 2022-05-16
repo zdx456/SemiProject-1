@@ -111,11 +111,11 @@ public class ContentsAttachmentDao {
 							+ "select B.contents_no, C.attachment_no, E.contents_title "
 							+ "from likegenre A join contents B on A.genre_name = B.genre_name "
 							+ "join contents_attachment C on B.contents_no = C.contents_no "
-							+ "join review D on B.contents_no = D.contents_no "
-							+ "join contents E on D.contents_no = E.contents_no "
+							+ "join contents E on B.contents_no = E.contents_no "
+							+ "left outer join review D on B.contents_no = D.contents_no "
 							+ "where A.client_id = ? "
 							+ "group by B.contents_no, C.attachment_no, E.contents_title "
-							+ "order by avg(D.review_score) desc"
+							+ "order by avg(D.review_score) desc nulls last"
 						+ ") TMP"
 					+ ") where rn between 1 and 12";
 		
