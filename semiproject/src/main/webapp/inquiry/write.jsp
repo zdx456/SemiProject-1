@@ -21,11 +21,11 @@
 		    </div>
 		    <div class="input-inquiry">
 		        <label for="input_inquiry_title">제목 <span>&#42;</span></label>
-		        <input type="text" name="inquiryTitle" class="form-input fill" id="input_inquiry_title" autocomplete="off" required>	
+		        <input type="text" name="inquiryTitle" class="form-input fill" id="input_inquiry_title" autocomplete="off" required maxlength="100">	
 		    </div>
 		    <div>
 		        <label for="input_inquiry_content">내용 <span>&#42;</span></label>
-		        <textarea name="inquiryContent" class="form-input fill" id="input_inquiry_content" required rows="12"></textarea>
+		        <textarea name="inquiryContent" class="form-input fill" id="input_inquiry_content" required rows="12" maxlength="1300"></textarea>
 		    </div>
 		    <div>
 		        <button type="submit" class="fill btn-mint">접수하기</button>

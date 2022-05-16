@@ -32,11 +32,11 @@
 				</div>
 			    <div class="input-inquiry">
 			        <label for="input_inquiry_title">제목 <span>&#42;</span></label>
-			        <input type="text" name="noticeTitle" class="form-input fill" id="input_inquiry_title" autocomplete="off" required>	
+			        <input type="text" name="noticeTitle" class="form-input fill" id="input_inquiry_title" autocomplete="off" required maxlength="100">	
 			    </div>
 			    <div>
 			        <label for="input_inquiry_content">내용 <span>&#42;</span></label>
-			        <textarea name="noticeContent" class="form-input fill" id="input_inquiry_content" required rows="12"></textarea>
+			        <textarea name="noticeContent" class="form-input fill" id="input_inquiry_content" required rows="12" maxlength="1300"></textarea>
 			    </div>
 			    <div>
 			        <button type="submit" class="fill btn-mint">등록하기</button>
