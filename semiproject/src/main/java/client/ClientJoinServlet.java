@@ -82,6 +82,7 @@ public class ClientJoinServlet extends HttpServlet {
          }
       
          resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
+         
       } catch (Exception e) {
          e.printStackTrace();
          resp.sendError(500);
