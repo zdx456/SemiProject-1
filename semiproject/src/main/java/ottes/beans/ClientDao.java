@@ -140,9 +140,7 @@ public class ClientDao {
 		String sql = "update client set client_pw = ? where client_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, changePw);
-		System.out.println("ClientDao >> changePassword  >> changePw : " +  changePw);
 		ps.setString(2, clientId);
-		System.out.println("ClientDao >> changePassword  >> clientId : " +  clientId);
 		int count = ps.executeUpdate();
 		
 		con.close();
@@ -262,7 +260,6 @@ public class ClientDao {
 	}
 	public String findPw(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		System.out.println("ClientDao >> findPw ");
 		String sql = "select client_id from client where client_id=? and client_nick=? and client_birth=? and client_email=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientId());

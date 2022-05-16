@@ -33,7 +33,6 @@ public class AdminMenuFilter implements Filter{
 		
 		try {
 			String clientGrade = (String) req.getSession().getAttribute("auth");
-			System.out.println(clientGrade);
 			
 			if(clientGrade == null) {
 				resp.sendRedirect(req.getContextPath()+ "/client/login.jsp");	
