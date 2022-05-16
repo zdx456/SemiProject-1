@@ -157,41 +157,46 @@
 		padding: 0.4em;
 	}
 	
+	.check-style{
+		font-weight: bold;
+		color : #EDC948;
+	}
+	
 
 </style>
 
 <script type="text/javascript">
 
-	$(function(){
-		
-		$(".select-all").change(function(){
-			if($(this).is(":checked")){
-				$(".select-item").prop("checked", true);
-				$(".check-label").css("color", "#EDC948").css("font-weight", "bold");
-				
-			}
-			else {
-				$(".select-item").prop("checked", false);
-				$(".check-label").css("color", "white").css("font-weight", "normal");
-			}
-		});
-		
-		$(".select-item").change(function(){
-			var total = $("input:checkbox[name=ottName]").length;
-			var checked = $("input:checkbox[name=ottName]:checked").length;
-			//console.log(total);
-			//console.log(checked);
+$(function(){
+	
+	$(".select-all").change(function(){
+		if($(this).is(":checked")){
+			$(".select-item").prop("checked", true);
+			$(".ottCheck").parents().addClass("check-style");
+			$(".select-all").parents().addClass("check-style");
 			
-			if(total != checked){
-				$(".select-all").prop("checked", false);
-				$(".check-labelAll").css("color", "white").css("font-weight", "normal");
-			}
-			else{
-				$(".select-all").prop("checked", true);
-				$(".check-labelAll").css("color", "#EDC948").css("font-weight", "bold");
-			}
-		});
+		}
+		else {
+			$(".select-item").prop("checked", false);
+			$(".ottCheck").parents().removeClass("check-style");
+			$(".select-all").parents().removeClass("check-style");
+		}
 	});
+	
+	$(".select-item").change(function(){
+		var total = $("input:checkbox[name=ottName]").length;
+		var checked = $("input:checkbox[name=ottName]:checked").length;
+		
+		if(total != checked){
+			$(".select-all").prop("checked", false);
+			$(".select-all").parents().removeClass("check-style");
+		}
+		else{
+			$(".select-all").prop("checked", true);
+			$(".select-all").parents().addClass("check-style");
+		}
+	});
+});
 		
 		//페이지
 		$(function(){
@@ -227,40 +232,32 @@
 		    });
 		});
 		
+		//체크박스 선택시 스타일 변화
 		$(function(){
-			$(".check1").change(function(){
+			$(".ottCheck").change(function(){
 				if($(this).is(":checked")){
-					$(".check-label1").css("color", "#EDC948").css("font-weight", "bold");
+					$(this).parents().addClass("check-style");
 				}
 				else {
-					$(".check-label1").css("color", "white").css("font-weight", "normal");
+					$(this).parents().removeClass("check-style");
+				}
+			});
+		});
+		
+		$(function(){
+			$(".ottCheck").each(function(){
+				if($(this).is(":checked")){
+					$(this).parents().addClass("check-style");
 				}
 			});
 			
-			$(".check2").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label2").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label2").css("color", "white").css("font-weight", "normal");
-				}
-			});
-			
-			$(".check3").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label3").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label3").css("color", "white").css("font-weight", "normal");
-				}
-			});
-			
-			$(".check4").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label4").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label4").css("color", "white").css("font-weight", "normal");
+			$(".select-all").each(function(){
+				var total = $("input:checkbox[name=ottName]").length;
+				var checked = $("input:checkbox[name=ottName]:checked").length;
+				
+				if(total == checked){
+					$(this).parents().addClass("check-style");
+					$(this).prop("checked", true);
 				}
 			});
 			
@@ -319,9 +316,11 @@
     	var title = $("input[name=contentsTitle]").val() == "";
     	var time = $("input[name=contentsTime]").val() == "";
     	var director = $("input[name=contentsDirector]").val() == "";
-    	var summary = $("textarea[name=contentsSummary]").val() == "";
+    	var summary = $(".summary").val().length == 0;
+    	var summarySize = $(".summary").val().length > 1300;
+    	var timeSize = $("input[name=contentsTime]").val().length > 4;
     	
-    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary){
+    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || summarySize || timeSize){
     		e.preventDefault();
     	}
     });
@@ -348,6 +347,8 @@
 		}
 		
 	});
+	
+	
 	
 	
 </script>
@@ -541,11 +542,12 @@
 		<div class="row">
 				줄거리 (*필수)
 				<div class="row-label"></div>
+				
 				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary"><%=contentsDto.getContentsSummary() %></textarea>
 				
 				<div class="row right">
 					<span class="length">
-						<span class="count">0</span>
+						<span class="count"><%=contentsDto.getContentsSummary().length() %></span>
 						/
 						<span class="total">1300</span>
 					</span>
@@ -612,9 +614,9 @@
 				<%for(OttCheckVO ottCheckVO : checkList){ %>
 					<div class="row">
 						<label><%if(ottCheckVO.isCheck()){%>
-							<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item" checked>
+							<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item ottCheck" checked >
 						<%} else { %>
-							<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item">
+							<input type="checkbox" name="ottName" value="<%=ottCheckVO.getOttName() %>" class="select-item ottCheck">
 						<%} %>
 						<%=ottCheckVO.getOttName() %></label>
 					</div>
