@@ -82,7 +82,6 @@ public class ClientDao {
 		if(rs.next()) {
 			clientDto = new ClientDto();
 			
-			//data 13개 copy
 			clientDto.setClientId(rs.getString("client_id"));
 			clientDto.setClientPw(rs.getString("client_pw"));
 			clientDto.setClientNick(rs.getString("client_nick"));
@@ -391,7 +390,38 @@ public class ClientDao {
 				con.close();
 				
 				return count;
+				
 			}
 ///////////
+			public ClientDto checkNick(String clientNick) throws Exception {
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select * from client where client_nick = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, clientNick);
+				ResultSet rs = ps.executeQuery();
+				
+				ClientDto clientDto;
+				if(rs.next()) {
+					clientDto = new ClientDto();
+					
+
+					clientDto.setClientId(rs.getString("client_id"));
+					clientDto.setClientPw(rs.getString("client_pw"));
+					clientDto.setClientNick(rs.getString("client_nick"));
+					clientDto.setClientBirth(rs.getString("client_birth"));
+					clientDto.setClientEmail(rs.getString("client_email"));
+					clientDto.setClientGrade(rs.getString("client_grade"));
+					clientDto.setClientJoindate(rs.getDate("client_joindate"));
+				}
+				
+				else {
+					clientDto = null;
+				}
+				
+				con.close();
+				
+				return clientDto;
 }
 
+}
