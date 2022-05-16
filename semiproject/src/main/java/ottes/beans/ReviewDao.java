@@ -169,7 +169,10 @@ public class ReviewDao {
 		int begin = end -(s-1);
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select * from (select rownum rn, TMP.* from( "
-				+ " select * from review where contents_no = ?  order by review_time desc"
+				+ " 	  select R.*, C.client_nick, A.contents_title from review R  "
+				+ "                  left outer join client C on R.review_writer = C.client_id "
+				+ "                  left outer join contents A on R.contents_no = A.contents_no "
+				+ "                  where R.contents_no = ? order by review_time desc  "
 				+ " )"
 				+ " TMP)where rn between ? and ?" ;
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -189,6 +192,8 @@ public class ReviewDao {
 			reviewDto.setReviewContent(rs.getString("review_content"));
 			reviewDto.setReviewScore(rs.getInt("review_score"));
 			reviewDto.setReviewTime(rs.getDate("review_time"));
+			reviewDto.setClientNick(rs.getString("client_nick"));
+			reviewDto.setContentsTitle(rs.getString("contents_title"));
 
 			list.add(reviewDto);
 		}
@@ -202,7 +207,10 @@ public class ReviewDao {
 		int begin = end -(s-1);
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select * from (select rownum rn, TMP.* from( "
-				+ " select * from review where review_writer = ? order by review_time desc"
+				+ " select R.*, C.client_nick, A.contents_title  from review R "
+				+ "                 left outer join client C on R.review_writer = C.client_id "
+				+ "                 left outer join contents A on R.contents_no = A.contents_no "
+				+ "                 where R.review_writer = ? order by review_time desc"
 				+ " )"
 				+ " TMP)where rn between ? and ? ";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -221,6 +229,8 @@ public class ReviewDao {
 			reviewDto.setReviewContent(rs.getString("review_content"));
 			reviewDto.setReviewScore(rs.getInt("review_score"));
 			reviewDto.setReviewTime(rs.getDate("review_time"));
+			reviewDto.setClientNick(rs.getString("client_nick"));
+			reviewDto.setContentsTitle(rs.getString("contents_title"));
 
 			list.add(reviewDto);
 		}

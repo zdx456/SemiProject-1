@@ -125,8 +125,11 @@
                 if(!flieExist){
                     return false;
                 }
-              
-                return flieExist;
+                var priceExist = $(".havePrice").val();
+              	if(!priceExist){
+              		return false;
+              	}
+                return flieExist && priceExist;
             });
         });
       </script>
@@ -157,7 +160,7 @@
 			<%} %>
 			<%=ottDto.getOttName()%>
 			</td>
-			<td><%=ottDto.getOttPrice()%></td>
+			<td><%=ottDto.getOttPrice()%>원</td>
 			<td><button type="button" class="btn-yellow edit-btn btn-table">수정</button></td>
 			<td><a href="delete.svt?ottNo=<%=ottDto.getOttNo()%>" class="btn-black btn-table">삭제</a></td> 
 		</tr>
@@ -202,8 +205,8 @@
 
 
 	<form action="insert.svt" method="post" enctype="multipart/form-data" class="ottForm">
-	<input type="text" name="ottName" placeholder="Ott 이름" class="form-input input-round ottNameCheck" autocomplete="off">
-	<input type="number"  name="ottPrice" placeholder="Ott월별가격(basic)" min="0" step="100"  class="form-input input-round">
+	<input type="text" name="ottName" placeholder="Ott 이름" class="form-input input-round ottNameCheck" autocomplete="off" maxlength="10">
+	<input type="number"  name="ottPrice" placeholder="Ott월별가격(basic)" min="0" step="100"  class="form-input input-round havePrice">
 	<input type="file" name="ottLogo" accept=".jpg,.png" class="logoFile"><br><br>
 	<span class="coment"></span><br><br>
 	<button type="submit" class="btn-mint btn-insert btn-lock">등록</button>
