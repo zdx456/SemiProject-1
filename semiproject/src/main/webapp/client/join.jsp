@@ -101,7 +101,7 @@ $(function(){
 	
 	//닉네임 중복체크 버튼
 	$("#btnCheckNick").click(function(){
-		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,15}$/;
+		var Nickregex =/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,15}$/;
 		var clientNick = $("#clientNick").val();
 	
 		var Nickjudge = Nickregex.test(clientNick);
@@ -138,7 +138,7 @@ $(function(){
 	
 		var judge = regex.test(clientId);
 		if(!judge){
-			alert("영어,숫자 15자이내로 작성해주세요");
+			alert("영어,숫자 15자이하로 작성해주세요");
 			status.id=false;
 			return;
 		}
@@ -193,7 +193,8 @@ $(function(){
 			}
 
 			//비밀번호 형식체크  
-			var psRegex =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{7,16}$/;  //영어,숫자,특수문자 8~16
+			var psRegex =/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,16}$/;  //영어,숫자,특수문자 8~16 
+
 			var clientPw = $("#clientPw").val();
 			var psJudge = psRegex.test(clientPw);
 			if(!psJudge){
@@ -491,19 +492,9 @@ $(function() {
             </label> <label> <input type="checkbox" name="genreName"
                value="버라이어티" class="select-item" id="skip-item"> 버라이어티
             </label>
-            <!-- 
-               장르 "없음" 추가(이기주)
-            -->
-            <label style="display: none;">
-                <input type="checkbox" name="genreName" value="없음" id="select-skip" checked>
-            </label>
-         </div>
-         <br> <br>
-			<div class="row center">
-				<label> <input type="checkbox"
-					class="select-all select-item"> 전체 선택
-				</label>
-			</div> 
+           
+            
+			</div>
 
 			<br> <br>
 			<div class="row m10">

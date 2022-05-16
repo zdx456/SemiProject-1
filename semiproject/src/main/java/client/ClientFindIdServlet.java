@@ -21,8 +21,9 @@ public class ClientFindIdServlet extends HttpServlet{
 			req.setCharacterEncoding("UTF-8");
 			ClientDto clientDto = new ClientDto();
 			clientDto.setClientNick(req.getParameter("clientNick"));
+			clientDto.setClientEmail(req.getParameter("clientEmail"));	
 			clientDto.setClientBirth(req.getParameter("clientBirth"));
-						
+			
 			ClientDao clientDao = new ClientDao();
 			String clientId = clientDao.findId(clientDto);			
 			if(clientId == null) {

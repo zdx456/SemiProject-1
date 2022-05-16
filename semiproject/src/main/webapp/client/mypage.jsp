@@ -55,7 +55,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 	<div class="row left">
 		<label>생년월일</label>
 		<div class="row left">
-			<input type="date" class="form form-input input-round fill"
+				<input type="date" class="form form-input input-round fill"
 				value="<%=clientDto.getClientBirth()%>" disabled>
 		</div>
 	</div>
@@ -81,6 +81,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 
 		</div>
 	</div>
+	
 	<div class="row left">
 		<label>가입한 ott</label>
 		<div class="row left">

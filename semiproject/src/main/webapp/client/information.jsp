@@ -59,7 +59,7 @@
 	     <div class="row">
 	        <br>
 	        <input type="radio" name="clientGender" required
-				value="남성">남성
+				value="남성" checked>남성
 				<input type="radio" name="clientGender" required
 				value="여성">여성
 	    </div>

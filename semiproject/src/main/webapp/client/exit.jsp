@@ -7,7 +7,8 @@
 </div>
 <form action="exit.kh" method="post">
 <div class = "row center">
-<input type="password" name="clientPw" required>
+
+    <input type="password" name="clientPw" autocomplete="off" required class="form-input  input-round" placeholder="비밀번호">
 <input type="submit" value="탈퇴하기"  class="btn-black">
 </div>
 <% if(request.getParameter("error") != null) { %>

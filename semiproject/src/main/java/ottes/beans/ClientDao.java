@@ -235,19 +235,26 @@ public class ClientDao {
 	//아이디찾기
 	public String findId(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		//System.out.println("ClientDao >> findId ");
-		String sql = "select client_id from client where client_nick=? and client_birth=?";
+		String sql = "select client_id from client where client_nick=? and client_email=? and client_birth=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientNick());
-		ps.setString(2, clientDto.getClientBirth());
+		//System.out.println("ClientDao >> findid0 >> getClient닉 "+clientDto.getClientNick());	
+		ps.setString(2, clientDto.getClientEmail());
+		//System.out.println("ClientDao >> findid0 >> getClientEmail "+clientDto.getClientEmail());	
+		ps.setString(3, clientDto.getClientBirth());
+		//System.out.println("ClientDao >> findid0 >> getClient생일l "+clientDto.getClientBirth());	
 		ResultSet rs = ps.executeQuery();
 		
 		String clientId;
 		if(rs.next()) {
 			clientId = rs.getString("client_id");
+			
 		}
+		
 		else {
-			clientId = null;
+		   
+		    clientId = null;
+			
 		}
 		
 		con.close();
@@ -260,13 +267,13 @@ public class ClientDao {
 		String sql = "select client_id from client where client_id=? and client_nick=? and client_birth=? and client_email=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientId());
-		System.out.println("ClientDao >> findPw0 >> getClientId "+clientDto.getClientId());
+		//System.out.println("ClientDao >> findPw0 >> getClientId "+clientDto.getClientId());
 		ps.setString(2, clientDto.getClientNick());
-		System.out.println("ClientDao >> findPw0 >> getClientNick "+clientDto.getClientNick());
+		//System.out.println("ClientDao >> findPw0 >> getClientNick "+clientDto.getClientNick());
 		ps.setString(3, clientDto.getClientBirth());
-		System.out.println("ClientDao >> findPw0 >> getClientBirth "+clientDto.getClientBirth());
+		//System.out.println("ClientDao >> findPw0 >> getClientBirth "+clientDto.getClientBirth());
 		ps.setString(4, clientDto.getClientEmail());
-		System.out.println("ClientDao >> findPw0 >> getClientEmail "+clientDto.getClientEmail());	
+		//System.out.println("ClientDao >> findPw0 >> getClientEmail "+clientDto.getClientEmail());	
 		ResultSet rs = ps.executeQuery();
 		
 		String clientId;
