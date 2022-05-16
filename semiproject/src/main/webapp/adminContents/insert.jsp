@@ -1,8 +1,17 @@
 
+<%@page import="ottes.beans.OttDto"%>
+<%@page import="java.util.List"%>
+<%@page import="ottes.beans.OttDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
+
+<%
+	OttDao ottDao = new OttDao();
+	List<OttDto> list = ottDao.selectList();
+
+%>
 
 <style>
 
@@ -114,6 +123,11 @@
 		font-size: 17px;
 	}
 	
+	.check-style{
+		font-weight: bold;
+		color : #EDC948;
+	}
+	
 
 
 </style>
@@ -125,28 +139,28 @@
 		$(".select-all").change(function(){
 			if($(this).is(":checked")){
 				$(".select-item").prop("checked", true);
-				$(".check-label").css("color", "#EDC948").css("font-weight", "bold");
+				$(".ottCheck").parents().addClass("check-style");
+				$(".select-all").parents().addClass("check-style");
 				
 			}
 			else {
 				$(".select-item").prop("checked", false);
-				$(".check-label").css("color", "white").css("font-weight", "normal");
+				$(".ottCheck").parents().removeClass("check-style");
+				$(".select-all").parents().removeClass("check-style");
 			}
 		});
 		
 		$(".select-item").change(function(){
 			var total = $("input:checkbox[name=ottName]").length;
 			var checked = $("input:checkbox[name=ottName]:checked").length;
-			//console.log(total);
-			//console.log(checked);
 			
 			if(total != checked){
 				$(".select-all").prop("checked", false);
-				$(".check-labelAll").css("color", "white").css("font-weight", "normal");
+				$(".select-all").parents().removeClass("check-style");
 			}
 			else{
 				$(".select-all").prop("checked", true);
-				$(".check-labelAll").css("color", "#EDC948").css("font-weight", "bold");
+				$(".select-all").parents().addClass("check-style");
 			}
 		});
 	});
@@ -171,6 +185,20 @@
 			function move(index){
 				$(".page").hide();
 				$(".page").eq(index).show();
+				
+				if(index == 0){
+					$(".btn-prev").hide();
+				}
+				else{
+					$(".btn-prev").show();
+				}
+				
+				if(index == 2){
+					$(".btn-next").hide();
+				}
+				else{
+					$(".btn-next").show();
+				}
 			}
 			
 		});
@@ -185,43 +213,16 @@
 		    });
 		});
 		
+		//체크박스 선택시 스타일 변화
 		$(function(){
-			$(".check1").change(function(){
+			$(".ottCheck").change(function(){
 				if($(this).is(":checked")){
-					$(".check-label1").css("color", "#EDC948").css("font-weight", "bold");
+					$(this).parents().addClass("check-style");
 				}
 				else {
-					$(".check-label1").css("color", "white").css("font-weight", "normal");
+					$(this).parents().removeClass("check-style");
 				}
 			});
-			
-			$(".check2").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label2").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label2").css("color", "white").css("font-weight", "normal");
-				}
-			});
-			
-			$(".check3").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label3").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label3").css("color", "white").css("font-weight", "normal");
-				}
-			});
-			
-			$(".check4").change(function(){
-				if($(this).is(":checked")){
-					$(".check-label4").css("color", "#EDC948").css("font-weight", "bold");
-				}
-				else {
-					$(".check-label4").css("color", "white").css("font-weight", "normal");
-				}
-			});
-			
 		});
 		
 		//러닝타임에 숫자 이외 입력 방지
@@ -239,11 +240,12 @@
 				
 				var size = $(this).val().length;
 				
-				var target = $(this).next().children(".length").children(".count");
+				var target = $(this).next().next().children(".length").children(".count");
 				target.text(size);
 				
 				if(size > 1300){
-					target.css("clor", "red");
+					target.css("color", "red");
+					
 				}
 				else {
 					target.css("color", "white");
@@ -260,13 +262,15 @@
 		    	var title = $("input[name=contentsTitle]").val() == "";
 		    	var time = $("input[name=contentsTime]").val() == "";
 		    	var director = $("input[name=contentsDirector]").val() == "";
-		    	var summary = $("input[name=contentsSummary]").val() == "";
+		    	var summary = $(".summary").val().length == 0;
 		    	var attach = $("input[name=contentsAttachment]").val() == "";
 		    	var region = $("select[name=regionName]").val() == "";
 		    	var genre = $("select[name=genreName]").val() == "";
 		    	var grade = $("select[name=contentsGrade]").val() == "";
+		    	var summarySize = $(".summary").val().length > 1300;
+		    	var timeSize = $("input[name=contentsTime]").val().length > 4; 
 		    	
-		    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || attach ||region || genre || grade){
+		    	if($("input:checkbox[name=ottName]:checked").length == 0 || title || time || director || summary || attach ||region || genre || grade || summarySize || timeSize){
 		    		e.preventDefault();
 		    		
 		    	}
@@ -296,6 +300,100 @@
 			
 		});
 		
+		//빈칸 알림
+		$(function(){
+			
+			//제목
+			$("input[name=contentsTitle]").blur(function(){
+
+				if($(this).val()==""){
+					$(this).next("span").text("제목을 입력해주세요.").css('color', '#EDC948');
+				}
+				else {
+					$(this).next("span").text("");
+				}
+				
+			});
+			
+			//국가
+			$("select[name=regionName]").blur(function(){
+				
+				if($(this).val()==""){
+					$(this).parent().next("span").text("국가를 입력해주세요.").css('color', '#EDC948');
+				}
+				else{
+					$(this).parent().next("span").text("");
+				}
+			});
+			
+			//장르
+			$("select[name=genreName]").blur(function(){
+				
+				if($(this).val()==""){
+					$(this).parent().next("span").text("장르를 입력해주세요.").css('color', '#EDC948');
+				}
+				else{
+					$(this).parent().next("span").text("");
+				}
+			});
+			
+			//등급
+			$("select[name=contentsGrade]").blur(function(){
+				
+				if($(this).val()==""){
+					$(this).parent().next("span").text("등급을 입력해주세요.").css('color', '#EDC948');
+				}
+				else{
+					$(this).parent().next("span").text("");
+				}
+			});
+			
+			//러닝타임
+			$("input[name=contentsTime]").blur(function(){
+				
+				if($(this).val()==""){
+					$(this).next("span").text("러닝타임을 입력해주세요.").css('color', '#EDC948');
+				}
+				else {
+					$(this).next("span").text("");
+				}
+			});
+			
+			//감독
+			$("input[name=contentsDirector]").blur(function(){
+	
+				if($(this).val()==""){
+					$(this).next("span").text("감독을 입력해주세요.").css('color', '#EDC948');
+				}
+				else {
+					$(this).next("span").text("");
+				}
+			});
+			
+			//줄거리
+			$(".summary").blur(function(){
+
+				if($(this).val()==""){
+					$(this).next("span").text("줄거리를 입력해주세요.").css('color', '#EDC948');
+				}
+				else {
+					$(this).next("span").text("");
+				}
+			});
+			
+			//첨부파일
+			$("input[name=contentsAttachment]").blur(function(){
+				
+				if($(this).val()==""){
+					$(this).parent().next("span").text("이미지를 첨부해주세요.").css('color', '#EDC948');
+				}
+				else {
+					$(this).parent().next("span").text("");
+				}
+			});
+			
+		});
+		
 
 </script>
 
@@ -314,6 +412,7 @@
 				<label>제목 (*필수)</label>
 				<div class="row-label"></div>
 					<input type="text" name="contentsTitle" autocomplete="off" class="form-input input-round fill">
+						<span></span>
 			</div>
 				
 			<div class="row">
@@ -329,6 +428,7 @@
 						<option>할리우드</option>
 					</select>
 				</div>
+				<span></span>
 			</div>
 			
 			<div class="row">
@@ -346,6 +446,7 @@
 						<option>다큐멘터리</option>
 					</select>
 				</div>
+				<span></span>
 			</div>
 			
 			<div class="row">
@@ -362,6 +463,7 @@
 						<option>청불</option>
 					</select>
 				</div>
+				<span></span>
 			</div>
 				
 				
@@ -369,20 +471,22 @@
 				<label>러닝타임(분)(숫자만 입력) (*필수)</label>
 				<div class="row-label"></div>
 					<input type="text" name="contentsTime" autocomplete="off" class="form-input input-round fill">
+					<span></span>
 			</div>
 				
 			<div class="row">
 				<label>감독 (*필수)</label>
 				<div class="row-label"></div>
 					<input type="text" name="contentsDirector" autocomplete="off" class="form-input input-round fill">
+					<span></span>
 			</div>
 				
 			<div class="row">
 				줄거리 (*필수)
 				<div class="row-label"></div>
 				<textarea name="contentsSummary" rows="7" class="form-input fill input-round summary"></textarea>
-				
-				<div class="row right">
+				<span></span>
+				<div class="right">
 					<span class="length">
 						<span class="count">0</span>
 						/
@@ -402,6 +506,7 @@
 					<br><br>
 					<img src ="" id="preview" width="150" height="150" alt="포스터" hidden>
 				</div>
+					<span></span>
 			</div>
 			
 			<!-- 이전, 다음 버튼 -->
@@ -472,38 +577,22 @@
 			<div class="row m60 borderOtt">
 				
 				<div class="row m-bottom">
-					<label class="check-label check-labelAll">
+					<label>
 						<input type="checkbox" class="select-all">
 					전체 선택</label>
 				</div>
 				
-			
+			<%for(OttDto ottDto : list) {%>
 			<div class="row">
-				<label class="check-label1 check-label">
-					<input type="checkbox" name="ottName" value="넷플릭스" class="select-item check1">
-				넷플릭스</label>
+					<label>
+					<input type="checkbox" name="ottName" value="<%=ottDto.getOttName() %>" class="select-item ottCheck">
+					<%=ottDto.getOttName() %></label>
+			<span></span>
 			</div>
-			
-			<div class="row">
-				<label class="check-label2 check-label">
-					<input type="checkbox" name="ottName" value="왓차" class="select-item check2">
-				왓차</label>
-			</div>
-			
-			<div class="row">
-				<label class="check-label3 check-label"> 
-					<input type="checkbox" name="ottName" value="웨이브" class="select-item check3">
-				웨이브</label>
-			</div>
-			
-			<div class="row">
-				<label class="check-label4 check-label">
-					<input type="checkbox" name="ottName" value="티빙" class="select-item check4">
-				티빙</label>
-			</div>
-			
+			<%} %>
 		
 		</div>
+		
 		
 		<div class="row m10">
 			<button type="submit" class="fill btn-black btn-list fontSizeUp">콘텐츠 등록하기</button>
