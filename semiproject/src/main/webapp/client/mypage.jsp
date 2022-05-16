@@ -43,7 +43,7 @@ List<OttAttachmentDto> listOtt = ottAttachmentDao.selectOttList();
 		<div class="row left">
 			<input type="text" class="form form-input input-round fill"
 				value="<%=clientDto.getClientId()%>" disabled>
-		</div>
+		</div> 
 	</div>
 	<div class="row left">
 		<label>닉네임</label>

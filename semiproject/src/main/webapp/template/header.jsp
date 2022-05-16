@@ -137,7 +137,7 @@
 								</ul>
 							</div>
 						</li>					
-						<% }else{ %>
+						<% }else{ %> 
 						<li><a href="<%=request.getContextPath()%>/client/join.jsp">회원가입</a></li>
 						<li><a href="<%=request.getContextPath()%>/client/login.jsp">로그인</a></li>
 						<%} %>						
