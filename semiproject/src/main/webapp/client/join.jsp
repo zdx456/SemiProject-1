@@ -162,6 +162,17 @@ $(function(){
 		
 	});
 	
+	//전체 선택 개별적으로 다 눌렀을 때 체크 되는지와 전체에서 하나 빼면 체크 풀리는지
+	$(".ott").on("input", function(){
+		
+		if($('.ott:checked').length==$('.ott').length){
+	        $('#selectAll').prop('checked',true);
+	    }else{
+	       $('#selectAll').prop('checked',false);
+	    }
+	})
+
+	
     $(".select-all").on("input", function(){
         // this == 체크변화가 발생한 체크박스
         var checked = $(this).prop("checked");
