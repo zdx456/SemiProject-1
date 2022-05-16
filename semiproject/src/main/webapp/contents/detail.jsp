@@ -1,3 +1,6 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="ottes.beans.ContentsAttachmentDao"%>
+<%@page import="ottes.beans.ContentsAttachmentDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ottes.beans.OttAttachmentDto"%>
 <%@page import="ottes.beans.OttAttachmentDao"%>
@@ -27,7 +30,6 @@ String reviewWriter = request.getParameter("reviewWriter");
 
 ContentsDao contentsDao = new ContentsDao();
 ContentsDto contentsDto = contentsDao.selectOne(contentsNo);
-
 
 ActorDao actorDao = new ActorDao();
 ActorDto actorDto = actorDao.selectName(contentsNo);
@@ -171,6 +173,10 @@ textarea::placeholder {
 	color : #00ADB5;
 }
 
+textarea {
+	resize:none;
+}
+
 .flex-container {
 	background: rgb(54,60,70);
 	background: linear-gradient(180deg, rgba(54,60,70,0.7936216723017332) 1%, rgba(98,105,113,0.4630894594165791) 74%);
@@ -183,14 +189,41 @@ textarea::placeholder {
 	border-radius: 20px;
 	
 }
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 
-$(function() {
+$(function(){
 	
+	// 리뷰 글자수 카운트
+	
+	$(".reviewC").on("input", function(){
+		
+		var size = $(this).val().length;
+		
+		var target = $(this).next().children(".leg").children(".count2");
+		target.text(size);
+		
+		if(size > 100){
+			target.css("color", "red");
+			$(".reviewbutton").off('click');
+			
+		}
+		else {
+			target.css("color", "white");
+		}
+		
+		if (size>100) {
+			$(".reviewbutton").click(function(e){
+				e.preventDefault();
+			});
+		}
+		
+	});
 });
+
 function isEmpty(value){
 
     if(value == null || value.length === 0) {
@@ -204,9 +237,14 @@ function isEmpty(value){
      }
 
 }
-      
-      
+
+// 좋아요 기능 
+
 $(function () {
+	
+	  var login = <%=(String)session.getAttribute("login")%>;
+	  
+	  if(login) {
 
     $(".heart").click(function (){
     	
@@ -228,12 +266,45 @@ $(function () {
 	            }
 	            $(".count").text(resp.count);
 	            
-            }
-
-        });
-    });
-
+         	   }
+	        });
+	    });
+	  }
 });
+
+// 로고 이동 기능      
+      
+$(function() {
+	
+	
+	$(document).ready(function(){
+		
+		if( $(".ottname").text() == "넷플릭스" || "왓차" || "티빙" || "웨이브") {
+			
+			$(".forott").find("label").each(function(i, e) {
+			    console.log($(this).text());
+					
+					if( $(this).text() =="넷플릭스") {
+						$(".ottlogo").click(function(){ 
+					$(location).attr("href", "https://www.netflix.com/") 
+					});
+				}
+						
+					else if( $(this).text() =="왓차") {
+						$(".ottlogo").click(function(){ 
+					$(location).attr("href", "https://www.watcha.com/") 
+					});
+				}	
+					else if( $(this).text() =="웨이브") {
+						$(".ottlogo").click(function(){ 
+					$(location).attr("href", "https://www.wavve.com/") 
+					});
+				}	
+				
+				});
+       	     }
+			});
+		});
 
     </script>
 
@@ -249,6 +320,10 @@ $(function () {
 	
 	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.5/score.js"></script>
 	 <script>
+	 
+	 
+	 // 별점 플러그인
+	 
         $(function(){
         	$(".score-show").score({
         		starColor: "gold", 
@@ -277,36 +352,33 @@ $(function () {
 
 	<div class="row flex-container center">
 	<div id="box1" class="content center">
-			
+	<br>
+			<div>
 			<img
 				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
 				width="200" height="250" alt="포스터">
-
-
-			<table class="table center ">
-				<thead>
-					<tr>
-						<td>
-								
-							
+			</div>	
+		<br>
+		<div style="line-height:150%;">
 		<%for(OttAttachmentDto ottAttachmentDto : list) { %>
-			<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
-				width="40" height="40" class="img img-logo" alt="ott">
-										<%} %>
-					
-						</td>
-					</tr>
-					<tr>
-						<td>
+			<a href="">
+				<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
+					width="40" height="40" class="img img-logo ottlogo" alt="ott" >
+				<label class="ot1" ><%=ottAttachmentDto.getAttachmentNo() %></label>			
+			</a>
+		<%} %>
+		</div>			
+						<div class="forott">
 						<%for(OttDto ottDto : ottlist) { %>
-						<span class="price"><%=ottDto.getOttPrice() %></span>
-						<%} %>
-						</td>
-					</tr>
+						<% DecimalFormat decFormat = new DecimalFormat("##,###");%>
+						 <span class="price"><%=decFormat.format(ottDto.getOttPrice()) %>￦</span>
+					<label class="ottname"  hidden><%=ottDto.getOttName() %></label>
 
-						<tr>
-						<td>
-						<span>
+			<%} %>
+						
+
+						<div style="line-height:150%;">
+						<span style="line-height:200%;">
 						<%if(reviewDao.avg(contentsNo) == 1){ %>
 						<label class="score-show" data-max="5" data-rate="1"></label>
 						<%} %>
@@ -323,21 +395,16 @@ $(function () {
 						<label class="score-show" data-max="5" data-rate="5"></label>
 						<%} %>
 						</span>
-						</td>
-					</tr>
+						</div>
+						
 
-					<tr>
-						<td> <span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
+						<span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
 						<% if (likecontentsDto != null) { %> 
 						<label class="heart like">♥</label> 
 						<% } else { %> 
 						<label class="heart">♥</label> 
 						<% } %>
-						</td>
-					</tr>
-				
-				</thead>
-			</table>
+					</div>
 		
 	</div>
 	
@@ -398,15 +465,24 @@ $(function () {
 			<input type="hidden" name="contentsNo"
 				value="<%=contentsDto.getContentsNo()%>"> <input
 				type="hidden" name="reviewWriter" value="<%=reviewWriter%>">
-				
-			<textarea name="reviewContent" class="write review review" rows="7" cols="65"
+
+			<textarea name="reviewContent" class="write review reviewC" rows="7" cols="65"
 				placeholder="리뷰 작성하기"></textarea>
-		</div>		
+		
+				<div class="row right" >
+					<span class="leg">
+						<span class="count2">0</span>
+						/
+						<span class="total">100</span>
+					</span>
+				</div>
+					
 			<br>
 				
 			<span class="score-select" data-max="5" data-rate="3"></span>
-			<input type="submit" class="btn-mint button" value="리뷰 등록">
+			<span class="reviewbutton"><input type="submit" class="btn-mint button" value="리뷰 등록"></span>
 		</form>
+		</div>	
 	
 	
 		<% } else { %>
@@ -430,10 +506,10 @@ $(function () {
 			<tr>
 				<th width="10%"><%=reviewDto.getReviewWriter()%></th>
 				<td width="20%"><%=reviewDto.getReviewTime()%></td>
-				<td width="30%">
+				<td width="30%" class="rs">
 					<!--  댓글 내용 --> <%=reviewDto.getReviewContent()%>
 				</td>
-				<td width="10%">
+				<td width="10%" class="rs">
 						<%if(reviewDto.getReviewScore() == 1){ %>
 						<label class="score-show" data-max="5" data-rate="1"></label>
 						<%} %>
@@ -457,9 +533,9 @@ $(function () {
 			%>
 		</table>
 		<br>
-		<form action="review_list.jsp?contentsNo=<%=contentsNo%>" method="post">
-			<input type="submit" class="button btn-yellow" id="rb2" value="리뷰 전체 보기"></input>
-		</form>
+		<a href="review_list.jsp?contentsNo=<%=contentsNo%>">
+			<input type="button" class="button btn-yellow" id="rb2" value="리뷰 전체 보기"></input>
+		</a>
 		
 	</div>
 	

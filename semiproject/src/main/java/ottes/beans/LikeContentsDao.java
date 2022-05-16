@@ -69,11 +69,12 @@ public void insert(LikeContentsDto likeContentsDto) throws Exception{
 		return count > 0;
 	}
 	
-	public boolean delete(String clientId) throws Exception{
+	public boolean delete(String clientId, int contentsNo) throws Exception{
 		Connection con = JdbcUtils.getConnection();
-		String sql = "delete likecontents where client_id = ?";
+		String sql = "delete likecontents where client_id = ? and contents_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientId);
+		ps.setInt(2, contentsNo);
 		
 		int count = ps.executeUpdate();
 		

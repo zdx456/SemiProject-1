@@ -37,7 +37,7 @@ public class LikeContentsInsertServlet extends HttpServlet{
 			int contentsNo = Integer.parseInt(req.getParameter("contentsNo")); 
 			
 			if(likeContentsDao.find(clientId, contentsNo) != null) {
-				likeContentsDao.delete(clientId);
+				likeContentsDao.delete(clientId, contentsNo);
 				like = false;
 			}
 			else {
