@@ -10,6 +10,22 @@ package ottes.beans;
 		private String reviewContent;
 		private Date reviewTime;
 		private int reviewScore;
+		private String clientNick;
+		private String contentsTitle;
+		
+		
+		public String getContentsTitle() {
+			return contentsTitle;
+		}
+		public void setContentsTitle(String contentsTitle) {
+			this.contentsTitle = contentsTitle;
+		}
+		public String getClientNick() {
+			return clientNick;
+		}
+		public void setClientNick(String clientNick) {
+			this.clientNick = clientNick;
+		}
 		public int getReviewNo() {
 			return reviewNo;
 		}

@@ -1,3 +1,7 @@
+<%@page import="ottes.beans.ContentsDto"%>
+<%@page import="ottes.beans.ContentsDao"%>
+<%@page import="ottes.beans.ClientDto"%>
+<%@page import="ottes.beans.ClientDao"%>
 <%@page import="ottes.beans.ReviewDto"%>
 <%@page import="java.util.List"%>
 <%@page import="ottes.beans.ReviewDao"%>
@@ -148,6 +152,7 @@
 	//관리자인지 판정
 	String memberGrade = (String)session.getAttribute("auth");
 	boolean isAdmin = memberGrade != null && memberGrade.equals("관리자");
+	
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -195,14 +200,37 @@
                     placeLimit:0,
                 }
             });
+        	
+        	
         });
+    </script>
+    
+    <script type="text/javascript">
+    $(function(){
+        $(".reviewSize").on("input", function(){
+            var content = $(this).val();
+            var size = content.length;
+
+            var target = $(this).next(".length").children(".count");
+            target.text(size);
+
+            if(size > 100){
+                target.css("color", "red");//전체 count 선택
+            }
+            else {
+                target.css("color", "white");
+            }
+           
+        });
+    });
+    
     </script>
     
 
 		
 <div class="container w700">
 	<div class="row center ">
-		<h2>리뷰 목록</h2>
+		<h2> 리뷰 목록</h2>
 		<hr>
 	</div>
 	<%if(!searchWriter && islogin){ //내가 쓴 글, 로그인이 안되면  등록은 불가능하게 만듬%>
@@ -211,28 +239,42 @@
 		<br>
 			<h4>리뷰등록</h4><br><br>
 			<input type="hidden" name="contentsNo" value="<%=contentsNo%>" > <!-- contentsNo 파라미터 -->
-			<textarea rows="3" cols="50" class=" reviewCont" name="reviewContent"  placeholder="리뷰내용"></textarea>
+			<textarea rows="3" cols="50" class=" reviewCont reviewSize"  name="reviewContent"  placeholder="리뷰내용"></textarea>
+			<span class="length">
+                <span class="count">0</span> 
+                / 
+                <span class="total">100</span>
+            </span>
 			<label class="score-select" data-max="5" data-rate="3"></label><br><br>
 		</div>
-		<div class="row center"><button type="submit" class="btn-mint btn-insert ">등록</button></div>
+		<div class="row center"><button type="submit" class="btn-mint btn-insert btnsub ">등록</button></div>
 		</form>
 	<%} %>
-
+	
+	<%if(!searchWriter){%>
 	<div class= "row center">
 		<br><a href="detail.jsp?contentsNo=<%=contentsNo%>" class="btn-yellow btn-contents  ">콘텐츠로 이동</a>
 	</div>
+	<%} %>
+	
 	<div class="row review">
 		<table class="review-table ">
 			<tr>
-				<th>작성자</th>
+				<th>닉네임</th>
 				<th>작성일</th>
 				<th>내용</th>
 				<th>평점</th>
 			</tr>
 		<%for(ReviewDto reviewDto : list){ %>
-
+			
+				<tr>
+				<td colspan="5" style="color: #9772FB;">
+					<%=reviewDto.getContentsTitle() %>
+				</td>
+			</tr>
+		
 			<tr class="show-row center">
-				<td><%=reviewDto.getReviewWriter() %></td>
+				<td><%=reviewDto.getClientNick() %></td>
 				<td><%=reviewDto.getReviewTime()%></td>
 				<td class="left">
 					<textarea rows="3" cols="35" class="reviewCont " disabled><%=reviewDto.getReviewContent()%></textarea>
@@ -254,6 +296,7 @@
 						<label class="score-show" data-max="5" data-rate="5"></label>
 						<%} %>
 				</td>
+				
 			    <%
 					//본인이 작성한 댓글인지 여부를 미리 파악
 					boolean isReviewOwner = clientId != null && clientId.equals(reviewDto.getReviewWriter());
@@ -273,6 +316,7 @@
 				</td>
 				<%} %>
 			</tr>
+			
 				<!-- 평소에는 hide 수정 버튼을 누르면 나오게 설계  -->
 			<tr class="edit-row">
 	<td colspan="6">
@@ -283,10 +327,15 @@
 						<input type="hidden" name="reviewNo" value="<%=reviewDto.getReviewNo()%>">
 						<input type="hidden" name="contentsNo" value="<%=reviewDto.getContentsNo()%>">
 						<input type="hidden" name="reviewWriter" value="<%=reviewDto.getReviewWriter() %>" disabled class="form-input input-round">
-						<%=reviewDto.getReviewWriter() %>
+						<%=reviewDto.getClientNick() %>
 				</td>
 				<td colspan="2">
-						<textarea class=" reviewCont" name="reviewContent" rows="3" cols="50"><%=reviewDto.getReviewContent()%></textarea>
+						<textarea class=" reviewCont" name="reviewContent" rows="3" cols="45"><%=reviewDto.getReviewContent()%></textarea>
+						<span class="length">
+			                <span class="count">0</span> 
+			                / 
+			                <span class="total">100</span>
+        			    </span>
 				</td>
 				<td>
 						<%if(reviewDto.getReviewScore() == 1){ %>
