@@ -45,11 +45,14 @@ List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 // 현재 로그인한 사용자가 댓글 작성자인지 확인하는 코드
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
 String clientId = (String) session.getAttribute("login");
-boolean isLogin = clientId != null;
+boolean isLogin = clientId != null && !clientId.equals("");
+
+// 작성자 확인하기
+boolean searchWriter = reviewWriter != null && !reviewWriter.equals("");
+boolean isWrite = reviewDao.checkWriter(contentsNo, clientId);
 
 //좋아요 출력할 likeContents 불러오기
 LikeContentsDao likeContentsDao = new LikeContentsDao();
-
 LikeContentsDto likecontentsDto = likeContentsDao.find(clientId, contentsNo);//find는 좋아요 이력을 찾는 기능(단일조회와 비슷)
 
 // ott 정보 불러오기
@@ -253,9 +256,7 @@ function isEmpty(value){
 
 $(function () {
 	
-	  var login = <%=(String)session.getAttribute("login")%>;
-	  
-	  if(login) {
+	
 
     $(".heart").click(function (){
     	
@@ -280,7 +281,6 @@ $(function () {
          	   }
 	        });
 	    });
-	  }
 });
 
 
@@ -377,11 +377,16 @@ $(function () {
 						
 
 						<span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
-						<% if (likecontentsDto != null) { %> 
-						<label class="heart like">♥</label> 
-						<% } else { %> 
-						<label class="heart">♥</label> 
-						<% } %>
+						<%if(isLogin){ %>
+							<% if (likecontentsDto != null) { %> 
+							<label class="heart like">♥</label> 
+							<% } else { %> 
+							<label class="heart">♥</label> 
+							<% } %>
+							
+						<%}else{ %>
+							<label>♥</label> 
+						<%} %>
 					</div>
 		
 	</div>
@@ -437,7 +442,7 @@ $(function () {
 
 
 		<%
-		if (isLogin) {
+		if(!searchWriter && isLogin && !isWrite ){ 
 		%>
 		<div>
 			<input type="hidden" name="contentsNo"
