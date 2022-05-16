@@ -92,9 +92,8 @@ $(function () {
 				<div class="row">
 					<input type="text"
 						class="form form-input input-round fill regex-input"
-							autocomplete="off"
-						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px;"
-						value=""/>
+							autocomplete="off"/
+						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px; " value="<%=clientDto.getClientNick()%>"/>
 					<button type="button" id="btnCheckNick" class="btn">중복체크</button>
 
 				</div>
