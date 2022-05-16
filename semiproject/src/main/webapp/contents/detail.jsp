@@ -1,3 +1,6 @@
+<%@page import="ottes.beans.HrefVO"%>
+<%@page import="ottes.beans.OttHrefDao"%>
+<%@page import="ottes.beans.OttHrefDto"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="ottes.beans.ContentsAttachmentDao"%>
 <%@page import="ottes.beans.ContentsAttachmentDto"%>
@@ -43,6 +46,7 @@ List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 // 세션에 있는 사용자의 아이디와 댓글의 작성자를 비교
 String clientId = (String) session.getAttribute("login");
 boolean isLogin = clientId != null;
+boolean isCorrect = clientId.equals(reviewWriter);
 
 //좋아요 출력할 likeContents 불러오기
 LikeContentsDao likeContentsDao = new LikeContentsDao();
@@ -58,6 +62,11 @@ List<OttAttachmentDto> list = ottAttachmentDao.selectList( contentsNo);
 
 OttDao ottDao = new OttDao();
 List<OttDto> ottlist = ottDao.findPrice(contentsNo);
+
+// ott 로고에 링크 걸기
+OttHrefDao ottHrefDao = new OttHrefDao();
+List<HrefVO> hrefList = ottHrefDao.selectList(contentsNo);
+System.out.println("ottNo :" + ottContentsDto.getOttNo());
 
 // 관리자인지 판정
 String memberGrade = (String) session.getAttribute("auth");
@@ -195,6 +204,21 @@ textarea {
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 
+// 리뷰 한 번만 작성하기
+$(function () {
+	
+    var login = <%=(String)session.getAttribute("login")%>;
+    var isCorrect = <%=clientId.equals(reviewWriter)%>;
+
+    if(login && !isCorrect) {
+			$(".reviewC").click(function(e){
+				e.preventDefault();
+			});
+
+    }
+});
+
+
 $(function(){
 	
 	// 리뷰 글자수 카운트
@@ -233,9 +257,7 @@ function isEmpty(value){
      } else{
 
             return value;
-
      }
-
 }
 
 // 좋아요 기능 
@@ -272,39 +294,7 @@ $(function () {
 	  }
 });
 
-// 로고 이동 기능      
-      
-$(function() {
-	
-	
-	$(document).ready(function(){
-		
-		if( $(".ottname").text() == "넷플릭스" || "왓차" || "티빙" || "웨이브") {
-			
-			$(".forott").find("label").each(function(i, e) {
-			    console.log($(this).text());
-					
-					if( $(this).text() =="넷플릭스") {
-						$(".ottlogo").click(function(){ 
-					$(location).attr("href", "https://www.netflix.com/") 
-					});
-				}
-						
-					else if( $(this).text() =="왓차") {
-						$(".ottlogo").click(function(){ 
-					$(location).attr("href", "https://www.watcha.com/") 
-					});
-				}	
-					else if( $(this).text() =="웨이브") {
-						$(".ottlogo").click(function(){ 
-					$(location).attr("href", "https://www.wavve.com/") 
-					});
-				}	
-				
-				});
-       	     }
-			});
-		});
+
 
     </script>
 
@@ -360,18 +350,17 @@ $(function() {
 			</div>	
 		<br>
 		<div style="line-height:150%;">
-		<%for(OttAttachmentDto ottAttachmentDto : list) { %>
-			<a href="">
-				<img src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>"
-					width="40" height="40" class="img img-logo ottlogo" alt="ott" >
-				<label class="ot1" ><%=ottAttachmentDto.getAttachmentNo() %></label>			
+			<%for(HrefVO hrefVO : hrefList) {%>
+				<a href="<%=hrefVO.getOttHref()%>" >
+				<img src="../adminContents/file_down.svt?attachmentNo=<%=hrefVO.getAttachmentNo()%>"
+               width="40" height="40" class="img img-logo ottlogo" alt="ott" >
 			</a>
-		<%} %>
+			<%} %>
 		</div>			
-						<div class="forott">
+						<div>
 						<%for(OttDto ottDto : ottlist) { %>
 						<% DecimalFormat decFormat = new DecimalFormat("##,###");%>
-						 <span class="price"><%=decFormat.format(ottDto.getOttPrice()) %>￦</span>
+						 <span class="price">￦<%=decFormat.format(ottDto.getOttPrice()) %></span>
 					<label class="ottname"  hidden><%=ottDto.getOttName() %></label>
 
 			<%} %>
