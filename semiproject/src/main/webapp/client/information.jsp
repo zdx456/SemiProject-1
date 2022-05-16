@@ -39,15 +39,67 @@
  
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+$(function () {
+    var status = {
+      
+        nick: false
+    };
+
+   
+    //닉네임 중복체크 버튼
+    $("#btnCheckNick").click(function () {
+            var Nickregex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,15}$/;
+            var clientNick = $("#clientNick").val();
+
+            var Nickjudge = Nickregex.test(clientNick);
+            if (!Nickjudge) {
+                alert("한글,영어,숫자 2~10자이내로 작성해주세요");
+                status.nick = false;
+                return;
+            }
+
+            $.ajax({
+                url: "http://localhost:8080/semiproject/checkNick.kh?clientNick=" +
+                    clientNick,
+                type: "get",
+
+                success: function (resp) {
+                    if (resp === "yes") {
+                        alert("사용 가능한 닉네임입니다");
+                        status.nick = true;
+
+                    } else if (resp === "no") {
+                        alert("중복된 닉네임입니다");
+                        status.nick = false;
+
+                    }
+                }
+
+
+            });
+        });
+    });
+	</script>
+	
 <form action="information.kh" method="post" >
 	<div class="container w450 m30">
 	    <div class="row center">
 	        <h1>회원 정보 변경</h1>
 	    </div>
-	    <div class="row">
-	        <label>닉네임</label>
-	        <input type="text" name="clientNick" autocomplete="off" required class="form-input fill input-round" value="<%=clientDto.getClientNick()%>">
-	    </div>
+	    <div class="row left">
+				<label>닉네임</label>
+				<div class="row">
+					<input type="text"
+						class="form form-input input-round fill regex-input"
+							autocomplete="off"
+						name="clientNick" required placeholder="닉네임" id="clientNick" style="width:310px;"
+						value=""/>
+					<button type="button" id="btnCheckNick" class="btn">중복체크</button>
+
+				</div>
+			</div>
+
 	    <div class="row">
 	        <label>생년월일</label><br>
 	        <input type="date" name="clientBirth" autocomplete="off" required class="form-input input-round fill" value="<%=clientDto.getClientBirth()%>">
