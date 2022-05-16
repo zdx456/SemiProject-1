@@ -6,6 +6,15 @@
     
     <style>
     
+    .btn-contents {
+         padding-top: 5px;
+         padding-bottom:  5px;
+         padding-left: 35px;
+         padding-right: 35px;
+         font-size: 17px;
+         width: 50%
+         }
+    
     .review {
 	color: grey;
 	background-color: #313842;
@@ -208,6 +217,10 @@
 		<div class="row center"><button type="submit" class="btn-mint btn-insert ">등록</button></div>
 		</form>
 	<%} %>
+
+	<div class= "row center">
+		<br><a href="detail.jsp?contentsNo=<%=contentsNo%>" class="btn-yellow btn-contents  ">콘텐츠로 이동</a>
+	</div>
 	<div class="row review">
 		<table class="review-table ">
 			<tr>

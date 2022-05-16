@@ -19,7 +19,7 @@ public class ClientNickCheckServlet extends HttpServlet{
 		try {
 			String clientNick = req.getParameter("clientNick");
 			ClientDao clientDao = new ClientDao();
-			ClientDto clientDto = clientDao.selectOne(clientNick);
+			ClientDto clientDto = clientDao.checkNick(clientNick);
 			resp.setContentType("text/plain; charset=UTF-8");
 			if(clientDto != null) {
 				resp.getWriter().print("no");

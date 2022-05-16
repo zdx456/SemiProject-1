@@ -19,7 +19,6 @@ public class OttUpdateServlet extends HttpServlet {
 		try {
 			
 			OttDto ottDto = new OttDto();
-			
 			ottDto.setOttNo(Integer.parseInt(req.getParameter("ottNo")));
 			ottDto.setOttName(req.getParameter("ottName"));
 			ottDto.setOttPrice(Integer.parseInt(req.getParameter("ottPrice")));

@@ -84,7 +84,7 @@ public class ReviewDao {
 			String sql = 
 					"select * from( "
 					+ "  select rownum RN, TMP.* from ("
-					+ "  select review.* from review where contents_no = ? order by review_no desc"
+					+ "  select review.* from review where contents_no = ? order by review_time desc"
 					+ "        ) TMP"
 					+ ") where RN between 1 and 5";
 			

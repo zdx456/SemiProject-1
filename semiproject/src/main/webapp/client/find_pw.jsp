@@ -10,6 +10,8 @@
     border-radius: 5px;
     color: #EDC948;}
 	</style>
+
+	
 <form action="find_pw.kh" method="post">
 	<div class="container w400 m30">
 	    <div class="row center">
@@ -29,7 +31,7 @@
 	    </div>
 	    
 	    <div class="row center">
-	        <button type="submit" id= "button" class="form-input fill input-round">비밀번호 찾기</button>
+	        <button type="submit" id= "button" class="form-input fill input-round btn-next">비밀번호 찾기</button>
 	    </div>
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>
 		<% if(request.getParameter("error") != null) { %>
