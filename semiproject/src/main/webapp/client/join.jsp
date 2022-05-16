@@ -515,9 +515,10 @@ $(function() {
             </label> <label> <input type="checkbox" name="genreName"
                value="버라이어티" class="select-item" id="skip-item"> 버라이어티
             </label>
-           
-            
-			</div>
+            <label style="display: none;">
+                <input type="checkbox" name="genreName" value="없음" id="select-skip" checked>
+            </label>
+		</div>
 
 			<br> <br>
 			<div class="row m10">
