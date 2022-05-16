@@ -261,7 +261,19 @@ $(function(){
 		$(".page").hide();
 		$(".page").eq(index).show();
 	
-	
+		  //이전 버튼 컨트롤
+	      if(index == 0){
+	         $(".btn-prev").hide();
+	      }else{
+	         $(".btn-prev").show();
+	      }
+	      
+	      //다음버튼 컨트롤
+	      if(index == 2){
+	         $(".btn-next").hide();
+	      }else{
+	         $(".btn-next").show();
+	      }
 		// 퍼센트 이동하는 사이즈
 		var percent = (index+1) * 100 / 3;
         $(".percent").css("width", percent+"%");
