@@ -1,3 +1,5 @@
+<%@page import="ottes.beans.ClientDto"%>
+<%@page import="ottes.beans.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <%
@@ -8,6 +10,8 @@
 	String auth = (String)session.getAttribute("auth");
 	boolean admin = auth != null && auth.equals("관리자");
 %>
+
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -109,8 +113,15 @@
 							</div> 
 						</li>	
 						<%} else if(login) { %>
+						
+						<%
+							ClientDao clientDao = new ClientDao();
+							ClientDto clientDto = new ClientDto();
+							clientDto = clientDao.selectOne(clientId);
+							String clientNick = clientDto.getClientNick();								
+						%>
 						<li><a href="<%=request.getContextPath()%>/client/logout.svt">로그아웃</a></li>
-						<li><a href="#"><%=clientId %>님</a></li>
+						<li><a href="#"><%=clientNick %>님</a></li>
 						<li>
 							<!-- 햄버거 메뉴 HTML 코드 -->
 							<input type="checkbox" class="hideChkbox burger" id="burger" name="headerchk">
@@ -120,7 +131,7 @@
 								<span></span>
 								<span></span>
 							</label>
-							<div class="burger-menu">
+							<div class="burger-menu"> 
 								<!-- 메뉴 -->
 								<ul>
 									<li class="menu-list"><a href="<%=request.getContextPath()%>/client/mypage.jsp">마이페이지</a></li>
