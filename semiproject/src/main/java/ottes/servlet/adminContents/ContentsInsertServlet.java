@@ -33,7 +33,7 @@ public class ContentsInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//Multipart 요청 처리 준비
-			String path = System.getProperty("user.home") + "/upload";
+			String path = "D:/upload/kh91";
 			
 			File dir = new File(path);
 			dir.mkdirs();
