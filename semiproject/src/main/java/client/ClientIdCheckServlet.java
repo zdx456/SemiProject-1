@@ -27,7 +27,7 @@ public class ClientIdCheckServlet extends HttpServlet{
 			else {
 				resp.getWriter().print("yes");
 			}
-		}
+		} 
 		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

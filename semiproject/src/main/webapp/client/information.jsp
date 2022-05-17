@@ -60,7 +60,7 @@ $(function () {
             }
 
             $.ajax({
-                url: context+ "/checkNick.kh?clientNick=" +
+                url: context+ "/checkNick.kh?clientNick=" + 
                     clientNick,
                 type: "get",
 

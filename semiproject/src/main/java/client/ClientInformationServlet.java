@@ -67,7 +67,7 @@ public class ClientInformationServlet extends HttpServlet {
 			
 			
 			
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
 			resp.sendError(500);
 		}

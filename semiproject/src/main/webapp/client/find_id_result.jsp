@@ -18,7 +18,7 @@
 </div>
 
 <div class="row center">
-            <input type="submit" value="로그인 하러가기" id="button" class="form-input full input-round" onclick="location.href = 'login.jsp';">
+            <input type="submit" value="로그인 하러가기" id="button" class="form-input full input-round" onclick="location.href =  'login.jsp';">
         </div>
         <div class="row center">
             <input type="submit" value="비밀번호 찾기" id="button" class="form-input full input-round" onclick="location.href = 'find_pw.jsp';">
