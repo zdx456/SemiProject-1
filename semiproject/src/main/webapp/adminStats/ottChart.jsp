@@ -89,7 +89,7 @@
   <script>
     $(function () {
       $.ajax({
-    	  url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
+    	  url: context+"/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -147,7 +147,7 @@
       });
     
       $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
+        url: context+"/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -203,7 +203,7 @@
     });
 
     $.ajax({
-    	url: "http://localhost:8080/semiproject/ajax/ottSexChart.svt",
+    	url: context+"/ajax/ottSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -259,7 +259,7 @@
     
     $(function () {
         $.ajax({
-        	url: "http://localhost:8080/semiproject/ajax/ottAgeChart.svt",
+        	url: context+"/ajax/ottAgeChart.svt",
           type: "post",
           //data: {},
           success: function (resp) {
@@ -372,7 +372,7 @@
         // -> (중요) 통신이 끝나야 차트가 나올 수 있다.
 
         $.ajax({
-            url: "http://localhost:8080/semiproject/ajax/OttContentsChart.svt",
+            url: context+"/ajax/OttContentsChart.svt",
             type: "post",
             // data : {}
             success: function (resp) {
