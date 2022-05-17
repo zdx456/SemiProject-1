@@ -277,9 +277,6 @@ public class ContentsAttachmentDao {
 		int end = p * 7;
 		int begin = end - (7 - 1); 
 		
-		System.out.println(keyword);
-		System.out.println(type);
-		
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from ("
