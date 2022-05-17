@@ -112,7 +112,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:"http://localhost:8080/semiproject/checkNick.kh?clientNick="+clientNick,
+			url: context+"/checkNick.kh?clientNick="+clientNick,
 			type:"get",
 			
 			success:function(resp){
@@ -144,7 +144,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:"http://localhost:8080/semiproject/checkId.kh?clientId="+clientId,
+			url: context +"/checkId.kh?clientId="+clientId,
 			type:"get",
 			
 			success:function(resp){
