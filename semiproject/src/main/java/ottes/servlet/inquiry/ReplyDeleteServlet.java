@@ -25,7 +25,7 @@ public class ReplyDeleteServlet extends HttpServlet{
 			if(success) {
 				InquiryDao inquiryDao = new InquiryDao();
 				inquiryDao.updateReplycount(replyTarget);
-				resp.sendRedirect("inquiry_detail.jsp?inquiryNo=" + replyTarget);
+				resp.sendRedirect(req.getContextPath()+"/adminClient/inquiry_detail.jsp?inquiryNo=" + replyTarget);
 			}
 			else {
 				resp.sendError(404);

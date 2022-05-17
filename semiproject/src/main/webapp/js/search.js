@@ -55,7 +55,7 @@ $(function(){
 	    $('.region_wrap').removeClass('sort_active');
 	    $(".genre").find("option:eq(0)").prop("selected", true);
 	    $(".region").find("option:eq(0)").prop("selected", true);	
-	    $('.ott_filter').css("opacity", "1");	    	    
+	    $('.ott_filter').addClass('ott_active');  	    
 	});		
 		
 	$(".score").click(function(){
@@ -79,7 +79,7 @@ $(function(){
 	    $('.region_wrap').removeClass('sort_active');
 	    $(".genre").find("option:eq(0)").prop("selected", true);
 	    $(".region").find("option:eq(0)").prop("selected", true);	
-	    $('.ott_filter').css("opacity", "1");				  
+	    $('.ott_filter').addClass('ott_active');			  
 	});	
 
 	$(".like").click(function(){
@@ -103,7 +103,7 @@ $(function(){
 	    $('.region_wrap').removeClass('sort_active');
 	    $(".genre").find("option:eq(0)").prop("selected", true);
 	    $(".region").find("option:eq(0)").prop("selected", true);	    	    
-	    $('.ott_filter').css("opacity", "1");	    
+	    $('.ott_filter').addClass('ott_active');    
 	});	
 	
 	$(".genre").change(function(){
@@ -127,7 +127,7 @@ $(function(){
 		    $('.region_wrap').removeClass('sort_active');
 		    $(".genre").find("option:eq(0)").prop("selected", true);
 		    $(".region").find("option:eq(0)").prop("selected", true);	
-		    $('.ott_filter').css("opacity", "1");				
+		    $('.ott_filter').addClass('ott_active');			
 		} else {
 			searchGenreFirstPage(keyword, $(this).val());
 			
@@ -146,7 +146,7 @@ $(function(){
 			$('.genre_wrap').addClass('sort_active');
 			$('.region_wrap').removeClass('sort_active');
 			$(".region").find("option:eq(0)").prop("selected", true);
-			$('.ott_filter').css("opacity", "1");
+			$('.ott_filter').addClass('ott_active');
 		} 	
 	});
 	
@@ -171,7 +171,7 @@ $(function(){
 		    $('.region_wrap').removeClass('sort_active');
 		    $(".genre").find("option:eq(0)").prop("selected", true);
 		    $(".region").find("option:eq(0)").prop("selected", true);	
-		    $('.ott_filter').css("opacity", "1");			   
+		    $('.ott_filter').addClass('ott_active');			   
 		} else {
 			searchRegionFirstPage(keyword, $(this).val());
 			
@@ -190,7 +190,7 @@ $(function(){
 		    $('.genre_wrap').removeClass('sort_active');
 		    $('.region_wrap').addClass('sort_active');
 			$(".genre").find("option:eq(0)").prop("selected", true);
-		    $('.ott_filter').css("opacity", "1");			
+		    $('.ott_filter').addClass('ott_active');		
 		} 		
 	});	
 
@@ -217,8 +217,8 @@ $(function(){
 	    $('.region_wrap').removeClass('sort_active');
   		$(".genre").find("option:eq(0)").prop("selected", true);
 	    $(".region").find("option:eq(0)").prop("selected", true);
-	    $('.ott_filter').css("opacity", ".3");
-	    $(this).css("opacity", "1");		    
+	    $('.ott_filter').removeClass('ott_active'); 
+	    $(this).addClass('ott_active');
 	});				
 	
 	// 더보기 버튼
@@ -239,7 +239,7 @@ $(function(){
 	
 	$(".genre_more").click(function(){
 		page4++;
-		searchGenrePage(page4, keyword, $(".genre").val()); 
+		searchGenrePage(page4, keyword, $(".genre_wrap>.genre").val()); 
 	});			
 
 	$(".genre_more_all").click(function(){
@@ -249,17 +249,19 @@ $(function(){
 	
 	$(".region_more").click(function(){
 		page6++;
-	    searchRegionPage(page6, keyword, $(".region").val());
+	    searchRegionPage(page6, keyword, $(".region_wrap>.region").val());
 	});	
 	
 	$(".ott_more").click(function(){
+		var id = $('.ott_active').attr('id');
+		var ottNo = id.replace('ott_filter_', '');
 		page7++;
 	    searchOttPage(page7, keyword, ottNo);
 	});				
 	        
 	function searchFirstPage(keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/list.svt",
+	        url:context+"/search/list.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -273,8 +275,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -291,7 +293,7 @@ $(function(){
 
 	function searchPage(page, keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/list.svt",
+	        url:context+"/search/list.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -305,8 +307,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -323,7 +325,7 @@ $(function(){
 	
 	function searchGenrePage(page, keyword, type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/genre_sort.svt",
+	        url: context + "/search/genre_sort.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -338,8 +340,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");	                
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -356,7 +358,7 @@ $(function(){
 
 	function searchGenreSortPage(page, type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/genre_sort2.svt",
+	        url:context+"/search/genre_sort2.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -370,8 +372,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -388,7 +390,7 @@ $(function(){
 
 	function searchGenreFirstPage(keyword, type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/genre_sort.svt",
+	        url:context+"/search/genre_sort.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -403,8 +405,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -421,7 +423,7 @@ $(function(){
 
 	function searchGenreFirstSortPage(type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/genre_sort2.svt",
+	        url:context+"/search/genre_sort2.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -435,8 +437,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -453,7 +455,7 @@ $(function(){
 	
 	function searchRegionPage(page, keyword, type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/region_sort.svt",
+	        url:context+"/search/region_sort.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -468,8 +470,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -486,7 +488,7 @@ $(function(){
 	
 	function searchRegionFirstPage(keyword, type) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/region_sort.svt",
+	        url:context+"/search/region_sort.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -501,8 +503,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -520,7 +522,7 @@ $(function(){
 	
 	function searchScorePage(page, keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/score_sort.svt",
+	        url:context+"/search/score_sort.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -534,8 +536,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -552,7 +554,7 @@ $(function(){
 	
 	function searchScoreFirstPage(keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/score_sort.svt",
+	        url:context+"/search/score_sort.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -566,8 +568,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -584,7 +586,7 @@ $(function(){
 	
 	function searchLikePage(page, keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/like_sort.svt",
+	        url:context+"/search/like_sort.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -598,8 +600,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -616,7 +618,7 @@ $(function(){
 	
 	function searchLikeFirstPage(keyword) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/like_sort.svt",
+	        url:context+"/search/like_sort.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -630,8 +632,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -648,7 +650,7 @@ $(function(){
 
 	function searchOttPage(page, keyword, ottNo) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/ott_sort.svt",
+	        url:context+"/search/ott_sort.svt",
 	        type:"post",
 	        data:{
 	            p : page, 
@@ -663,8 +665,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));
@@ -681,7 +683,7 @@ $(function(){
 	
 	function searchOttFirstPage(keyword, ottNo) {
 	    $.ajax({
-	        url:"http://localhost:8080/semiproject/search/ott_sort.svt",
+	        url:context+"/search/ott_sort.svt",
 	        type:"post",
 	        data:{
 	            p : 1, 
@@ -696,8 +698,8 @@ $(function(){
 	            for(var i=0; i < resp.length; i++) {
 	                var div = $("<div>").addClass("search_list_wrap");
 	                var div2 = $("<div>").addClass("search_list_text_wrap");
-	                var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
-	                var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
+	                var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo).addClass("search_img");
+	                var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo);
 	                var p1 = $("<p>").text(resp[i].contentsTitle);
 	                var p2 = $("<p>").text(resp[i].contentsSummary);
 	                var p3 = $("<p>").text('★ ' + resp[i].avgScore.toFixed(1));

@@ -30,7 +30,7 @@
 	</div>
 	<div class="search">
 		<h2><a href="<%=request.getContextPath()%>/notice/list.jsp">고객센터</a></h2>
-		<form action="list.jsp" method="get">
+		<form action="<%=request.getContextPath()%>/notice/list.jsp" method="get">
 			<input type="search" name="keyword" placeholder="어떤 도움이 필요하세요?" required autocomplete="off">
 			<button type="submit" class="hidden"></button>
 		</form>
@@ -42,15 +42,15 @@
 		</div>
 	</div>
 	<div class="notice_sort">
-		<form action="list.jsp" method="get">		
+		<form action="<%=request.getContextPath()%>/notice/list.jsp" method="get">		
 			<input type="text" class="hidden">		
 			<input type="submit" value="전체보기">
 		</form>
-		<form action="list.jsp" method="get">		
+		<form action="<%=request.getContextPath()%>/notice/list.jsp" method="get">		
 			<input type="text" class="hidden" name="type" value="공지">		
 			<input type="submit" value="공지">
 		</form>	
-		<form action="list.jsp" method="get">		
+		<form action="<%=request.getContextPath()%>/notice/list.jsp" method="get">		
 			<input type="text" class="hidden" name="type" value="FAQ">		
 			<input type="submit" value="FAQ">
 		</form>					

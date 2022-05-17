@@ -41,7 +41,7 @@
 	                <p>영화, 드라마, 버라이어티 등</p>
 	                <p>최신 콘텐츠들의 OTT 정보 뿐만 아니라</p>
 	                <p>각종 맞춤 추천까지 제공해주는 서비스, <span>Ottes</span> !</p>
-	                <form action="contents/list.jsp" method="get">
+	                <form action="<%=request.getContextPath()%>/contents/list.jsp" method="get">
 	                	<input type="search" name="keyword" required autocomplete="off" placeholder="제목, 감독, 배우, 줄거리 등을 입력해주세요">	
 						<input type="submit" class="hidden">
 	                </form>

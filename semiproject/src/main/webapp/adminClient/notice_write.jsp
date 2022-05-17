@@ -7,21 +7,21 @@
 		    <div class="notice_edit_wrap">
 		        <h2>새 공지사항 작성</h2>
 				<div class="notice_sort">
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden">		
 						<input type="submit" value="전체보기">
 					</form>
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden" name="type" value="공지">		
 						<input type="submit" value="공지">
 					</form>	
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden" name="type" value="FAQ">		
 						<input type="submit" value="FAQ">
 					</form>					
 				</div>		        
 		    </div>
-			<form action="notice_write.svt" method="post">
+			<form action="<%=request.getContextPath()%>/adminClient/notice_write.svt" method="post">
 			    <div>
 					<input type="radio" name="noticeType" value="공지" id="radio_notice" checked>
 					<label for="radio_notice">공지</label>

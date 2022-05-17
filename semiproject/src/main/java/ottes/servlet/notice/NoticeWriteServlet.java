@@ -28,7 +28,7 @@ public class NoticeWriteServlet extends HttpServlet {
 			noticeDto.setNoticeNo(noticeDao.getSequence());
 			noticeDao.insert(noticeDto);
 
-			resp.sendRedirect("notice_list.jsp");
+			resp.sendRedirect(req.getContextPath()+"/adminClient/notice_list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

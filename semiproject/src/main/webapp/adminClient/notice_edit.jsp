@@ -15,21 +15,21 @@
 		    <div class="notice_edit_wrap">
 		        <h2>공지사항 수정</h2>
 				<div class="notice_sort">
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden">		
 						<input type="submit" value="전체보기">
 					</form>
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden" name="type" value="공지">		
 						<input type="submit" value="공지">
 					</form>	
-					<form action="notice_list.jsp" method="get">		
+					<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 						<input type="text" class="hidden" name="type" value="FAQ">		
 						<input type="submit" value="FAQ">
 					</form>					
 				</div>		        
 		    </div>
-			<form action="notice_edit.svt" method="post">
+			<form action="<%=request.getContextPath()%>/adminClient/notice_edit.svt" method="post">
 			<input type="hidden" name="noticeNo" value="<%=noticeDto.getNoticeNo()%>">
 			<%if(noticeDto.getNoticeType().equals("공지")){ %>
 			    <div>

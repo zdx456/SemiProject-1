@@ -29,7 +29,7 @@ public class NoticeEditServlet extends HttpServlet {
 			boolean success = noticeDao.update(noticeDto);
 			
 			if(success) {
-				resp.sendRedirect("notice_list.jsp");
+				resp.sendRedirect(req.getContextPath()+"/adminClient/notice_list.jsp");
 			}
 			else {
 				resp.sendError(404);

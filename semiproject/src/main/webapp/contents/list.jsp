@@ -23,7 +23,7 @@
 		</div>	
 		<!-- 검색 결과 OTT 필터 버튼 -->
 			<%for(OttAttachmentDto ottAttachmentDto : listOtt){ %>	
-				<img class="ott_filter" id="ott_filter_<%=ottAttachmentDto.getOttNo()%>" src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>">
+				<img class="ott_filter ott_active" id="ott_filter_<%=ottAttachmentDto.getOttNo()%>" src="../adminContents/file_down.svt?attachmentNo=<%=ottAttachmentDto.getAttachmentNo()%>">
 			<%} %>
 		<!-- 검색 결과 정렬 버튼 -->
 		<div class="search_result_sort">

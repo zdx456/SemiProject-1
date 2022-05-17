@@ -10,7 +10,7 @@ $(function(){
             
     function loadPage(page) {
     	$.ajax({	
-        	url:"http://localhost:8080/semiproject/main/list.svt",
+        	url:context+"/main/list.svt",
             type:"post",
             data:{
             	p : page
@@ -25,8 +25,8 @@ $(function(){
                  
                 for(var i=0; i < resp.length; i++) {
                 	var div3 = $("<div>").addClass("swiper-slide").addClass("recent_list_style");
-                	var img = $("<img>").attr("src", "http://localhost:8080/semiproject/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo);
-                	var a = $("<a>").attr("href", "http://localhost:8080/semiproject/contents/detail.jsp?contentsNo=" + resp[i].contentsNo).addClass("cover").addClass("hidden");
+                	var img = $("<img>").attr("src", context+"/adminContents/file_down.svt?attachmentNo=" + resp[i].attachmentNo);
+                	var a = $("<a>").attr("href", context+"/contents/detail.jsp?contentsNo=" + resp[i].contentsNo).addClass("cover").addClass("hidden");
                 	var span1 = $("<span>").addClass("cover_text");
                 	var span2 = $("<span>").text(resp[i].contentsTitle);
                 	
