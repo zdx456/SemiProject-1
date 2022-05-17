@@ -16,7 +16,7 @@
 ● 송현도 : 일정 및 회의 관리 (프로젝트 매니저) - 전체 진행일정 조율, 관리 담당
 ```
 
-### 개발 당담
+### 개발 
 
 ```
 ● 유성현 : 콘텐츠 리뷰 CRUD , ott CRUD , 통계(가입일, ott컨텐츠 개수)
@@ -136,6 +136,7 @@
 ## ○참고문서
 
 * 마크다운
+
  <https://gist.github.com/ihoneymon/652be052a0727ad59601> 
 
  <https://mini-min-dev.tistory.com/56>  
