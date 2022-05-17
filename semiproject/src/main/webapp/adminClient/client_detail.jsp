@@ -95,7 +95,6 @@
         }
     </style>
     <div class="row center div-container">
-        <!-- style="display: flex; flex-direction: column; -->
         <h1 class="title">회원 상세 정보</h1>
         <div>
             <table class="table">
@@ -130,10 +129,10 @@
             <a href="client_list.jsp" class="btn-mint btn btn-p3 fill">목록으로</a>
         </div>
         <div class="row center">
-            <a href="client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-yellow btn btn-p3 fill">정보 수정</a>
+            <a href="<%=request.getContextPath()%>/adminClient/client_chgInfo.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-yellow btn btn-p3 fill">정보 수정</a>
         </div>
         <div class="row center">
-            <a href="client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-black btn btn-p3 fill">강제 탈퇴</a>
+            <a href="<%=request.getContextPath()%>/adminClient/client_delete.jsp?clientId=<%=clientDto.getClientId()%>" class="btn-black btn btn-p3 fill">강제 탈퇴</a>
         </div>
     </div>
 

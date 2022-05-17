@@ -44,7 +44,7 @@
   <script>
     $(function () {
       $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+        url: context+"/ajax/genreSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -101,7 +101,7 @@
       });
     
       $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+        url: context+"/ajax/genreSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -157,7 +157,7 @@
     });
 
     $.ajax({
-        url: "http://localhost:8080/semiproject/ajax/genreSexChart.svt",
+        url: context+"/ajax/genreSexChart.svt",
         type: "post",
         //data: {},
         success: function (resp) {
@@ -213,7 +213,7 @@
     
     $(function () {
         $.ajax({
-          url: "http://localhost:8080/semiproject/ajax/genreAgeChart.svt",
+          url: context+"/ajax/genreAgeChart.svt",
           type: "post",
           //data: {},
           success: function (resp) {

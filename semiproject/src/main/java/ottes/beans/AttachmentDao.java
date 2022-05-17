@@ -101,9 +101,10 @@ public class AttachmentDao {
 	}
 	
 	//파일 저장 위치 지정
+
 	public static final String path = "D:/upload/kh91"; 
-	
-	
+
+
 	//컨텐츠 번호로 파일 번호, 정보 불러오기(상세페이지에 포스터 올릴 때 필요)
 	public AttachmentDto selectAttachment(int contentsNo) throws Exception {
 		

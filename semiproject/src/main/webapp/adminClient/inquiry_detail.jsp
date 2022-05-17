@@ -23,19 +23,19 @@
 			<h2><a href="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp">1:1 문의 관리</a></h2>
 		</div>
 		<div class="notice_sort">
-			<form action="inquiry_list.jsp" method="get">		
+			<form action="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp" method="get">		
 				<input type="text" class="hidden">		
 				<input type="submit" value="전체보기">
 			</form>
-			<form action="inquiry_list.jsp" method="get">		
+			<form action="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp" method="get">		
 				<input type="text" class="hidden" name="type" value="오류제보">		
 				<input type="submit" value="오류제보">
 			</form>
-			<form action="inquiry_list.jsp" method="get">		
+			<form action="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp" method="get">		
 				<input type="text" class="hidden" name="type" value="문의사항">		
 				<input type="submit" value="문의사항">
 			</form>	
-			<form action="inquiry_list.jsp" method="get">		
+			<form action="<%=request.getContextPath()%>/adminClient/inquiry_list.jsp" method="get">		
 				<input type="text" class="hidden" name="type" value="기타">		
 				<input type="submit" value="기타">
 			</form>						
@@ -67,7 +67,7 @@
 				<pre><%=replyDto.getReplyContent()%></pre>								
 				<!-- 댓글 수정 -->
 				<div class="reply_edit hidden">
-					<form action="reply_edit.svt" method="post">
+					<form action="<%=request.getContextPath()%>/adminClient/reply_edit.svt" method="post">
 						<input type="hidden" name="replyNo" value="<%=replyDto.getReplyNo()%>">
 						<input type="hidden" name="replyTarget" value="<%=replyDto.getReplyTarget()%>">
 						<textarea name="replyContent" required><%=replyDto.getReplyContent()%></textarea>
@@ -79,7 +79,7 @@
 			<!-- 댓글 작성 -->
 			<div class="reply reply_write">
 				<h3>답변 작성</h3>
-				<form action="reply_write.svt" method="post">
+				<form action="<%=request.getContextPath()%>/adminClient/reply_write.svt" method="post">
 					<input type="hidden" name="replyTarget" value="<%=inquiryDto.getInquiryNo()%>">
 					<textarea name="replyContent" required rows="4" cols="100"></textarea>
 					<input class="reply_write_btn" type="submit" value="등록">
