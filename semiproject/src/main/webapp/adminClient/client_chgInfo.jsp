@@ -170,7 +170,7 @@
                 <button type="submit" class="btn-yellow btn-p3 btn-primary fill">정 보 변 경</button>
             </div>
             <div class="row center">
-                <a href="client_detail.jsp?clientId=<%=clientId%>" class="btn-black btn-p3 btn-primary fill">돌 아 가 기</a>
+                <a href="<%=request.getContextPath()%>/adminClient/client_detail.jsp?clientId=<%=clientId%>" class="btn-black btn-p3 btn-primary fill">돌 아 가 기</a>
             </div>
 
         </form>

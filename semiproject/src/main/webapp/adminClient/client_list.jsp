@@ -287,49 +287,49 @@
             <div class="row center inline-pagination pagination">
 				<%if(p > 1){ %>
 					<%if(search){ %>
-					<a href="client_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
 					<%} else { %>
-					<a href="client_list.jsp?p=1&s=<%=s%>">&laquo;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 					<%} %>
 				<%} %>
 				
 				<%if(startBlock > 1){ %>
 					<%if(search){ %>
-					<a href="client_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
 					<%} else { %>
-					<a href="client_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
 					<%} %>
 				<%} %>
 		
 				<%for(int i=startBlock; i <= endBlock; i++){ %>
 					<%if(search){ %>
 						<%if(i == p){ %>
-						<a href="client_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
+						<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
 						<%} else { %>
-						<a href="client_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
+						<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
 						<%} %>
 					<%} else { %>
 						<%if(i == p){ %>
-						<a href="client_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+						<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
 						<%} else { %>
-						<a href="client_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 						<%} %>
 					<%} %>
 				<%} %>
 		
 				<%if(endBlock < lastPage){ %>
 					<%if(search){ %>
-					<a href="client_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
 					<%} else { %>
-					<a href="client_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
 					<%} %>
 				<%} %>
 				
 				<%if(p < lastPage){ %>
 					<%if(search){ %>
-					<a href="client_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
 					<%} else { %>
-					<a href="client_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+					<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 					<%} %>
 				<%} %>
 			</div>

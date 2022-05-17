@@ -14,7 +14,7 @@
 </div>
 <div class="row">
 	<h2>
-		<a href="client_list.jsp" class="link link-btn fill">회원 관리 메뉴로 돌아가기</a>
+		<a href="<%=request.getContextPath()%>/adminClient/client_list.jsp" class="link link-btn fill">회원 관리 메뉴로 돌아가기</a>
 	</h2>
 </div>
 
