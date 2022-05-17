@@ -454,7 +454,7 @@ $(function() {
 
 		<div class="container w400 m50 page">
 			<div class="row center">
-				<label> 선호하는 OTT를 선택하세요. </label>
+				<label> 가입한 OTT를 선택하세요. </label>
 			</div>
 			<br>
 

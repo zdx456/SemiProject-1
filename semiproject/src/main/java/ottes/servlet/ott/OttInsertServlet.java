@@ -28,7 +28,7 @@ public class OttInsertServlet extends HttpServlet{
 		try {
 			
 			//파일 첨부 준비
-			String path = System.getProperty("user.home") + "/upload";
+			String path = "D:/upload/kh91";
 			
 			File dir = new File(path);
 			dir.mkdirs();
@@ -76,7 +76,7 @@ public class OttInsertServlet extends HttpServlet{
 			OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
 			ottAttachmentDao.insert(ottAttachmentDto);
 			
-			resp.sendRedirect("list.jsp");
+			resp.sendRedirect(req.getContextPath()+"/ott/list.jsp");
 			// ott 목록으로 돌아가기!
 			
 		}

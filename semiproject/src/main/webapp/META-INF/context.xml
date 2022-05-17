@@ -20,14 +20,18 @@
 			- maxWaitMillis :  최대 연결 대기시간 밀리초  (0이면 무제한) - 자리 꽉 찰 시 손님을 얼마나 기다리게 할꺼냐
 	
 	www.sysout.co.kr:11521:xe 강사님 주소
+	
+	jdbc:oracle:thin:@www.sysout.co.kr:1521:xe 배포
 	-->
 	
+	<!-- username = "semi" password = "semi" -->
 	<Resource name="jdbc/oracle"
 					  type="javax.sql.DataSource"
 					  auth ="Container"
 					  
 					  driverClassName="oracle.jdbc.OracleDriver"
 					  url="jdbc:oracle:thin:@localhost:1521:xe"
+					  
 					  username="semi"
 					  password="semi"
 					  
