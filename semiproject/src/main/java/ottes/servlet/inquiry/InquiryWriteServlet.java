@@ -29,7 +29,7 @@ public class InquiryWriteServlet extends HttpServlet {
 			inquiryDao.insert(inquiryDto);
 			
 			// 문의 접수 완료 후 등록 완료 안내 페이지로 이동
-			resp.sendRedirect("write_success.jsp");
+			resp.sendRedirect(req.getContextPath()+"/inquiry/write_success.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

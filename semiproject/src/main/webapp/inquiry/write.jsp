@@ -6,7 +6,7 @@
 	    <div>
 	        <h2>1:1 문의 접수 &#9997;</h2>
 	    </div>
-		<form action="inquiry_write.svt" method="post">
+		<form action="<%=request.getContextPath()%>/inquiry/inquiry_write.svt" method="post">
 		    <div>
 				<input type="radio" name="inquiryType" value="오류제보" id="radio_error" checked>
 				<label for="radio_error">수정이 필요하거나 없는 작품을 제보하고 싶어요</label>

@@ -30,7 +30,7 @@ public class ReplyWriteServlet extends HttpServlet{
 			InquiryDao inquiryDao = new InquiryDao();
 			inquiryDao.updateReplycount(replyDto.getReplyTarget());
 
-			resp.sendRedirect("inquiry_detail.jsp?inquiryNo=" + replyDto.getReplyTarget());
+			resp.sendRedirect(req.getContextPath()+"/adminClient/inquiry_detail.jsp?inquiryNo=" + replyDto.getReplyTarget());
 		}
 		catch(Exception e) {
 			e.printStackTrace();

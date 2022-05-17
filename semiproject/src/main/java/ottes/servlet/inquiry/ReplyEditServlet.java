@@ -25,7 +25,7 @@ public class ReplyEditServlet extends HttpServlet {
 			boolean success = replyDao.update(replyDto);
 
 			if(success) {
-				resp.sendRedirect("inquiry_detail.jsp?inquiryNo=" + replyDto.getReplyTarget());
+				resp.sendRedirect(req.getContextPath()+"/adminClient/inquiry_detail.jsp?inquiryNo=" + replyDto.getReplyTarget());
 			}
 			else {
 				resp.sendError(404);

@@ -73,25 +73,25 @@
 		</div>	
 		<div class="wrap">
 			<div class="notice_sort">
-				<form action="inquiry_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/mypage/inquiry_list.jsp" method="get">		
 					<input type="text" class="hidden">		
 					<input type="submit" value="전체보기">
 				</form>
-				<form action="inquiry_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/mypage/inquiry_list.jsp" method="get">		
 					<input type="text" class="hidden" name="type" value="오류제보">		
 					<input type="submit" value="오류제보">
 				</form>
-				<form action="inquiry_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/mypage/inquiry_list.jsp" method="get">		
 					<input type="text" class="hidden" name="type" value="문의사항">		
 					<input type="submit" value="문의사항">
 				</form>	
-				<form action="inquiry_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/mypage/inquiry_list.jsp" method="get">		
 					<input type="text" class="hidden" name="type" value="기타">		
 					<input type="submit" value="기타">
 				</form>					
 			</div>
 			<div class="admin_search">
-				<form action="inquiry_list.jsp" method="get">
+				<form action="<%=request.getContextPath()%>/mypage/inquiry_list.jsp" method="get">
 					<%if(search) {%>	
 					<input type="search" name="keyword" value="<%=keyword%>" required autocomplete="off">		
 					<%} else {%>
@@ -138,49 +138,49 @@
 		<div class="pagination">
 			<%if(p > 1){ %>
 				<%if(search){ %>
-				<a href="inquiry_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
 				<%} else { %>
-				<a href="inquiry_list.jsp?p=1&s=<%=s%>">&laquo;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%} %>
 			<%} %>
 			
 			<%if(startBlock > 1){ %>
 				<%if(search){ %>
-				<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
 				<%} else { %>
-				<a href="inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
 				<%} %>
 			<%} %>
 	
 			<%for(int i=startBlock; i <= endBlock; i++){ %>
 				<%if(search){ %>
 					<%if(i == p){ %>
-					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
+					<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>	
 					<%} else { %>
-					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
 					<%} %>
 				<%} else { %>
 					<%if(i == p){ %>
-					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+					<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
 					<%} else { %>
-					<a href="inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} %>
 				<%} %>
 			<%} %>
 	
 			<%if(endBlock < lastPage){ %>
 				<%if(search){ %>
-				<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
 				<%} else { %>
-				<a href="inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
 				<%} %>
 			<%} %>
 			
 			<%if(p < lastPage){ %>
 				<%if(search){ %>
-				<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
 				<%} else { %>
-				<a href="inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+				<a href="<%=request.getContextPath()%>/mypage/inquiry_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 				<%} %>
 			<%} %>		
 		</div>

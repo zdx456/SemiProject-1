@@ -78,21 +78,21 @@
 		</div>
 		<div class="wrap">
 			<div class="notice_sort">
-				<form action="notice_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 					<input type="text" class="hidden">		
 					<input type="submit" value="전체보기">
 				</form>
-				<form action="notice_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 					<input type="text" class="hidden" name="type" value="공지">		
 					<input type="submit" value="공지">
 				</form>	
-				<form action="notice_list.jsp" method="get">		
+				<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">		
 					<input type="text" class="hidden" name="type" value="FAQ">		
 					<input type="submit" value="FAQ">
 				</form>					
 			</div>
 			<div class="admin_search">
-				<form action="notice_list.jsp" method="get">
+				<form action="<%=request.getContextPath()%>/adminClient/notice_list.jsp" method="get">
 					<select name="option">
 						<option value="all">전체</option>
 						<option value="notice_title">제목</option>
@@ -135,63 +135,63 @@
 		<div class="pagination">
 			<%if(p > 1){ %>
 				<%if(searchAll){ %>
-				<a href="notice_list.jsp?p=1&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&laquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=1&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&laquo;</a>
 				<%} else if(sort){ %>
-				<a href="notice_list.jsp?p=1&s=<%=s%>&type=<%=type%>">&laquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=1&s=<%=s%>&type=<%=type%>">&laquo;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=1&s=<%=s%>">&laquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%} %>
 			<%} %>
 			
 			<%if(startBlock > 1){ %>
 				<%if(searchAll || search){ %>
-				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&lt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&lt;</a>
 				<%} else if(sort){ %>
-				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>">&lt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>&type=<%=type%>">&lt;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=startBlock-1%>&s=<%=s%>">&lt;</a>
 				<%} %>
 			<%} %>
 	
 			<%for(int i=startBlock; i <= endBlock; i++){ %>
 				<%if(searchAll || search){ %>
 					<%if(i == p){ %>
-					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>	
+					<a class="active" href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>	
 					<%} else { %>
-					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>"><%=i%></a>
 					<%} %>
 				<%} else if(sort){ %>
 					<%if(i == p){ %>
-					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>	
+					<a class="active" href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>	
 					<%} else { %>
-					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>"><%=i%></a>
 					<%} %>
 				<%} else { %>
 					<%if(i == p){ %>
-					<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
+					<a class="active" href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>	
 					<%} else { %>
-					<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+					<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} %>
 				<%} %>
 			<%} %>
 	
 			<%if(endBlock < lastPage){ %>
 				<%if(searchAll || search){ %>
-				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&gt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&gt;</a>
 				<%} else if(sort){ %>
-				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>">&gt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>&type=<%=type%>">&gt;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=endBlock+1%>&s=<%=s%>">&gt;</a>
 				<%} %>
 			<%} %>
 			
 			<%if(p < lastPage){ %>
 				<%if(searchAll || search){ %>
-				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&raquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&option=<%=option%>&keyword=<%=keyword%>">&raquo;</a>
 				<%} else if(sort){ %>
-				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>">&raquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>">&raquo;</a>
 				<%} else { %>
-				<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+				<a href="<%=request.getContextPath()%>/adminClient/notice_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 				<%} %>
 			<%} %>		
 		</div>

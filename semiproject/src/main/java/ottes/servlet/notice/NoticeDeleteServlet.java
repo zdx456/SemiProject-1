@@ -21,7 +21,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 			boolean success = noticeDao.delete(noticeNo);
 
 			if(success) {
-				resp.sendRedirect("notice_list.jsp");
+				resp.sendRedirect(req.getContextPath()+"/adminClient/notice_list.jsp");
 			}
 			else {
 				resp.sendError(404);

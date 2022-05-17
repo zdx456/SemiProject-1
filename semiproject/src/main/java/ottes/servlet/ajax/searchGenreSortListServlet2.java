@@ -22,8 +22,6 @@ public class searchGenreSortListServlet2  extends HttpServlet{
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
 			String type =  req.getParameter("type"); // 국가
 			
-
-			
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
 			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchGenreSort(p, type); 
 

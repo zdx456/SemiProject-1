@@ -22,8 +22,6 @@ public class searchLikeSortListServlet  extends HttpServlet{
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
 			String keyword = req.getParameter("keyword"); // 검색 키워드
 			
-
-			
 			ContentsAttachmentDao contentsAttachmentDao = new ContentsAttachmentDao();
 			List<ContentsAttachmentDto> searchList = contentsAttachmentDao.searchLikeSort(p, keyword); 
 
