@@ -53,10 +53,11 @@
 * 운영체제 - window10, window11
 
 
-* 사용 언어 - java 1.8(JDK 1,8), Oracle 21.4.3, JavaScript, HTML
+* 사용 언어 - java 1.8(JDK 1,8), Oracle 11g XE, JavaScript, HTML5
 
 
 * IDE(개발환경) - Eclipse(4.22.0), Visual Studio Code(1.67.1)
+
 
 ## 설계
 
