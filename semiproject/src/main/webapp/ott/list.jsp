@@ -102,7 +102,7 @@
             $(".ottNameCheck").blur(function(){
             var ottName = $(".ottNameCheck").val();
             	  $.ajax({
-                      url:"http://localhost:8080/semiproject/ajax/ottName.svt?ottName="+ottName,
+                      url: context+"/ajax/ottName.svt?ottName="+ottName,
                       type:"get",
                       success:function(resp){
                           if(resp == "N"){

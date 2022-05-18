@@ -76,7 +76,7 @@ public class OttInsertServlet extends HttpServlet{
 			OttAttachmentDao ottAttachmentDao = new OttAttachmentDao();
 			ottAttachmentDao.insert(ottAttachmentDto);
 			
-			resp.sendRedirect("list.jsp");
+			resp.sendRedirect(req.getContextPath()+"/ott/list.jsp");
 			// ott 목록으로 돌아가기!
 			
 		}
