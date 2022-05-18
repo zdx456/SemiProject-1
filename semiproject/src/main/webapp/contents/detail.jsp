@@ -47,12 +47,13 @@ List<ReviewDto> reviewList = reviewDao.selectList(contentsNo);
 String clientId = (String) session.getAttribute("login");
 boolean isLogin = clientId != null && !clientId.equals("");
 
-// 작성자 확인하기
+//작성자 확인하기
 boolean searchWriter = reviewWriter != null && !reviewWriter.equals("");
 boolean isWrite = reviewDao.checkWriter(contentsNo, clientId);
 
 //좋아요 출력할 likeContents 불러오기
 LikeContentsDao likeContentsDao = new LikeContentsDao();
+
 LikeContentsDto likecontentsDto = likeContentsDao.find(clientId, contentsNo);//find는 좋아요 이력을 찾는 기능(단일조회와 비슷)
 
 // ott 정보 불러오기
@@ -256,12 +257,14 @@ function isEmpty(value){
 
 $(function () {
 	
-	
+	 <%-- var login = <%=(String)session.getAttribute("login")%>; --%>
+	  
+	 <%-- if(login) { --%>
 
     $(".heart").click(function (){
     	
         $.ajax({
-            url: "http://localhost:8080/semiproject/likecontents/likecontents_insert.svt",
+            url: "<%=request.getContextPath()%>/likecontents/likecontents_insert.svt",
             type: "post",
             data: {
                 contentsNo: <%=contentsNo%>
@@ -281,6 +284,7 @@ $(function () {
          	   }
 	        });
 	    });
+	 <%-- } --%> 
 });
 
 
@@ -334,22 +338,20 @@ $(function () {
 	<br>
 			<div>
 			<img
-				src="../adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
+				src="<%=request.getContextPath()%>/adminContents/file_down.svt?attachmentNo=<%=attachmentDto.getAttachmentNo()%>"
 				width="200" height="250" alt="포스터">
 			</div>	
 		<br>
 		<div style="line-height:150%;">
 			<%for(HrefVO hrefVO : hrefList) {%>
 				<a href="<%=hrefVO.getOttHref()%>" >
-				<img src="../adminContents/file_down.svt?attachmentNo=<%=hrefVO.getAttachmentNo()%>"
+				<img src="<%=request.getContextPath()%>/adminContents/file_down.svt?attachmentNo=<%=hrefVO.getAttachmentNo()%>"
                width="40" height="40" class="img img-logo ottlogo" alt="ott" >
 			</a>
 			<%} %>
 		</div>			
 						<div>
 						<%for(OttDto ottDto : ottlist) { %>
-						<% DecimalFormat decFormat = new DecimalFormat("##,###");%>
-						 <span class="price">￦<%=decFormat.format(ottDto.getOttPrice()) %></span>
 					<label class="ottname"  hidden><%=ottDto.getOttName() %></label>
 
 			<%} %>
@@ -377,13 +379,13 @@ $(function () {
 						
 
 						<span class="count"><%=likeContentsDao.count(contentsNo)%></span>  
-						<%if(isLogin){ %>
+							<%if(isLogin){ %>
 							<% if (likecontentsDto != null) { %> 
 							<label class="heart like">♥</label> 
 							<% } else { %> 
 							<label class="heart">♥</label> 
 							<% } %>
-							
+
 						<%}else{ %>
 							<label>♥</label> 
 						<%} %>
@@ -438,7 +440,7 @@ $(function () {
 		
 		<!-- 댓글 작성 영역 -->
 	
-		<form action="review_insert.svt" method="post">
+		<form action="<%=request.getContextPath()%>/review_insert.svt" method="post">
 
 
 		<%
@@ -516,7 +518,7 @@ $(function () {
 			%>
 		</table>
 		<br>
-		<a href="review_list.jsp?contentsNo=<%=contentsNo%>">
+		<a href="<%=request.getContextPath()%>/review_list.jsp?contentsNo=<%=contentsNo%>">
 			<input type="button" class="button btn-yellow" id="rb2" value="리뷰 전체 보기"></input>
 		</a>
 		

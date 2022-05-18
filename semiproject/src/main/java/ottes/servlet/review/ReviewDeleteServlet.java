@@ -28,7 +28,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 
 			if (success) {
 				// 성공 시 컨텐츠 상세 페이지 그대로 유지
-				resp.sendRedirect("detail.jsp?contentsNo=" + contentsNo);
+				resp.sendRedirect(req.getContextPath()+"detail.jsp?contentsNo=" + contentsNo);
 
 			} else {
 				resp.sendError(404);
