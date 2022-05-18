@@ -34,7 +34,7 @@ public class ClientFindPwServlet extends HttpServlet {
 			else {
 			    resp.sendRedirect("find_pw.jsp?error");
 			}
-
+ 
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

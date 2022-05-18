@@ -60,7 +60,7 @@ $(function () {
             }
 
             $.ajax({
-                url: "http://localhost:8080/semiproject/checkNick.kh?clientNick=" +
+                url: context+ "/checkNick.kh?clientNick=" + 
                     clientNick,
                 type: "get",
 

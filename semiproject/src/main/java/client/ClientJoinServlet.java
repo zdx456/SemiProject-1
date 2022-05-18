@@ -81,9 +81,9 @@ public class ClientJoinServlet extends HttpServlet {
             likeGenreDao.insert2(clientId, genreName);
          }
       
-         resp.sendRedirect(req.getContextPath() + "/client/join_finish.jsp");
+         resp.sendRedirect(req.getContextPath() + "join_finish.jsp");
          
-      } catch (Exception e) {
+      } catch (Exception e) {  
          e.printStackTrace();
          resp.sendError(500);
       }
