@@ -440,7 +440,7 @@ $(function () {
 		
 		<!-- 댓글 작성 영역 -->
 	
-		<form action="<%=request.getContextPath()%>/review_insert.svt" method="post">
+		<form action="<%=request.getContextPath()%>/contents//review_insert.svt" method="post">
 
 
 		<%
@@ -518,7 +518,7 @@ $(function () {
 			%>
 		</table>
 		<br>
-		<a href="<%=request.getContextPath()%>/review_list.jsp?contentsNo=<%=contentsNo%>">
+		<a href="<%=request.getContextPath()%>/contents//review_list.jsp?contentsNo=<%=contentsNo%>">
 			<input type="button" class="button btn-yellow" id="rb2" value="리뷰 전체 보기"></input>
 		</a>
 		

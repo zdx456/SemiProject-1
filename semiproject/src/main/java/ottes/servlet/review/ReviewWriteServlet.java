@@ -37,7 +37,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			reviewDao.insert(reviewDto);
 			
 			// 리뷰 작성 후 컨텐츠 상세보기 페이지 그대로 돌아오기
-			resp.sendRedirect(req.getContextPath()+"detail.jsp?contentsNo="+reviewDto.getContentsNo());
+			resp.sendRedirect(req.getContextPath()+"/contents/detail.jsp?contentsNo="+reviewDto.getContentsNo());
 			
 					
 		} catch (Exception e) {

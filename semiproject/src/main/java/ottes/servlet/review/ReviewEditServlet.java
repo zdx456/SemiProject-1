@@ -31,7 +31,7 @@ public class ReviewEditServlet extends HttpServlet {
 
 			if (success) {
 				// 수정 성공 시 컨텐츠 상세 페이지 그대로 유지
-				resp.sendRedirect(req.getContextPath()+"detail.jsp?contentsNo=" + reviewDto.getContentsNo());
+				resp.sendRedirect(req.getContextPath()+"/contents/detail.jsp?contentsNo=" + reviewDto.getContentsNo());
 			} else {
 				resp.sendError(404);
 			}
