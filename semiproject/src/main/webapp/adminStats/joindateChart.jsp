@@ -33,7 +33,7 @@
         $(function(){
 
             $.ajax({
-                url: "http://localhost:8080/semiproject/ajax/joindateYearChart.svt",
+                url: context+"/ajax/joindateYearChart.svt",
                 type: "post",
                 success: function (resp) {
                     console.log(resp);
@@ -87,7 +87,7 @@
 
             function loadYearMonth(year){
             $.ajax({
-                url: "http://localhost:8080/semiproject/ajax/joindateMonthChart.svt?year="+year,
+                url: context+"/ajax/joindateMonthChart.svt?year="+year,
                 type: "post",
                 success: function (resp) {
                     console.log(resp);
